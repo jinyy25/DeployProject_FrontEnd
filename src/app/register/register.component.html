@@ -20,7 +20,7 @@
 
         <mat-form-field fxFlex="grow">
           <mat-label>ID</mat-label>
-          <input #id formControlName="id" matInput required (keyup)="checkId(id.value)">
+          <input #id formControlName="id" matInput required (keyup)="checkId(id.value)" maxlength="20">
           <mat-error *ngIf="form.get('id').hasError('required')">아이디를 입력해 주세요.</mat-error>
           <mat-error *ngIf="form.get('id').hasError('checkError')">중복된 아이디 입니다.</mat-error>
           
@@ -28,7 +28,7 @@
 
         <mat-form-field fxFlex="grow">
           <mat-label>Password</mat-label>
-          <input #password [type]="inputType" formControlName="password" matInput required  >
+          <input #password [type]="inputType" formControlName="password" matInput required maxlength="20" >
           <mat-error *ngIf="form.get('password').hasError('required')">비밀번호를 입력해 주세요.</mat-error>
         </mat-form-field>
 
