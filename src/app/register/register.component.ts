@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
       teamNo: ['', Validators.required],
       password: ['', Validators.required],
       passwordConfirm: ['', [Validators.required,this.equalTo('password')]],
-      check:[false,[]]
+      check:[false,[]],      
     });
 
     this.teamService.selectTeamList()

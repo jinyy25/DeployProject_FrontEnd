@@ -82,7 +82,14 @@ export class AppComponent {
         label: 'Dashboard',
         route: '/',
         icon: icLayers
+      },
+      {
+        type:'link',
+        label: 'Deploy Manage',
+        route: '/deploy-list',        
+        icon: icLayers
       }
+
     ];
   }
 }

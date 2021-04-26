@@ -1,0 +1,19 @@
+<vex-page-layout>
+
+    <vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">        
+        
+    </vex-page-layout-header>
+
+    <vex-page-layout-content 
+        [class.container]="layoutCtrl.value === 'boxed'"
+        [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+        class="-mt-6">
+        <!-- <div class="card overflow-auto -mt-16">            
+            <table mat-table matSort>
+    
+            </table>        
+        </div> -->
+    </vex-page-layout-content>
+    
+
+</vex-page-layout>

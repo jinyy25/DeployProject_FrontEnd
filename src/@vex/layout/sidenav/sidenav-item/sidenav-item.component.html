@@ -1,3 +1,4 @@
+<!-- 사이드 메뉴 내용 -->
 <a *ngIf="isLink(item) && !isFunction(item.route)"
    [fragment]="item.fragment"
    [routerLinkActiveOptions]="item.routerLinkActiveOptions || { exact: false }"
@@ -14,6 +15,7 @@
         fxFlex="none">{{ item.badge.value }}</span>
 </a>
 
+<!-- 경로 -->
 <div (click)="item.route()"
      *ngIf="isLink(item) && isFunction(item.route)"
      class="item"
@@ -28,6 +30,8 @@
         fxFlex="none">{{ item.badge.value }}</span>
 </div>
 
+
+<!-- 사이드 메뉴의 하위메뉴 -->
 <ng-container *ngIf="isDropdown(item)">
   <div (click)="toggleOpen()"
        [class.active]="isOpen || isActive"
