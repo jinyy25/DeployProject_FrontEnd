@@ -19,6 +19,9 @@ import icLock from '@iconify/icons-ic/twotone-lock';
 import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
+import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/models/user.model';
+import { JwtService } from 'src/app/services/jwt.service';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -109,10 +112,30 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icLock = icLock;
   icNotificationsOff = icNotificationsOff;
 
+  loginUser : User;
+  check:string;
   constructor(private cd: ChangeDetectorRef,
-              private popoverRef: PopoverRef<ToolbarUserDropdownComponent>) { }
+              private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
+              private jwtService:JwtService
+              
+              ) { }
 
   ngOnInit() {
+
+    this.check = localStorage.getItem("AUTH_TOKEN");
+
+    if(this.check !=null){
+       
+      this.loginUser = this.jwtService.decodeToUser(this.check);
+      
+    }else{
+      this.check= sessionStorage.getItem("AUTH_TOKEN");
+
+      if(this.check !=null){
+        this.loginUser = this.jwtService.decodeToUser(this.check);
+      }
+    }
+
   }
 
   setStatus(status: OnlineStatus) {
@@ -121,6 +144,8 @@ export class ToolbarUserDropdownComponent implements OnInit {
   }
 
   close() {
+    localStorage.removeItem("AUTH_TOKEN");
+    sessionStorage.removeItem("AUTH_TOKEN");
     this.popoverRef.close();
   }
 }

@@ -4,7 +4,7 @@
       <div class="dropdown-heading-icon" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon [icIcon]="icPerson"></mat-icon>
       </div>
-      <div class="dropdown-heading">David Smith</div>
+      <div *ngIf="loginUser!=null"  class="dropdown-heading">{{loginUser.name}}</div>
     </div>
 
     <button [matMenuTriggerFor]="settingsMenu"
@@ -46,7 +46,8 @@
         </span>
       </ng-container>
     </button>
-    <a (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
+    <a *ngIf="loginUser!=null"  (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
+    <a *ngIf="loginUser==null"  (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGIN</a>
   </div>
 </div>
 
