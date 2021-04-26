@@ -1,0 +1,73 @@
+<div class="col-md-6">
+    <h2> User Details</h2>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Action</th>
+        <th>Action</th>`
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }">
+        <td class="hidden">{{user.id}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete User</button></td>
+        <td><button class="btn btn-danger" routerLink="/edit/{{user.id}}">Edit User</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <button (click)="exportAsXLSX()">Download User List As Excel File</button>
+    <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+</div>
+<!--*ngIf="group.value && group.value.length"-->
+<!--[multiple]="true"이면 checkbox처럼 기능하고, mat-button-toggle-group은 
+    value가 없고 ngModel이 서포트되지 않음
+-->
+<mat-button-toggle-group (change)="onColumnChange($event)" [multiple]="true" #group="matButtonToggleGroup" >
+  <mat-button-toggle value="id">
+    <span>ID</span>
+  </mat-button-toggle>
+    <mat-button-toggle value="firstName">
+    <span>First Name</span>
+  </mat-button-toggle>
+  <mat-button-toggle value="lastName">
+    <span>Last Name</span>
+  </mat-button-toggle>
+  <mat-button-toggle value="email">
+    <span>Email</span>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-table *ngIf="group.value && group.value.length" [dataSource]="users" class="mat-elevation-z8">
+ 
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.firstName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.lastName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+  </ng-container>
+ 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>
+
