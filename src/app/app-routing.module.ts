@@ -12,6 +12,7 @@ const routes: VexRoutes = [
   },
   {
     path:'register',
+<<<<<<< HEAD
    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),   
   },
   {
@@ -23,6 +24,14 @@ const routes: VexRoutes = [
         loadChildren:() => import('./deploy-list/deploy-list.module').then(m => m.DeployListModule),
       }   
     ]
+=======
+   loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),
+   
+  },
+  {
+    path:'login',
+    loadChildren:() =>import('./login/login.module').then(m=>m.LoginModule),
+>>>>>>> 9d3e5345c0a2af36f3a9ee365bc38bc9914b4a37
   }
 ];
 

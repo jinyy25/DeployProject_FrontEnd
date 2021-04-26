@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractC
 import { Router } from '@angular/router';
 import { fadeInUp400ms } from '../../@vex/animations/fade-in-up.animation';
 import { User } from '../models/user.model';
-import { UserService } from '../service/user.service';
-import { TeamService } from '../service/team.service';
+import { UserService } from '../services/user.service';
+import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
 
 @Component({
