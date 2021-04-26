@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     component: CustomLayoutComponent,
     children: []
+  },
+  {
+    path:'register',
+   loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),
+   
   }
 ];
 
