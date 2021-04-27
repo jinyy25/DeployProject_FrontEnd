@@ -10,6 +10,7 @@ import { VexRoutes } from '../@vex/interfaces/vex-route.interface';
 common pagination sample component
 */
 import { UserComponent } from './common/pagination/user.component';
+import { ExcelComponent } from './common/excel-download/excel.component';
 
 
 const routes: VexRoutes = [
@@ -36,10 +37,15 @@ const routes: VexRoutes = [
 
 
 
-  
-  //common pagination sample용 route
+
+  /*
+  common sample code용 route 설정
+  */
   { 
     path: 'sampleUserList', component: UserComponent 
+  },
+  { 
+    path: 'sampleExcelDownload', component: ExcelComponent 
   }
 ];
 

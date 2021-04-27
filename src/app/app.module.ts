@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -15,7 +16,9 @@ import { NgxPaginationModule } from 'ngx-pagination';//for pagination
 //common sample용
 import { UserService } from './common/pagination/user.service';
 import { UserComponent } from './common/pagination/user.component';
-
+import { UserExcelService } from './common/excel-download/userExcel.service';
+import { ExcelComponent } from './common/excel-download/excel.component';
+import { ExcelService } from './common/excel-download/excel.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { UserComponent } from './common/pagination/user.component';
     
     
     //pagination sample용 Component
-    UserComponent
+    UserComponent,
+    ExcelComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,10 @@ import { UserComponent } from './common/pagination/user.component';
 
 
     //common sample용
-    UserService
+    UserService,
+    UserExcelService,
+    ExcelService
+    
   ],
   bootstrap: [AppComponent]
 })
