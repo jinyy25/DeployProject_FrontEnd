@@ -8,21 +8,20 @@ const routes: VexRoutes = [
   {
     path: '',
     component: CustomLayoutComponent,
-    children: []
+    children: [
+      {
+        path:'deploy-list',
+        loadChildren:() => import('./deploy-list/deploy-list.module').then(m => m.DeployListModule),
+      }
+    ]
   },
   {
     path:'register',
    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),   
   },
   {
-    path: '',
-    component: CustomLayoutComponent,
-    children:[
-      {
-        path:'deploy-list',
-        loadChildren:() => import('./deploy-list/deploy-list.module').then(m => m.DeployListModule),
-      }   
-    ]
+    path:'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   }
 ];
 
