@@ -37,7 +37,7 @@ const routes: VexRoutes = [
   },
   {
     path : 'schedule', component : ScheduleComponent
-  }
+  },
 
 
 
