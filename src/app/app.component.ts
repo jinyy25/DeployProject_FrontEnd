@@ -86,7 +86,7 @@ export class AppComponent {
       },
       {
         type:'link',
-        label: 'Deploy Manage',
+        label: 'Deploy',
         route: '/deploy-list',        
         icon: icLayers
       },

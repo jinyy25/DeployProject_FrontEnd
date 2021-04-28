@@ -1,23 +1,27 @@
-<div class="col-mg-6">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Writer</th>
-                <th>Date</th>                
-                <th>다운로드</th>
-            </tr>
-        </thead>        
-        <tbody>
-            <!-- *ngFor : 배열 나열 -->
-            <tr *ngFor="let deploy of deploys">
-                <td>{{deploy.deployNo}}</td>
-                <td>{{deploy.deployTitle}}</td>
-                <td>{{deploy.deployContent}}</td>
-                <td>{{deploy.writer}}</td>
-                <td>{{deploy.deployContent}}</td>                                
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+    <div class="">
+        <div class="deploy-list-header">
+            <p>Deploy List</p>
+            <button id="writeBtn">New Deploy</button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Writer</th>
+                    <th>Date</th>                
+                    <th>Download</th>
+                </tr>
+            </thead>        
+            <tbody>
+                <tr *ngFor="let deploy of deploys">
+                    <td>{{deploy.deployNo}}</td>
+                    <td>{{deploy.deployTitle}}</td>
+                    <td>{{deploy.deployContent}}</td>
+                    <td>{{deploy.writer}}</td>
+                    <td>{{deploy.deployContent}}</td>                                
+                </tr>
+            </tbody>        
+        </table>
+    </div>
