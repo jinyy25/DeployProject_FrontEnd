@@ -4,6 +4,17 @@
             <p>Deploy List</p>
             <button mat-stroked-button routerLink="deploy-write" >New Deploy</button>
         </div>
+
+        <div class="deploy-search">
+            <!-- <mat-form-field>
+                <mat-label>Category</mat-label>
+                <select>
+                    <option value="Title"></option>
+                    <option value="Writer"></option>
+                    <option value="Date"></option>
+                </select>
+            </mat-form-field> -->
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -18,8 +29,8 @@
                 <tr *ngFor="let deploy of deploys">
                     <td>{{deploy.deployNo}}</td>
                     <td>{{deploy.deployTitle}}</td>
-                    <td>{{deploy.deployContent}}</td>
                     <td>{{deploy.writer}}</td>
+                    <td>{{deploy.deployDate}}</td>
                     <td>{{deploy.deployContent}}</td>                                
                 </tr>
             </tbody>        

@@ -19,7 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContainerModule } from '../../@vex/directives/container/container.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
   declarations: [DeployListComponent],
@@ -41,7 +42,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatTooltipModule,
     ReactiveFormsModule,
     ContainerModule,
-
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonToggleModule
   ]
 })
 export class DeployListModule { }
