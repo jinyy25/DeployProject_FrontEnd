@@ -1,0 +1,47 @@
+h2{
+	margin:100px auto 0 130px;
+}
+#titleWrap{
+	width: 80%;
+	height: 70px;
+	margin: auto;
+	// background-color: blue;
+}
+#fileWrap{
+	width:80%;
+	height: 280px;
+	margin:auto;
+	// background-color: red;
+}
+#contentWrap{
+	width: 80%;
+	height: 500px;
+	margin: auto;
+	// background-color: black;
+}
+#contentWrap textarea{
+	height:400px;
+	resize: none;;
+}
+#fileLabel{
+	padding:10px;
+	cursor: pointer;
+	border: 1px solid #d5d5db;
+}
+#fileBox{
+	width: 100%;
+	height: 220px;
+	margin: 20px auto 0 auto;
+	border: 1px solid #d5d5db;
+}
+#buttonWrap{
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+#buttonWrap button{
+	width: 120px;
+	height: 50px;
+	margin:0 80px;
+	border:1px solid #bbc2d3;
+}	

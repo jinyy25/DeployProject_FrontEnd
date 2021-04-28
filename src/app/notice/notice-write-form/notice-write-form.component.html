@@ -1,0 +1,42 @@
+<h2>공지사항</h2>
+<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+	
+	<div id="titleWrap" fxFlex="auto" fxLayout="column">
+		<mat-form-field fxFlex="grow">
+			<mat-label>제목:</mat-label>
+			<input formControlName="title" matInput>
+		</mat-form-field>
+	</div>
+
+	<div id="fileWrap">
+		<div>
+			<input type="file" multiple id="file"  style="display: none;">
+			<label id="fileLabel" for="file">파일 선택</label>
+		</div>
+		<div id="fileBox">
+			<ul>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>1.jpg</li>
+				<li>2.jpg</li>
+			</ul>
+		</div>
+	</div>
+	<div id="contentWrap">
+		<mat-form-field fxFlex="grow">
+			<mat-label>내용:</mat-label>
+			<textarea formControlName="title" matInput></textarea>
+		</mat-form-field>
+	</div>
+
+	<div id="buttonWrap">
+		<button>확인</button>
+		<button>취소</button>
+	</div>
+</div>

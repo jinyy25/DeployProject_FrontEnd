@@ -1,19 +1,23 @@
-<vex-page-layout>
-
-    <vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">        
-        
-    </vex-page-layout-header>
-
-    <vex-page-layout-content 
-        [class.container]="layoutCtrl.value === 'boxed'"
-        [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-        class="-mt-6">
-        <!-- <div class="card overflow-auto -mt-16">            
-            <table mat-table matSort>
-    
-            </table>        
-        </div> -->
-    </vex-page-layout-content>
-    
-
-</vex-page-layout>
+<div class="col-mg-6">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Writer</th>
+                <th>Date</th>                
+                <th>다운로드</th>
+            </tr>
+        </thead>        
+        <tbody>
+            <!-- *ngFor : 배열 나열 -->
+            <tr *ngFor="let deploy of deploys">
+                <td>{{deploy.deployNo}}</td>
+                <td>{{deploy.deployTitle}}</td>
+                <td>{{deploy.deployContent}}</td>
+                <td>{{deploy.writer}}</td>
+                <td>{{deploy.deployContent}}</td>                                
+            </tr>
+        </tbody>
+    </table>
+</div>
