@@ -1,4 +1,5 @@
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -19,6 +20,7 @@ import { UserComponent } from './common/pagination/user.component';
 import { UserExcelService } from './common/excel-download/userExcel.service';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { ExcelService } from './common/excel-download/excel.service';
+import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,13 @@ import { ExcelService } from './common/excel-download/excel.service';
     
     
     
+    
     //pagination sample용 Component
     UserComponent,
-    ExcelComponent
+    ExcelComponent,
+    UploadFilesComponent
+  
+    
   ],
   imports: [
     BrowserModule,

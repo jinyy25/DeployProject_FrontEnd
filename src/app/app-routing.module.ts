@@ -1,4 +1,5 @@
 
+
 import { NgModule } from '@angular/core';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
@@ -7,10 +8,11 @@ import { VexRoutes } from '../@vex/interfaces/vex-route.interface';
 
 
 /*
-common pagination sample component
+common pagination `sample component
 */
 import { UserComponent } from './common/pagination/user.component';
 import { ExcelComponent } from './common/excel-download/excel.component';
+import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 
 
 const routes: VexRoutes = [
@@ -46,6 +48,9 @@ const routes: VexRoutes = [
   },
   { 
     path: 'sampleExcelDownload', component: ExcelComponent 
+  },
+  { 
+    path: 'sampleFileUpload', component: UploadFilesComponent 
   }
 ];
 
