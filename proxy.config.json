@@ -1,0 +1,7 @@
+
+{
+    "/deploy-list/*" : {
+        "target" : "http://localhost:8080/deploy-list",
+        "secure" : false
+    }
+}

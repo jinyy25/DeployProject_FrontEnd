@@ -1,9 +1,21 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Deploy } from '../models/deploy.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeployService {
 
-  constructor() { }
+  constructor(
+    private httpClient:HttpClient
+  ) { }
+
+  private deployURL='http://localhost:8080/deploy-list';
+
+  //1. get all deploys
+  public getDeploys(){
+    console.log("test all");
+    return this.httpClient.get<Deploy[]>(this.deployURL);
+  }
 }
