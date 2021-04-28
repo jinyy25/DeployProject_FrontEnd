@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>일정</h2>
+<h2 mat-dialog-title *ngIf="data.complete != 'Y'">
+  {{ data.writer }} 님의 일정
+</h2>
+<h2 mat-dialog-title *ngIf="data.complete == 'Y'">완료된 일정입니다</h2>
 <div mat-dialog-content>
   <form>
     <span>시작 날짜 : </span>
@@ -66,6 +69,7 @@
   </button>
 </div>
 <div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">취소</button>
   <button mat-button (click)="onDelete()">삭제</button>
   <button
     mat-button

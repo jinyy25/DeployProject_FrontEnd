@@ -38,6 +38,13 @@ import { ExcelService } from './common/excel-download/excel.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { DeployWriteFormComponent } from './deploy-list/deploy-write-form/deploy-write-form.component';
 
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
+  listPlugin
+]);
+
 @NgModule({
   declarations: [
     AppComponent,

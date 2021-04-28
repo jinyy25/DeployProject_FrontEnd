@@ -10,5 +10,6 @@ export class Schedule{//vo 객체
     allDay : boolean;
     complete : string;
     uploadDate : string;//일까지만
+    updateDate : string;
     completeDate : string;
 }

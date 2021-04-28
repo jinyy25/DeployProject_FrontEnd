@@ -45,7 +45,7 @@ export class ScheduleComponent implements AfterViewInit {
     dayMaxEvents: true,            //하루에 일정 많을때 +버튼으로 표시
     // eventBackgroundColor: 'red',   //기본값 배경색상 적용
     // eventTextColor: 'white',         //기본값 글자색상 적용
-    eventDrop: this.handleEventDrop.bind(this),
+    eventChange: this.handleEventChange.bind(this),
     //dateClick: this.handleDateClick.bind(this), //date short click
     select: this.handleDateSelect.bind(this),   //date long click
     eventClick: this.handleEventClick.bind(this),
@@ -68,12 +68,18 @@ export class ScheduleComponent implements AfterViewInit {
           end.setDate(end.getDate() + 1);
           endDate = this.pipe.transform(end, 'yyyy-MM-dd');
         }
+        let edit = true;
+        if(element.complete == 'Y'){
+          edit = false;
+        }
         this.events.push({
           id : String(element.scheduleNo),
           title : element.scheduleTitle,
           start : element.startDate,
           end : endDate,
-          schedule : element
+          schedule : element,
+          startEditable : edit,
+          durationEditable : edit
         });
       });
       this.calendarOptions.events = this.events;
@@ -85,10 +91,43 @@ export class ScheduleComponent implements AfterViewInit {
     this.openUpdate(arg);
   }
 
-  //이벤트 드래그 해서 이동
-  handleEventDrop(arg) {//얘도 수정해줘야함
-    const newEvent = arg.event;//드래그한 후의 날짜
-    const oldEvent = arg.oldEvent;//드래그 전의 날짜
+  //이벤트 드래그, resize
+  handleEventChange(arg) {
+    if(confirm("일정을 수정하시겠습니까?")){
+      const newEvent = arg.event;//드래그한 후의 날짜
+      const schedule = newEvent.extendedProps.schedule;
+
+      if(newEvent.allDay){//종일
+
+        schedule.startDate = this.pipe.transform(newEvent.start, 'yyyy-MM-dd');
+        const end = new Date(newEvent.end);
+        end.setDate(newEvent.end.getDate() - 1);
+        schedule.endDate = this.pipe.transform(end, 'yyyy-MM-dd');
+        
+      }else{//시간 있으면
+        
+        schedule.startDate = this.pipe.transform(newEvent.start, 'yyyy-MM-dd HH:mm');
+        if(newEvent.end == null){//종일에서 시간으로 옮기면 값 null
+          const end = new Date(newEvent.start);
+          end.setHours(newEvent.start.getHours() + 1);
+          schedule.endDate = this.pipe.transform(end, 'yyyy-MM-dd HH:mm');
+        }else{
+          schedule.endDate = this.pipe.transform(newEvent.end, 'yyyy-MM-dd HH:mm');
+        }
+
+      }
+
+      this.service.updateSchedule(schedule).subscribe(data => {
+        if(data > 0){
+          alert("일정 수정");
+        }else{
+          alert("수정 실패")
+        }
+      });
+
+    }else{//수정 안함
+      window.location.reload();
+    }
   }
 
   // 날짜를 선택한 경우
@@ -105,40 +144,16 @@ export class ScheduleComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {//onSave 메소드에서 리턴한 schedule 객체
-      const calendarApi = arg.view.calendar;
+      //const calendarApi = arg.view.calendar;
 
-      if(result.allDay){//하루 종일
-        const endDate = new Date(result.endDate);
-        endDate.setDate(endDate.getDate() + 1);//endDate 하루 늘려줌
-        calendarApi.addEvent({
-          id: String(Math.random()),
-          title: result.scheduleTitle,
-          start: result.startDate,
-          end: endDate,
-          allDay: result.allDay,
-          schedule : result
-        });
-        this.service.createSchedule(result).subscribe(data => {
+      this.service.createSchedule(result).subscribe(data => {
+        if(data > 0){
           alert("일정 등록");
-        });
-      }else{//시간 있을때
-        const startDate = new Date(result.startDate+"T"+result.startTime+':00');
-        const endDate = new Date(result.endDate+"T"+result.endTime+':00');
-        calendarApi.addEvent({
-          id: String(Math.random()),
-          title: result.scheduleTitle,
-          start: startDate,
-          end: endDate,
-          allDay: result.allDay,
-          schedule : result
-        });
-        //날짜 시간 합쳐줘야함
-        result.startDate = result.startDate+" "+result.startTime;
-        result.endDate = result.endDate+" "+result.endTime;
-        this.service.createSchedule(result).subscribe(data => {
-          alert("일정 등록");
-        });
-      }
+        }else{
+          alert("등록 실패");
+        }
+        window.location.reload();//새로고침
+      });
     });
   }
 
@@ -148,8 +163,10 @@ export class ScheduleComponent implements AfterViewInit {
       //open 메소드는 dialogRef를 리턴
       width : '450px',
       data : {
+        scheduleNo : arg.event.extendedProps.schedule.scheduleNo,
         scheduleTitle : arg.event.title,
         scheduleContent : arg.event.extendedProps.schedule.scheduleContent,
+        writer : arg.event.extendedProps.schedule.writer,
         startDate : arg.event.start,
         endDate : arg.event.end,
         allDay : arg.event.allDay,
@@ -159,38 +176,26 @@ export class ScheduleComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe( result => {
       if(result == 'delete'){//삭제
-        arg.event.remove();
+
         this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo).subscribe(data => {
-          alert("일정 삭제");
+          if(data > 0){
+            alert("일정 삭제");
+            arg.event.remove();
+          }else{
+            alert("삭제 실패")
+          }
         });
 
       }else if(result){//수정
-        const calendarApi = arg.view.calendar;
-        arg.event.remove();
-
-        if(result.allDay){//하루 종일
-          const endDate = new Date(result.endDate);
-          endDate.setDate(endDate.getDate() + 1);//endDate 하루 늘려줌
-          //arg.event.setProp('title', result.scheduleTitle);
-          calendarApi.addEvent({
-            id: String(Math.random()),
-            title: result.scheduleTitle,
-            start: result.startDate,
-            end: endDate,
-            allDay: result.allDay,
-            schedule : result
-          });
-        }else{//시간 있을때
-          const startDate = new Date(result.startDate+"T"+result.startTime+':00');
-          const endDate = new Date(result.endDate+"T"+result.endTime+':00');
-          calendarApi.addEvent({
-            title: result.scheduleTitle,
-            start: startDate,
-            end: endDate,
-            allDay: result.allDay,
-            schedule : result
-          });
-        }
+        
+        this.service.updateSchedule(result).subscribe(data => {
+          if(data > 0){
+            alert("일정 수정");
+          }else{
+            alert("수정 실패")
+          }
+          window.location.reload();
+        });
       }
     });
   }
