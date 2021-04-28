@@ -11,23 +11,23 @@ const httpOptions = {
 })
 export class ScheduleService{
 
-  private url = 'http://localhost:8080';
+  private url = '/schedule';
 
   constructor(private http : HttpClient) { }
 
   createSchedule(schedule : Schedule){
-    return this.http.post<Schedule>(this.url+"/create", schedule);
+    return this.http.post(this.url+"/create", schedule);
   }
 
   selectSchedule(){
-    return this.http.get<Schedule[]>(this.url);
+    return this.http.get<Schedule[]>(this.url+"/list");
   }
 
   updateSchedule(schedule : Schedule){
-    return this.http.patch<Schedule>(this.url+"/update", schedule);
+    return this.http.patch(this.url+"/update", schedule);
   }
 
   deleteSchedule(scheduleNo : number){
-    return this.http.delete<Schedule>(this.url+"/delete/"+scheduleNo);
+    return this.http.delete(this.url+"/delete/"+scheduleNo);
   }
 }
