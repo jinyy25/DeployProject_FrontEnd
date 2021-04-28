@@ -1,8 +1,8 @@
 
-    <div class="">
+    <div class="deploy-outline">
         <div class="deploy-list-header">
             <p>Deploy List</p>
-            <button id="writeBtn">New Deploy</button>
+            <button mat-stroked-button routerLink="deploy-write" >New Deploy</button>
         </div>
         <table class="table table-striped">
             <thead>
@@ -24,4 +24,16 @@
                 </tr>
             </tbody>        
         </table>
+        <mat-paginator [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = $event">
+        </mat-paginator>
+
+        <div *ngIf="pageEvent">
+            <h5>Page Change Event Properties</h5>
+            <div>List length: {{pageEvent.length}}</div>
+            <div>Page size: {{pageEvent.pageSize}}</div>
+            <div>Page index: {{pageEvent.pageIndex}}</div>
+          </div>
     </div>

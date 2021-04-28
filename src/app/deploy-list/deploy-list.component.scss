@@ -1,5 +1,5 @@
 .deploy-list-header{
-    padding: 1em;
+    padding: 0em 0em 2em 0em;
     display: flex;
     justify-content: space-between;
 }
@@ -7,4 +7,7 @@
 p{
     font-size: 1.7em;
     font-weight: 600;
+}
+.deploy-outline{
+    padding: 4em;
 }

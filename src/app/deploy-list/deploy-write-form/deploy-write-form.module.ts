@@ -21,7 +21,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({
-  declarations: [DeployWriteFormModule],
+  declarations: [],
   imports: [
     CommonModule,
     FlexLayoutModule,    

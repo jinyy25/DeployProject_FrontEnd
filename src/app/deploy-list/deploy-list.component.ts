@@ -4,6 +4,8 @@ import { fadeInUp400ms } from '../../@vex/animations/fade-in-up.animation';
 import { DeployService} from '../services/deploy.service';
 import { stagger40ms } from '../../@vex/animations/stagger.animation';
 import { Deploy } from '../models/deploy.model';
+import {PageEvent} from '@angular/material/paginator';
+
 
 @Component({
   selector: 'vex-deploy-list',
@@ -20,6 +22,19 @@ export class DeployListComponent implements OnInit{
 
   deploys:Deploy[];
 
+
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  pageEvent: PageEvent;
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+  
   constructor(
     private deployService:DeployService
   ){}
