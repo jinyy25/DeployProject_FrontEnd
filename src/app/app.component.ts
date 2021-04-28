@@ -92,8 +92,8 @@ export class AppComponent {
       },
       {
         type:'link',
-        label: 'Board',
-        route:'/board',
+        label: 'Notice',
+        route:'/notice',
         icon: icAssigment
       }
 
