@@ -10,21 +10,12 @@
 
 	<div id="fileWrap">
 		<div>
-			<input type="file" multiple id="file"  style="display: none;">
+			<input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
 			<label id="fileLabel" for="file">파일 선택</label>
 		</div>
-		<div id="fileBox">
+		<div *ngIf="display=='block'" id="fileBox">
 			<ul>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>1.jpg</li>
-				<li>2.jpg</li>
+				<li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
 			</ul>
 		</div>
 	</div>
@@ -36,7 +27,7 @@
 	</div>
 
 	<div id="buttonWrap">
-		<button>확인</button>
+		<button (click)="upload()">확인</button>
 		<button>취소</button>
 	</div>
 </div>

@@ -12,7 +12,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class NoticeWriteFormComponent implements OnInit {
 
+  selectedFiles?: FileList;
+
+  files = [];
+  fileNames  = [];
+
   form: FormGroup;
+
+  display ="none";
+
   constructor(
     private fb:FormBuilder
   ) { }
@@ -23,4 +31,28 @@ export class NoticeWriteFormComponent implements OnInit {
     })
   }
 
+  selectFiles(event): void {
+    this.files=event.target.files;
+    this.display="block";
+  }
+  close(obj,text:string): void{
+    text=text.substr(1);
+   for(let i =0 ; i<this.files.length;i++){
+
+
+     if(this.files[i].name!=text){
+
+      this.fileNames.push(this.files[i]);
+
+     }//if end
+     
+    }//for end
+    this.files=this.fileNames;
+    this.fileNames=[];
+    
+  }//close() end
+
+  upload():void{
+    console.log(this.files);
+  }
 }
