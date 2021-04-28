@@ -13,6 +13,7 @@ common pagination `sample component
 import { UserComponent } from './common/pagination/user.component';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 
 const routes: VexRoutes = [
@@ -34,6 +35,9 @@ const routes: VexRoutes = [
     path:'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
+  {
+    path : 'schedule', component : ScheduleComponent
+  }
 
 
 

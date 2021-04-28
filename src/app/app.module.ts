@@ -11,6 +11,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
 import { NgxPaginationModule } from 'ngx-pagination';//for pagination
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+import { MatDialogModule } from '@angular/material/dialog';//모달
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InsertScheduleComponent } from './insert-schedule/insert-schedule.component';
+import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
+import { ScheduleService } from './services/schedule.service';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { ScheduleModule } from './schedule/schedule.module';
+import { DatePipe } from '@angular/common';
+
 
 
 
@@ -25,6 +40,9 @@ import { UploadFilesComponent } from './common/file-upload/upload-files.componen
 @NgModule({
   declarations: [
     AppComponent,
+    ScheduleComponent,
+    InsertScheduleComponent,
+    UpdateScheduleComponent,
 
 
     
@@ -48,10 +66,20 @@ import { UploadFilesComponent } from './common/file-upload/upload-files.componen
 
     // Vex
     VexModule,
-    CustomLayoutModule
+    CustomLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FullCalendarModule,
+    MatDialogModule,//modal
+    ScheduleModule,
+  ],
+  entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
+    InsertScheduleComponent,
+    UpdateScheduleComponent
   ],
   providers: [
-
+    ScheduleService,
+    DatePipe,
 
 
 

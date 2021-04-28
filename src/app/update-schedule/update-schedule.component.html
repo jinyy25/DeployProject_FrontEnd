@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>일정</h2>
+<div mat-dialog-content>
+  <form>
+    <span>시작 날짜 : </span>
+    <input
+      type="date"
+      name="startDate"
+      [(ngModel)]="schedule.startDate"
+      [disabled]="data.complete == 'Y'"
+    />
+    <input
+      type="time"
+      name="startTime"
+      [(ngModel)]="schedule.startTime"
+      [disabled]="isDisabled || data.complete == 'Y'"
+    />
+    <br />
+    <span>완료 날짜 : </span>
+    <input
+      type="date"
+      name="endDate"
+      [(ngModel)]="schedule.endDate"
+      [disabled]="data.complete == 'Y'"
+    />
+    <input
+      type="time"
+      name="endTime"
+      [(ngModel)]="schedule.endTime"
+      [disabled]="isDisabled || data.complete == 'Y'"
+    />
+    <input
+      type="checkbox"
+      id="allDay"
+      name="allDay"
+      [(ngModel)]="schedule.allDay"
+      (click)="disable()"
+      [disabled]="data.complete == 'Y'"
+    />
+    <label for="allDay">종일</label>
+    <br />
+
+    <span>일정 제목</span>
+    <br />
+    <input
+      type="text"
+      name="scheduleTitle"
+      [(ngModel)]="schedule.scheduleTitle"
+      [disabled]="data.complete == 'Y'"
+    />
+    <br />
+
+    <span>일정 내용</span>
+    <br />
+    <textarea
+      name="scheduleContent"
+      [(ngModel)]="schedule.scheduleContent"
+      [disabled]="data.complete == 'Y'"
+    >
+      {{ schedule.scheduleContent }}
+    </textarea>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onComplete()" [disabled]="data.complete == 'Y'">
+    완료
+  </button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onDelete()">삭제</button>
+  <button
+    mat-button
+    (click)="onUpdate()"
+    cdkFocusInitial
+    [disabled]="data.complete == 'Y'"
+  >
+    수정
+  </button>
+</div>

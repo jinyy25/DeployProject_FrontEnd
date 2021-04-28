@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>일정 등록</h2>
+<div mat-dialog-content>
+  <form>
+    <span>시작 날짜 : </span>
+    <input type="date" name="startDate" [(ngModel)]="schedule.startDate" />
+    <input
+      type="time"
+      name="startTime"
+      [(ngModel)]="schedule.startTime"
+      [disabled]="isDisabled"
+    />
+    <br />
+    <span>완료 날짜 : </span>
+    <input type="date" name="endDate" [(ngModel)]="schedule.endDate" />
+    <input
+      type="time"
+      name="endTime"
+      [(ngModel)]="schedule.endTime"
+      [disabled]="isDisabled"
+    />
+    <input
+      type="checkbox"
+      id="allDay"
+      name="allDay"
+      [(ngModel)]="schedule.allDay"
+      (click)="disable()"
+    />
+    <label for="allDay">종일</label>
+    <br />
+
+    <span>일정 제목</span>
+    <br />
+    <input
+      type="text"
+      name="scheduleTitle"
+      [(ngModel)]="schedule.scheduleTitle"
+    />
+    <br />
+
+    <span>일정 내용</span>
+    <br />
+    <textarea
+      name="scheduleContent"
+      [(ngModel)]="schedule.scheduleContent"
+    ></textarea>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">취소</button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial>등록</button>
+</div>
