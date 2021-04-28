@@ -24,6 +24,15 @@ const routes: VexRoutes = [
       {
         path:'deploy-list',
         loadChildren:() => import('./deploy-list/deploy-list.module').then(m => m.DeployListModule),
+      },
+      {
+        path:'notice',
+        children:[
+          {
+            path:'',
+            loadChildren:() => import('./notice/notice.module').then(m => m.NoticeModule),
+          }
+        ]
       }
     ]
   },

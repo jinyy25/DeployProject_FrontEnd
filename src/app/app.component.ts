@@ -12,6 +12,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SplashScreenService } from '../@vex/services/splash-screen.service';
 import { Style, StyleService } from '../@vex/services/style.service';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
+import icAssigment from '@iconify/icons-ic/twotone-assignment';
 
 @Component({
   selector: 'vex-root',
@@ -88,6 +89,12 @@ export class AppComponent {
         label: 'Deploy Manage',
         route: '/deploy-list',        
         icon: icLayers
+      },
+      {
+        type:'link',
+        label: 'Board',
+        route:'/board',
+        icon: icAssigment
       }
 
     ];
