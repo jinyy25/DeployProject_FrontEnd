@@ -14,20 +14,18 @@ export class InsertScheduleComponent implements OnInit{
   constructor(private dialogRef : MatDialogRef<InsertScheduleComponent>, @Inject(MAT_DIALOG_DATA) public data: Schedule, private pipe: DatePipe) { }
   ngOnInit(): void {//날짜, 시간, 종일 input 값 세팅
     this.schedule.allDay = this.data.allDay;
+
+    this.schedule.startDate = this.pipe.transform(this.data.startDate, 'yyyy-MM-dd');
     
     if(this.data.allDay){//월에서 선택
-      this.schedule.startDate = this.pipe.transform(this.data.startDate, 'yyyy-MM-dd');
       const endDate = new Date(this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'));
       endDate.setDate(endDate.getDate() - 1);
       this.schedule.endDate = this.pipe.transform(endDate, 'yyyy-MM-dd');
     }else{//주, 일에서 선택
-      this.schedule.startDate = this.pipe.transform(this.data.startDate, 'yyyy-MM-dd HH:mm');
-      this.schedule.endDate = this.pipe.transform(this.data.endDate, 'yyyy-MM-dd HH:mm');
+      this.schedule.startTime = this.pipe.transform(this.data.startDate, 'HH:mm');
+      this.schedule.endDate = this.pipe.transform(this.data.endDate, 'yyyy-MM-dd');
+      this.schedule.endTime = this.pipe.transform(this.data.endDate, 'HH:mm');
     }
-  }
-
-  onCancel(){
-    this.dialogRef.close();
   }
 
   onSubmit(){//여기 있는 값 리턴. required 값 적었는지 확인해줘야함

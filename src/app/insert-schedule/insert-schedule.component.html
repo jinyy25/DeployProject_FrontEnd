@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>일정 등록</h2>
+<h2 mat-dialog-title>{{ data.name }} 님 일정 등록</h2>
 <div mat-dialog-content>
   <form>
     <span>시작 날짜 : </span>
@@ -28,13 +28,14 @@
     <label for="allDay">종일</label>
     <br />
 
-    <span>일정 제목</span>
-    <br />
-    <input
-      type="text"
-      name="scheduleTitle"
-      [(ngModel)]="schedule.scheduleTitle"
-    />
+    <mat-form-field>
+      <mat-label>일정 제목</mat-label>
+      <input
+        [(ngModel)]="schedule.scheduleTitle"
+        matInput
+        name="scheduleTitle"
+      />
+    </mat-form-field>
     <br />
 
     <span>일정 내용</span>
@@ -46,6 +47,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">취소</button>
+  <button mat-button mat-dialog-close>취소</button>
   <button mat-button (click)="onSubmit()" cdkFocusInitial>등록</button>
 </div>

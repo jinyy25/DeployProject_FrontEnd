@@ -48,6 +48,18 @@ import { InsertScheduleComponent } from '../insert-schedule/insert-schedule.comp
 import { UpdateScheduleComponent } from '../update-schedule/update-schedule.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
+  listPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -59,13 +71,14 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatButtonModule,
     MatDialogModule,
-    MatToolbarModule,
-    MatTooltipModule,
     ScheduleRoutingModule,
     FullCalendarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule//modal
+    MatDialogModule,//modal
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
     InsertScheduleComponent,

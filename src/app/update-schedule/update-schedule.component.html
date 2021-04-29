@@ -1,7 +1,15 @@
 <h2 mat-dialog-title *ngIf="data.complete != 'Y'">
-  {{ data.writer }} 님의 일정
+  {{ data.name }} 님의 일정
+  <span>
+    <small>< {{ data.teamName }}팀 ></small>
+  </span>
 </h2>
-<h2 mat-dialog-title *ngIf="data.complete == 'Y'">완료된 일정입니다</h2>
+<h2 mat-dialog-title *ngIf="data.complete == 'Y'">
+  {{ data.name }} 님의 완료된 일정입니다
+  <span>
+    <small>< {{ data.teamName }}팀 ></small>
+  </span>
+</h2>
 <div mat-dialog-content>
   <form>
     <span>시작 날짜 : </span>
@@ -9,13 +17,13 @@
       type="date"
       name="startDate"
       [(ngModel)]="schedule.startDate"
-      [disabled]="data.complete == 'Y'"
+      [disabled]="data.complete == 'Y' || data.disable"
     />
     <input
       type="time"
       name="startTime"
       [(ngModel)]="schedule.startTime"
-      [disabled]="isDisabled || data.complete == 'Y'"
+      [disabled]="isDisabled || data.complete == 'Y' || data.disable"
     />
     <br />
     <span>완료 날짜 : </span>
@@ -23,13 +31,13 @@
       type="date"
       name="endDate"
       [(ngModel)]="schedule.endDate"
-      [disabled]="data.complete == 'Y'"
+      [disabled]="data.complete == 'Y' || data.disable"
     />
     <input
       type="time"
       name="endTime"
       [(ngModel)]="schedule.endTime"
-      [disabled]="isDisabled || data.complete == 'Y'"
+      [disabled]="isDisabled || data.complete == 'Y' || data.disable"
     />
     <input
       type="checkbox"
@@ -37,19 +45,20 @@
       name="allDay"
       [(ngModel)]="schedule.allDay"
       (click)="disable()"
-      [disabled]="data.complete == 'Y'"
+      [disabled]="data.complete == 'Y' || data.disable"
     />
     <label for="allDay">종일</label>
     <br />
 
-    <span>일정 제목</span>
-    <br />
-    <input
-      type="text"
-      name="scheduleTitle"
-      [(ngModel)]="schedule.scheduleTitle"
-      [disabled]="data.complete == 'Y'"
-    />
+    <mat-form-field>
+      <mat-label>일정 제목</mat-label>
+      <input
+        [(ngModel)]="schedule.scheduleTitle"
+        [disabled]="data.complete == 'Y' || data.disable"
+        matInput
+        name="scheduleTitle"
+      />
+    </mat-form-field>
     <br />
 
     <span>일정 내용</span>
@@ -57,25 +66,31 @@
     <textarea
       name="scheduleContent"
       [(ngModel)]="schedule.scheduleContent"
-      [disabled]="data.complete == 'Y'"
+      [disabled]="data.complete == 'Y' || data.disable"
     >
       {{ schedule.scheduleContent }}
     </textarea>
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onComplete()" [disabled]="data.complete == 'Y'">
+  <button
+    mat-button
+    (click)="onComplete()"
+    [disabled]="data.complete == 'Y' || data.disable"
+  >
     완료
   </button>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">취소</button>
-  <button mat-button (click)="onDelete()">삭제</button>
+  <button mat-button mat-dialog-close>취소</button>
+  <button mat-button (click)="onDelete()" [disabled]="data.disable">
+    삭제
+  </button>
   <button
     mat-button
     (click)="onUpdate()"
     cdkFocusInitial
-    [disabled]="data.complete == 'Y'"
+    [disabled]="data.complete == 'Y' || data.disable"
   >
     수정
   </button>
