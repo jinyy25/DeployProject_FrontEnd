@@ -13,7 +13,6 @@ common pagination `sample component
 import { UserComponent } from './common/pagination/user.component';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 
 
 const routes: VexRoutes = [
@@ -33,19 +32,20 @@ const routes: VexRoutes = [
             loadChildren:() => import('./notice/notice.module').then(m => m.NoticeModule),
           }
         ]
+      },
+      {
+        path : 'schedule',
+        loadChildren:() => import('./schedule/schedule.module').then(m => m.ScheduleModule)
       }
     ]
   },
   {
     path:'register',
-   loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),   
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),   
   },
   {
     path:'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
-  },
-  {
-    path : 'schedule', component : ScheduleComponent
   },
 
 
@@ -74,7 +74,8 @@ const routes: VexRoutes = [
     // preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled',
     relativeLinkResolution: 'corrected',
-    anchorScrolling: 'enabled'
+    anchorScrolling: 'enabled',
+    useHash: true
   })],
   exports: [RouterModule]
 })

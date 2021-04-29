@@ -13,6 +13,7 @@ import { SplashScreenService } from '../@vex/services/splash-screen.service';
 import { Style, StyleService } from '../@vex/services/style.service';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
+import icDateRange from '@iconify/icons-ic/twotone-date-range';
 
 @Component({
   selector: 'vex-root',
@@ -95,6 +96,17 @@ export class AppComponent {
         label: 'Notice',
         route:'/notice',
         icon: icAssigment
+      },
+      {
+        type:'link',
+        label: 'Schedule',
+        route:'/schedule',
+        icon: icDateRange,
+        badge: {
+          value: '12',
+          bgClass: 'bg-deep-purple',
+          textClass: 'text-deep-purple-contrast',
+        },
       }
 
     ];

@@ -17,13 +17,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
-import { MatDialogModule } from '@angular/material/dialog';//모달
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InsertScheduleComponent } from './insert-schedule/insert-schedule.component';
-import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 import { ScheduleService } from './services/schedule.service';
-import { ScheduleComponent } from './schedule/schedule.component';
-import { ScheduleModule } from './schedule/schedule.module';
 import { DatePipe } from '@angular/common';
 
 
@@ -48,9 +42,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [
     AppComponent,
-    ScheduleComponent,
-    InsertScheduleComponent,
-    UpdateScheduleComponent,
 
 
     
@@ -75,16 +66,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 
     // Vex
     VexModule,
-    CustomLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FullCalendarModule,
-    MatDialogModule,//modal
-    ScheduleModule,
-  ],
-  entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
-    InsertScheduleComponent,
-    UpdateScheduleComponent
+    CustomLayoutModule
   ],
   providers: [
     ScheduleService,
