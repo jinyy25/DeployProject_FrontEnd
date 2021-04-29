@@ -1,14 +1,14 @@
 <div id="boardWrap">
 	<p>공지사항</p>
 	<div id="searchBox" [formGroup]="form">
-		<mat-form-field class="select-field">
+		<mat-form-field class="select-field" appearance="standard">
 			<mat-label>구분</mat-label>
 			<mat-select required formControlName="type">
 				<mat-option value="title">제목</mat-option>
 				<mat-option value="nickname">작성자</mat-option>
 			</mat-select>
 		</mat-form-field>
-		<mat-form-field class="search-field">
+		<mat-form-field class="search-field" appearance="standard">
 			<mat-label>검색어를 입력해 주세요.</mat-label>
 			<input formControlName="word" matInput >	
 		</mat-form-field> 
@@ -16,7 +16,7 @@
 		<button mat-stroked-button  routerLink="write" class="write_btn" >글쓰기</button>
 	</div>
 
-	<table id="boardTable" class="table-striped">
+	<table id="boardTable" class="table table-striped">
 		<thead>
 			<tr>
 				<th style="width:10%">번호</th>
@@ -29,6 +29,12 @@
 			<tr>
 					<td>2</td>
 					<td class="left_border">테스트입니다</td>
+					<td class="left_border">나혁진</td>
+					<td class="left_border">2022-02-02</td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td class="left_border">테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.</td>
 					<td class="left_border">나혁진</td>
 					<td class="left_border">2022-02-02</td>
 			</tr>

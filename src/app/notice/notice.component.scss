@@ -8,7 +8,6 @@
 	
 	#boardTable{
 		width:100%;
-		text-align:center;
 		margin: auto;
 	}
 	.select-field{
@@ -16,38 +15,19 @@
 		
 	}
 	.search-field{
-		margin: 0em 1em 0em 1em;
     	width: 28em;
 	}
 	#searchBox{
 		margin-top: 30px;
 		display: flex;
-    justify-content: space-between;
-	}
-
-	#boardTable th{
-		height:50px;
-		vertical-align: middle;
-		border-top: 2px solid #2c3e7e;
-		border-bottom: 1px solid #d5d5db;
-		background-color: #f2f4fb;
-		color:#103581;
-	}
-
-	.left_border{
-		border-left:1px solid #d5d5db;
-	}
-
-	#boardTable td{
-		height:100px;
-		vertical-align: middle;
-		border-bottom: 1px solid #d5d5db;
+    	justify-content: space-between;
 	}
 
 	tbody tr{
 		cursor:pointer;
 	}
 	button{
+		
 		height: 3.5em;
 		width: 10%;
 	}

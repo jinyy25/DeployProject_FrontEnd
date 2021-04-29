@@ -13,12 +13,12 @@
 
     <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
       <div fxFlex="auto" fxLayout="column">
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>ID</mat-label>
           <input #id formControlName="id" matInput required maxlength="20">
           <mat-error *ngIf="form.get('id').hasError('required')">아이디를 입력해 주세요.</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>Password</mat-label>
           <input #password [type]="inputType" formControlName="password" matInput required maxlength="20">
           <mat-error *ngIf="form.get('password').hasError('required')">비밀번호를 입력해 주세요.</mat-error>

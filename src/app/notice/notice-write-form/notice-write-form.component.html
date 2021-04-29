@@ -3,7 +3,7 @@
 	<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
 		
 		<div id="titleWrap" fxFlex="auto" fxLayout="column">
-			<mat-form-field fxFlex="grow">
+			<mat-form-field fxFlex="grow" appearance="standard">
 				<mat-label>제목:</mat-label>
 				<input formControlName="title" matInput maxlength="34">
 			</mat-form-field>
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div id="contentWrap">
-			<mat-form-field fxFlex="grow">
+			<mat-form-field fxFlex="grow" >
 				<mat-label>내용:</mat-label>
 				<textarea formControlName="content" matInput></textarea>
 			</mat-form-field>
