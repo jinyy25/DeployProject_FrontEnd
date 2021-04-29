@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { DeployWriteFormComponent } from './deploy-write-form.component';
 
 import { PageLayoutModule } from '../../../@vex/components/page-layout/page-layout.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,13 +18,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContainerModule } from '../../../@vex/directives/container/container.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ DeployWriteFormComponent],
   imports: [
-    CommonModule,
-    FlexLayoutModule,    
+    CommonModule,        
+    PageLayoutModule,
+    FlexLayoutModule,
+    BreadcrumbsModule,    
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
@@ -37,8 +42,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatTooltipModule,
     ReactiveFormsModule,
     ContainerModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ]
 })
 export class DeployWriteFormModule { }
