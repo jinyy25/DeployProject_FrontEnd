@@ -6,6 +6,8 @@ import { EventApi, EventInput } from '@fullcalendar/core';
 import enLocale from '@fullcalendar/core/locales/en-au';
 import koLocale from '@fullcalendar/core/locales/ko';
 import { InsertScheduleComponent } from '../insert-schedule/insert-schedule.component';
+import { User } from '../models/user.model';
+import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
 import { UpdateScheduleComponent } from '../update-schedule/update-schedule.component';
 
@@ -16,11 +18,31 @@ import { UpdateScheduleComponent } from '../update-schedule/update-schedule.comp
 })
 export class ScheduleComponent implements AfterViewInit {
 
+  //로그인 회원 아이디 정보
+  loginUser : User;
+  check:string;
+
+  ngOnInit() {
+    this.check = localStorage.getItem("AUTH_TOKEN");
+
+    if(this.check !=null){
+       
+      this.loginUser = this.jwtService.decodeToUser(this.check);
+      
+    }else{
+      this.check= sessionStorage.getItem("AUTH_TOKEN");
+
+      if(this.check !=null){
+        this.loginUser = this.jwtService.decodeToUser(this.check);
+      }
+    }
+  }
+
   events : EventInput[] = [];
 
   @ViewChild('calendar') calendar : FullCalendarComponent;
 
-  constructor(private dialog : MatDialog, private service : ScheduleService, private pipe: DatePipe) {}
+  constructor(private dialog : MatDialog, private service : ScheduleService, private pipe: DatePipe, private jwtService : JwtService) {}
 
   calendarOptions : CalendarOptions = {
     locales:[enLocale, koLocale],
@@ -62,16 +84,34 @@ export class ScheduleComponent implements AfterViewInit {
     //let calendarApi = this.calendar.getApi();
     this.service.selectSchedule().subscribe(data => {
       data.forEach(element => {
+
         let endDate = element.endDate;
+
         if(element.startDate.length == 10 && element.endDate.length == 10){
           const end = new Date(element.endDate);
           end.setDate(end.getDate() + 1);
           endDate = this.pipe.transform(end, 'yyyy-MM-dd');
         }
-        let edit = true;
-        if(element.complete == 'Y'){
-          edit = false;
+
+        let edit = element.complete != 'Y';//완료되지 않은 일정 = true
+        let color;
+
+        if(element.teamName == 'A'){
+          color = 'pink';
+        }else if(element.teamName == 'B'){
+          color = 'orange';
+        }else if(element.teamName == 'C'){
+          color = 'green';
+        }else if(element.teamName == 'D'){
+          color = 'purple';
         }
+        if(element.writer == this.loginUser.id){
+          color = 'default';
+        }
+        if(!edit){//완료된 일정은 회색
+          color = 'grey';
+        }
+
         this.events.push({
           id : String(element.scheduleNo),
           title : element.scheduleTitle,
@@ -79,7 +119,8 @@ export class ScheduleComponent implements AfterViewInit {
           end : endDate,
           schedule : element,
           startEditable : edit,
-          durationEditable : edit
+          durationEditable : edit,
+          color : color
         });
       });
       this.calendarOptions.events = this.events;
@@ -140,11 +181,17 @@ export class ScheduleComponent implements AfterViewInit {
     const dialogRef = this.dialog.open(InsertScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
       width : '450px',
-      data : {startDate : arg.start, endDate : arg.end, allDay : arg.allDay}//날짜, 시간 전해줘야됨
+      data : {startDate : arg.start, endDate : arg.end, allDay : arg.allDay, name : this.loginUser.name}//날짜, 시간 전해줘야됨
     });
 
     dialogRef.afterClosed().subscribe( result => {//onSave 메소드에서 리턴한 schedule 객체
       //const calendarApi = arg.view.calendar;
+      result.writer = this.loginUser.id;
+
+      if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
+        result.startDate = result.startDate+" "+result.startTime;
+        result.endDate = result.endDate+" "+result.endTime;
+      }
 
       this.service.createSchedule(result).subscribe(data => {
         if(data > 0){
@@ -159,6 +206,8 @@ export class ScheduleComponent implements AfterViewInit {
 
   openUpdate(arg) : void{
     //arg.event = EventApi
+    const disable = this.loginUser.id != arg.event.extendedProps.schedule.writer;//로그인 유저가 일정 작성자가 아닐 경우
+
     const dialogRef = this.dialog.open(UpdateScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
       width : '450px',
@@ -166,11 +215,13 @@ export class ScheduleComponent implements AfterViewInit {
         scheduleNo : arg.event.extendedProps.schedule.scheduleNo,
         scheduleTitle : arg.event.title,
         scheduleContent : arg.event.extendedProps.schedule.scheduleContent,
-        writer : arg.event.extendedProps.schedule.writer,
+        name : arg.event.extendedProps.schedule.name,
         startDate : arg.event.start,
         endDate : arg.event.end,
         allDay : arg.event.allDay,
-        complete : arg.event.extendedProps.schedule.complete
+        complete : arg.event.extendedProps.schedule.complete,
+        disable : disable,
+        teamName : arg.event.extendedProps.schedule.teamName
       }
     });
 
@@ -187,6 +238,11 @@ export class ScheduleComponent implements AfterViewInit {
         });
 
       }else if(result){//수정
+
+        if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
+          result.startDate = result.startDate+" "+result.startTime;
+          result.endDate = result.endDate+" "+result.endTime;
+        }
         
         this.service.updateSchedule(result).subscribe(data => {
           if(data > 0){

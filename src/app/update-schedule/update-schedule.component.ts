@@ -17,23 +17,21 @@ export class UpdateScheduleComponent implements OnInit {
     this.schedule.scheduleNo = this.data.scheduleNo;
     this.schedule.allDay = this.data.allDay;
 
+    this.schedule.startDate = this.pipe.transform(this.data.startDate, 'yyyy-MM-dd');
+
     if(this.data.allDay){//종일
-      this.schedule.startDate = this.pipe.transform(this.data.startDate, 'yyyy-MM-dd');
       const endDate = new Date(this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'));
       endDate.setDate(endDate.getDate() - 1);
       this.schedule.endDate = this.pipe.transform(endDate, 'yyyy-MM-dd');
     }else{//시간
-      this.schedule.startDate = this.pipe.transform(this.data.startDate, 'yyyy-MM-dd HH:mm');
-      this.schedule.endDate = this.pipe.transform(this.data.endDate, 'yyyy-MM-dd HH:mm');
+      this.schedule.startTime = this.pipe.transform(this.data.startDate, 'HH:mm');
+      this.schedule.endDate = this.pipe.transform(this.data.endDate, 'yyyy-MM-dd');
+      this.schedule.endTime = this.pipe.transform(this.data.endDate, 'HH:mm');
     }
     this.schedule.scheduleTitle = this.data.scheduleTitle;
     this.schedule.scheduleContent = this.data.scheduleContent;
   }
 
-  onCancel(){
-    this.dialogRef.close();
-  }
-  
   onDelete(){
     if(confirm("해당 일정을 삭제하시겠습니까? 삭제 후에는 복구가 불가능합니다.")){
       this.dialogRef.close('delete');

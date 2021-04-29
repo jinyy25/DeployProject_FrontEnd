@@ -102,11 +102,11 @@ export class AppComponent {
         label: 'Schedule',
         route:'/schedule',
         icon: icDateRange,
-        badge: {
-          value: '12',
-          bgClass: 'bg-deep-purple',
-          textClass: 'text-deep-purple-contrast',
-        },
+        // badge: {
+        //   value: '12',
+        //   bgClass: 'bg-deep-purple',
+        //   textClass: 'text-deep-purple-contrast',
+        // }
       }
 
     ];

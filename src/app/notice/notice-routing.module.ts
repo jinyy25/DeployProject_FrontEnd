@@ -4,6 +4,7 @@ import { NoticeComponent } from './notice.component';
 import { RouterModule } from '@angular/router';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { NoticeWriteFormComponent } from './notice-write-form/notice-write-form.component';
+import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
 
 const routes: VexRoutes = [
   {
@@ -13,7 +14,12 @@ const routes: VexRoutes = [
   {
     path: 'write',
     component:NoticeWriteFormComponent
+  },
+  {
+    path:':boardNo',
+    component:NoticeDetailComponent
   }
+  
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 <div>
-    <h2>Excel File Download Sample</h2>
+    <h2 id="userList" #listTitle>Excel File Download Sample</h2>
+    <!--타이틀에 id로 엑셀 파일명 지정해주시고 지역변수 설정해주신다음에 버튼 클릭시 메서드 호출시에 id값 넣어주시면 됩니다.-->
     <table>
       <thead>
       <tr>
@@ -18,6 +19,6 @@
       </tr>
       </tbody>
     </table>
-    <button (click)="exportAsXLSX()">Download User List As Excel File</button>
+    <button (click)="exportAsXLSX(listTitle.id)">Download User List As Excel File</button>
 </div>
 

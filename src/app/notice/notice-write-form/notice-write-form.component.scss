@@ -1,19 +1,23 @@
+#noticeWrap{
+		width: 80%;
+		margin :auto;
+	}
 h2{
-	margin:100px auto 0 130px;
+	margin:100px 0 0 20px;
 }
 #titleWrap{
-	width: 80%;
+	width: 100%;
 	height: 70px;
 	margin: auto;
 	// background-color: blue;
 }
 #fileWrap{
-	width:80%;
+	width:100%;
 	margin:auto;
 	// background-color: red;
 }
 #contentWrap{
-	width: 80%;
+	width: 100%;
 	height: 500px;
 	margin: auto;
 	// background-color: black;
@@ -35,7 +39,7 @@ h2{
 	overflow-y: scroll;
 }
 #buttonWrap{
-	width: 80%;
+	width: 100%;
 	margin: auto;
 	text-align: center;
 }
