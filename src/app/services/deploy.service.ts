@@ -18,4 +18,10 @@ export class DeployService {
     console.log("test all");
     return this.httpClient.get<Deploy[]>(this.deployURL);
   }
+
+  //2. send script
+  // public sendScript(){
+  //   console.log("test script");
+  //   return this.httpClient.post<Deploy[]>(this.deployURL);
+  // }
 }

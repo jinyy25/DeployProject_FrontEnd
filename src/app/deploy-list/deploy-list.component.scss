@@ -11,3 +11,16 @@ p{
 .deploy-outline{
     padding: 4em;
 }
+
+.deploy-search{
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-field{
+   width:20%; 
+}
+
+.search-field{
+    width: 70%;
+}

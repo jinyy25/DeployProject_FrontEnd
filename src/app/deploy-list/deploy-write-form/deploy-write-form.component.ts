@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DeployService } from 'src/app/services/deploy.service';
+import { ActivatedRoute,Router} from '@angular/router';
 
 @Component({
   selector: 'vex-deploy-write-form',
@@ -12,10 +14,24 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class DeployWriteFormComponent implements OnInit {
 
-  form: FormGroup;
-  constructor() { }
+  // createScript!: FormGroup;
+  
+  constructor(
+    private deployService: DeployService,
+    // private formBuilder: FormBuilder,
+    // private route:ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
   }
+
+
+
+  // submnit(){
+  //   this.deployService.sendScript()
+  //     .subscribe(data =>          
+  //       // alert("success"))
+  //       // this.router.navigate([this.redirectTo?this.redirectTo:'/'])
+  // }
 
 }

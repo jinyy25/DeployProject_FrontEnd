@@ -6,14 +6,20 @@
         </div>
 
         <div class="deploy-search">
-            <!-- <mat-form-field>
+            <mat-form-field class="select-field">
                 <mat-label>Category</mat-label>
-                <select>
-                    <option value="Title"></option>
-                    <option value="Writer"></option>
-                    <option value="Date"></option>
+                <select matNativeControl required>
+                    <option value="All">All</option>
+                    <option value="Title">Title</option>
+                    <option value="Writer">Writer</option>
+                    <option value="Date">Date</option>
                 </select>
-            </mat-form-field> -->
+            </mat-form-field>
+            <mat-form-field class="search-field">
+                <mat-label></mat-label>
+                <input matInput placeholder="Seacrch">       
+            </mat-form-field>                
+
         </div>
         <table class="table table-striped">
             <thead>
@@ -31,7 +37,10 @@
                     <td>{{deploy.deployTitle}}</td>
                     <td>{{deploy.writer}}</td>
                     <td>{{deploy.deployDate}}</td>
-                    <td>{{deploy.deployContent}}</td>                                
+                    <td>
+                        <button></button>
+                        <button></button>
+                    </td>                                
                 </tr>
             </tbody>        
         </table>
@@ -46,5 +55,5 @@
             <div>List length: {{pageEvent.length}}</div>
             <div>Page size: {{pageEvent.pageSize}}</div>
             <div>Page index: {{pageEvent.pageIndex}}</div>
-          </div>
+        </div>
     </div>
