@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
@@ -42,53 +41,35 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { ScheduleRoutingModule } from './schedule-routing.module';
+import { ScheduleComponent } from './schedule.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { InsertScheduleComponent } from '../insert-schedule/insert-schedule.component';
+import { UpdateScheduleComponent } from '../update-schedule/update-schedule.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  exports: [
-    A11yModule,
-    ClipboardModule,
-    CdkStepperModule,
-    CdkTableModule,
-    CdkTreeModule,
-    DragDropModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
+  declarations: [
+    ScheduleComponent,
+    InsertScheduleComponent,
+    UpdateScheduleComponent,
+  ],
+  imports: [
+    CommonModule,
     MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
     MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule,
-    OverlayModule,
-    PortalModule,
-    ScrollingModule
-  ]
+    ScheduleRoutingModule,
+    FullCalendarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule//modal
+  ],
+  entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
+    InsertScheduleComponent,
+    UpdateScheduleComponent
+  ],
 })
 export class ScheduleModule { }
