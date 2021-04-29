@@ -5,4 +5,7 @@ export class Deploy{
     writer:string
     deployDate:string
     
+    // portalScript:string
+    // tbwappScript:string
+    // centerScript:string
 }

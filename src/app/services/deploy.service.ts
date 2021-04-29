@@ -20,8 +20,9 @@ export class DeployService {
   }
 
   //2. send script
-  // public sendScript(){
-  //   console.log("test script");
-  //   return this.httpClient.post<Deploy[]>(this.deployURL);
-  // }
+  public sendScript(deploys){
+    console.log("test script");
+    console.log(deploys.deployTitle);
+    return this.httpClient.post<Deploy>(this.deployURL+"/deploy-write",deploys);
+  }
 }

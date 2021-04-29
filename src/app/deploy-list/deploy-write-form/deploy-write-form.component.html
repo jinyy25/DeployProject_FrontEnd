@@ -1,13 +1,15 @@
 <div class="deploy-outline">
     <p>배포이력관리</p>
-    <div>      
+    <form [formGroup]="deployForm">
         <mat-form-field class="block">
             <mat-label>제목</mat-label>
-            <input matInput>
+            <input #title formControlName="title" matInput>
+            <mat-error *ngIf="deployForm.get('title').hasError('required')">제목을 입력해 주세요</mat-error>
         </mat-form-field>    
         <mat-form-field class="block">
             <mat-label>내용</mat-label>
-            <textarea matInput></textarea>
+            <textarea #content formControlName="content" matInput></textarea>
+            <mat-error *ngIf="deployForm.get('content').hasError('required')">내용을 입력해 주세요</mat-error>
         </mat-form-field>
         <mat-form-field class="block">
             <mat-label>portal</mat-label>
@@ -21,14 +23,13 @@
             <mat-label>center</mat-label>
             <textarea matInput></textarea>
         </mat-form-field>
-    </div>
-    <div class="file-outline">
-        <span>파일업로드</span>
-        <input type="file">
-    </div>
-    
-    <div class="button-outline">
-        <button mat-flat-button color="primary">배포이력등록</button>
-    </div>
-
+        <div class="file-outline">
+            <span>파일업로드</span>
+            <input type="file">
+        </div>
+        
+        <div class="button-outline">
+            <button (click)="send(deployForm,title,content)" mat-flat-button color="primary">배포이력등록</button>
+        </div>
+    </form>
 </div>

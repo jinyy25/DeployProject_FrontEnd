@@ -1,25 +1,24 @@
 
     <div class="deploy-outline">
         <div class="deploy-list-header">
-            <p>Deploy List</p>
-            <button mat-stroked-button routerLink="deploy-write" >New Deploy</button>
+            <p>배포이력관리</p>
         </div>
 
         <div class="deploy-search">
             <mat-form-field class="select-field">
-                <mat-label>Category</mat-label>
+                <mat-label>분류</mat-label>
                 <select matNativeControl required>
-                    <option value="All">All</option>
-                    <option value="Title">Title</option>
-                    <option value="Writer">Writer</option>
-                    <option value="Date">Date</option>
+                    <option value="All">전체</option>
+                    <option value="Title">제목</option>
+                    <option value="Writer">작성자</option>
+                    <option value="Date">날짜</option>
                 </select>
             </mat-form-field>
             <mat-form-field class="search-field">
-                <mat-label></mat-label>
-                <input matInput placeholder="Seacrch">       
-            </mat-form-field>                
-
+                <mat-label>Search</mat-label>
+                <input matInput>       
+            </mat-form-field>  
+            <button mat-stroked-button routerLink="deploy-write" >New Deploy</button>              
         </div>
         <table class="table table-striped">
             <thead>
