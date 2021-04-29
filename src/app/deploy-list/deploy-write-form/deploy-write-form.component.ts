@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DeployService } from 'src/app/services/deploy.service';
-import { ActivatedRoute,Router} from '@angular/router';
 
 @Component({
   selector: 'vex-deploy-write-form',
