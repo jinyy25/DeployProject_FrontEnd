@@ -5,6 +5,7 @@
         </div>
 
         <div class="deploy-search">
+            
             <mat-form-field class="select-field">
                 <mat-label>분류</mat-label>
                 <select matNativeControl required>
@@ -14,20 +15,25 @@
                     <option value="Date">날짜</option>
                 </select>
             </mat-form-field>
+
+            
             <mat-form-field class="search-field">
                 <mat-label>Search</mat-label>
                 <input matInput>       
-            </mat-form-field>  
-            <button mat-stroked-button routerLink="deploy-write" >New Deploy</button>              
+            </mat-form-field>
+            <button mat-stroked-button>검색</button>  
+            
+            <button mat-stroked-button routerLink="deploy-write" class="deployBtn" >배포작성</button>              
         </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Title</th>
-                    <th>Writer</th>
-                    <th>Date</th>                
-                    <th>Download</th>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>날짜</th>                
+                    <th>다운로드</th>
                 </tr>
             </thead>        
             <tbody>
