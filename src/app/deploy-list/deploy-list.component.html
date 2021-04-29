@@ -1,23 +1,50 @@
-<div class="col-mg-6">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Writer</th>
-                <th>Date</th>                
-                <th>다운로드</th>
-            </tr>
-        </thead>        
-        <tbody>
-            <!-- *ngFor : 배열 나열 -->
-            <tr *ngFor="let deploy of deploys">
-                <td>{{deploy.deployNo}}</td>
-                <td>{{deploy.deployTitle}}</td>
-                <td>{{deploy.deployContent}}</td>
-                <td>{{deploy.writer}}</td>
-                <td>{{deploy.deployContent}}</td>                                
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+    <div class="deploy-outline">
+        <div class="deploy-list-header">
+            <p>Deploy List</p>
+            <button mat-stroked-button routerLink="deploy-write" >New Deploy</button>
+        </div>
+
+        <div class="deploy-search">
+            <!-- <mat-form-field>
+                <mat-label>Category</mat-label>
+                <select>
+                    <option value="Title"></option>
+                    <option value="Writer"></option>
+                    <option value="Date"></option>
+                </select>
+            </mat-form-field> -->
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Writer</th>
+                    <th>Date</th>                
+                    <th>Download</th>
+                </tr>
+            </thead>        
+            <tbody>
+                <tr *ngFor="let deploy of deploys">
+                    <td>{{deploy.deployNo}}</td>
+                    <td>{{deploy.deployTitle}}</td>
+                    <td>{{deploy.writer}}</td>
+                    <td>{{deploy.deployDate}}</td>
+                    <td>{{deploy.deployContent}}</td>                                
+                </tr>
+            </tbody>        
+        </table>
+        <mat-paginator [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = $event">
+        </mat-paginator>
+
+        <div *ngIf="pageEvent">
+            <h5>Page Change Event Properties</h5>
+            <div>List length: {{pageEvent.length}}</div>
+            <div>Page size: {{pageEvent.pageSize}}</div>
+            <div>Page index: {{pageEvent.pageIndex}}</div>
+          </div>
+    </div>

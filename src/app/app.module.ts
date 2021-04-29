@@ -30,6 +30,7 @@ import { UserExcelService } from './common/excel-download/userExcel.service';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { ExcelService } from './common/excel-download/excel.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
+import { DeployWriteFormComponent } from './deploy-list/deploy-write-form/deploy-write-form.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -51,7 +52,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     //pagination sample용 Component
     UserComponent,
     ExcelComponent,
-    UploadFilesComponent
+    UploadFilesComponent,
+    DeployWriteFormComponent
   
     
   ],

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DeployListComponent } from './deploy-list.component';
-import { DeployListRoutingModule } from './deploy-list-routing.module';
 
-import { PageLayoutModule } from '../../@vex/components/page-layout/page-layout.module';
+
+import { PageLayoutModule } from '../../../@vex/components/page-layout/page-layout.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BreadcrumbsModule } from '../../@vex/components/breadcrumbs/breadcrumbs.module';
+import { BreadcrumbsModule } from '../../../@vex/components/breadcrumbs/breadcrumbs.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -16,20 +15,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { IconModule } from '@visurel/iconify-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ContainerModule } from '../../@vex/directives/container/container.module';
+import { ContainerModule } from '../../../@vex/directives/container/container.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from "@angular/material/form-field";
+
 
 @NgModule({
-  declarations: [DeployListComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    DeployListRoutingModule,        
-    PageLayoutModule,
-    FlexLayoutModule,
-    BreadcrumbsModule,    
+    FlexLayoutModule,    
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
@@ -42,10 +37,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatTooltipModule,
     ReactiveFormsModule,
     ContainerModule,
-    MatInputModule,
-    MatFormFieldModule,
     MatSelectModule,
     MatButtonToggleModule
   ]
 })
-export class DeployListModule { }
+export class DeployWriteFormModule { }

@@ -9,7 +9,6 @@ h2{
 }
 #fileWrap{
 	width:80%;
-	height: 280px;
 	margin:auto;
 	// background-color: red;
 }
@@ -33,6 +32,7 @@ h2{
 	height: 220px;
 	margin: 20px auto 0 auto;
 	border: 1px solid #d5d5db;
+	overflow-y: scroll;
 }
 #buttonWrap{
 	width: 80%;
@@ -44,4 +44,16 @@ h2{
 	height: 50px;
 	margin:0 80px;
 	border:1px solid #bbc2d3;
+}
+.close_btn{
+	width: 20px;
+	border:1px solid #bbc2d3;
+	margin-right: 20px;
+}
+#fileBox ul{
+	margin-left: 10px;
+	margin-top:10px;
+}
+#fileBox li{
+	margin-top:10px;
 }	
