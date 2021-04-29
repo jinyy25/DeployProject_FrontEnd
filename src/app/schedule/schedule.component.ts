@@ -14,7 +14,7 @@ import { UpdateScheduleComponent } from '../update-schedule/update-schedule.comp
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.css']
+  styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements AfterViewInit {
 
@@ -160,9 +160,9 @@ export class ScheduleComponent implements AfterViewInit {
 
       this.service.updateSchedule(schedule).subscribe(data => {
         if(data > 0){
-          alert("일정 수정");
+          alert("일정을 수정하였습니다");
         }else{
-          alert("수정 실패")
+          alert("수정에 실패하였습니다")
         }
       });
 
@@ -180,7 +180,7 @@ export class ScheduleComponent implements AfterViewInit {
   openDialog(arg) : void{//모달창 띄움
     const dialogRef = this.dialog.open(InsertScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
-      width : '450px',
+      width : '480px',
       data : {startDate : arg.start, endDate : arg.end, allDay : arg.allDay, name : this.loginUser.name}//날짜, 시간 전해줘야됨
     });
 
@@ -195,9 +195,9 @@ export class ScheduleComponent implements AfterViewInit {
 
       this.service.createSchedule(result).subscribe(data => {
         if(data > 0){
-          alert("일정 등록");
+          alert("일정이 등록되었습니다");
         }else{
-          alert("등록 실패");
+          alert("등록에 실패하였습니다");
         }
         window.location.reload();//새로고침
       });
@@ -210,7 +210,7 @@ export class ScheduleComponent implements AfterViewInit {
 
     const dialogRef = this.dialog.open(UpdateScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
-      width : '450px',
+      width : '480px',
       data : {
         scheduleNo : arg.event.extendedProps.schedule.scheduleNo,
         scheduleTitle : arg.event.title,
@@ -230,10 +230,10 @@ export class ScheduleComponent implements AfterViewInit {
 
         this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo).subscribe(data => {
           if(data > 0){
-            alert("일정 삭제");
+            alert("일정을 삭제하였습니다");
             arg.event.remove();
           }else{
-            alert("삭제 실패")
+            alert("삭제에 실패하였습니다")
           }
         });
 
@@ -246,9 +246,9 @@ export class ScheduleComponent implements AfterViewInit {
         
         this.service.updateSchedule(result).subscribe(data => {
           if(data > 0){
-            alert("일정 수정");
+            alert("일정을 수정하였습니다");
           }else{
-            alert("수정 실패")
+            alert("수정에 실패하였습니다")
           }
           window.location.reload();
         });
