@@ -18,11 +18,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
 
 
 
 @NgModule({
-  declarations: [NoticeComponent],
+  declarations: [NoticeComponent, NoticeDetailComponent],
   imports: [
     CommonModule,
     NoticeRoutingModule,

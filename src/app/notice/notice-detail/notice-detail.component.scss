@@ -1,0 +1,111 @@
+#noticeWrap{
+	width: 80%;
+	margin:130px auto 0 auto;
+	border-top: 2px solid #2c3e7e;
+}
+#noticeHeader{
+	 overflow: hidden;
+}
+#noticeHeader dt, #noticeHeader dd{
+	height: 50px;
+	padding:15px 7px;
+
+}
+#noticeHeader dt{
+	width: 100px;
+	text-align: center;
+	color:#103581;
+	background-color: #f2f4fb;
+}
+dt,dl{
+	float: left;
+	font-size: 14px;
+}
+#noticeTitle{
+	width: 70%;
+}
+#noticeTitle dt,#noticeWriter dt{
+	border:1px solid #d5d5db;
+	border-left:none;
+}
+#noticeRegdate{
+	width:30%;
+}
+#noticeTitle dd{
+	margin-left: 100px;
+	border-bottom:1px solid #d5d5db;
+}
+#noticeRegdate dt{
+	border:1px solid #d5d5db;
+}
+#noticeRegdate dd{
+	text-align: center;
+	border-bottom:1px solid #d5d5db;
+}
+#noticeWriter{
+	width: 30%;
+}
+#noticeWriter dt{
+	border-top: none;
+	
+}
+#noticeWriter dd{
+	text-align: center;
+	border-bottom:1px solid #d5d5db;
+	// background-color: red;
+}
+#phone{
+	width: 40%;
+}
+#phone dt{
+	border:1px solid #d5d5db;
+	border-top: none;
+}
+#phone dd{
+	text-align: center;
+	border-bottom:1px solid #d5d5db;
+}
+#noticeUpdate{
+	width: 30%;
+}
+#noticeUpdate dt{
+	border:1px solid #d5d5db;
+	border-top:none;
+}
+#noticeUpdate dd{
+	
+	text-align: center;
+	border-bottom:1px solid #d5d5db;
+}
+#fileBox{
+	width: 100%;
+	height: 220px;
+	margin: 20px auto 0 auto;
+	border: 1px solid #d5d5db;
+	overflow-y: scroll;
+}
+#fileBox ul{
+	margin-left: 10px;
+	margin-top:10px;
+}
+#fileBox li{
+	margin-top:10px;
+}
+#contentBox{
+	margin-top: 20px;
+	width: 100%;
+	padding: 15px 7px;
+	min-height: 200px;
+}
+#noticeFooter{
+	width: 100%;
+	background-color: red;
+}
+.btn{
+	float: right;
+	background-color: #212529;
+	color:#fff;
+	margin: 0 5px;
+}
+.btn_common{
+}	

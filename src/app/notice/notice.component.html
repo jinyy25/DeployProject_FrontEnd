@@ -1,38 +1,44 @@
-<h2>공지사항</h2>
+<div id="noticeWrap">
 
-<table id="boardTable">
-	<thead>
-		<tr>
-			<th style="width:10%">번호</th>
-			<th class="left_border" style="width:65%">제목</th>
-			<th class="left_border" style="width:10%">작성자</th>
-			<th class="left_border" style="width:20%">작성일</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-				<td>2</td>
-				<td class="left_border">테스트입니다</td>
-				<td class="left_border">나혁진</td>
-				<td class="left_border">2022-02-02</td>
-		</tr>
-		<tr>
-				<td>1</td>
-				<td class="left_border">테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.</td>
-				<td class="left_border">나혁진</td>
-				<td class="left_border">2022-02-02</td>
-		</tr>
+	<h2>공지사항</h2>
 
-		
-	</tbody>
-</table>
-<button id="writeBtn" routerLink="write" class="btn">글쓰기</button>
+	<table id="boardTable">
+		<thead>
+			<tr>
+				<th style="width:10%">번호</th>
+				<th class="left_border" style="width:65%">제목</th>
+				<th class="left_border" style="width:10%">작성자</th>
+				<th class="left_border" style="width:20%">작성일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+					<td>2</td>
+					<td class="left_border">테스트입니다</td>
+					<td class="left_border">나혁진</td>
+					<td class="left_border">2022-02-02</td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td class="left_border">테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.테스트입니다.</td>
+					<td class="left_border">나혁진</td>
+					<td class="left_border">2022-02-02</td>
+			</tr>
 
-	<div id="searchBox">
-			<select name="kind">
-				<option value="title">제목</option>
-				<option value="nickname">작성자</option>
-			</select>
-			<input name="word">
-			<button id="searchBtn"  class="btn">검색</button>
+			
+		</tbody>
+	</table>
+	<div id="writeBtnWrap">
+		<button id="writeBtn" routerLink="write" class="btn">글쓰기</button>
 	</div>
+
+		<div id="searchBox">
+				<select name="kind">
+					<option value="title">제목</option>
+					<option value="nickname">작성자</option>
+				</select>
+				<input name="word">
+				<button id="searchBtn"  class="btn">검색</button>
+		</div>
+
+</div>

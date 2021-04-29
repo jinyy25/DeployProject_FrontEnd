@@ -1,33 +1,35 @@
-<h2>공지사항</h2>
-<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
-	
-	<div id="titleWrap" fxFlex="auto" fxLayout="column">
-		<mat-form-field fxFlex="grow">
-			<mat-label>제목:</mat-label>
-			<input formControlName="title" matInput>
-		</mat-form-field>
-	</div>
-
-	<div id="fileWrap">
-		<div>
-			<input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
-			<label id="fileLabel" for="file">파일 선택</label>
+<div id="noticeWrap">
+	<h2>공지사항</h2>
+	<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+		
+		<div id="titleWrap" fxFlex="auto" fxLayout="column">
+			<mat-form-field fxFlex="grow">
+				<mat-label>제목:</mat-label>
+				<input formControlName="title" matInput maxlength="34">
+			</mat-form-field>
 		</div>
-		<div *ngIf="display=='block'" id="fileBox">
-			<ul>
-				<li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
-			</ul>
-		</div>
-	</div>
-	<div id="contentWrap">
-		<mat-form-field fxFlex="grow">
-			<mat-label>내용:</mat-label>
-			<textarea formControlName="title" matInput></textarea>
-		</mat-form-field>
-	</div>
 
-	<div id="buttonWrap">
-		<button (click)="upload()">확인</button>
-		<button>취소</button>
+		<div id="fileWrap">
+			<div>
+				<input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
+				<label id="fileLabel" for="file">파일 선택</label>
+			</div>
+			<div *ngIf="display=='block'" id="fileBox">
+				<ul>
+					<li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+				</ul>
+			</div>
+		</div>
+		<div id="contentWrap">
+			<mat-form-field fxFlex="grow">
+				<mat-label>내용:</mat-label>
+				<textarea formControlName="title" matInput></textarea>
+			</mat-form-field>
+		</div>
+
+		<div id="buttonWrap">
+			<button (click)="upload()">확인</button>
+			<button>취소</button>
+		</div>
 	</div>
 </div>

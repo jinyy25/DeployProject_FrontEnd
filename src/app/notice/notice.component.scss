@@ -1,9 +1,15 @@
+	#noticeWrap{
+		width: 80%;
+		margin :auto;
+	}
+
 	h2{
-		margin:100px auto 0 120px;
+		margin:100px 0 0 0;
+		
 	}
 
 	#boardTable{
-		width:1000px;
+		width:100%;
 		text-align:center;
 		margin: 40px auto;
 	}
@@ -28,17 +34,18 @@
 	}
 
 	#writeBtn{
-		position:relative;
-		left:950px;
-		width:100px;
+		float: right;
+		width: 100px;
 		height:35px;
 		cursor: pointer;
 	}
 	
 	#searchBox{
-		margin:30px auto;
-		width:600px;
+		float: left;
+		margin:50px 0;
+		width:70%;
 		height:80px;
+		text-align: center;
 	}
 
 	#searchBox select,#searchBox input,#searchBox button{
@@ -46,7 +53,7 @@
 	}
 
 	#searchBox select,#searchBox button{
-		width:50px;
+		width:10%;
 		height: 52px;
 	}
 
@@ -55,7 +62,7 @@
 	}
 
 	#searchBox select{
-		width:70px;
+		width:10%;
 		margin-left: 150px;
 		cursor: pointer;
 	}
@@ -69,7 +76,7 @@
 	}
 
 	#searchBox button{
-		top:-0.5px;
+		top:-1.5px;
 		width:58px;
 	}
 	
@@ -81,3 +88,7 @@
 		background-color: #2c3e7e;
 		color:#fff;
 	}
+	#writeBtnWrap{
+		width: 100%;
+	}
+	
