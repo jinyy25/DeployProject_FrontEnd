@@ -1,11 +1,28 @@
-	h2{
-		margin:100px auto 0 120px;
+	#boardWrap{
+		padding: 4em;
 	}
-
+	#boardWrap p{
+		font-weight: 600;
+		font-size: 1.7em;
+	}
+	
 	#boardTable{
-		width:1000px;
+		width:100%;
 		text-align:center;
-		margin: 40px auto;
+		margin: auto;
+	}
+	.select-field{
+		width:10em;
+		
+	}
+	.search-field{
+		margin: 0em 1em 0em 1em;
+    	width: 28em;
+	}
+	#searchBox{
+		margin-top: 30px;
+		display: flex;
+    justify-content: space-between;
 	}
 
 	#boardTable th{
@@ -27,57 +44,14 @@
 		border-bottom: 1px solid #d5d5db;
 	}
 
-	#writeBtn{
-		position:relative;
-		left:950px;
-		width:100px;
-		height:35px;
-		cursor: pointer;
-	}
-	
-	#searchBox{
-		margin:30px auto;
-		width:600px;
-		height:80px;
-	}
-
-	#searchBox select,#searchBox input,#searchBox button{
-		position: relative;
-	}
-
-	#searchBox select,#searchBox button{
-		width:50px;
-		height: 52px;
-	}
-
-	#searchBox select, #searchBox input{
-		border:1px solid #bbc2d3;
-	}
-
-	#searchBox select{
-		width:70px;
-		margin-left: 150px;
-		cursor: pointer;
-	}
-
-	#searchBox input{
-		top:-1.5px;
-		padding:0;
-		height: 50px;
-		display: inline-block;
-		vertical-align: middle;
-	}
-
-	#searchBox button{
-		top:-0.5px;
-		width:58px;
-	}
-	
 	tbody tr{
 		cursor:pointer;
 	}
-	
-	.btn{
-		background-color: #2c3e7e;
-		color:#fff;
+	button{
+		height: 3.5em;
+		width: 10%;
 	}
+	.write_btn{
+		margin: 0em 0em 0em 14em;
+	}
+	

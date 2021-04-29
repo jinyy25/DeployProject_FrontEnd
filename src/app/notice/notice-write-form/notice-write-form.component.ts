@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'vex-notice-write-form',
@@ -22,12 +23,14 @@ export class NoticeWriteFormComponent implements OnInit {
   display ="none";
 
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private uploadService:UploadService
   ) { }
 
   ngOnInit(): void {
     this.form=this.fb.group({
-      title:['',Validators.required]
+      title:['',Validators.required],
+      content:['',Validators.required]
     })
   }
 
@@ -52,7 +55,20 @@ export class NoticeWriteFormComponent implements OnInit {
     
   }//close() end
 
-  upload():void{
-    console.log(this.files);
+  upload(form){
+    if(this.form.controls.title.errors != null){
+      return false;
+    }else if(this.form.controls.content.errors != null){
+      return false;
+    }
+    if(this.files.length !=0){
+      for(let i = 0 ; i<this.files.length;i++){
+        this.uploadService.upload(this.files[i])
+          .subscribe((event:any)=>{
+              console.log(event)
+          })
+
+      }
+    }
   }
 }

@@ -23,12 +23,12 @@
 		<div id="contentWrap">
 			<mat-form-field fxFlex="grow">
 				<mat-label>내용:</mat-label>
-				<textarea formControlName="title" matInput></textarea>
+				<textarea formControlName="content" matInput></textarea>
 			</mat-form-field>
 		</div>
 
 		<div id="buttonWrap">
-			<button (click)="upload()">확인</button>
+			<button (click)="upload(form)">확인</button>
 			<button>취소</button>
 		</div>
 	</div>

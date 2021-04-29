@@ -19,11 +19,13 @@ import { ContainerModule } from 'src/@vex/directives/container/container.module'
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 
 
 @NgModule({
-  declarations: [NoticeComponent, NoticeDetailComponent],
+  declarations: [NoticeComponent],
   imports: [
     CommonModule,
     NoticeRoutingModule,
@@ -43,7 +45,9 @@ import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
     ReactiveFormsModule,
     ContainerModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class NoticeModule { }
