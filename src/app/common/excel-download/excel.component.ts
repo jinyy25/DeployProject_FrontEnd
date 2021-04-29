@@ -14,6 +14,7 @@ import { UserExcelService } from './userExcel.service';
 export class ExcelComponent implements OnInit {
   
   users: User[];
+ 
 
   constructor(private router : Router, 
               private userService : UserExcelService, 
@@ -27,8 +28,9 @@ export class ExcelComponent implements OnInit {
     });
   };
 
-  exportAsXLSX():void {
-    this.excelService.exportAsExcelFile(this.users, 'ExcelFile');
+  exportAsXLSX(listTitle:string):void {
+   
+    this.excelService.exportAsExcelFile(this.users, listTitle);
   }
   
 
