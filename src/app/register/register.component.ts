@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
    console.log(id);
    this.userService.checkId(id)
     .subscribe(data =>{
-      if(!data.result){
+      if(!data){
         this.form.controls.id.setErrors({checkError:true});
       }
 
