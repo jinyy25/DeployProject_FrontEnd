@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BoardFile } from '../models/boardfile.model';
+import { Notice } from '../models/notice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +16,7 @@ export class BoardService {
     return this.http.post<any>(this.userUrl+"/register",fileList);
   }
 
+  selectNotice(){
+    return this.http.get<Notice[]>(this.userUrl);
+  }
 }

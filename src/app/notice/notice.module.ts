@@ -21,6 +21,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -47,7 +48,8 @@ import { MatInput, MatInputModule } from '@angular/material/input';
     MatSelectModule,
     MatButtonToggleModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxPaginationModule
   ]
 })
 export class NoticeModule { }

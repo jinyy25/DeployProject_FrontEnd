@@ -81,7 +81,7 @@ export class NoticeWriteFormComponent implements OnInit {
 
       this.boardService.upload(this.fileList)
       .subscribe(data =>{
-          if(data.data=="success"){
+          if(data.data==1){
             console.log("공지사항 인서트");
           }
       })
