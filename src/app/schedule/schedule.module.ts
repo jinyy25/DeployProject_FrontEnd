@@ -78,7 +78,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatDialogModule,//modal
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatCheckboxModule
   ],
   entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
     InsertScheduleComponent,

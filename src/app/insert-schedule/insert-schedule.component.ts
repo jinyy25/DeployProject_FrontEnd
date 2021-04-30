@@ -6,7 +6,7 @@ import { Schedule } from '../models/schedule.model';
 @Component({
   selector: 'app-insert-schedule',
   templateUrl: './insert-schedule.component.html',
-  styleUrls: ['./insert-schedule.component.css']
+  styleUrls: ['../schedule/schedule.component.scss']
 })
 export class InsertScheduleComponent implements OnInit{
   schedule : Schedule = new Schedule();

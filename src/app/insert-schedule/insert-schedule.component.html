@@ -1,34 +1,56 @@
 <h2 mat-dialog-title>{{ data.name }} 님 일정 등록</h2>
 <div mat-dialog-content>
   <form>
-    <span>시작 날짜 : </span>
-    <input type="date" name="startDate" [(ngModel)]="schedule.startDate" />
-    <input
-      type="time"
-      name="startTime"
-      [(ngModel)]="schedule.startTime"
-      [disabled]="isDisabled"
-    />
+    <mat-form-field appearance="standard">
+      <mat-label>시작 날짜</mat-label>
+      <input
+        matInput
+        type="date"
+        name="startDate"
+        [(ngModel)]="schedule.startDate"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <input
+        matInput
+        type="time"
+        name="startTime"
+        [(ngModel)]="schedule.startTime"
+        [disabled]="isDisabled"
+      />
+    </mat-form-field>
     <br />
-    <span>완료 날짜 : </span>
-    <input type="date" name="endDate" [(ngModel)]="schedule.endDate" />
-    <input
-      type="time"
-      name="endTime"
-      [(ngModel)]="schedule.endTime"
-      [disabled]="isDisabled"
-    />
-    <input
-      type="checkbox"
-      id="allDay"
+
+    <mat-form-field appearance="standard">
+      <mat-label>완료 날짜</mat-label>
+      <input
+        matInput
+        type="date"
+        name="endDate"
+        [(ngModel)]="schedule.endDate"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <input
+        matInput
+        type="time"
+        name="endTime"
+        [(ngModel)]="schedule.endTime"
+        [disabled]="isDisabled"
+      />
+    </mat-form-field>
+
+    <mat-checkbox
+      color="primary"
       name="allDay"
       [(ngModel)]="schedule.allDay"
       (click)="disable()"
-    />
-    <label for="allDay">종일</label>
+      style="margin-left: 15px"
+      >종일
+    </mat-checkbox>
     <br />
 
-    <mat-form-field>
+    <mat-form-field appearance="standard" class="field">
       <mat-label>일정 제목</mat-label>
       <input
         [(ngModel)]="schedule.scheduleTitle"
@@ -38,12 +60,15 @@
     </mat-form-field>
     <br />
 
-    <span>일정 내용</span>
-    <br />
-    <textarea
-      name="scheduleContent"
-      [(ngModel)]="schedule.scheduleContent"
-    ></textarea>
+    <mat-form-field appearance="standard" class="field">
+      <mat-label>일정 내용</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        name="scheduleContent"
+        [(ngModel)]="schedule.scheduleContent"
+      ></textarea>
+    </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
