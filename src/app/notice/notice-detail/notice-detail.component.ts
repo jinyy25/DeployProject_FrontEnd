@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BoardService } from 'src/app/services/board.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'vex-notice-detail',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoticeDetailComponent implements OnInit {
 
-  constructor() { }
+  boardNo:number;  
+  constructor(
+    private boardService:BoardService,
+    private route:ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.boardNo=this.route.snapshot.params['boardNo'];
+
+    this.boardService.selectNoticeDetail(this.boardNo)
+    .subscribe(data=>{
+      console.log(data);
+    })
   }
 
 }

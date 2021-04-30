@@ -19,4 +19,8 @@ export class BoardService {
   selectNotice(){
     return this.http.get<Notice[]>(this.userUrl);
   }
+
+  selectNoticeDetail(boardNo){
+    return this.http.get<any>(this.userUrl+"/"+boardNo)
+  }
 }
