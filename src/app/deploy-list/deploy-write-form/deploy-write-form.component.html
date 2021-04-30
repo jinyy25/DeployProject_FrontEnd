@@ -1,35 +1,42 @@
 <div class="deploy-outline">
     <p>배포이력관리</p>
     <form [formGroup]="deployForm">
-        <mat-form-field class="block">
+        <mat-form-field class="block" appearance="standard">
             <mat-label>제목</mat-label>
-            <input #title formControlName="title" matInput>
-            <mat-error *ngIf="deployForm.get('title').hasError('required')">제목을 입력해 주세요</mat-error>
+            <input #deployTitle formControlName="deployTitle" matInput>
+            <mat-error *ngIf="deployForm.get('deployTitle').hasError('required')">제목을 입력해 주세요</mat-error>
         </mat-form-field>    
         <mat-form-field class="block">
             <mat-label>내용</mat-label>
-            <textarea #content formControlName="content" matInput></textarea>
-            <mat-error *ngIf="deployForm.get('content').hasError('required')">내용을 입력해 주세요</mat-error>
+            <textarea #deployContent formControlName="deployContent" matInput></textarea>
+            <mat-error *ngIf="deployForm.get('deployContent').hasError('required')">내용을 입력해 주세요</mat-error>
         </mat-form-field>
         <mat-form-field class="block">
             <mat-label>portal</mat-label>
-            <textarea matInput></textarea>
+            <textarea #portalScript matInput formControlName="portalScript"></textarea>
         </mat-form-field>
         <mat-form-field class="block">
             <mat-label>tbwapp</mat-label>
-            <textarea matInput></textarea>
+            <textarea #tbwappScript matInput formControlName="tbwappScript"></textarea>
         </mat-form-field>
         <mat-form-field class="block">
             <mat-label>center</mat-label>
-            <textarea matInput></textarea>
+            <textarea #centerScript matInput formControlName="centerScript"></textarea>
         </mat-form-field>
-        <div class="file-outline">
-            <span>파일업로드</span>
-            <input type="file">
+        <div class="fileWrap">
+            <div class="file-outline">
+                <input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
+                <label class="fileLabel" for="file">파일 선택</label>      
+            </div>
+            <div *ngIf="display=='block'" id="fileBox">
+                <ul>
+                    <li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+                </ul>
+            </div>
         </div>
         
         <div class="button-outline">
-            <button (click)="send(deployForm,title,content)" mat-flat-button color="primary">배포이력등록</button>
+            <button (click)="send(deployForm,deployTitle,deployContent,portalScript,tbwappScript,centerScript)" mat-flat-button color="primary">배포이력등록</button>
         </div>
     </form>
 </div>

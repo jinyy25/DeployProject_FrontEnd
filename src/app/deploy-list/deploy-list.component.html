@@ -5,35 +5,34 @@
         </div>
 
         <div class="deploy-search">
+            <!-- <div> -->
+                <mat-form-field class="select-field" appearance="standard">
+                    <mat-label>분류</mat-label>
+                    <select matNativeControl required>
+                        <option value="All">전체</option>
+                        <option value="Title">제목</option>
+                        <option value="Writer">작성자</option>
+                        <option value="Date">날짜</option>
+                    </select>
+                </mat-form-field>
             
-            <mat-form-field class="select-field">
-                <mat-label>분류</mat-label>
-                <select matNativeControl required>
-                    <option value="All">전체</option>
-                    <option value="Title">제목</option>
-                    <option value="Writer">작성자</option>
-                    <option value="Date">날짜</option>
-                </select>
-            </mat-form-field>
-
-            
-            <mat-form-field class="search-field">
-                <mat-label>Search</mat-label>
-                <input matInput>       
-            </mat-form-field>
-            <button mat-stroked-button>검색</button>  
-            
+                <mat-form-field class="search-field" appearance="standard">
+                    <mat-label>Search</mat-label>
+                    <input matInput>       
+                </mat-form-field>
+                <button mat-stroked-button>검색</button>  
+            <!-- </div>     -->
             <button mat-stroked-button routerLink="deploy-write" class="deployBtn" >배포작성</button>              
         </div>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>                
-                    <th>다운로드</th>
+                    <th style="width: 10%;">번호</th>
+                    <th style="width: 40%;">제목</th>
+                    <th style="width: 10%;">작성자</th>
+                    <th style="width: 15%;">날짜</th>                
+                    <th style="width: 25%;">다운로드</th>
                 </tr>
             </thead>        
             <tbody>
@@ -43,8 +42,8 @@
                     <td>{{deploy.writer}}</td>
                     <td>{{deploy.deployDate}}</td>
                     <td>
-                        <button></button>
-                        <button></button>
+                        <button mat-stroked-button>zip</button>
+                        <button mat-stroked-button>exel</button>
                     </td>                                
                 </tr>
             </tbody>        

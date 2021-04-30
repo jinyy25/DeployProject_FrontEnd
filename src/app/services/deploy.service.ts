@@ -12,6 +12,7 @@ export class DeployService {
   ) { }
 
   private deployURL='http://localhost:8080/deploy-list';
+  private scriptURL='http://localhost:8080/script'
 
   //1. get all deploys
   public getDeploys(){
@@ -19,10 +20,16 @@ export class DeployService {
     return this.httpClient.get<Deploy[]>(this.deployURL);
   }
 
-  //2. send script
-  public sendScript(deploys){
-    console.log("test script");
-    console.log(deploys.deployTitle);
-    return this.httpClient.post<Deploy>(this.deployURL+"/deploy-write",deploys);
+  //2. insert deploys
+  public insertDeploy(deploys){
+    return this.httpClient.post<Deploy>(this.deployURL,deploys);
+  }
+
+  //3. insert scripts
+  public insertScript(deploys){
+    console.log("centerr::" + deploys.centerScript + deploys.category);
+    console.log("portall::" + deploys.portalScript + deploys.category);
+    console.log("tbw::" + deploys.tbwappScript + deploys.category);
+    return this.httpClient.post<Deploy>(this.scriptURL,deploys);      
   }
 }
