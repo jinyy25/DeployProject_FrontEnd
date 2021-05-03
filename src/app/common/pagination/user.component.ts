@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {//OnInit implements 해주셔야 �
 
   
   ngOnInit() {
-    /*
+    /**
     이 컴포넌트가 로드될 때 ngOnInit() method 사용되므로 페이징될 정보의 모든 리스트 불러오는
     메서드와 그에 해당하는 서비스는 여기서 불러주시면 됩니다.
     백단에서는 따로 pagination을 위한 구문 작성하실 필요 없고, 기본 selectList 구문입니다.

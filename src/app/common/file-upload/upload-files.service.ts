@@ -19,7 +19,7 @@ export class UploadFilesService {
       reportProgress: true,
       responseType: 'json'
     });
-
+  
     return this.http.request(req);
    
   }

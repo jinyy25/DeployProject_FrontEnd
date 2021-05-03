@@ -22,6 +22,7 @@ import { UserExcelService } from './common/excel-download/userExcel.service';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { ExcelService } from './common/excel-download/excel.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
+import { DataManagementComponent } from './common/data-management/data-management.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { UploadFilesComponent } from './common/file-upload/upload-files.componen
     UserComponent,
     ExcelComponent,
     UploadFilesComponent,
+    DataManagementComponent
   
     
   ],
