@@ -6,4 +6,5 @@ export class Notice{
 	phone:string;
 	regdate:string;
 	updateDate:string;
+	id:string;
 }

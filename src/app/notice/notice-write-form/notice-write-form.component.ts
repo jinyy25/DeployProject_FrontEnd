@@ -49,6 +49,8 @@ export class NoticeWriteFormComponent implements OnInit {
       content:['',Validators.required]
     })
 
+
+    
     this.boardNo=this.route.snapshot.params['boardNo'];
     if(this.boardNo !=null){
       this.boardService.selectNoticeDetail(this.boardNo)
@@ -57,6 +59,8 @@ export class NoticeWriteFormComponent implements OnInit {
         this.files=res.data.files;
         if(this.files.length>0){
           this.display="block";
+        }else{
+          this.display="none";
         }
       })
     }else{
@@ -83,6 +87,9 @@ export class NoticeWriteFormComponent implements OnInit {
     }//for end
     this.files=this.fileNames;
     this.fileNames=[];
+    if(this.files.length==0){
+      this.display="none";
+    }
     
   }//close() end
 
@@ -127,6 +134,7 @@ export class NoticeWriteFormComponent implements OnInit {
 
 
   upload(form,type){
+    console.log(form);
     if(type=="insert"){
       if(this.form.controls.title.errors != null){
         return false;
@@ -140,8 +148,8 @@ export class NoticeWriteFormComponent implements OnInit {
       for(let i = 0 ; i<this.files.length;i++){
         this.uploadService.upload(this.files[i])
           .subscribe(data=>{
-            this.fileList.names.push(data.data);
-            this.fileList.directoryPaths[i]="C:\\uploads";
+            this.fileList.names.push(data.data.name);
+            this.fileList.directoryPaths[i]=data.data.directoryPath;
             
             if(this.files.length-1==i){
                 this.addFileList(form,type);
@@ -167,5 +175,9 @@ export class NoticeWriteFormComponent implements OnInit {
   update(form){
     const type="update";
     this.upload(form,type);
+  }
+
+  cancel(){
+    this.router.navigate(['/notice']);
   }
 }
