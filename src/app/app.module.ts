@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -22,7 +23,9 @@ import { UserExcelService } from './common/excel-download/userExcel.service';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { ExcelService } from './common/excel-download/excel.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
-import { DataManagementComponent } from './common/data-management/data-management.component';
+import { CodeManagementComponent } from './common/code-management/code-management.component';
+import { CodeMgmtService } from './common/code-management/code-mgmt.service';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { DataManagementComponent } from './common/data-management/data-managemen
     UserComponent,
     ExcelComponent,
     UploadFilesComponent,
-    DataManagementComponent
+    CodeManagementComponent
+   
   
     
   ],
@@ -64,7 +68,8 @@ import { DataManagementComponent } from './common/data-management/data-managemen
     //common sample용
     UserService,
     UserExcelService,
-    ExcelService
+    ExcelService,
+    CodeMgmtService
     
   ],
   bootstrap: [AppComponent]

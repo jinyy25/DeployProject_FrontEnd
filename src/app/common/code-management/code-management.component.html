@@ -1,0 +1,21 @@
+<table id="boardTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width:15%">코드 아이디</th>
+            <th style="width:50%">코드 이름</th>
+            <th style="width:15%">부모 코드 아이디</th>
+            <th style="width:20%">사용여부</th>
+            <th style="width:20%">순서</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let codeMgmt of codeMgmts">
+                <td>{{codeMgmt.codeId}}</td>
+                <td>{{codeMgmt.codeName}}</td>
+                <td>{{codeMgmt.parentCodeId}}</td>
+                <td>{{codeMgmt.codeUseYN}}</td>
+                <td>{{codeMgmt.dsplOrder}}</td>
+        </tr>
+
+    </tbody>
+</table>
