@@ -23,4 +23,12 @@ export class BoardService {
   selectNoticeDetail(boardNo){
     return this.http.get<any>(this.userUrl+"/"+boardNo)
   }
+
+  deleteNotice(boardNo){
+    return this.http.delete<any>(this.userUrl+"/"+boardNo);
+  }
+  updateNotice(fileList:BoardFile,boardNo){
+    return this.http.patch<any>(this.userUrl+"/"+boardNo,fileList);
+  }
+  
 }

@@ -23,6 +23,7 @@ export class UploadFilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fileInfos = this.uploadService.getFiles();
+    console.log(this.fileInfos);
   }
 
   selectFiles(event): void {//업로드 하기위해 선택한 파일 얻어옴
