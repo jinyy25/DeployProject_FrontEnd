@@ -6,7 +6,7 @@
 			<mat-form-field fxFlex="grow" appearance="standard">
 				<mat-label>제목:</mat-label>
 				<input  *ngIf="boardNo==null" formControlName="title" matInput maxlength="34">
-				<input *ngIf="boardNo!=null" formControlName="title"  value="{{notice.title}}" matInput maxlength="34">
+				<input *ngIf="boardNo!=null" formControlName="title"  #title [(ngModel)]="notice.title" matInput maxlength="34">
 			</mat-form-field>
 		</div>
 
@@ -25,14 +25,14 @@
 			<mat-form-field fxFlex="grow" >
 				<mat-label>내용:</mat-label>
 				<textarea *ngIf="boardNo==null" formControlName="content" matInput></textarea>
-				<textarea *ngIf="boardNo!=null" formControlName="content" matInput value="{{notice.content}}"></textarea>
+				<textarea *ngIf="boardNo!=null" formControlName="content" #content matInput [(ngModel)]="notice.content"></textarea>
 			</mat-form-field>
 		</div>
 
 		<div id="buttonWrap">
 			<button  *ngIf="boardNo==null" (click)="insert(form)">확인</button>
 			<button  *ngIf="boardNo!=null" (click)="update(form)">확인</button>
-			<button>취소</button>
+			<button (click)="cancel()">취소</button>
 		</div>
 	</div>
 </div>

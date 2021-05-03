@@ -7,6 +7,9 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { UploadService } from 'src/app/services/upload.service';
 import { Observable } from 'rxjs';
 
+import { JwtService } from 'src/app/services/jwt.service';
+import { User } from 'src/app/models/user.model';
+
 @Component({
   selector: 'vex-notice-detail',
   templateUrl: './notice-detail.component.html',
@@ -20,15 +23,31 @@ export class NoticeDetailComponent implements OnInit {
   boardNo:number;
   notice:Notice = new Notice();
   files:File[];
-  fileInfos?: Observable<any>;  
+  fileInfos?: Observable<any>;
+  check:string;
+  loginUser:User;  
+  display:string;
+  
   constructor(
     private boardService:BoardService,
     private uploadService:UploadService,
     private route:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private jwtService:JwtService
   ) { }
 
   ngOnInit(): void {
+     this.check = localStorage.getItem("AUTH_TOKEN"); 
+      if(this.check !=null){ 
+        this.loginUser=this.jwtService.decodeToUser(this.check);
+      }else{
+        this.check= sessionStorage.getItem("AUTH_TOKEN");
+
+        if(this.check !=null){
+          this.loginUser = this.jwtService.decodeToUser(this.check);
+        }//if end
+      }//if~else end
+      
     this.boardNo=this.route.snapshot.params['boardNo'];
 
     this.boardService.selectNoticeDetail(this.boardNo)
@@ -36,11 +55,11 @@ export class NoticeDetailComponent implements OnInit {
       this.notice=data.data.board;
       this.files=data.data.files;
       
-      
+      if(this.files.length>0){
+        this.display="block";
+      }
     })
-    this.fileInfos=this.uploadService.getFiles();
-    console.log(this.fileInfos);
-
+    
   }
 
   selectList(){
