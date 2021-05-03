@@ -36,7 +36,7 @@
                 </tr>
             </thead>        
             <tbody>
-                <tr *ngFor="let deploy of deploys">
+                <tr *ngFor="let deploy of deploys  | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems ">
                     <td>{{deploy.deployNo}}</td>
                     <td>{{deploy.deployTitle}}</td>
                     <td>{{deploy.writer}}</td>
@@ -48,16 +48,5 @@
                 </tr>
             </tbody>        
         </table>
-        <mat-paginator [length]="length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="pageEvent = $event">
-        </mat-paginator>
-
-        <div *ngIf="pageEvent">
-            <h5>Page Change Event Properties</h5>
-            <div>List length: {{pageEvent.length}}</div>
-            <div>Page size: {{pageEvent.pageSize}}</div>
-            <div>Page index: {{pageEvent.pageIndex}}</div>
-        </div>
+        <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
     </div>
