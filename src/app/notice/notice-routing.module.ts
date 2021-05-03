@@ -18,7 +18,12 @@ const routes: VexRoutes = [
   {
     path:':boardNo',
     component:NoticeDetailComponent
+  },
+  {
+    path:'modify/:boardNo',
+    component:NoticeWriteFormComponent
   }
+  
   
 ];
 
