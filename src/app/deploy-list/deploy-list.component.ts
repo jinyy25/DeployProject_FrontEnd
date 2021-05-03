@@ -21,7 +21,10 @@ import {PageEvent} from '@angular/material/paginator';
 export class DeployListComponent implements OnInit{
 
   deploys:Deploy[];
-
+  
+  constructor(
+    private deployService:DeployService
+  ){}
 
   length = 100;
   pageSize = 10;
@@ -35,9 +38,6 @@ export class DeployListComponent implements OnInit{
     }
   }
   
-  constructor(
-    private deployService:DeployService
-  ){}
 
   ngOnInit(){
     this.deployService.getDeploys()

@@ -31,8 +31,7 @@ export class NoticeWriteFormComponent implements OnInit {
     private fb:FormBuilder,
     private uploadService:UploadService,
     private jwtService:JwtService,
-    private boardService:BoardService
-    
+    private boardService:BoardService    
   ) { }
 
   ngOnInit(): void {

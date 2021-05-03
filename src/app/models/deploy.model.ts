@@ -5,5 +5,10 @@ export class Deploy{
     writer:string
     deployDate:Date
 
+
+    portalScript:string
+    tbwappScript:string
+    centerScript:string
+
     category:string
 }

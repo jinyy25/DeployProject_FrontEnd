@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Deploy } from '../models/deploy.model';
+import { Script } from '../models/script.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +23,13 @@ export class DeployService {
 
   //2. insert deploys
   public insertDeploy(deploys){
+    console.log(deploys.writer);
     return this.httpClient.post<Deploy>(this.deployURL,deploys);
   }
 
   //3. insert scripts
-  public insertScript(deploys){
-    console.log("centerr::" + deploys.centerScript + deploys.category);
-    console.log("portall::" + deploys.portalScript + deploys.category);
-    console.log("tbw::" + deploys.tbwappScript + deploys.category);
-    return this.httpClient.post<Deploy>(this.scriptURL,deploys);      
+  public insertScript(data){
+    console.log("check::"+data);
+    return this.httpClient.post<Script>(this.scriptURL,data);      
   }
 }

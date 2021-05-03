@@ -3,6 +3,7 @@ import { Portal } from '@angular/cdk/portal';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BoardFile } from 'src/app/models/boardfile.model';
 import { DeployService } from 'src/app/services/deploy.service';
 import { Deploy } from '../../models/deploy.model';
 import { Script } from '../../models/script.model';
@@ -18,16 +19,15 @@ export class DeployWriteFormComponent implements OnInit {
 
   loginUser : User;
   check:string;
-
   deployForm: FormGroup;  
-  deploys: Deploy[];
-  category: string;
+  deploys: Deploy;
 
-  scripts:Script[];
   selectedFiles : FileList;
-
   files = [];
   fileNames = [];
+
+  data:Script[];
+
 
   display = "none";
 
@@ -35,7 +35,8 @@ export class DeployWriteFormComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private deployService: DeployService,
-    private jwtService : JwtService
+    private jwtService : JwtService,
+
     ) { 
       this.buildForm();
     }
@@ -53,7 +54,7 @@ export class DeployWriteFormComponent implements OnInit {
     }
   } 
 
-  //파일다수추가시
+  // 파일다수추가시
   selectFiles(event): void{
     this.files = event.target.files;
     this.display = "block";
@@ -61,7 +62,7 @@ export class DeployWriteFormComponent implements OnInit {
   close(obj,text:string): void{
     text = text.substr(1);
     for(let i = 0; i < this.files.length; i++){
-      if(this.files[i].name!=text){
+      if(this.files[i].name != text){
         this.fileNames.push(this.files[i]);
       }
     }
@@ -69,7 +70,7 @@ export class DeployWriteFormComponent implements OnInit {
     this.fileNames=[];
   }
 
-  //유효성검사
+  // 유효성검사
   buildForm(): void{
     this.deployForm = this.formBuilder.group({
       deployTitle:['',[Validators.required]],
@@ -81,53 +82,57 @@ export class DeployWriteFormComponent implements OnInit {
   }
 
   // send버튼 누를시
-  send(deployForm,deployTitle,deployContent,portalScript,tbwappScript,centerScript){
+  send(deployForm,deployTitle,deployContent,
+        portalScript,tbwappScript,centerScript){
+
     if(this.deployForm.controls.deployTitle.errors != null){
       deployTitle.focus();
       return false;
     }
-    // writer : this.loginUser.name
-    
     this.deploys = deployForm.value;
-  
-    
+    this.deploys.writer = this.loginUser.name;
+    this.data = [];
+
+    if(portalScript !== null){
+      try{
+        portalScript = this.deployForm.controls.portalScript.value.split('\n');
+        for(var i in portalScript){
+          this.data.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
+        }
+      }catch(e){}
+    } 
+    if(centerScript != null){
+      try{
+        centerScript = this.deployForm.controls.centerScript.value.split('\n');
+        for(var j in centerScript){
+          this.data.push({portalScript:null,tbwappScript:null,centerScript:centerScript[j],category:'center'});
+        }
+      }catch(e){}
+    }
+    if(tbwappScript != null){
+      try{
+        tbwappScript = this.deployForm.controls.tbwappScript.value.split('\n');
+        for(var z in tbwappScript){
+          this.data.push({portalScript:null,tbwappScript:tbwappScript[z],centerScript:null,category:'tbwapp'});
+        }
+      }catch(e){}
+    }
+
     //1. 배포이력전송
     this.deployService.insertDeploy(this.deploys)
     .subscribe(data => {
-      location.href="/";
+      alert('successDeployHistory');
+      // location.href="/";
+    })
+
+    //2. script 전송
+    this.deployService.insertScript(this.data)
+    .subscribe(data=>{
+      alert('successScriptContents');
     })
 
 
-    //2. script 전송
-    if(centerScript != null){   
-      console.log("######"+this.category);
-      this.deploys
-      this.deployService.insertScript(this.deploys)
-      .subscribe(data=>{
-        location.href="/";
-        console.log('insertCenter');
-      })
-    } else if(portalScript != null){       
-      this.deployService.insertScript(this.deploys)
-      .subscribe(data=>{
-        location.href="/";
-        console.log('insertPortal');
-      })
-    } else if(tbwappScript !=null){
-      this.deployService.insertScript(this.deploys)
-      .subscribe(data=>{
-        location.href="/";
-        console.log('inserttbwapp');
-      })  
-    }
     
-    
-
-    // this.deployService.insertScript(this.deploys)
-    // .subscribe(data=>{
-    //   location.href="/";
-    // })
-
     
 
 

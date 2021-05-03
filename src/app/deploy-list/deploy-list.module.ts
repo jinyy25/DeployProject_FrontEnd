@@ -21,9 +21,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { DeployDetailComponent } from './deploy-detail/deploy-detail.component';
 
 @NgModule({
-  declarations: [DeployListComponent],
+  declarations: [DeployListComponent, DeployDetailComponent],
   imports: [
     CommonModule,
     DeployListRoutingModule,        

@@ -12,6 +12,27 @@ p{
     padding: 0em 0em 2em 0em;
 }
 .deploy-outline{
-    padding: 4em 14em 0em 14em;
+    padding: 4em 14em 5em 14em;
 }
 
+#fileBox{
+	width: 100%;
+	height: 220px;
+	padding: 20px auto 0 auto;
+	border: 1px solid #d5d5db;
+	overflow-y: scroll;
+}
+#fileWrap{
+	width:100%;
+	margin:auto;
+}
+
+.close_btn{
+	width: 20px;
+	border:1px solid #bbc2d3;
+	margin-right: 20px;
+}
+
+.form-outline{
+
+}
