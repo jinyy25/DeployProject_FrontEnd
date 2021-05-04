@@ -8,8 +8,8 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { ScheduleRoutingModule } from './schedule-routing.module';
 import { ScheduleComponent } from './schedule.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { InsertScheduleComponent } from '../insert-schedule/insert-schedule.component';
-import { UpdateScheduleComponent } from '../update-schedule/update-schedule.component';
+import { InsertScheduleComponent } from './insert-schedule/insert-schedule.component';
+import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin

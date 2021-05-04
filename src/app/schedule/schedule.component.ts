@@ -5,11 +5,11 @@ import { FullCalendarComponent, CalendarOptions } from '@fullcalendar/angular';
 import { EventApi, EventInput } from '@fullcalendar/core';
 import enLocale from '@fullcalendar/core/locales/en-au';
 import koLocale from '@fullcalendar/core/locales/ko';
-import { InsertScheduleComponent } from '../insert-schedule/insert-schedule.component';
+import { InsertScheduleComponent } from './insert-schedule/insert-schedule.component';
 import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
-import { UpdateScheduleComponent } from '../update-schedule/update-schedule.component';
+import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 
 @Component({
   selector: 'app-schedule',
