@@ -93,11 +93,6 @@ export class InsertScheduleComponent implements OnInit{
         return false;
       }
     }else{//종일 체크 안 돼있을 경우 - 시간 둘 다 입력
-      this.form.get('startTime').setValidators(Validators.required);
-      this.form.get('startTime').updateValueAndValidity();
-      this.form.get('endTime').setValidators(Validators.required);
-      this.form.get('endTime').updateValueAndValidity();
-
       if(startTime.value == ''){
         startTime.focus();
         return false;
@@ -105,7 +100,6 @@ export class InsertScheduleComponent implements OnInit{
         endTime.focus();
         return false;
       }else if(endDate.value+" "+endTime.value <= startDate.value+" "+startTime.value){//날짜 시간 같으면 안됨, 뒷날짜가 뒤여야함
-        this.form.controls.endDate.setErrors({dateError:true});
         return false;
       }
     }
@@ -125,6 +119,27 @@ export class InsertScheduleComponent implements OnInit{
     }else{
       this.form.get('startTime').enable();
       this.form.get('endTime').enable();
+    }
+  }
+
+  dateCheck(){//날짜 유효성 검사
+    this.form.markAllAsTouched();
+    const allDay = this.form.value.allDay;
+    const startDate = this.form.value.startDate + " " + this.form.value.startTime;
+    const endDate = this.form.value.endDate + " " + this.form.value.endTime;
+
+    if(!allDay && startDate >= endDate){
+      if(this.form.value.startTime == '' || this.form.value.endTime == ''){
+        this.form.get('startTime').setValidators(Validators.required);
+        this.form.get('startTime').updateValueAndValidity();
+        this.form.get('endTime').setValidators(Validators.required);
+        this.form.get('endTime').updateValueAndValidity();
+      }else{
+        this.form.controls.endDate.setErrors({dateError:true});
+      }
+    }else{
+      this.form.controls.endDate.setErrors({dateError:null});
+      this.form.controls.endDate.updateValueAndValidity({emitEvent: false});
     }
   }
 }

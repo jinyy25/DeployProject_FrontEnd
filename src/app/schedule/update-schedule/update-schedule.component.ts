@@ -137,4 +137,18 @@ export class UpdateScheduleComponent implements OnInit {
       this.form.get('endTime').enable();
     }
   }
+
+  dateCheck(){
+    this.form.markAllAsTouched();
+    const allDay = this.form.value.allDay;
+    const startDate = this.form.value.startDate + " " + this.form.value.startTime;
+    const endDate = this.form.value.endDate + " " + this.form.value.endTime;
+
+    if(!allDay && startDate >= endDate){
+      this.form.controls.endDate.setErrors({dateError:true});
+    }else{
+      this.form.controls.endDate.setErrors({dateError:null});
+      this.form.controls.endDate.updateValueAndValidity({emitEvent: false});
+    }
+  }
 }

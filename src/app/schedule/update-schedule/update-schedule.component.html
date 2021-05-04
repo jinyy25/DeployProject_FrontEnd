@@ -67,7 +67,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="standard">
-      <input matInput type="time" formControlName="endTime" #endTime />
+      <input
+        matInput
+        type="time"
+        formControlName="endTime"
+        #endTime
+        (change)="dateCheck()"
+      />
       <mat-error>시간을 입력해주세요</mat-error>
     </mat-form-field>
 
@@ -77,6 +83,7 @@
       (click)="disable()"
       style="margin-left: 15px"
       #allDay
+      (change)="dateCheck()"
       >종일
     </mat-checkbox>
     <br />
