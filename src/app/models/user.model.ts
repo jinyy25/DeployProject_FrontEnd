@@ -7,5 +7,6 @@ export class User {
   email:string;
   teamNo:number;
   regdate:string;
+  team:string;
   result:string;
 }
