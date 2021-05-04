@@ -36,7 +36,7 @@
       <mat-error
         *ngIf="
           form.controls.endDate.hasError('matDatepickerMin') ||
-          form.errors?.dateError
+          form.controls.endDate.hasError('dateError')
         "
         >종료 날짜는 시작 날짜 이후여야합니다
       </mat-error>

@@ -18,6 +18,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScheduleDirective } from './schedule.directive';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -46,7 +47,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatInputModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MomentDateModule
   ],
   entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
     InsertScheduleComponent,

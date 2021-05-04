@@ -22,7 +22,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-insert-schedule',
   templateUrl: './insert-schedule.component.html',
-  styleUrls: ['../schedule/schedule.component.scss'],
+  styleUrls: ['../schedule.component.scss'],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}
@@ -105,7 +105,7 @@ export class InsertScheduleComponent implements OnInit{
         endTime.focus();
         return false;
       }else if(endDate.value+" "+endTime.value <= startDate.value+" "+startTime.value){//날짜 시간 같으면 안됨, 뒷날짜가 뒤여야함
-        //this.form.controls.endDate.setErrors({dateError:true});
+        this.form.controls.endDate.setErrors({dateError:true});
         return false;
       }
     }

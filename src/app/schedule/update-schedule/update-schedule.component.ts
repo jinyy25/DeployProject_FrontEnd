@@ -10,7 +10,7 @@ import { Schedule } from '../../models/schedule.model';
 @Component({
   selector: 'app-update-schedule',
   templateUrl: './update-schedule.component.html',
-  styleUrls: ['../schedule/schedule.component.scss'],
+  styleUrls: ['../schedule.component.scss'],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}
