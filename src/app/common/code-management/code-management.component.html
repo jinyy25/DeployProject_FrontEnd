@@ -9,12 +9,27 @@
         </tr>
     </thead>
     <tbody>
+        
         <tr *ngFor="let codeMgmt of codeMgmts">
-                <td>{{codeMgmt.codeId}}</td>
+                <td>
+                <button (click)="toggleChildCodes(codeMgmt.codeId)" id="bt">
+                    버튼
+                </button>
+                {{codeMgmt.codeId}}
+                </td>
                 <td>{{codeMgmt.codeName}}</td>
                 <td>{{codeMgmt.parentCodeId}}</td>
                 <td>{{codeMgmt.codeUseYN}}</td>
                 <td>{{codeMgmt.dsplOrder}}</td>
         </tr>
+        <ng-container *ngIf="show">
+            <tr *ngFor="let childCodeMgmt of childCodeMgmts">
+                <td> {{childCodeMgmt.codeId}}</td>
+                <td>{{childCodeMgmt.codeName}}</td>
+                <td>{{childCodeMgmt.parentCodeId}}</td>
+                <td>{{childCodeMgmt.codeUseYN}}</td>
+                <td>{{childCodeMgmt.dsplOrder}}</td>
+            </tr>
+        </ng-container>
     </tbody>
 </table>

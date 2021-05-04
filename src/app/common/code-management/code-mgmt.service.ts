@@ -18,4 +18,7 @@ export class CodeMgmtService {
   public getParentCodeInfos() {
     return this.http.get<CodeMgmt[]>(this.userUrl);
   }
+  public getChildCodeInfos(parentCodeId) {
+    return this.http.get<CodeMgmt[]>(this.userUrl+"/"+parentCodeId);
+  }
 }
