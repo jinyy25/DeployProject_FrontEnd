@@ -1,11 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Schedule } from '../../models/schedule.model';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { dateCheck } from '../schedule.directive';
 
 export const MY_FORMATS = {
   parse: {
@@ -55,7 +54,7 @@ export class InsertScheduleComponent implements OnInit{
         allDay : [this.data.allDay],
         scheduleTitle : ['', [Validators.required, Validators.maxLength(33)]],
         scheduleContent : ['', [Validators.maxLength(166)]]
-      }, { validators: dateCheck });
+      });
 
     }else{//주, 일에서 선택
 
@@ -67,7 +66,7 @@ export class InsertScheduleComponent implements OnInit{
         allDay : [this.data.allDay],
         scheduleTitle : ['', [Validators.required, Validators.maxLength(33)]],
         scheduleContent : ['', [Validators.maxLength(166)]]
-      }, { validators: dateCheck });
+      });
       
     }
   }
@@ -135,11 +134,11 @@ export class InsertScheduleComponent implements OnInit{
         this.form.get('endTime').setValidators(Validators.required);
         this.form.get('endTime').updateValueAndValidity();
       }else{
-        this.form.controls.endDate.setErrors({dateError:true});
+        this.form.controls.endDate.setErrors({dateError : true});
       }
     }else{
-      this.form.controls.endDate.setErrors({dateError:null});
-      this.form.controls.endDate.updateValueAndValidity({emitEvent: false});
+      this.form.controls.endDate.setErrors({dateError : null});
+      this.form.controls.endDate.updateValueAndValidity({emitEvent : false});
     }
   }
 }

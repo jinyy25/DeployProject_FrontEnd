@@ -15,7 +15,7 @@ export class ScheduleService{
 
   constructor(private http : HttpClient) { }
 
-  createSchedule(schedule : Schedule){
+  insertSchedule(schedule : Schedule){
     return this.http.post(this.url, schedule);
   }
 

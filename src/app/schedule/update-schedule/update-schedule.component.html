@@ -1,25 +1,25 @@
 <h2 mat-dialog-title *ngIf="data.complete != 'Y' && data.disable">
   {{ data.name }} 님의 일정
   <span>
-    <small>< {{ data.teamName }}팀 ></small>
+    <small>< {{ data.team }}팀 ></small>
   </span>
 </h2>
 <h2 mat-dialog-title *ngIf="data.complete != 'Y' && !data.disable">
   나의 일정
   <span>
-    <small>< {{ data.teamName }}팀 ></small>
+    <small>< {{ data.team }}팀 ></small>
   </span>
 </h2>
 <h2 mat-dialog-title *ngIf="data.complete == 'Y' && !data.disable">
   나의 완료된 일정
   <span>
-    <small>< {{ data.teamName }}팀 ></small>
+    <small>< {{ data.team }}팀 ></small>
   </span>
 </h2>
 <h2 mat-dialog-title *ngIf="data.complete == 'Y' && data.disable">
   {{ data.name }} 님의 완료된 일정입니다
   <span>
-    <small>< {{ data.teamName }}팀 ></small>
+    <small>< {{ data.team }}팀 ></small>
   </span>
 </h2>
 <div mat-dialog-content>

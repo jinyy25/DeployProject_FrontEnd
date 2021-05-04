@@ -109,13 +109,13 @@ export class ScheduleComponent implements AfterViewInit {
         let edit = element.complete != 'Y';//완료되지 않은 일정 = true
         let color;
 
-        if(element.teamName == 'A'){
+        if(element.team == 'A'){
           color = 'pink';
-        }else if(element.teamName == 'B'){
+        }else if(element.team == 'B'){
           color = 'orange';
-        }else if(element.teamName == 'C'){
+        }else if(element.team == 'C'){
           color = 'green';
-        }else if(element.teamName == 'D'){
+        }else if(element.team == 'D'){
           color = 'purple';
         }
         if(element.writer == this.loginUser.id){
@@ -206,7 +206,7 @@ export class ScheduleComponent implements AfterViewInit {
         result.endDate = result.endDate+" "+result.endTime;
       }
 
-      this.service.createSchedule(result).subscribe(data => {
+      this.service.insertSchedule(result).subscribe(data => {
         if(data > 0){
           alert("일정이 등록되었습니다");
         }else{
@@ -234,7 +234,7 @@ export class ScheduleComponent implements AfterViewInit {
         allDay : arg.event.allDay,
         complete : arg.event.extendedProps.schedule.complete,
         disable : disable,
-        teamName : arg.event.extendedProps.schedule.teamName
+        team : arg.event.extendedProps.schedule.team
       }
     });
 

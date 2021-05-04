@@ -17,7 +17,6 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ScheduleDirective } from './schedule.directive';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -31,8 +30,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   declarations: [
     ScheduleComponent,
     InsertScheduleComponent,
-    UpdateScheduleComponent,
-    ScheduleDirective
+    UpdateScheduleComponent
   ],
   imports: [
     CommonModule,
