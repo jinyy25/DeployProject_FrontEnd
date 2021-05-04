@@ -1,5 +1,6 @@
 
 
+
 import { NgModule } from '@angular/core';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
@@ -13,6 +14,7 @@ common pagination `sample component
 import { UserComponent } from './common/pagination/user.component';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
+import { CodeManagementComponent } from './common/code-management/code-management.component';
 
 
 const routes: VexRoutes = [
@@ -47,6 +49,10 @@ const routes: VexRoutes = [
     path:'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
+  {
+    path:'mypage',
+    loadChildren: () => import('./mypage/mypage.module').then(m => m.MypageModule),
+  },
 
 
 
@@ -64,6 +70,9 @@ const routes: VexRoutes = [
   },
   { 
     path: 'sampleFileUpload', component: UploadFilesComponent 
+  },
+  { 
+    path: 'codeMgmt', component: CodeManagementComponent 
   }
 ];
 

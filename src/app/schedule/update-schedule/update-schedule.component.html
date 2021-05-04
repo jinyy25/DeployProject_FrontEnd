@@ -1,0 +1,166 @@
+<h2 mat-dialog-title *ngIf="data.complete != 'Y' && data.disable">
+  {{ data.name }} 님의 일정
+  <span>
+    <small>< {{ data.team }}팀 ></small>
+  </span>
+</h2>
+<h2 mat-dialog-title *ngIf="data.complete != 'Y' && !data.disable">
+  나의 일정
+  <span>
+    <small>< {{ data.team }}팀 ></small>
+  </span>
+</h2>
+<h2 mat-dialog-title *ngIf="data.complete == 'Y' && !data.disable">
+  나의 완료된 일정
+  <span>
+    <small>< {{ data.team }}팀 ></small>
+  </span>
+</h2>
+<h2 mat-dialog-title *ngIf="data.complete == 'Y' && data.disable">
+  {{ data.name }} 님의 완료된 일정입니다
+  <span>
+    <small>< {{ data.team }}팀 ></small>
+  </span>
+</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>시작 날짜</mat-label>
+      <input
+        matInput
+        [matDatepicker]="start"
+        formControlName="startDate"
+        #startDate
+      />
+      <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+      <mat-datepicker #start></mat-datepicker>
+      <mat-error>시작 날짜를 입력해주세요</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <input matInput type="time" formControlName="startTime" #startTime />
+      <mat-error>시간을 입력해주세요</mat-error>
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="standard">
+      <mat-label>종료 날짜</mat-label>
+      <input
+        matInput
+        [matDatepicker]="end"
+        formControlName="endDate"
+        [min]="form.controls.startDate.value"
+        #endDate
+      />
+      <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+      <mat-datepicker #end></mat-datepicker>
+      <mat-error *ngIf="form.controls.endDate.hasError('required')"
+        >종료 날짜를 입력해주세요
+      </mat-error>
+      <mat-error
+        *ngIf="
+          form.controls.endDate.hasError('matDatepickerMin') ||
+          form.controls.endDate.hasError('dateError')
+        "
+        >종료 날짜는 시작 날짜 이후여야합니다
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <input
+        matInput
+        type="time"
+        formControlName="endTime"
+        #endTime
+        (change)="dateCheck()"
+      />
+      <mat-error>시간을 입력해주세요</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox
+      color="primary"
+      formControlName="allDay"
+      (click)="disable()"
+      style="margin-left: 15px"
+      #allDay
+      (change)="dateCheck()"
+      >종일
+    </mat-checkbox>
+    <br />
+
+    <mat-form-field appearance="standard" class="field">
+      <mat-label>일정 제목</mat-label>
+      <input
+        formControlName="scheduleTitle"
+        #scheduleTitle
+        matInput
+        maxlength="33"
+      />
+      <mat-error>제목을 입력해주세요</mat-error>
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="standard" class="field">
+      <mat-label>일정 내용</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        formControlName="scheduleContent"
+        #scheduleContent
+        maxlength="166"
+      >
+          {{ schedule.scheduleContent }}
+      </textarea>
+    </mat-form-field>
+
+    <div class="btns">
+      <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>취소</button>
+        <button
+          mat-button
+          color="primary"
+          (click)="
+            onUpdate(
+              'complete',
+              startDate,
+              startTime,
+              endDate,
+              endTime,
+              allDay,
+              scheduleTitle,
+              scheduleContent
+            )
+          "
+          [disabled]="data.complete == 'Y' || data.disable"
+        >
+          완료
+        </button>
+      </div>
+
+      <div mat-dialog-actions>
+        <button mat-button (click)="onDelete()" [disabled]="data.disable">
+          삭제
+        </button>
+        <button
+          mat-button
+          (click)="
+            onUpdate(
+              'update',
+              startDate,
+              startTime,
+              endDate,
+              endTime,
+              allDay,
+              scheduleTitle,
+              scheduleContent
+            )
+          "
+          [disabled]="data.complete == 'Y' || data.disable"
+          color="primary"
+        >
+          수정
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

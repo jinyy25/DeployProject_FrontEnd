@@ -15,19 +15,19 @@ export class ScheduleService{
 
   constructor(private http : HttpClient) { }
 
-  createSchedule(schedule : Schedule){
-    return this.http.post(this.url+"/create", schedule);
+  insertSchedule(schedule : Schedule){
+    return this.http.post(this.url, schedule);
   }
 
   selectSchedule(){
-    return this.http.get<Schedule[]>(this.url+"/list");
+    return this.http.get<Schedule[]>(this.url);
   }
 
   updateSchedule(schedule : Schedule){
-    return this.http.patch(this.url+"/update", schedule);
+    return this.http.patch(this.url, schedule);
   }
 
   deleteSchedule(scheduleNo : number){
-    return this.http.delete(this.url+"/delete/"+scheduleNo);
+    return this.http.delete(this.url+"/"+scheduleNo);
   }
 }

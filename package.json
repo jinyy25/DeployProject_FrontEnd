@@ -48,6 +48,7 @@
     "highlight.js": "^10.7.2",
     "luxon": "^1.26.0",
     "moment": "^2.29.1",
+    "ng2-expanding-table": "^1.5.2",
     "ngx-pagination": "^5.0.0",
     "ngx-quicklink": "^0.2.7",
     "ngx-showdown": "^6.0.0",

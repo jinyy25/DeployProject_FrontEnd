@@ -5,11 +5,11 @@ import { FullCalendarComponent, CalendarOptions } from '@fullcalendar/angular';
 import { EventApi, EventInput } from '@fullcalendar/core';
 import enLocale from '@fullcalendar/core/locales/en-au';
 import koLocale from '@fullcalendar/core/locales/ko';
-import { InsertScheduleComponent } from '../insert-schedule/insert-schedule.component';
+import { InsertScheduleComponent } from './insert-schedule/insert-schedule.component';
 import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
-import { UpdateScheduleComponent } from '../update-schedule/update-schedule.component';
+import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 
 @Component({
   selector: 'app-schedule',
@@ -49,12 +49,25 @@ export class ScheduleComponent implements AfterViewInit {
     locale: 'ko',//한국어
     displayEventTime: false,
     headerToolbar: {
-      left: 'prev,next today listMonth',
+      left: 'prev,next today all,team,one',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      right: 'listMonth dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    customButtons: {
+      all: {
+        text: '전체',
+        click: () => this.showAll()
+      },
+      team: {
+        text: '팀',
+        click: () => this.showTeam()
+      },
+      one: {
+        text: '개인',
+        click: () => this.showOne()
+      }
     },
     initialView: 'dayGridMonth',
-    //initialEvents: [],
     weekends: true,
     editable: true,                //event longclick 시, draggable과 resizing(date range 변경)이 가능하게 함(기본값 : false)
     eventDurationEditable: true,  //resize 가능
@@ -96,13 +109,13 @@ export class ScheduleComponent implements AfterViewInit {
         let edit = element.complete != 'Y';//완료되지 않은 일정 = true
         let color;
 
-        if(element.teamName == 'A'){
+        if(element.team == 'A'){
           color = 'pink';
-        }else if(element.teamName == 'B'){
+        }else if(element.team == 'B'){
           color = 'orange';
-        }else if(element.teamName == 'C'){
+        }else if(element.team == 'C'){
           color = 'green';
-        }else if(element.teamName == 'D'){
+        }else if(element.team == 'D'){
           color = 'purple';
         }
         if(element.writer == this.loginUser.id){
@@ -180,7 +193,7 @@ export class ScheduleComponent implements AfterViewInit {
   openDialog(arg) : void{//모달창 띄움
     const dialogRef = this.dialog.open(InsertScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
-      width : '480px',
+      width : '530px',
       data : {startDate : arg.start, endDate : arg.end, allDay : arg.allDay, name : this.loginUser.name}//날짜, 시간 전해줘야됨
     });
 
@@ -193,7 +206,7 @@ export class ScheduleComponent implements AfterViewInit {
         result.endDate = result.endDate+" "+result.endTime;
       }
 
-      this.service.createSchedule(result).subscribe(data => {
+      this.service.insertSchedule(result).subscribe(data => {
         if(data > 0){
           alert("일정이 등록되었습니다");
         }else{
@@ -210,7 +223,7 @@ export class ScheduleComponent implements AfterViewInit {
 
     const dialogRef = this.dialog.open(UpdateScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
-      width : '480px',
+      width : '530px',
       data : {
         scheduleNo : arg.event.extendedProps.schedule.scheduleNo,
         scheduleTitle : arg.event.title,
@@ -221,7 +234,7 @@ export class ScheduleComponent implements AfterViewInit {
         allDay : arg.event.allDay,
         complete : arg.event.extendedProps.schedule.complete,
         disable : disable,
-        teamName : arg.event.extendedProps.schedule.teamName
+        team : arg.event.extendedProps.schedule.team
       }
     });
 
@@ -261,4 +274,19 @@ export class ScheduleComponent implements AfterViewInit {
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
+
+  showAll(){//전체 스케쥴 보여주기
+    this.calendarOptions.events = this.events;
+  }
+
+  showTeam(){//본인 팀 보여주기
+    const teamEvent = this.events.filter((event) => event.schedule.teamNo == this.loginUser.teamNo);
+    this.calendarOptions.events = teamEvent;
+  }
+
+  showOne(){//자기꺼 보여주기
+    const oneEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id);
+    this.calendarOptions.events = oneEvent;
+  }
 }
+

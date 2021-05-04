@@ -7,13 +7,14 @@
       <div *ngIf="loginUser!=null"  class="dropdown-heading">{{loginUser.name}}</div>
     </div>
 
-    <button [matMenuTriggerFor]="settingsMenu"
+    <!--설정아이콘 주석처리  2021/05/04 나혁진-->
+    <!-- <button [matMenuTriggerFor]="settingsMenu"
             mat-icon-button
             matTooltip="Settings"
             matTooltipPosition="before"
             type="button">
       <mat-icon [icIcon]="icSettings" class="notifications-header-icon"></mat-icon>
-    </button>
+    </button> -->
   </div>
 
   <div class="dropdown-content">
@@ -46,8 +47,8 @@
         </span>
       </ng-container>
     </button>
-    <a *ngIf="loginUser!=null"  (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
-    <a *ngIf="loginUser==null"  (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGIN</a>
+    <a *ngIf="loginUser!=null"  (click)="logout()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
+    <a *ngIf="loginUser==null" (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGIN</a>
   </div>
 </div>
 
@@ -64,7 +65,7 @@
 <mat-menu #settingsMenu="matMenu" xPosition="before" yPosition="below">
   <button mat-menu-item>
     <mat-icon [icIcon]="icBusiness"></mat-icon>
-    <span>Change Address</span>
+    <span>회원정보 수정</span>
   </button>
 
   <button mat-menu-item>

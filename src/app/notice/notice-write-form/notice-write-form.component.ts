@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 import { BoardService } from 'src/app/services/board.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice.model';
-import { UpdateScheduleComponent } from 'src/app/update-schedule/update-schedule.component';
+import { UpdateScheduleComponent } from 'src/app/schedule/update-schedule/update-schedule.component';
 
 
 @Component({

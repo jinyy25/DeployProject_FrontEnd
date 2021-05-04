@@ -10,9 +10,9 @@ export class Schedule{//vo 객체
     endTime : string;
     allDay : boolean;
     complete : string;
-    uploadDate : string;//일까지만
+    regDate : string;//일까지만
     updateDate : string;
     completeDate : string;
     disable : boolean;//본인인지 아닌지. 본인이 아니면 true
-    teamName : string;
+    team : string;
 }

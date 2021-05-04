@@ -19,7 +19,6 @@ import icLock from '@iconify/icons-ic/twotone-lock';
 import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
-import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/models/user.model';
 import { JwtService } from 'src/app/services/jwt.service';
 
@@ -28,6 +27,7 @@ export interface OnlineStatus {
   label: string;
   icon: Icon;
   colorClass: string;
+  
 }
 
 @Component({
@@ -37,15 +37,16 @@ export interface OnlineStatus {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarUserDropdownComponent implements OnInit {
+  loginUser : User;
 
   items: MenuItem[] = [
     {
       id: '1',
       icon: icAccountCircle,
-      label: 'My Profile',
+      label: '회원 정보 수정',
       description: 'Personal Information',
       colorClass: 'text-teal',
-      route: '/apps/social'
+      route: '/mypage',
     },
     {
       id: '2',
@@ -112,7 +113,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icLock = icLock;
   icNotificationsOff = icNotificationsOff;
 
-  loginUser : User;
+  
   check:string;
   constructor(private cd: ChangeDetectorRef,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
@@ -142,10 +143,13 @@ export class ToolbarUserDropdownComponent implements OnInit {
     this.activeStatus = status;
     this.cd.markForCheck();
   }
-
-  close() {
+  logout(){
     localStorage.removeItem("AUTH_TOKEN");
     sessionStorage.removeItem("AUTH_TOKEN");
+    this.popoverRef.close();
+  }
+  
+  close() {
     this.popoverRef.close();
   }
 }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataManagementComponent } from './data-management.component';
+import { CodeManagementComponent } from './code-management.component';
 
-describe('DataManagementComponent', () => {
-  let component: DataManagementComponent;
-  let fixture: ComponentFixture<DataManagementComponent>;
+describe('CodeManagementComponent', () => {
+  let component: CodeManagementComponent;
+  let fixture: ComponentFixture<CodeManagementComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DataManagementComponent ]
+      declarations: [ CodeManagementComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataManagementComponent);
+    fixture = TestBed.createComponent(CodeManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
