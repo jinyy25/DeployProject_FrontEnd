@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 import { CodeMgmt } from './codemgmt.model';
 import { ChildCodeMgmt } from './child.codemgmt.model';
@@ -21,7 +22,8 @@ export class CodeManagementComponent implements OnInit {
   parentCodeId: string;
 
   constructor(private router: Router,
-              private codeMgmtService: CodeMgmtService) { }
+              private codeMgmtService: CodeMgmtService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.codeMgmtService.getParentCodeInfos().
@@ -31,7 +33,7 @@ export class CodeManagementComponent implements OnInit {
     });
   }
 
-  toggleChildCodes(parentCodeId) {
+  toggleChildCodeList(parentCodeId) {
     console.log(parentCodeId);
     this.show = !this.show;
     this.codeMgmtService.getChildCodeInfos(parentCodeId)
@@ -40,5 +42,9 @@ export class CodeManagementComponent implements OnInit {
       this.childCodeMgmts = data;
     });
   }
+
+  
+
+
 
 }
