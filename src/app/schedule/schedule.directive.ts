@@ -7,13 +7,6 @@ export const dateCheck: ValidatorFn = (control: FormGroup): ValidationErrors | n
   const endDate = control.get('endDate').value;
   const endTime = control.get('endTime').value;
 
-  console.log(startDate);
-  console.log(startTime);
-  console.log(endDate);
-  console.log(endTime);
-
-  console.log(endDate+" "+endTime <= startDate+" "+startTime);
-
   return endDate+" "+endTime <= startDate+" "+startTime ? { dateError : true } : null;
 };
 
