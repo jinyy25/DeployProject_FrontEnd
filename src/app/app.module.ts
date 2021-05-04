@@ -25,6 +25,7 @@ import { ExcelService } from './common/excel-download/excel.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeManagementComponent } from './common/code-management/code-management.component';
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { CodeMgmtService } from './common/code-management/code-mgmt.service';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxPaginationModule,//for pagination
+    MomentDateModule,
 
     // Vex
     VexModule,

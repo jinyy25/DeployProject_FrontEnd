@@ -1,6 +1,11 @@
 .textarea {
   resize: none;
+  height: 80px;
 }
 .field {
   width: 400px;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
 }

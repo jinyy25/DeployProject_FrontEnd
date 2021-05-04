@@ -49,12 +49,25 @@ export class ScheduleComponent implements AfterViewInit {
     locale: 'ko',//한국어
     displayEventTime: false,
     headerToolbar: {
-      left: 'prev,next today listMonth',
+      left: 'prev,next today all,team,one',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      right: 'listMonth dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    customButtons: {
+      all: {
+        text: '전체',
+        click: () => this.showAll()
+      },
+      team: {
+        text: '팀',
+        click: () => this.showTeam()
+      },
+      one: {
+        text: '개인',
+        click: () => this.showOne()
+      }
     },
     initialView: 'dayGridMonth',
-    //initialEvents: [],
     weekends: true,
     editable: true,                //event longclick 시, draggable과 resizing(date range 변경)이 가능하게 함(기본값 : false)
     eventDurationEditable: true,  //resize 가능
@@ -180,7 +193,7 @@ export class ScheduleComponent implements AfterViewInit {
   openDialog(arg) : void{//모달창 띄움
     const dialogRef = this.dialog.open(InsertScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
-      width : '480px',
+      width : '530px',
       data : {startDate : arg.start, endDate : arg.end, allDay : arg.allDay, name : this.loginUser.name}//날짜, 시간 전해줘야됨
     });
 
@@ -210,7 +223,7 @@ export class ScheduleComponent implements AfterViewInit {
 
     const dialogRef = this.dialog.open(UpdateScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
-      width : '480px',
+      width : '530px',
       data : {
         scheduleNo : arg.event.extendedProps.schedule.scheduleNo,
         scheduleTitle : arg.event.title,
@@ -261,4 +274,19 @@ export class ScheduleComponent implements AfterViewInit {
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
+
+  showAll(){//전체 스케쥴 보여주기
+    this.calendarOptions.events = this.events;
+  }
+
+  showTeam(){//본인 팀 보여주기
+    const teamEvent = this.events.filter((event) => event.schedule.teamNo == this.loginUser.teamNo);
+    this.calendarOptions.events = teamEvent;
+  }
+
+  showOne(){//자기꺼 보여주기
+    const oneEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id);
+    this.calendarOptions.events = oneEvent;
+  }
 }
+
