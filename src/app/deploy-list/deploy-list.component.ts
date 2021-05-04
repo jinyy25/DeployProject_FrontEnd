@@ -5,7 +5,8 @@ import { DeployService} from '../services/deploy.service';
 import { stagger40ms } from '../../@vex/animations/stagger.animation';
 import { Deploy } from '../models/deploy.model';
 import {PageEvent} from '@angular/material/paginator';
-
+import { User } from '../models/user.model';
+import { JwtService } from '../services/jwt.service';
 
 @Component({
   selector: 'vex-deploy-list',
@@ -20,31 +21,37 @@ import {PageEvent} from '@angular/material/paginator';
 
 export class DeployListComponent implements OnInit{
 
+  loginUser : User;
+  check:string;
+
   deploys:Deploy[];
+  p: number;//현재 페이지 정보 담기 위함
+  itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
+  totalItems: any;
   
   constructor(
-    private deployService:DeployService
+    private deployService:DeployService,
+    private jwtService:JwtService
   ){}
 
-  length = 100;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  pageEvent: PageEvent;
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
-  
 
   ngOnInit(){
+    this.check = localStorage.getItem("AUTH_TOKEN");
+    if(this.check !=null){
+       this.loginUser = this.jwtService.decodeToUser(this.check);
+    }else{
+      this.check= sessionStorage.getItem("AUTH_TOKEN");
+      if(this.check !=null){
+        this.loginUser = this.jwtService.decodeToUser(this.check);
+      }
+    }
+
     this.deployService.getDeploys()
     .subscribe(
       response => {this.deploys = response},
     );
   }
-
+  
+  getPage(page) {}
 
 }

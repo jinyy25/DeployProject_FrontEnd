@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Deploy } from '../models/deploy.model';
 import { Script } from '../models/script.model';
+import { ScriptView } from '../models/scriptView.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +28,16 @@ export class DeployService {
     return this.httpClient.post<Deploy>(this.deployURL,deploys);
   }
 
-  //3. insert scripts
-  public insertScript(data){
-    console.log("check::"+data);
-    return this.httpClient.post<Script>(this.scriptURL,data);      
+  //3. select deploys
+  public selectDeployDetail(deployNo){
+      console.log("check");
+      return this.httpClient.get<ScriptView[]>(this.deployURL+"/"+deployNo);
   }
+
+
+  //3. insert scripts
+  // public insertScript(data){
+  //   console.log("check::"+data);
+  //   return this.httpClient.post<Script>(this.deployURL,data);      
+  // }
 }

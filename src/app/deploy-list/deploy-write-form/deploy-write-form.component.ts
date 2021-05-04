@@ -26,7 +26,7 @@ export class DeployWriteFormComponent implements OnInit {
   files = [];
   fileNames = [];
 
-  data:Script[];
+  // data:Script[];
 
 
   display = "none";
@@ -91,13 +91,16 @@ export class DeployWriteFormComponent implements OnInit {
     }
     this.deploys = deployForm.value;
     this.deploys.writer = this.loginUser.name;
-    this.data = [];
+    this.deploys.scriptDTO = [];
 
+
+    //textarea enter구분
     if(portalScript !== null){
       try{
         portalScript = this.deployForm.controls.portalScript.value.split('\n');
         for(var i in portalScript){
-          this.data.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
+          // this.data.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
+          this.deploys.scriptDTO.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
         }
       }catch(e){}
     } 
@@ -105,7 +108,7 @@ export class DeployWriteFormComponent implements OnInit {
       try{
         centerScript = this.deployForm.controls.centerScript.value.split('\n');
         for(var j in centerScript){
-          this.data.push({portalScript:null,tbwappScript:null,centerScript:centerScript[j],category:'center'});
+          this.deploys.scriptDTO.push({portalScript:null,tbwappScript:null,centerScript:centerScript[j],category:'center'});
         }
       }catch(e){}
     }
@@ -113,7 +116,7 @@ export class DeployWriteFormComponent implements OnInit {
       try{
         tbwappScript = this.deployForm.controls.tbwappScript.value.split('\n');
         for(var z in tbwappScript){
-          this.data.push({portalScript:null,tbwappScript:tbwappScript[z],centerScript:null,category:'tbwapp'});
+          this.deploys.scriptDTO.push({portalScript:null,tbwappScript:tbwappScript[z],centerScript:null,category:'tbwapp'});
         }
       }catch(e){}
     }
@@ -125,11 +128,11 @@ export class DeployWriteFormComponent implements OnInit {
       // location.href="/";
     })
 
-    //2. script 전송
-    this.deployService.insertScript(this.data)
-    .subscribe(data=>{
-      alert('successScriptContents');
-    })
+    // //2. script 전송
+    // this.deployService.insertScript(this.data)
+    // .subscribe(data=>{
+    //   alert('successScriptContents');
+    // })
 
 
     

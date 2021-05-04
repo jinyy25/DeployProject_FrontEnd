@@ -36,7 +36,7 @@
                 </tr>
             </thead>        
             <tbody>
-                <tr *ngFor="let deploy of deploys  | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems ">
+                <tr *ngFor="let deploy of deploys | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}" routerLink="{{deploy.deployNo}}">
                     <td>{{deploy.deployNo}}</td>
                     <td>{{deploy.deployTitle}}</td>
                     <td>{{deploy.writer}}</td>

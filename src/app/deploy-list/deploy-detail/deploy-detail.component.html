@@ -1,5 +1,5 @@
-<h2 mat-dialog-title>배포이력 스크립트</h2>
-<div mat-dialog-content>
+<h2>배포이력 스크립트</h2>
+<div>
     <div>
         <button mat-stroked-button>zip</button>
         <button mat-stroked-button>excel</button>
@@ -19,25 +19,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <!-- <tr *ngFor="let scriptView of scriptViews"> -->
-                <!-- <td>{{scriptView.scriptNo}}</td>
+   
+            <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
+                <td>{{scriptView.scriptNo}}</td>
                 <td>{{scriptView.category}}</td>
                 <td>{{scriptView.fileType}}</td>
                 <td>{{scriptView.localPath}}</td>
                 <td>{{scriptView.directoryPath}}</td>
                 <td>{{scriptView.backupScript}}</td>
                 <td>{{scriptView.reflectScript}}</td>
-                <td>{{scriptView.rollbackScript}}</td> -->
-                <td>1</td>
-                <td>portal</td>
-                <td>jsp</td>
-                <td>src/main/webapp/WEB-INF/jsp/body/eips/stat/mdmCodeDefectStat.jsp</td>
-                <td>src/main/webapp/WEB-INF/jsp/body/eips/stat/mdmCodeDefectStat.jsp</td>
-                <td>src/main/webapp/WEB-INF/jsp/body/eips/stat/mdmCodeDefectStat.jsp</td>
-                <td>src/main/webapp/WEB-INF/jsp/body/eips/stat/mdmCodeDefectStat.jsp</td>
-                <td>src/main/webapp/WEB-INF/jsp/body/eips/stat/mdmCodeDefectStat.jsp</td>
+                <td>{{scriptView.rollbackScript}}</td>
             </tr>
         </tbody>
     </table>
+    <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
 </div>

@@ -1,14 +1,17 @@
+import { BoardFile } from "./boardfile.model"
+import { Script } from "./script.model"
+
 export class Deploy{
+    //배포이력
     deployNo:number
     deployTitle:string 
     deployContent:string
     writer:string
     deployDate:Date
 
+    //스크립트 textarea구분
+    scriptDTO:Script[]
 
-    portalScript:string
-    tbwappScript:string
-    centerScript:string
-
-    category:string
+    //파일 list 구분
+    files:BoardFile[]
 }
