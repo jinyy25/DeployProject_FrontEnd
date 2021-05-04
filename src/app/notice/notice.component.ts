@@ -40,5 +40,16 @@ export class NoticeComponent implements OnInit {
   }
   getPage(page) {}//페이지 변경시 호출 될 메서드
 
+  search(form){
+    if(this.form.controls.type.errors !=null){
+      return false;
+    }else if(this.form.controls.word.errors !=null){
+      return false;
+    }
+    this.boardService.searchNotice(this.form.controls.type.value,this.form.controls.word.value)
+    .subscribe(res=>{
+      this.notices=res;
+    })
+  }
  
 }

@@ -5,14 +5,14 @@
 			<mat-label>구분</mat-label>
 			<mat-select required formControlName="type">
 				<mat-option value="title">제목</mat-option>
-				<mat-option value="nickname">작성자</mat-option>
+				<mat-option value="writer">작성자</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field class="search-field" appearance="standard">
 			<mat-label>검색어를 입력해 주세요.</mat-label>
 			<input formControlName="word" matInput >	
 		</mat-form-field> 
-		<button mat-stroked-button>검색</button>
+		<button mat-stroked-button (click)="search(form)">검색</button>
 		<button mat-stroked-button  routerLink="write" class="write_btn" >글쓰기</button>
 	</div>
 
