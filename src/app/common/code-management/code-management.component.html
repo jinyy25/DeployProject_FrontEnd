@@ -1,3 +1,5 @@
+
+<button>등록</button>
 <table id="boardTable" class="table table-striped">
     <thead>
         <tr>
@@ -24,7 +26,7 @@
         </tr>
         <ng-container *ngIf="show">
             <tr *ngFor="let childCodeMgmt of childCodeMgmts">
-                <td> {{childCodeMgmt.codeId}}</td>
+                <td>{{childCodeMgmt.codeId}}</td>
                 <td>{{childCodeMgmt.codeName}}</td>
                 <td>{{childCodeMgmt.parentCodeId}}</td>
                 <td>{{childCodeMgmt.codeUseYN}}</td>
