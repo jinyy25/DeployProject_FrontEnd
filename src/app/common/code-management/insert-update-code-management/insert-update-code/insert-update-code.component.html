@@ -5,8 +5,10 @@
                 style="margin-left: 15px"
                 formControlName="isParentCode"
                 #isParentCode
+                (click)="disable()"
         >부모코드여부
         </mat-checkbox>
+        <br/>
         <mat-form-field appearance="standard">
         <mat-label>코드 아이디</mat-label>
         <input
@@ -15,6 +17,7 @@
             #codeId
         />
         </mat-form-field>
+        <br/>
         <mat-form-field appearance="standard">
         <mat-label>코드 이름</mat-label>
         <input
@@ -23,6 +26,7 @@
             #codeName 
         />
         </mat-form-field>
+        <br/>
         <mat-form-field appearance="standard">
         <mat-label>부모 코드 아이디</mat-label>
         <input
@@ -31,13 +35,16 @@
             #parentCodeId
         />
         </mat-form-field>
+        <br/>
         <mat-form-field appearance="standard">
+        <mat-label>순서</mat-label>
         <input
             matInput
             formControlName="dsplOrder"
             #dsplOrder
         />
         </mat-form-field>
+        <br/>
         <mat-checkbox
             color="primary"
             style="margin-left: 15px"
@@ -51,15 +58,7 @@
       <button
             type="submit"
             mat-button
-            (click)="
-            onSubmit(
-                isParentCode,
-                codeId,
-                codeName,
-                parentCodeId,
-                dsplOrder,
-                isInUse
-                )"
+            (click)="onSubmit()"
       >생성
       </button>
     </mat-dialog-actions>

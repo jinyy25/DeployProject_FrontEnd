@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { CodeMgmt } from './../../codemgmt.model';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { ConstantPool } from '@angular/compiler';
 @Component({
   selector: 'vex-insert-update-code',
   templateUrl: './insert-update-code.component.html',
@@ -9,8 +11,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 export class InsertUpdateCodeComponent implements OnInit {
   form : FormGroup;
 
-  constructor(private dialogRef : MatDialogRef<InsertUpdateCodeComponent>,
-              private formBuilder: FormBuilder
+  codeMgmt : CodeMgmt = new CodeMgmt();
+
+  constructor(
+      private dialogRef : MatDialogRef<InsertUpdateCodeComponent>,
+      private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: CodeMgmt,
               ) { }
 
   ngOnInit(): void {
@@ -21,22 +27,43 @@ export class InsertUpdateCodeComponent implements OnInit {
       //그래서 업데이트는 작동하는데 인서트는 작동하지 않았던 것
       codeId: ['', [Validators.required]],
       codeName: ['', [Validators.required]],
-      parentCodeId: ['', [Validators.required]],
+      parentCodeId: [''],
       dsplOrder: ['', [Validators.required]],
       isInUse:  ['', [Validators.required]]
     
     
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
   }
-  // form 요소에 편하게 접근하기 위한 getter
-  get f() { return this.form.controls; }
+  
+  onSubmit(){ 
+            if(this.form.value.isInUse==true){
+              this.codeMgmt.codeUseYN ='Y';
+              console.log(this.codeMgmt.codeUseYN);
+            }else{
+              this.codeMgmt.codeUseYN ='N';
+            }
+            if(this.form.value.isParentCode==true){
+              this.codeMgmt.parentCodeId = null;
+              console.log(this.codeMgmt.codeUseYN);
+            }else{
+              this.codeMgmt.parentCodeId = this.form.value.parentCodeId;
+            }
+              this.codeMgmt.codeId = this.form.value.codeId;
+              this.codeMgmt.codeName = this.form.value.codeName;
+              this.codeMgmt.dsplOrder = this.form.value.dsplOrder;
+              this.dialogRef.close(this.codeMgmt);
+  }
 
-  onSubmit(isParentCode,
-          codeId,
-          codeName,
-          parentCodeId,
-          dsplOrder,
-          isInUse){}
+  disable(){
+    const isParentCode = this.form.value.isParentCode;
+    if(!isParentCode){//부모코드이면 parentCodeId input요소 disable시키고 값 ''넣어줌
+      this.form.get('parentCodeId').setValue('');
+      this.form.get('parentCodeId').disable();
+    } else { //부모코드가 아니면
+      this.form.get('parentCodeId').enable();
+    }
+  }
+  
     
 
 }
