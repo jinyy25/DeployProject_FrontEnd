@@ -23,17 +23,19 @@
             <mat-label>center</mat-label>
             <textarea #centerScript matInput formControlName="centerScript"></textarea>
         </mat-form-field>
-        <div class="fileWrap">
-            <div class="file-outline">
-                <input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
-                <label class="fileLabel" for="file">파일 선택</label>      
-            </div>
-            <div *ngIf="display=='block'" id="fileBox">
-                <ul>
-                    <li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
-                </ul>
-            </div>
-        </div>
+
+
+		<div id = "fileWrap">
+			<div>
+				<input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
+				<label id="fileLabel" for="file">파일 선택</label>
+			</div>
+			<div *ngIf="display=='block'" id="fileBox">
+				<ul>
+					<li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+				</ul>
+			</div>
+		</div>
         
         <div class="button-outline">
             <button (click)="send(deployForm,deployTitle,deployContent,portalScript,tbwappScript,centerScript)" mat-flat-button color="primary">배포이력등록</button>

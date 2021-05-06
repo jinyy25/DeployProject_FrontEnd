@@ -2,9 +2,10 @@ import { CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Portal } from '@angular/cdk/portal';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BoardFile } from 'src/app/models/boardfile.model';
 import { DeployService } from 'src/app/services/deploy.service';
+import { UploadService } from 'src/app/services/upload.service';
 import { Deploy } from '../../models/deploy.model';
 import { Script } from '../../models/script.model';
 import { User } from '../../models/user.model';
@@ -22,6 +23,8 @@ export class DeployWriteFormComponent implements OnInit {
   deployForm: FormGroup;  
   deploys: Deploy;
 
+  fileList:BoardFile = new BoardFile();
+
   selectedFiles : FileList;
   files = [];
   fileNames = [];
@@ -36,6 +39,8 @@ export class DeployWriteFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private deployService: DeployService,
     private jwtService : JwtService,
+    private uploadService:UploadService,
+    private route:ActivatedRoute,
 
     ) { 
       this.buildForm();
@@ -54,20 +59,25 @@ export class DeployWriteFormComponent implements OnInit {
     }
   } 
 
-  // 파일다수추가시
+  //파일다수추가시
   selectFiles(event): void{
     this.files = event.target.files;
     this.display = "block";
   }
+
+  //파일 닫기 누를시
   close(obj,text:string): void{
-    text = text.substr(1);
-    for(let i = 0; i < this.files.length; i++){
-      if(this.files[i].name != text){
-        this.fileNames.push(this.files[i]);
-      }
-    }
+    text=text.substr(1);
+   for(let i =0 ; i<this.files.length;i++){
+     if(this.files[i].name!=text){
+      this.fileNames.push(this.files[i]);
+     }
+     }
     this.files=this.fileNames;
     this.fileNames=[];
+    if(this.files.length==0){
+      this.display="none";
+    }
   }
 
   // 유효성검사
@@ -121,18 +131,32 @@ export class DeployWriteFormComponent implements OnInit {
       }catch(e){}
     }
 
+    console.log("확인좀::"+this.files);
+
+
+    //파일 추가
+    if(this.files.length !=0){
+      console.log(this.files);
+      for(let i = 0 ; i<this.files.length;i++){
+        this.uploadService.upload(this.files[i])
+          .subscribe(data=>{
+            this.fileList.names.push(data.data.name);
+            this.fileList.directoryPaths[i]=data.data.directoryPath;
+          })
+      }
+    }
+
+
+
+
+
+
     //1. 배포이력전송
     this.deployService.insertDeploy(this.deploys)
     .subscribe(data => {
       alert('successDeployHistory');
       // location.href="/";
     })
-
-    // //2. script 전송
-    // this.deployService.insertScript(this.data)
-    // .subscribe(data=>{
-    //   alert('successScriptContents');
-    // })
 
 
     
