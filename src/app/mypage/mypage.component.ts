@@ -30,7 +30,7 @@ export class MypageComponent implements OnInit {
 
   user:User = new User();
   teamList: Team[];
-   positionList: Position[];
+  positionList: Position[];
 
   constructor(
     private router: Router,

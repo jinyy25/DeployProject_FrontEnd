@@ -44,7 +44,8 @@ export class UpdateScheduleComponent implements OnInit {
         endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
         scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required, Validators.maxLength(33)]],
-        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]]
+        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]],
+        updateReason : ['', [Validators.maxLength(166)]]
       });
 
     }else{//시간
@@ -57,7 +58,8 @@ export class UpdateScheduleComponent implements OnInit {
         endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
         scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required, Validators.maxLength(33)]],
-        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]]
+        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]],
+        updateReason : ['', [Validators.maxLength(166)]]
       });
 
     }
@@ -65,11 +67,12 @@ export class UpdateScheduleComponent implements OnInit {
 
   onDelete(){
     if(confirm("해당 일정을 삭제하시겠습니까? 삭제 후에는 복구가 불가능합니다.")){
-      this.dialogRef.close('delete');
+      const deleteReason = {delete : 'delete', reason : this.form.value.updateReason};
+      this.dialogRef.close(deleteReason);
     }
   }
 
-  onUpdate(type, startDate, startTime, endDate, endTime, allDay, scheduleTitle, scheduleContent){
+  onUpdate(type, startDate, startTime, endDate, endTime, allDay, scheduleTitle, scheduleContent, updateReason){
 
     this.form.markAllAsTouched();//에러 한번에 다 뜨게
 

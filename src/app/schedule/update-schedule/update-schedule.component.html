@@ -113,6 +113,18 @@
       </textarea>
     </mat-form-field>
 
+    <mat-form-field appearance="standard" class="field">
+      <mat-label>수정/삭제 사유</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        formControlName="updateReason"
+        #updateReason
+        maxlength="166"
+      >
+      </textarea>
+    </mat-form-field>
+
     <div class="btns">
       <div mat-dialog-actions>
         <button mat-button mat-dialog-close>취소</button>
@@ -128,7 +140,8 @@
               endTime,
               allDay,
               scheduleTitle,
-              scheduleContent
+              scheduleContent,
+              updateReason
             )
           "
           [disabled]="data.complete == 'Y' || data.disable"
@@ -152,7 +165,8 @@
               endTime,
               allDay,
               scheduleTitle,
-              scheduleContent
+              scheduleContent,
+              updateReason
             )
           "
           [disabled]="data.complete == 'Y' || data.disable"

@@ -109,9 +109,9 @@ export class ScheduleComponent implements AfterViewInit {
         let edit = element.complete != 'Y';//완료되지 않은 일정 = true
         let color;
 
-        if(element.team == 'A'){
+        if(element.team == '추출'){
           color = 'pink';
-        }else if(element.team == 'B'){
+        }else if(element.team == '배포'){
           color = 'orange';
         }else if(element.team == 'C'){
           color = 'green';
@@ -239,9 +239,9 @@ export class ScheduleComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {
-      if(result == 'delete'){//삭제
+      if(result.delete == 'delete'){//삭제
 
-        this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo).subscribe(data => {
+        this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo, result.reason).subscribe(data => {
           if(data > 0){
             alert("일정을 삭제하였습니다");
             arg.event.remove();
