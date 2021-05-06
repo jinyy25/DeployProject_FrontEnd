@@ -94,7 +94,6 @@ export class DeployWriteFormComponent implements OnInit {
   }
 
   // 1. send버튼 누를시
-
   sendData(deploys){
     console.log("asaa::"+deploys.scriptDTO);
     this.deployService.insertDeploy(deploys)
@@ -123,7 +122,6 @@ export class DeployWriteFormComponent implements OnInit {
       try{
         portalScript = this.deployForm.controls.portalScript.value.split('\n');
         for(var i in portalScript){
-          // this.data.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
           this.deploys.scriptDTO.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
         }
       }catch(e){}
@@ -144,16 +142,15 @@ export class DeployWriteFormComponent implements OnInit {
         }
       }catch(e){}
     }
+    
     //3. 파일 추가
     if(this.files.length !=0){
-      console.log("파일리스트확인"+this.files);
       for(let i = 0 ; i<this.files.length;i++){
         this.uploadService.upload(this.files[i])
         .subscribe(data=>{
           alert("check");
           this.fileList.fileNames.push(data.data.name);
           this.fileList.directoryPaths.push(data.data.directoryPath);
-          console.log("last::"+this.fileList.directoryPaths);
           this.deploys.fileNames = this.fileList.fileNames
           this.deploys.directoryPaths = this.fileList.directoryPaths
           if(this.files.length-1==i){
