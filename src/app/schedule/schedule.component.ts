@@ -10,6 +10,8 @@ import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
+import { TeamService } from '../services/team.service';
+import { Team } from '../models/team.model';
 
 @Component({
   selector: 'app-schedule',
@@ -20,7 +22,8 @@ export class ScheduleComponent implements AfterViewInit {
 
   //로그인 회원 아이디 정보
   loginUser : User;
-  check:string;
+  check : string;
+  teamList : Team[];
 
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -36,13 +39,23 @@ export class ScheduleComponent implements AfterViewInit {
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
+
+    this.teamService.selectTeamList().subscribe(res => {
+      this.teamList = res.data.team;
+    });
   }
 
   events : EventInput[] = [];
 
   @ViewChild('calendar') calendar : FullCalendarComponent;
 
-  constructor(private dialog : MatDialog, private service : ScheduleService, private pipe: DatePipe, private jwtService : JwtService) {}
+  constructor(
+    private dialog : MatDialog,
+    private service : ScheduleService,
+    private pipe: DatePipe,
+    private jwtService : JwtService,
+    private teamService : TeamService
+  ) {}
 
   calendarOptions : CalendarOptions = {
     locales:[enLocale, koLocale],
@@ -106,18 +119,16 @@ export class ScheduleComponent implements AfterViewInit {
           endDate = this.pipe.transform(end, 'yyyy-MM-dd');
         }
 
-        let edit = element.complete != 'Y';//완료되지 않은 일정 = true
+        const edit = element.complete != 'Y';//완료되지 않은 일정 = true
+        const colorArray = ['pink', 'orange', 'green', 'purple', 'violet', 'black', 'red', 'navy', 'yellow'];
         let color;
 
-        if(element.team == '추출'){
-          color = 'pink';
-        }else if(element.team == '배포'){
-          color = 'orange';
-        }else if(element.team == 'C'){
-          color = 'green';
-        }else if(element.team == 'D'){
-          color = 'purple';
+        for (let i = 0; i < this.teamList.length; i++) {
+          if(element.team == this.teamList[i].codeName){
+            color = colorArray[i];
+          }
         }
+
         if(element.writer == this.loginUser.id){
           color = 'default';
         }
@@ -198,6 +209,7 @@ export class ScheduleComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {//onSave 메소드에서 리턴한 schedule 객체
+      console.log(result);
       //const calendarApi = arg.view.calendar;
       result.writer = this.loginUser.id;
 

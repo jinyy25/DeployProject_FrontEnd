@@ -108,6 +108,8 @@ export class UpdateScheduleComponent implements OnInit {
 
       if(confirm("해당 일정을 수정하시겠습니까?")){
         this.schedule = this.form.value;
+        this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
+        this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
         this.schedule.updateDate = this.pipe.transform(new Date(), 'yyyy-MM-dd');
         this.dialogRef.close(this.schedule);
       }
@@ -116,6 +118,8 @@ export class UpdateScheduleComponent implements OnInit {
 
       if(confirm("완료 후에는 수정이 불가능합니다. 계속하시겠습니까?")){
         this.schedule = this.form.value;
+        this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
+        this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
         this.schedule.complete = 'Y';
         this.schedule.completeDate = this.pipe.transform(new Date(), 'yyyy-MM-dd HH:mm');
         this.dialogRef.close(this.schedule);

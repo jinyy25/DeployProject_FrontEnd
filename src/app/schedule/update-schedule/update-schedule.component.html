@@ -113,8 +113,9 @@
       </textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="standard" class="field">
-      <mat-label>수정/삭제 사유</mat-label>
+    <mat-form-field appearance="standard" class="field" hidden="!data.disable">
+      <mat-label *ngIf="data.complete != 'Y'">수정/</mat-label>
+      <mat-label>삭제 사유</mat-label>
       <textarea
         class="textarea"
         matInput
