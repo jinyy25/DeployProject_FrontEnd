@@ -27,7 +27,14 @@ export class ScheduleService{
     return this.http.patch(this.url, schedule);
   }
 
-  deleteSchedule(scheduleNo : number){
-    return this.http.delete(this.url+"/"+scheduleNo);
+  deleteSchedule(scheduleNo : number, updateReason : string){
+    if(updateReason == null || updateReason == ''){
+      return this.http.delete(this.url+"/"+scheduleNo);
+    }else{
+      const schedule = new Schedule();
+      schedule.scheduleNo = scheduleNo;
+      schedule.updateReason = updateReason;
+      return this.http.post(this.url+"/deleteReason", schedule);
+    }
   }
 }

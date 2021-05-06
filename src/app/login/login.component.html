@@ -2,7 +2,7 @@
   <div @fadeInUp class="card overflow-hidden w-full max-w-xs">
     <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
       <div class="fill-current text-center">
-        <img class="w-16" src="assets/img/logo/logo.gif" style="width: 100px;height: 40px;">
+        <img class="w-16" src="assets/img/logo/logo.gif" style="width: 150px;height: 40px;">
       </div>
     </div>
 
@@ -27,6 +27,7 @@
 
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <mat-checkbox formControlName="check" class="caption" color="primary">로그인 유지</mat-checkbox>
+        <a [routerLink]="['/forgot-id']" class="caption">아이디 찾기</a>
         <a [routerLink]="['/forgot-password']" class="caption">비밀번호 찾기</a>
       </div>
 

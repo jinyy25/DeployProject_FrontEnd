@@ -77,10 +77,7 @@ export class MypageComponent implements OnInit {
   send(form,id,name,position,email,phone,team) {
     
     //유효성검사
-    if(this.form.controls.id.errors != null){
-      id.focus();
-      return false;
-    }else if(this.form.controls.name.errors != null){
+    if(this.form.controls.name.errors != null){
       name.focus();
       return false;
     }else if(this.form.controls.position.errors != null){
@@ -95,15 +92,13 @@ export class MypageComponent implements OnInit {
     }else if(this.form.controls.team.errors != null){
       team.focus();
       return false;
-    }else if(!form.value.check){
-      alert("약관에 동의를 해주세요.");
-      return false;
     }
 
     this.user=form.value;
-    this.userService.createUser(this.user)
-      .subscribe(data=>{
-        if(data){
+    this.user.id=this.loginUser.id;
+    this.userService.updateUser(this.user)
+      .subscribe(res=>{
+        if(res.data){
             location.href="/";
           }
       })

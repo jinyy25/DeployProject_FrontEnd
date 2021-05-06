@@ -53,8 +53,18 @@ const routes: VexRoutes = [
     path:'mypage',
     loadChildren: () => import('./mypage/mypage.module').then(m => m.MypageModule),
   },
-
-
+  {
+    path:'password',
+    loadChildren: () => import('./password/password.module').then(m => m.PasswordModule),
+  },
+  {
+    path:'forgot-id',
+    loadChildren: () => import('./forgot-id/forgot-id.module').then(m => m.ForgotIdModule),
+  },
+  {
+    path:'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then(m=> m.ForgotPasswordModule),
+  },
 
 
 

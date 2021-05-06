@@ -25,7 +25,9 @@ import { ExcelService } from './common/excel-download/excel.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeManagementComponent } from './common/code-management/code-management.component';
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
-import { MypageComponent } from './mypage/mypage.component';
+import { ForgotIdComponent } from './forgot-id/forgot-id.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -40,8 +42,8 @@ import { MypageComponent } from './mypage/mypage.component';
     //pagination sample용 Component
     UserComponent,
     ExcelComponent,
-    UploadFilesComponent,
-    CodeManagementComponent
+    UploadFilesComponent
+   
     
    
   
@@ -53,6 +55,7 @@ import { MypageComponent } from './mypage/mypage.component';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxPaginationModule,//for pagination
+    MatDialogModule,
 
     // Vex
     VexModule,

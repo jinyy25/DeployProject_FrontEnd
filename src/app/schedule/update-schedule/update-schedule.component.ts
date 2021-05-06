@@ -38,26 +38,28 @@ export class UpdateScheduleComponent implements OnInit {
 
       this.form = this.builder.group({
         scheduleNo : [this.data.scheduleNo],
-        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        startTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
-        endDate : [{value : this.pipe.transform(endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
+        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        startTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y'}],
+        endDate : [{value : this.pipe.transform(endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required, Validators.maxLength(33)]],
-        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]]
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33)]],
+        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
+        updateReason : ['', [Validators.maxLength(166)]]
       });
 
     }else{//시간
 
       this.form = this.builder.group({
         scheduleNo : [this.data.scheduleNo],
-        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        startTime : [{value : this.pipe.transform(this.data.startDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
-        endDate : [{value : this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
+        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        startTime : [{value : this.pipe.transform(this.data.startDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y'}],
+        endDate : [{value : this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required, Validators.maxLength(33)]],
-        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]]
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33)]],
+        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
+        updateReason : ['', [Validators.maxLength(166)]]
       });
 
     }
@@ -65,11 +67,12 @@ export class UpdateScheduleComponent implements OnInit {
 
   onDelete(){
     if(confirm("해당 일정을 삭제하시겠습니까? 삭제 후에는 복구가 불가능합니다.")){
-      this.dialogRef.close('delete');
+      const deleteReason = {delete : 'delete', reason : this.form.value.updateReason};
+      this.dialogRef.close(deleteReason);
     }
   }
 
-  onUpdate(type, startDate, startTime, endDate, endTime, allDay, scheduleTitle, scheduleContent){
+  onUpdate(type, startDate, startTime, endDate, endTime, allDay, scheduleTitle, scheduleContent, updateReason){
 
     this.form.markAllAsTouched();//에러 한번에 다 뜨게
 
@@ -105,6 +108,8 @@ export class UpdateScheduleComponent implements OnInit {
 
       if(confirm("해당 일정을 수정하시겠습니까?")){
         this.schedule = this.form.value;
+        this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
+        this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
         this.schedule.updateDate = this.pipe.transform(new Date(), 'yyyy-MM-dd');
         this.dialogRef.close(this.schedule);
       }
@@ -113,6 +118,8 @@ export class UpdateScheduleComponent implements OnInit {
 
       if(confirm("완료 후에는 수정이 불가능합니다. 계속하시겠습니까?")){
         this.schedule = this.form.value;
+        this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
+        this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
         this.schedule.complete = 'Y';
         this.schedule.completeDate = this.pipe.transform(new Date(), 'yyyy-MM-dd HH:mm');
         this.dialogRef.close(this.schedule);

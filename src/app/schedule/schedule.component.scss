@@ -3,9 +3,44 @@
   height: 80px;
 }
 .field {
-  width: 400px;
+  width: 450px;
 }
 .btns {
   display: flex;
   justify-content: space-between;
+}
+
+#external {
+  position: absolute;
+  z-index: 2;
+  top: 55px;
+  left: 20px;
+  width: 160px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.app-calendar {
+  position: relative;
+  z-index: 1;
+  margin-left: 200px;
+}
+
+.fc-event {
+  cursor: pointer;
+  border: none;
+  margin-top: 5px;
+  background: none;
+}
+
+.mine {
+  cursor: default;
+  background-color: rgba(59, 130, 246);
+  margin-top: 20px;
+}
+
+.complete {
+  cursor: default;
+  background-color: grey;
 }

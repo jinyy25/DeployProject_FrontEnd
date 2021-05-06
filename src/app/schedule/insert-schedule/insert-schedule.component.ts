@@ -102,8 +102,9 @@ export class InsertScheduleComponent implements OnInit{
         return false;
       }
     }
-
     this.schedule = this.form.value;
+    this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
+    this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
     this.dialogRef.close(this.schedule);
   }
 

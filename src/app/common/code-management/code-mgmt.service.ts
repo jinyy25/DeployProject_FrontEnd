@@ -21,4 +21,7 @@ export class CodeMgmtService {
   public getChildCodeInfos(parentCodeId) {
     return this.http.get<CodeMgmt[]>(this.userUrl+"/"+parentCodeId);
   }
+  public insertCode(codemgmt : CodeMgmt){
+    return this.http.post(this.userUrl, codemgmt);
+  }
 }

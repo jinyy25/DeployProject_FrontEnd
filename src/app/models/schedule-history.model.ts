@@ -3,4 +3,11 @@ export class ScheduleHistory{
     scheduleNo : number;
     scheduleTitle : string;
     writer : string;
+    startDate : string;
+    endDate : string;
+    scheduleContent : string;
+    regdate : string;
+    updateDate : string;
+    updateReason : string;
+    type : string;
 }
