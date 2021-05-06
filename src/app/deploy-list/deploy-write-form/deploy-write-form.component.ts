@@ -3,7 +3,9 @@ import { Portal } from '@angular/cdk/portal';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { BoardFile } from 'src/app/models/boardfile.model';
+import { DeployFile } from 'src/app/models/deploy-file.model';
 import { DeployService } from 'src/app/services/deploy.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Deploy } from '../../models/deploy.model';
@@ -21,18 +23,18 @@ export class DeployWriteFormComponent implements OnInit {
   loginUser : User;
   check:string;
   deployForm: FormGroup;  
-  deploys: Deploy;
+  deploys: Deploy = new Deploy();
 
-  fileList:BoardFile = new BoardFile();
+  fileList:DeployFile = new DeployFile();
 
-  selectedFiles : FileList;
+  selectedFiles? : FileList;
   files = [];
   fileNames = [];
+  display = "none";
 
   // data:Script[];
 
 
-  display = "none";
 
   constructor(
     private router: Router,
@@ -70,8 +72,8 @@ export class DeployWriteFormComponent implements OnInit {
     text=text.substr(1);
    for(let i =0 ; i<this.files.length;i++){
      if(this.files[i].name!=text){
-      this.fileNames.push(this.files[i]);
-     }
+        this.fileNames.push(this.files[i]);
+      }
      }
     this.files=this.fileNames;
     this.fileNames=[];
@@ -91,9 +93,21 @@ export class DeployWriteFormComponent implements OnInit {
     });
   }
 
-  // send버튼 누를시
+  // 1. send버튼 누를시
+
+  sendData(deploys){
+    console.log("asaa::"+deploys.scriptDTO);
+    this.deployService.insertDeploy(deploys)
+    .subscribe(data => {
+      alert('successDeployHistory');
+      // location.href="/";
+    })
+  }
+
   send(deployForm,deployTitle,deployContent,
-        portalScript,tbwappScript,centerScript){
+        portalScript,tbwappScript,centerScript,
+        files
+        ){
 
     if(this.deployForm.controls.deployTitle.errors != null){
       deployTitle.focus();
@@ -104,7 +118,7 @@ export class DeployWriteFormComponent implements OnInit {
     this.deploys.scriptDTO = [];
 
 
-    //textarea enter구분
+    // 2. textarea enter구분
     if(portalScript !== null){
       try{
         portalScript = this.deployForm.controls.portalScript.value.split('\n');
@@ -130,40 +144,24 @@ export class DeployWriteFormComponent implements OnInit {
         }
       }catch(e){}
     }
-
-    console.log("확인좀::"+this.files);
-
-
-    //파일 추가
+    //3. 파일 추가
     if(this.files.length !=0){
-      console.log(this.files);
+      console.log("파일리스트확인"+this.files);
       for(let i = 0 ; i<this.files.length;i++){
         this.uploadService.upload(this.files[i])
-          .subscribe(data=>{
-            this.fileList.names.push(data.data.name);
-            this.fileList.directoryPaths[i]=data.data.directoryPath;
+        .subscribe(data=>{
+          alert("check");
+          this.fileList.fileNames.push(data.data.name);
+          this.fileList.directoryPaths.push(data.data.directoryPath);
+          console.log("last::"+this.fileList.directoryPaths);
+          this.deploys.fileNames = this.fileList.fileNames
+          this.deploys.directoryPaths = this.fileList.directoryPaths
+          if(this.files.length-1==i){
+            this.sendData(this.deploys);
+        }
           })
       }
     }
-
-
-
-
-
-
-    //1. 배포이력전송
-    this.deployService.insertDeploy(this.deploys)
-    .subscribe(data => {
-      alert('successDeployHistory');
-      // location.href="/";
-    })
-
-
-    
-    
-
-
-
   }
   
 

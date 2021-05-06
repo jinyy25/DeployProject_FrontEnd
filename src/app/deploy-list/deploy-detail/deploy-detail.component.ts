@@ -7,6 +7,8 @@ import { DeployService } from 'src/app/services/deploy.service';
 import { User } from '../../models/user.model';
 import { JwtService } from '../../services/jwt.service';
 import {PageEvent} from '@angular/material/paginator';
+import { ExcelService } from 'src/app/common/excel-download/excel.service';
+import { UserExcelService } from 'src/app/common/excel-download/userExcel.service';
 
 @Component({
   selector: 'vex-deploy-detail',
@@ -21,6 +23,8 @@ export class DeployDetailComponent implements OnInit {
   deployNo:number;
   scriptViews:ScriptView[];
 
+  users: User[];
+
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
@@ -29,7 +33,9 @@ export class DeployDetailComponent implements OnInit {
     private deployService:DeployService,
     private route:ActivatedRoute,
     private router:Router,
-    private jwtService:JwtService
+    private jwtService:JwtService,
+    private excelService : ExcelService,
+    private userService : UserExcelService, 
   ) { }
 
   ngOnInit(): void {
@@ -45,10 +51,15 @@ export class DeployDetailComponent implements OnInit {
 
     this.deployNo=this.route.snapshot.params['deployNo'];
 
+
     this.deployService.selectDeployDetail(this.deployNo)
     .subscribe(
         response => {this.scriptViews = response},
     )
+  }
+
+  exportAsXLSX(deployTitle:string):void {   
+    this.excelService.exportAsExcelFile(this.scriptViews, deployTitle);
   }
 
   getPage(page) {}

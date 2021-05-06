@@ -1,4 +1,5 @@
 import { BoardFile } from "./boardfile.model"
+import { DeployFile } from "./deploy-file.model"
 import { Script } from "./script.model"
 
 export class Deploy{
@@ -13,5 +14,7 @@ export class Deploy{
     scriptDTO:Script[]
 
     //파일 list 구분
-    files:BoardFile[]
+    // files:DeployFile[]
+    fileNames:string[]=[];
+    directoryPaths:string[]=[];
 }

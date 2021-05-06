@@ -144,6 +144,7 @@ export class NoticeWriteFormComponent implements OnInit {
       }
     }//if end
 
+
     if(this.files.length !=0){
       console.log(this.files);
       for(let i = 0 ; i<this.files.length;i++){
