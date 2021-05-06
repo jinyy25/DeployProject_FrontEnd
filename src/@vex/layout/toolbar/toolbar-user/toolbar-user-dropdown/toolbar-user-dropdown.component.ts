@@ -51,10 +51,10 @@ export class ToolbarUserDropdownComponent implements OnInit {
     {
       id: '2',
       icon: icMoveToInbox,
-      label: 'My Inbox',
+      label: '비밀번호 변경',
       description: 'Messages & Latest News',
       colorClass: 'text-primary',
-      route: '/apps/chat'
+      route: '/password'
     },
     {
       id: '3',
