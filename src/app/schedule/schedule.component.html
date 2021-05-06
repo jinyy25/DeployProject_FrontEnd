@@ -1,3 +1,31 @@
+<div id="external">
+  <p>
+    <strong>색상 안내도</strong>
+  </p>
+
+  <div
+    class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
+    *ngFor="let item of teamList; let i = index"
+  >
+    <div
+      class="fc-event-main"
+      #team
+      (click)="showTeam(item)"
+      [ngStyle]="{ 'background-color': teamColor(team, i) }"
+    >
+      {{ item.codeName }} 팀
+    </div>
+  </div>
+  <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine">
+    <div class="fc-event-main">본인</div>
+  </div>
+  <div
+    class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
+  >
+    <div class="fc-event-main">완료</div>
+  </div>
+</div>
+
 <div class="app-calendar">
   <full-calendar #calendar [options]="calendarOptions"></full-calendar>
 </div>

@@ -38,13 +38,13 @@ export class UpdateScheduleComponent implements OnInit {
 
       this.form = this.builder.group({
         scheduleNo : [this.data.scheduleNo],
-        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        startTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
-        endDate : [{value : this.pipe.transform(endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
+        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        startTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y'}],
+        endDate : [{value : this.pipe.transform(endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required, Validators.maxLength(33)]],
-        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]],
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33)]],
+        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
         updateReason : ['', [Validators.maxLength(166)]]
       });
 
@@ -52,13 +52,13 @@ export class UpdateScheduleComponent implements OnInit {
 
       this.form = this.builder.group({
         scheduleNo : [this.data.scheduleNo],
-        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        startTime : [{value : this.pipe.transform(this.data.startDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
-        endDate : [{value : this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required]],
-        endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y' || this.data.disable}],
+        startDate : [{value : this.pipe.transform(this.data.startDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        startTime : [{value : this.pipe.transform(this.data.startDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y'}],
+        endDate : [{value : this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
+        endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.required, Validators.maxLength(33)]],
-        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y' || this.data.disable}, [Validators.maxLength(166)]],
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33)]],
+        scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
         updateReason : ['', [Validators.maxLength(166)]]
       });
 

@@ -31,14 +31,24 @@
         [matDatepicker]="start"
         formControlName="startDate"
         #startDate
+        [readonly]="data.disable"
       />
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-      <mat-datepicker #start></mat-datepicker>
+      <mat-datepicker
+        #start
+        [disabled]="data.disable || data.complete == 'Y'"
+      ></mat-datepicker>
       <mat-error>시작 날짜를 입력해주세요</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
-      <input matInput type="time" formControlName="startTime" #startTime />
+      <input
+        matInput
+        type="time"
+        formControlName="startTime"
+        #startTime
+        [readonly]="data.disable"
+      />
       <mat-error>시간을 입력해주세요</mat-error>
     </mat-form-field>
     <br />
@@ -51,9 +61,13 @@
         formControlName="endDate"
         [min]="form.controls.startDate.value"
         #endDate
+        [readonly]="data.disable"
       />
       <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-      <mat-datepicker #end></mat-datepicker>
+      <mat-datepicker
+        #end
+        [disabled]="data.disable || data.complete == 'Y'"
+      ></mat-datepicker>
       <mat-error *ngIf="form.controls.endDate.hasError('required')"
         >종료 날짜를 입력해주세요
       </mat-error>
@@ -73,6 +87,7 @@
         formControlName="endTime"
         #endTime
         (change)="dateCheck()"
+        [readonly]="data.disable"
       />
       <mat-error>시간을 입력해주세요</mat-error>
     </mat-form-field>
@@ -95,6 +110,7 @@
         #scheduleTitle
         matInput
         maxlength="33"
+        [readonly]="data.disable"
       />
       <mat-error>제목을 입력해주세요</mat-error>
     </mat-form-field>
@@ -108,12 +124,13 @@
         formControlName="scheduleContent"
         #scheduleContent
         maxlength="166"
+        [readonly]="data.disable"
       >
           {{ schedule.scheduleContent }}
       </textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="standard" class="field" hidden="!data.disable">
+    <mat-form-field appearance="standard" class="field" [hidden]="data.disable">
       <mat-label *ngIf="data.complete != 'Y'">수정/</mat-label>
       <mat-label>삭제 사유</mat-label>
       <textarea
