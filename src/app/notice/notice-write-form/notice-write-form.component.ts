@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 import { BoardService } from 'src/app/services/board.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice.model';
-import { UpdateScheduleComponent } from 'src/app/schedule/update-schedule/update-schedule.component';
+
 
 
 @Component({
@@ -24,6 +24,7 @@ export class NoticeWriteFormComponent implements OnInit {
   selectedFiles?: FileList;
   files = [];
   fileNames  = [];
+  fileConfirm = [];
   form: FormGroup;
   display ="none";
   loginUser:User;
@@ -50,52 +51,65 @@ export class NoticeWriteFormComponent implements OnInit {
     })
 
 
-    
+    //수정일 경우
     this.boardNo=this.route.snapshot.params['boardNo'];
     if(this.boardNo !=null){
       this.boardService.selectNoticeDetail(this.boardNo)
       .subscribe(res=>{
+        
         this.notice=res.data.board;
         this.files=res.data.files;
+
+        //기존에 있던 파일인지 확인하는 변수
+        this.fileConfirm=res.data.files;
         if(this.files.length>0){
           this.display="block";
         }else{
           this.display="none";
         }
       })
-    }else{
-
     }
   }
 
   selectFiles(event): void {
     this.files=event.target.files;
     this.display="block";
-  }
 
+    //파일 선택하면 기존파일이 사라지므로 확인하는 변수 초기화
+    this.fileConfirm=[];
+  }
+  
   close(obj,text:string): void{
     text=text.substr(1);
-   for(let i =0 ; i<this.files.length;i++){
-
-
-     if(this.files[i].name!=text){
-
-      this.fileNames.push(this.files[i]);
-
-     }//if end
-     
+    
+    //files는 기존에 선택된 파일을 저장하는 변수
+    for(let i =0 ; i<this.files.length;i++){
+      
+      //삭제한 파일이름과 다를때 fileNames에 넣어줌
+      if(this.files[i].name!=text){
+        
+        this.fileNames.push(this.files[i]);
+        
+      }//if end
+      
     }//for end
+
+    
     this.files=this.fileNames;
     this.fileNames=[];
+
+    //파일이 없을때 닫음
     if(this.files.length==0){
       this.display="none";
+      this.fileConfirm=[];
     }
     
   }//close() end
 
+  //업로드된 파일과 공지사항내용 DB insert 메서드
   addFileList(form,type){
 
-
+    //로그인 유저정보 추출
     this.check = localStorage.getItem("AUTH_TOKEN"); 
       if(this.check !=null){ 
         this.loginUser=this.jwtService.decodeToUser(this.check);
@@ -107,6 +121,7 @@ export class NoticeWriteFormComponent implements OnInit {
         }//if end
       }//if~else end
 
+
       this.fileList.writer=this.loginUser.id;
       this.fileList.content=form.controls.content.value;
       this.fileList.title=form.controls.title.value;
@@ -115,26 +130,26 @@ export class NoticeWriteFormComponent implements OnInit {
 
         this.boardService.upload(this.fileList)
         .subscribe(data =>{
+
           this.router.navigate(['/notice/'+data.data]);
-            
-          
+
         })
       }else{
-        console.log(this.fileList+"업뎃");
+
         this.boardService.updateNotice(this.fileList,this.boardNo)
         .subscribe(res =>{
+
            this.router.navigate(['/notice/'+res.data]);
+
         })
       }
  
       
   }
 
-  
-
-
+  //파일 업로드 메서드
   upload(form,type){
-    console.log(form);
+  
     if(type=="insert"){
       if(this.form.controls.title.errors != null){
         return false;
@@ -144,7 +159,6 @@ export class NoticeWriteFormComponent implements OnInit {
     }//if end
 
     if(this.files.length !=0){
-      console.log(this.files);
       for(let i = 0 ; i<this.files.length;i++){
         this.uploadService.upload(this.files[i])
           .subscribe(data=>{
@@ -159,13 +173,12 @@ export class NoticeWriteFormComponent implements OnInit {
           })
       }//for end
 
-      
-
     }else{
       this.addFileList(form,type);
 
     }//if~else end 
   }//upload()end
+
 
   insert(form){
     const type="insert";
@@ -174,7 +187,29 @@ export class NoticeWriteFormComponent implements OnInit {
 
   update(form){
     const type="update";
-    this.upload(form,type);
+
+    //기존에 있었던 파일 일때
+    if(this.fileConfirm.length>0){
+
+      for(let i =0; i < this.fileConfirm.length;i++){
+        for(let j=0; j< this.files.length; j++){ 
+          
+          //기존에 있던 파일 선별
+          if(this.files[j]==this.fileConfirm[i]){
+            this.fileList.names.push(this.files[j].name);
+            this.fileList.directoryPaths.push(this.files[j].directoryPath);
+            
+          }//if end
+        }//for end
+      }//for end
+
+
+      this.addFileList(form,type);
+
+    }else{
+      this.upload(form,type);
+    }
+    
   }
 
   cancel(){

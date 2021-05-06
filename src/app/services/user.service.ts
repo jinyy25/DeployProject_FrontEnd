@@ -34,5 +34,8 @@ export class UserService {
   public findId(email){
     return this.http.get<any>(this.userUrl+"/find?email="+email);
   }
+  public findPassword(id,email){
+    return this.http.get<any>(this.userUrl+"/find/password?id="+id+"&email="+email);
+  }
 
 }

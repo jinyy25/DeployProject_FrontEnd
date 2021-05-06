@@ -7,7 +7,7 @@ import { HttpEvent, HttpRequest, HttpClient } from '@angular/common/http';
 })
 export class UploadService {
 
-  private userUrl = 'http://localhost:8080/upload';
+  private userUrl = 'http://localhost:8080/file';
 
   constructor(private http: HttpClient) { }
 
