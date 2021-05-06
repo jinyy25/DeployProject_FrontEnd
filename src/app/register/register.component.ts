@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
+import { Position } from '../models/position.model';
 
 @Component({
   selector: 'vex-register',
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
 
   user:User = new User();
   teamList: Team[];
+  positionList: Position[];
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -40,16 +42,17 @@ export class RegisterComponent implements OnInit {
       phone:['',Validators.required],
       position:['',Validators.required],
       name: ['', Validators.required],
-      teamNo: ['', Validators.required],
+      team: ['', Validators.required],
       password: ['', Validators.required],
       passwordConfirm: ['', [Validators.required,this.equalTo('password')]],
       check:[false,[]],      
     });
 
     this.teamService.selectTeamList()
-      .subscribe(data =>{
-        this.teamList = data;
-        console.log(this.teamList);
+      .subscribe(res =>{
+        this.teamList = res.data.team;
+        this.positionList = res.data.position;
+        
       })
    
   }
@@ -64,10 +67,9 @@ export class RegisterComponent implements OnInit {
  }
 
  public checkId(id){
-   console.log(id);
    this.userService.checkId(id)
-    .subscribe(data =>{
-      if(!data){
+    .subscribe(res =>{
+      if(res.data==false){
         this.form.controls.id.setErrors({checkError:true});
       }
 
@@ -99,7 +101,7 @@ export class RegisterComponent implements OnInit {
     }else if(this.form.controls.phone.errors != null){
       phone.focus();
       return false;
-    }else if(this.form.controls.teamNo.errors != null){
+    }else if(this.form.controls.team.errors != null){
       team.focus();
       return false;
     }else if(!form.value.check){
