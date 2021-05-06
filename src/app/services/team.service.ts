@@ -9,10 +9,10 @@ export class TeamService {
 
   constructor(private http:HttpClient) { }
 
-  private userUrl = "http://localhost:8080";
+  private userUrl = "http://localhost:8080/user";
 
   public selectTeamList(){
-	  return this.http.get<Team[]>(this.userUrl+"/register");
+	  return this.http.get<any>(this.userUrl+"/register");
   }
 
 }

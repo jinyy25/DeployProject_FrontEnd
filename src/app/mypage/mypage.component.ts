@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { TeamService } from '../services/team.service';
 import { UserService } from '../services/user.service';
 import { JwtService } from '../services/jwt.service';
+import { Position } from '../models/position.model';
 
 @Component({
   selector: 'vex-mypage',
@@ -29,6 +30,7 @@ export class MypageComponent implements OnInit {
 
   user:User = new User();
   teamList: Team[];
+   positionList: Position[];
 
   constructor(
     private router: Router,
@@ -62,13 +64,13 @@ export class MypageComponent implements OnInit {
       phone:['',Validators.required],
       position:['',Validators.required],
       name: ['', Validators.required],
-      teamNo: ['', Validators.required],    
+      team: ['', Validators.required],    
     });
 
     this.teamService.selectTeamList()
-      .subscribe(data =>{
-        this.teamList = data;
-        console.log(this.teamList);
+      .subscribe(res =>{
+        this.teamList = res.data.team;
+        this.positionList = res.data.position;
       })
   }
 
@@ -90,7 +92,7 @@ export class MypageComponent implements OnInit {
     }else if(this.form.controls.phone.errors != null){
       phone.focus();
       return false;
-    }else if(this.form.controls.teamNo.errors != null){
+    }else if(this.form.controls.team.errors != null){
       team.focus();
       return false;
     }else if(!form.value.check){

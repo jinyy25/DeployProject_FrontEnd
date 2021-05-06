@@ -17,10 +17,10 @@ export class UserService {
   private userUrl = "http://localhost:8080/user";
 
   public createUser(user){
-    return this.http.post<User>(this.userUrl+"/register",user);
+    return this.http.post<any>(this.userUrl+"/register",user);
   }
   public checkId(id){
-    return this.http.get<User>(this.userUrl+"/check/"+id);
+    return this.http.get<any>(this.userUrl+"/check/"+id);
   }
 
 }

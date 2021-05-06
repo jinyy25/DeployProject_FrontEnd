@@ -31,13 +31,8 @@
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Position</mat-label>
-            <mat-select #position formControlName="position">
-              <mat-option value="인턴" >인턴</mat-option>
-              <mat-option value="컨설턴트" >컨설턴트</mat-option>
-              <mat-option value="전임" >전임</mat-option>
-              <mat-option value="선임" >선임</mat-option>
-              <mat-option value="책임" >책임</mat-option>
-              <mat-option value="수석" >수석</mat-option>
+            <mat-select #position formControlName="position" [(ngModel)]="loginUser.position">
+             <mat-option *ngFor="let position of positionList"  value="{{position.codeName}}" >{{position.codeName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.get('position').hasError('required')">직급을 선택해 주세요.</mat-error>
           </mat-form-field>
@@ -59,10 +54,10 @@
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Team</mat-label>
-            <mat-select #team formControlName="teamNo">
-              <mat-option *ngFor="let team of teamList" value="{{team.teamNo}}" >{{team.teamName}}</mat-option>
+            <mat-select #team formControlName="team" [(ngModel)]="loginUser.team">
+              <mat-option  *ngFor="let team of teamList" value="{{team.codeName}}" >{{team.codeName}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('teamNo').hasError('required')">팀을 선택해 주세요.</mat-error>
+            <mat-error *ngIf="form.get('team').hasError('required')">팀을 선택해 주세요.</mat-error>
         </mat-form-field>
 
       
