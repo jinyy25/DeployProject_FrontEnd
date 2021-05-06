@@ -31,5 +31,8 @@ export class UserService {
   public updatePassword(user){
     return this.http.patch<any>(this.userUrl+"/password",user);
   }
+  public findId(email){
+    return this.http.get<any>(this.userUrl+"/find?email="+email);
+  }
 
 }
