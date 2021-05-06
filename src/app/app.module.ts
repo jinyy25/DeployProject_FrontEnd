@@ -26,6 +26,7 @@ import { UploadFilesComponent } from './common/file-upload/upload-files.componen
 import { CodeManagementComponent } from './common/code-management/code-management.component';
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
 import { ForgotIdComponent } from './forgot-id/forgot-id.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -41,8 +42,7 @@ import { ForgotIdComponent } from './forgot-id/forgot-id.component';
     //pagination sample용 Component
     UserComponent,
     ExcelComponent,
-    UploadFilesComponent,
-    CodeManagementComponent,
+    UploadFilesComponent
    
     
    
@@ -55,6 +55,7 @@ import { ForgotIdComponent } from './forgot-id/forgot-id.component';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxPaginationModule,//for pagination
+    MatDialogModule,
 
     // Vex
     VexModule,

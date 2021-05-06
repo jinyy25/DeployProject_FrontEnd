@@ -10,7 +10,7 @@ export class InsertUpdateCodeComponent implements OnInit {
   form : FormGroup;
 
   constructor(private dialogRef : MatDialogRef<InsertUpdateCodeComponent>,
-              private formBuilder: FormBuilder,
+              private formBuilder: FormBuilder
               ) { }
 
   ngOnInit(): void {
