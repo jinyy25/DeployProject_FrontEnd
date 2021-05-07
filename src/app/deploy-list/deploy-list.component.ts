@@ -7,6 +7,7 @@ import { Deploy } from '../models/deploy.model';
 import {PageEvent} from '@angular/material/paginator';
 import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'vex-deploy-list',
@@ -28,10 +29,12 @@ export class DeployListComponent implements OnInit{
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
-  
+  searchGroup :FormGroup;
+
   constructor(
     private deployService:DeployService,
-    private jwtService:JwtService
+    private jwtService:JwtService,
+    private formBuilder:FormBuilder
   ){}
 
 
@@ -54,4 +57,17 @@ export class DeployListComponent implements OnInit{
   
   getPage(page) {}
 
+  search(searchGroup){
+    console.log("checkk:"+this.searchGroup.controls.searchCategory);
+    if(this.searchGroup.controls.searchCategory.errors != null){
+      return false;
+    }else if(this.searchGroup.controls.keyword.errors != null){
+      return false;
+    }
+    this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.searchGroup.controls.keyword.value)
+    .subscribe(response => {
+      this.deploys = response;
+    })
+
+  }
 }

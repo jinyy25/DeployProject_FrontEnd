@@ -1,8 +1,8 @@
-<h2 id="userList" #listTitle>배포이력 스크립트</h2>
+<h2 id="Script_List" #listTitle>배포이력 스크립트</h2>
 <div>
     <div>
-        <button mat-stroked-button>zip</button>
-        <button mat-stroked-button(click)="exportAsXLSX(listTitle.id)">excel</button>
+        <button mat-stroked-button (click)="downloadZip(deployNo)">zip</button>
+        <button mat-stroked-button (click)="exportAsXLSX(listTitle.id)">excel</button>
         <button mat-stroked-button mat-dialog-close>취소</button>
     </div>
     <table class="table table-striped">

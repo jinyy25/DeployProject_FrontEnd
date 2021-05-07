@@ -34,10 +34,13 @@ export class DeployService {
       return this.httpClient.get<ScriptView[]>(this.deployURL+"/"+deployNo);
   }
 
+  //4. search deploys
+  public searchDeploy(searchCategory,keyword){
+    return this.httpClient.get<Deploy[]>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword="+keyword)
+  }
 
-  //3. insert scripts
-  // public insertScript(data){
-  //   console.log("check::"+data);
-  //   return this.httpClient.post<Script>(this.deployURL,data);      
-  // }
+  //5. zipe download
+  public downloadZipFile(deployNo){
+    return this.httpClient.post<any>(this.deployURL + "/download/"+deployNo, deployNo);
+  }
 }

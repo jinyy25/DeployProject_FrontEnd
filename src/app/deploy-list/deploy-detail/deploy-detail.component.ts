@@ -9,6 +9,7 @@ import { JwtService } from '../../services/jwt.service';
 import {PageEvent} from '@angular/material/paginator';
 import { ExcelService } from 'src/app/common/excel-download/excel.service';
 import { UserExcelService } from 'src/app/common/excel-download/userExcel.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'vex-deploy-detail',
@@ -23,9 +24,14 @@ export class DeployDetailComponent implements OnInit {
   deployNo:number;
   scriptViews:ScriptView[];
 
+  deploy:Deploy;
+
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
+
+  files:File[];
+  fileInfos?: Observable<any>;
 
   constructor(
     private deployService:DeployService,
@@ -47,19 +53,33 @@ export class DeployDetailComponent implements OnInit {
       }
     }
 
-    this.deployNo=this.route.snapshot.params['deployNo'];
+  this.deployNo=this.route.snapshot.params['deployNo'];
 
-
-    this.deployService.selectDeployDetail(this.deployNo)
+  //script정보
+  this.deployService.selectDeployDetail(this.deployNo)
     .subscribe(
         response => {this.scriptViews = response},
     )
   }
 
+  //엑셀다운로드
   exportAsXLSX(listTitle:string):void {   
     this.excelService.exportAsExcelFile(this.scriptViews, listTitle);
   }
 
+  //페이징처리
   getPage(page) {}
+
+  //zip 다운로드
+  downloadZip(deployNo){
+    console.log(deployNo)
+    // this.deploy.deployNo = deployNo
+
+    this.deployService.downloadZipFile(deployNo)
+    .subscribe(
+      response => {this.deploy = response
+      alert("success");},
+    );
+  }
 
 }
