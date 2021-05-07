@@ -15,12 +15,14 @@ import { UserComponent } from './common/pagination/user.component';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeManagementComponent } from './common/code-management/code-management.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const routes: VexRoutes = [
   {
     path: '',
     component: CustomLayoutComponent,
+    canActivate:[AuthGuardService],
     children: [
       {
         path:'deploy-list',
@@ -51,10 +53,12 @@ const routes: VexRoutes = [
   },
   {
     path:'mypage',
+    canActivate:[AuthGuardService],
     loadChildren: () => import('./mypage/mypage.module').then(m => m.MypageModule),
   },
   {
     path:'password',
+    canActivate:[AuthGuardService],
     loadChildren: () => import('./password/password.module').then(m => m.PasswordModule),
   },
   {

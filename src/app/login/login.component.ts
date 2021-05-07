@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
     this.user=form.value;
     this.loginService.login(this.user).pipe(
       tap((res :any) => {
-        console.log(res);
           if(form.value.check){
             localStorage.setItem("AUTH_TOKEN", res.data);
             this.loginService.loginUser = this.jwtService.decodeToUser(res.data); 
