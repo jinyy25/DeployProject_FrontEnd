@@ -18,6 +18,15 @@
       </tr>
       </tbody>
     </table>
+    <h4>Basic native select</h4>
+      <mat-form-field appearance="standard">
+      <mat-label>페이지 당 게시물 수</mat-label>
+      <select matNativeControl required>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+      </mat-form-field>
     <!--ngx pagination 적용하였습니다.-->
     <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
   </div>

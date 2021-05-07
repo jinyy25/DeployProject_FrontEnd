@@ -1,3 +1,4 @@
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -56,6 +57,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     NgxPaginationModule,//for pagination
     MatDialogModule,
+    MatFormFieldModule,
 
     // Vex
     VexModule,
