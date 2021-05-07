@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 
 import { JwtService } from 'src/app/services/jwt.service';
 import { User } from 'src/app/models/user.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'vex-notice-detail',
@@ -20,6 +21,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class NoticeDetailComponent implements OnInit {
 
+  layoutCtrl = new FormControl('boxed');
   boardNo:number;
   notice:Notice = new Notice();
   files:File[];
