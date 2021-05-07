@@ -11,7 +11,7 @@
       <h4 class="body-2 text-secondary m-0">아래의 조건을 작성해 주세요.</h4>
     </div>
 
-    <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+    <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px" (keyup.enter)="send(form,id,password)">
       <div fxFlex="auto" fxLayout="column">
         <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>ID</mat-label>
@@ -31,7 +31,7 @@
         <a [routerLink]="['/forgot-password']" class="caption">비밀번호 찾기</a>
       </div>
 
-      <button (click)="send(form,id,password)" color="primary" mat-raised-button type="button">
+      <button (click)="send(form,id,password)" color="primary" mat-raised-button type="button" >
         로그인
       </button>
 

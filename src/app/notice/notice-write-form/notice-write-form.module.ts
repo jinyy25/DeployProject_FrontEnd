@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     MatButtonToggleModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    QuillModule
   ]
 })
 export class NoticeWriteFormModule { }

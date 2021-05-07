@@ -1,40 +1,65 @@
-<div id="boardWrap">
-	<p>공지사항</p>
-	<div id="searchBox" [formGroup]="form">
-		<mat-form-field class="select-field" appearance="standard">
-			<mat-label>구분</mat-label>
-			<mat-select required formControlName="type">
-				<mat-option value="title">제목</mat-option>
-				<mat-option value="writer">작성자</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<mat-form-field class="search-field" appearance="standard">
-			<mat-label>검색어를 입력해 주세요.</mat-label>
-			<input formControlName="word" matInput >	
-		</mat-form-field> 
-		<button mat-stroked-button (click)="search(form)">검색</button>
-		<button mat-stroked-button  routerLink="write" class="write_btn" >글쓰기</button>
+<vex-page-layout>
+	<vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+    <div [class.container]="layoutCtrl.value === 'boxed'"
+         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+         class="w-full flex flex-col sm:flex-row justify-between">
+      <div>
+        <h1 class="title mt-0 mb-1">공지사항</h1>
+        <vex-breadcrumbs [crumbs]="['Notice']"></vex-breadcrumbs>
+      </div>
+    </div>
+  </vex-page-layout-header>
+  <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+                           [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+						   class="-mt-6">
+	<div class="card overflow-auto -mt-16">
+    	<div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+			<div id="searchBox" [formGroup]="form">
+				<mat-form-field class="select-field" appearance="standard">
+					<mat-label>구분</mat-label>
+					<mat-select required formControlName="type">
+						<mat-option value="title">제목</mat-option>
+						<mat-option value="writer">작성자</mat-option>
+						<mat-option value="content">내용</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="search-field" appearance="standard" >
+					<mat-label>검색어를 입력해 주세요.</mat-label>
+					<input formControlName="word" matInput>	
+				</mat-form-field> 
+				<button color="primary" mat-raised-button (click)="search(form)" class="search_btn">검색</button>
+				<button color="primary" mat-raised-button  routerLink="write" class="write_btn" >글쓰기</button>
+			</div>
+		</div>
 	</div>
 
-	<table id="boardTable" class="table table-striped">
-		<thead>
-			<tr>
-				<th style="width:15%">번호</th>
-				<th style="width:50%">제목</th>
-				<th style="width:15%">작성자</th>
-				<th style="width:20%">작성일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let notice of notices | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }" routerLink="{{notice.boardNo}}"  >
-					<td>{{notice.boardNo}}</td>
-					<td>{{notice.title}}</td>
-					<td>{{notice.writer}}</td>
-					<td>{{notice.regdate}}</td>
-			</tr>
+	<div id="boardWrap">
 
-		</tbody>
-	</table>
-	<!--ngx pagination 적용하였습니다.-->
-	<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
-</div>
+		<table id="boardTable" class="table w-full" >
+			<thead>
+				<tr>
+					<th style="width:15%">번호</th>
+					<th style="width:50%">제목</th>
+					<th style="width:15%">작성자</th>
+					<th style="width:20%">작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let notice of notices | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }" routerLink="{{notice.boardNo}}"  >
+						<td>{{notice.boardNo}}</td>
+						<td>{{notice.title}}</td>
+						<td>{{notice.writer}}</td>
+						<td>{{notice.regdate}}</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<div id="paginate">
+			<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+		</div>
+	</div> 
+
+   </vex-page-layout-content>
+</vex-page-layout>
+
+

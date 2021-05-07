@@ -1,6 +1,8 @@
 <div id="noticeWrap">
-	<h2>공지사항</h2>
-	<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+	<div id="noticeHeader">
+		<h2>공지사항</h2>
+	</div>
+	<div id="formGroup" [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
 		
 		<div id="titleWrap" fxFlex="auto" fxLayout="column">
 			<mat-form-field fxFlex="grow" appearance="standard">
@@ -21,6 +23,7 @@
 				</ul>
 			</div>
 		</div>
+		
 		<div id="contentWrap">
 			<mat-form-field fxFlex="grow" >
 				<mat-label>내용:</mat-label>

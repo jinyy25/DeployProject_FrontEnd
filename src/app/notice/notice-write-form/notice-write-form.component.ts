@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
 import { BoardFile } from 'src/app/models/boardfile.model';
 
@@ -32,6 +32,7 @@ export class NoticeWriteFormComponent implements OnInit {
   fileList:BoardFile = new BoardFile();
   boardNo:number;
   notice:Notice = new Notice();
+  
 
   constructor(
     private fb:FormBuilder,
