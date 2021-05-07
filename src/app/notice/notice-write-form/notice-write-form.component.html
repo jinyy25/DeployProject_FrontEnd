@@ -33,9 +33,9 @@
 		</div>
 
 		<div id="buttonWrap">
-			<button  *ngIf="boardNo==null" (click)="insert(form)">확인</button>
-			<button  *ngIf="boardNo!=null" (click)="update(form)">확인</button>
-			<button (click)="cancel()">취소</button>
+			<button color="primary" mat-raised-button  *ngIf="boardNo==null" (click)="insert(form)">확인</button>
+			<button color="primary" mat-raised-button  *ngIf="boardNo!=null" (click)="update(form)">확인</button>
+			<button color="primary" mat-raised-button (click)="cancel()">취소</button>
 		</div>
 	</div>
 </div>
