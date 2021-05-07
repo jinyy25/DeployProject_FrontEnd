@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ScheduleHistory } from '../models/schedule-history.model';
 import { Schedule } from '../models/schedule.model';
 
 const httpOptions = {
@@ -19,7 +20,7 @@ export class ScheduleService{
     return this.http.post(this.url, schedule);
   }
 
-  selectSchedule(){
+  selectScheduleList(){
     return this.http.get<Schedule[]>(this.url);
   }
 
@@ -36,5 +37,9 @@ export class ScheduleService{
       schedule.updateReason = updateReason;
       return this.http.post(this.url+"/deleteReason", schedule);
     }
+  }
+
+  selectHistoryList(scheduleNo : number){
+    return this.http.get<ScheduleHistory[]>(this.url+"/history/"+scheduleNo);
   }
 }

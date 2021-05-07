@@ -1,3 +1,5 @@
+import { colorVariables } from './../../../@vex/components/config-panel/color-variables';
+import { logging } from 'protractor';
 
 
 
@@ -88,6 +90,9 @@ export class CodeManagementComponent implements OnInit {
     });
     
   }//openInsertCodeDialog() end 
+  getCodeId(codeId){
+    alert(codeId);
+  }
 
 
 }
