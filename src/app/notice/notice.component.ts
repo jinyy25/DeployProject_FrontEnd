@@ -3,7 +3,7 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { BoardService } from '../services/board.service';
 import { Notice } from '../models/notice.model';
-
+import icSearch from '@iconify/icons-ic/twotone-search';
 
 @Component({
   selector: 'vex-notice',
@@ -20,7 +20,10 @@ export class NoticeComponent implements OnInit {
   totalItems: any;
   form: FormGroup;
   notices:Notice[];
-
+  layoutCtrl = new FormControl('boxed');
+  icSearch = icSearch;
+  
+  searchCtrl = new FormControl();
 
   
 

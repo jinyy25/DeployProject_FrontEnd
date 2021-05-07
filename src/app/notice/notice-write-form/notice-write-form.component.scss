@@ -1,9 +1,13 @@
 #noticeWrap{
 		width: 80%;
-		margin :auto;
-	}
+		margin : auto;
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
 h2{
+	padding-top:50px;
 	margin:100px 0 0 20px;
+
 }
 #titleWrap{
 	width: 100%;
