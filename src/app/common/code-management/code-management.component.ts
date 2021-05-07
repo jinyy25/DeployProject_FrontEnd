@@ -118,4 +118,14 @@ export class CodeManagementComponent implements OnInit {
 
     });//subscribe() end 
 }//openUpdateCodeDialog(codeId) end 
+
+deleteCode(codeId:string){
+   this.codeMgmtService.deleteCode(codeId).subscribe(data =>{
+     if(data > 0){
+       alert("코드가 삭제되었습니다.");
+     } else {
+       alert("코드를 삭제하지 못했습니다.");
+     }//if~else end 
+   });
+}
 }

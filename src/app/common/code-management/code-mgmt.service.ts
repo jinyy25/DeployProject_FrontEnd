@@ -27,6 +27,9 @@ export class CodeMgmtService {
   public updateCode(codemgmt: CodeMgmt){
     return this.http.patch<any>(this.userUrl, codemgmt);
   }
+  public deleteCode(codeId: string) {
+    return this.http.delete<any>(this.userUrl+"/"+codeId);
+  }
   public selectOneCodeByCodeId(codeId: string) {
     return this.http.get<CodeMgmt>(this.userUrl+"/dialog/"+codeId);
   }
