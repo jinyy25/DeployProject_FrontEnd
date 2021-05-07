@@ -24,6 +24,9 @@ export class CodeMgmtService {
   public insertCode(codemgmt : CodeMgmt){
     return this.http.post(this.userUrl, codemgmt);
   }
+  public updateCode(codemgmt: CodeMgmt){
+    return this.http.patch<any>(this.userUrl, codemgmt);
+  }
   public selectOneCodeByCodeId(codeId: string) {
     return this.http.get<CodeMgmt>(this.userUrl+"/dialog/"+codeId);
   }

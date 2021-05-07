@@ -92,7 +92,7 @@ export class CodeManagementComponent implements OnInit {
     });
     
   }//openInsertCodeDialog() end 
-  openUpdateCodeDialog(codeId){
+  openUpdateCodeDialog(codeId): void{
 
     console.log(codeId);
 
@@ -105,7 +105,17 @@ export class CodeManagementComponent implements OnInit {
     dialogConfig.width = "530";
     const dialogRef = this.dialog.open(InsertUpdateCodeComponent,dialogConfig);
 
-  }
+    dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
+      result.modifier = this.loginUser.id;
+      console.log(result);
+      this.codeMgmtService.updateCode(result).subscribe(data=> {
+        if(data > 0){
+          alert("코드가 수정되었습니다");
+        } else {
+          alert("코드수정에 실패하였습니다");
+        }//if~else end 
+      });
 
-
+    });//subscribe() end 
+}//openUpdateCodeDialog(codeId) end 
 }
