@@ -91,11 +91,10 @@ export class DeployWriteFormComponent implements OnInit {
 
   // 1. send버튼 누를시
   sendData(deploys){
-    console.log("asaa::"+deploys.scriptDTO);
     this.deployService.insertDeploy(deploys)
     .subscribe(data => {
       alert('successDeployHistory');
-      // location.href="/";
+      location.href="/#/deploy-list";
     })
   }
 
