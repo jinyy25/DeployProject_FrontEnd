@@ -72,9 +72,6 @@ export class DeployDetailComponent implements OnInit {
 
   //zip 다운로드
   downloadZip(deployNo){
-    console.log(deployNo)
-    // this.deploy.deployNo = deployNo
-
     this.deployService.downloadZipFile(deployNo)
     .subscribe(
       response => {this.deploy = response

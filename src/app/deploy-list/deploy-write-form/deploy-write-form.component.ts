@@ -32,10 +32,6 @@ export class DeployWriteFormComponent implements OnInit {
   fileNames = [];
   display = "none";
 
-  // data:Script[];
-
-
-
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -153,11 +149,13 @@ export class DeployWriteFormComponent implements OnInit {
           this.fileList.directoryPaths.push(data.data.directoryPath);
           this.deploys.fileNames = this.fileList.fileNames
           this.deploys.directoryPaths = this.fileList.directoryPaths
-          if(this.files.length-1==i){
-            this.sendData(this.deploys);
-        }
+            if(this.files.length-1==i){
+              this.sendData(this.deploys);
+            }
           })
       }
+    }else{
+      this.sendData(this.deploys);
     }
   }
   
