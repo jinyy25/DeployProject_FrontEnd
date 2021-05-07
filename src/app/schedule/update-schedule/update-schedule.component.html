@@ -1,8 +1,3 @@
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
-
 <h2 mat-dialog-title *ngIf="data.complete != 'Y' && data.disable">
   {{ data.name }} 님의 일정
   <span>
@@ -150,9 +145,7 @@
 
     <div *ngIf="historyLength > 0" class="update">
       <span (click)="viewHistory()" class="md-18">수정 내역</span>
-      <mat-icon aria-hidden="false" aria-label="arrow" class="md-18"
-        >keyboard_arrow_down</mat-icon
-      >
+      <img src="/assets/img/arrow.png" class="arrow" />
     </div>
     <table *ngIf="toggle" class="table">
       <thead>

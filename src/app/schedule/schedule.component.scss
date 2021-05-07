@@ -13,7 +13,7 @@
 #external {
   position: absolute;
   z-index: 2;
-  top: 55px;
+  top: 0;
   left: 20px;
   width: 160px;
   padding: 10px;
@@ -52,6 +52,12 @@
   margin-right: 5px;
 }
 
+.arrow {
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+}
+
 .update {
   display: flex;
   justify-content: flex-end;
@@ -62,7 +68,7 @@
   border: 1px;
   font-size: 12px;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 0;
 }
 

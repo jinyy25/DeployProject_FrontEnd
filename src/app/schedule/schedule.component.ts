@@ -26,7 +26,7 @@ export class ScheduleComponent implements AfterViewInit {
   check : string;
   //팀 정보
   teamList : Team[];
-  colorArray = ['pink', 'orange', 'lightgreen', 'purple', 'navy', 'black', 'red', 'violet', 'yellowgreen'];
+  colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'lightgreen'];
 
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
