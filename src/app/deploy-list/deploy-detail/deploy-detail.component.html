@@ -12,20 +12,18 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th style="width: 5%;">구분</th>
-                <th style="width: 5%;">타입</th>
-                <th style="width: 10%;">소스경로</th>
-                <th style="width: 16%;">디렉토리생성</th>                
-                <th style="width: 16%;">개발파일복사스크립트</th>
-                <th style="width: 16%;">백업스크립트(운영)</th>
-                <th style="width: 16%;">운영파일반영스크립트</th>
-                <th style="width: 16%;">원복스크립트</th>
+                <th>구분</th>
+                <th>타입</th>
+                <th>소스경로</th>
+                <th>디렉토리생성</th>                
+                <th>백업스크립트(운영)</th>
+                <th>운영파일반영스크립트</th>
+                <th>원복스크립트</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
                 <td>{{scriptView.scriptNo}}</td>
-                <td>{{scriptView.category}}</td>
                 <td>{{scriptView.fileType}}</td>
                 <td>{{scriptView.localPath}}</td>
                 <td>{{scriptView.directoryPath}}</td>
