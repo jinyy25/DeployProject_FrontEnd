@@ -1,4 +1,16 @@
-<div id="noticeWrap">
+<vex-page-layout>
+	<vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+    <div [class.container]="layoutCtrl.value === 'boxed'"
+         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+         class="w-full flex flex-col sm:flex-row justify-between">
+      <div>
+        <h1 class="title mt-0 mb-1">공지사항</h1>
+        <vex-breadcrumbs [crumbs]="['Notice-detail']"></vex-breadcrumbs>
+      </div>
+    </div>
+  </vex-page-layout-header>
+  <vex-page-layout-content>
+		<div id="noticeWrap">
 	<div id="noticeHeader">
 		<dl id="noticeTitle" class="notice_dl">
 			<dt>제목</dt>
@@ -39,3 +51,7 @@
 		<button color="primary" mat-raised-button *ngIf="loginUser.id==notice.id"  (click)="deleteNotice(boardNo)"  class="btn btn_common">삭제</button>
 	</div>
 </div>
+
+  </vex-page-layout-content>
+</vex-page-layout>
+
