@@ -23,8 +23,6 @@ export class DeployDetailComponent implements OnInit {
   deployNo:number;
   scriptViews:ScriptView[];
 
-  users: User[];
-
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
@@ -58,8 +56,8 @@ export class DeployDetailComponent implements OnInit {
     )
   }
 
-  exportAsXLSX(deployTitle:string):void {   
-    this.excelService.exportAsExcelFile(this.scriptViews, deployTitle);
+  exportAsXLSX(listTitle:string):void {   
+    this.excelService.exportAsExcelFile(this.scriptViews, listTitle);
   }
 
   getPage(page) {}
