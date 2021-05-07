@@ -8,6 +8,7 @@ import {PageEvent} from '@angular/material/paginator';
 import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'vex-deploy-list',
@@ -48,6 +49,11 @@ export class DeployListComponent implements OnInit{
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
+
+    this.searchGroup = this.formBuilder.group({
+      searchCategory:['',Validators.required],
+      keyword:['',Validators.required]
+    })
 
     this.deployService.getDeploys()
     .subscribe(

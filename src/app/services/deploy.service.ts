@@ -14,7 +14,6 @@ export class DeployService {
   ) { }
 
   private deployURL='http://localhost:8080/deploy-list';
-  private scriptURL='http://localhost:8080/script'
 
   //1. get all deploys
   public getDeploys(){
@@ -36,10 +35,11 @@ export class DeployService {
 
   //4. search deploys
   public searchDeploy(searchCategory,keyword){
-    return this.httpClient.get<Deploy[]>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword="+keyword)
+    console.log("확인::"+searchCategory+"/"+keyword);
+    return this.httpClient.get<Deploy[]>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
   }
 
-  //5. zipe download
+  //5. zip download
   public downloadZipFile(deployNo){
     return this.httpClient.post<any>(this.deployURL + "/download/"+deployNo, deployNo);
   }

@@ -8,10 +8,10 @@
                 <mat-form-field class="select-field" appearance="standard">
                     <mat-label>분류</mat-label>
                     <mat-select required formControlName="searchCategory">
-                        <mat-option value="All">전체</mat-option>
-                        <mat-option value="Title">제목</mat-option>
-                        <mat-option value="Writer">작성자</mat-option>
-                        <mat-option value="Date">날짜</mat-option>
+                        <mat-option value="all">전체</mat-option>
+                        <mat-option value="title">제목</mat-option>
+                        <mat-option value="writer">작성자</mat-option>
+                        <mat-option value="date">날짜</mat-option>
                     </mat-select>
                 </mat-form-field>
             
@@ -20,7 +20,7 @@
                     <input matInput formControlName="keyword">       
                 </mat-form-field>
                 <button mat-stroked-button (click)="search(searchGroup)">검색</button>  
-            <button mat-stroked-button routerLink="deploy-write" class="deployBtn" >배포작성</button>              
+                <button mat-stroked-button routerLink="deploy-write" class="deployBtn" >배포작성</button>              
         </div>
 
         <table class="table table-striped">

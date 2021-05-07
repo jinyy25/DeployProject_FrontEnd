@@ -1,5 +1,5 @@
-<h2 id="Script_List" #listTitle>배포이력 스크립트</h2>
-<div>
+<div class="outline">
+    <h2 id="Script_List" #listTitle>배포이력 스크립트</h2>
     <div>
         <button mat-stroked-button (click)="downloadZip(deployNo)">zip</button>
         <button mat-stroked-button (click)="exportAsXLSX(listTitle.id)">excel</button>
@@ -8,14 +8,14 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>구분</th>
-                <th>타입</th>
-                <th>소스경로</th>
-                <th>디렉토리생성</th>                
-                <th>개발파일복사스크립트</th>
-                <th>백업스크립트(운영)</th>
-                <th>운영파일반영스크립트</th>
-                <th>원복스크립트</th>
+                <th style="width: 5%;">구분</th>
+                <th style="width: 5%;">타입</th>
+                <th style="width: 10%;">소스경로</th>
+                <th style="width: 16%;">디렉토리생성</th>                
+                <th style="width: 16%;">개발파일복사스크립트</th>
+                <th style="width: 16%;">백업스크립트(운영)</th>
+                <th style="width: 16%;">운영파일반영스크립트</th>
+                <th style="width: 16%;">원복스크립트</th>
             </tr>
         </thead>
         <tbody>
