@@ -25,7 +25,6 @@
 	<div id="noticeContent">
 		<div *ngIf="display=='block'" id="fileBox">
 			<ul>
-				<!-- <li *ngFor="let file of fileInfos | async"><a href="{{file.url}}">{{file.name}}</a></li> -->
 				<li *ngFor="let file of files"><a href="http://localhost:8080/file/files/{{file.name}}">{{file.name}}</a></li>
 				
 			</ul>
@@ -35,8 +34,8 @@
 		</div>
 	</div>
 	<div id="noticeFooter">
-		<button (click)="selectList()"  class="btn">목록으로</button>
-		<button *ngIf="loginUser.id==notice.id" (click)="updateNotice(boardNo)"  class="btn btn_common">수정</button>
-		<button *ngIf="loginUser.id==notice.id"  (click)="deleteNotice(boardNo)"  class="btn btn_common">삭제</button>
+		<button color="primary" mat-raised-button (click)="selectList()"  class="btn">목록으로</button>
+		<button color="primary" mat-raised-button *ngIf="loginUser.id==notice.id" (click)="updateNotice(boardNo)"  class="btn btn_common">수정</button>
+		<button color="primary" mat-raised-button *ngIf="loginUser.id==notice.id"  (click)="deleteNotice(boardNo)"  class="btn btn_common">삭제</button>
 	</div>
 </div>
