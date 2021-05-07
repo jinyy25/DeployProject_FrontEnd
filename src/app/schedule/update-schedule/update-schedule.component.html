@@ -154,13 +154,35 @@
         >keyboard_arrow_down</mat-icon
       >
     </div>
-    <div *ngIf="toggle">
-      <table>
+    <table *ngIf="toggle" class="table">
+      <thead>
         <tr>
-          <th>변경 일시</th>
+          <td>수정 일시</td>
+          <td>수정 사유</td>
+          <td colspan="2">수정 내역</td>
         </tr>
-      </table>
-    </div>
+      </thead>
+      <tbody *ngFor="let item of history" class="tbody">
+        <tr>
+          <td rowspan="4">{{ item.regdate }}</td>
+          <td rowspan="4">{{ item.updateReason }}</td>
+          <td>제목</td>
+          <td>{{ item.scheduleTitle }}</td>
+        </tr>
+        <tr>
+          <td>내용</td>
+          <td>{{ item.scheduleContent }}</td>
+        </tr>
+        <tr>
+          <td>시작</td>
+          <td>{{ item.startDate }}</td>
+        </tr>
+        <tr>
+          <td>종료</td>
+          <td>{{ item.endDate }}</td>
+        </tr>
+      </tbody>
+    </table>
 
     <div class="btns">
       <div mat-dialog-actions>

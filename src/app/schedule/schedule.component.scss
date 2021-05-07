@@ -24,7 +24,8 @@
 .app-calendar {
   position: relative;
   z-index: 1;
-  margin-left: 200px;
+  padding-left: 200px;
+  background-color: white;
 }
 
 .fc-event {
@@ -54,4 +55,18 @@
 .update {
   display: flex;
   justify-content: flex-end;
+}
+
+.table {
+  width: 450px;
+  border: 1px;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.tbody {
+  border: none;
+  border-bottom: 1px solid #dee2e6;
 }

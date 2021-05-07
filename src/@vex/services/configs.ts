@@ -9,8 +9,8 @@ const defaultConfig: Config = {
   layout: 'horizontal',
   boxed: false,
   sidenav: {
-    title: 'VEX',
-    imageUrl: 'assets/img/demo/logo.svg',
+    title: 'VTW',
+    imageUrl: 'assets/img/logo/logo.gif',
     showCollapsePin: true,
     state: 'expanded'
   },

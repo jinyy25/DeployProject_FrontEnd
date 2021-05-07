@@ -99,7 +99,9 @@ export class MypageComponent implements OnInit {
     this.userService.updateUser(this.user)
       .subscribe(res=>{
         if(res.data){
-            location.href="/";
+            localStorage.removeItem("AUTH_TOKEN");
+            sessionStorage.removeItem("AUTH_TOKEN");
+            this.router.navigate(['/login']);
           }
       })
     
