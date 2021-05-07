@@ -12,6 +12,7 @@ import { ScheduleService } from '../services/schedule.service';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
+import { ScheduleHistory } from '../models/schedule-history.model';
 
 @Component({
   selector: 'app-schedule',
@@ -23,8 +24,11 @@ export class ScheduleComponent implements AfterViewInit {
   //로그인 회원 아이디 정보
   loginUser : User;
   check : string;
+  //팀 정보
   teamList : Team[];
   colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'yellow'];
+
+  history : ScheduleHistory[];
 
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -45,8 +49,6 @@ export class ScheduleComponent implements AfterViewInit {
       this.teamList = res.data.team;
     });
 
-    //색상 입혀주기
-    
   }
 
   events : EventInput[] = [];
@@ -112,7 +114,7 @@ export class ScheduleComponent implements AfterViewInit {
 
   ngAfterViewInit(){
     //let calendarApi = this.calendar.getApi();
-    this.service.selectSchedule().subscribe(data => {
+    this.service.selectScheduleList().subscribe(data => {
       data.forEach(element => {
 
         let endDate = element.endDate;
@@ -236,6 +238,10 @@ export class ScheduleComponent implements AfterViewInit {
     //arg.event = EventApi
     const disable = this.loginUser.id != arg.event.extendedProps.schedule.writer;//로그인 유저가 일정 작성자가 아닐 경우
 
+    this.service.selectHistoryList(arg.event.extendedProps.schedule.scheduleNo).subscribe(data => {
+      this.history = data;
+    });
+
     const dialogRef = this.dialog.open(UpdateScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
       width : '530px',
@@ -310,7 +316,7 @@ export class ScheduleComponent implements AfterViewInit {
     this.calendarOptions.events = teamEvent;
   }
 
-  teamColor(team, i){
+  teamColor(team, i){//색상 안내도에 팀 색 입혀주기
     team.style.backgroundColor = this.colorArray[i];
     team.style.borderRadius = "3px";
   }

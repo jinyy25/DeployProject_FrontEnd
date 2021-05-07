@@ -24,7 +24,7 @@ export class UpdateScheduleComponent implements OnInit {
 
   constructor(
     private dialogRef : MatDialogRef<UpdateScheduleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data : Schedule,
+    @Inject(MAT_DIALOG_DATA) public data,
     private pipe: DatePipe,
     private builder: FormBuilder
   ) { }

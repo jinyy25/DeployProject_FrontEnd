@@ -7,7 +7,6 @@ export class ScheduleHistory{
     endDate : string;
     scheduleContent : string;
     regdate : string;
-    updateDate : string;
     updateReason : string;
     type : string;
 }
