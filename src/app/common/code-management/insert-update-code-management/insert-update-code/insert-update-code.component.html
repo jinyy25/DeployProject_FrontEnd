@@ -56,11 +56,18 @@
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button mat-dialog-close>취소</button>
-      <button
-            type="submit"
-            mat-button
-            (click)="onSubmit()"
+      <button *ngIf="isInsertMode"
+              type="submit"
+              mat-button
+              (click)="onSubmit()"
       >생성
       </button>
+      <button *ngIf="!isInsertMode"
+              type="submit"
+              mat-button
+              (click)="onSubmit()"
+     >수정
+     </button>
+
     </mat-dialog-actions>
 
