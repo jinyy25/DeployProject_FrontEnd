@@ -22,6 +22,7 @@
                 <td>{{codeMgmt.parentCodeId}}</td>
                 <td>{{codeMgmt.codeUseYN}}</td>
                 <td>{{codeMgmt.dsplOrder}}</td>
+                <td><button (click)="openUpdateCodeDialog(codeMgmt.codeId)">수정</button></td>
         </tr>
         <ng-container *ngIf="show">
             <tr *ngFor="let childCodeMgmt of childCodeMgmts">
@@ -30,6 +31,7 @@
                 <td>{{childCodeMgmt.parentCodeId}}</td>
                 <td>{{childCodeMgmt.codeUseYN}}</td>
                 <td>{{childCodeMgmt.dsplOrder}}</td>
+                <td><button (click)="openUpdateCodeDialog(childCodeMgmt.codeId)">수정</button></td>
             </tr>
         </ng-container>
     </tbody>

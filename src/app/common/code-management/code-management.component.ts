@@ -32,6 +32,8 @@ export class CodeManagementComponent implements OnInit {
   public show: boolean = false;
   parentCodeId: string;
 
+  
+
   constructor(private router: Router,
               private codeMgmtService: CodeMgmtService,
               private dialog: MatDialog,
@@ -90,8 +92,19 @@ export class CodeManagementComponent implements OnInit {
     });
     
   }//openInsertCodeDialog() end 
-  getCodeId(codeId){
-    alert(codeId);
+  openUpdateCodeDialog(codeId){
+
+    console.log(codeId);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      codeId: codeId,
+      modifier: this.loginUser.id
+    };
+    dialogConfig.width = "530";
+    const dialogRef = this.dialog.open(InsertUpdateCodeComponent,dialogConfig);
+
   }
 
 

@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>코드 등록</h2>
+<h2 mat-dialog-title *ngIf="isInsertMode">코드 등록</h2>
+<h2 mat-dialog-title *ngIf="!isInsertMode">코드 수정</h2>
     <mat-dialog-content [formGroup]="form">
         <mat-checkbox
                 color="primary"
