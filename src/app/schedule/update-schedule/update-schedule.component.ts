@@ -6,6 +6,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MY_FORMATS } from '../insert-schedule/insert-schedule.component';
 import { Schedule } from '../../models/schedule.model';
+import { ScheduleService } from 'src/app/services/schedule.service';
+import { ScheduleHistory } from 'src/app/models/schedule-history.model';
 
 @Component({
   selector: 'app-update-schedule',
@@ -22,14 +24,22 @@ export class UpdateScheduleComponent implements OnInit {
 
   schedule : Schedule = new Schedule();
 
+  history : ScheduleHistory[];
+  historyLength;
+
   constructor(
     private dialogRef : MatDialogRef<UpdateScheduleComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private pipe: DatePipe,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private service : ScheduleService
   ) { }
 
   ngOnInit(): void {
+    this.service.selectHistoryList(this.data.scheduleNo).subscribe(data => {
+      this.history = data;
+      this.historyLength = this.history.length;
+    });
 
     if(this.data.allDay){//종일
 
@@ -159,5 +169,12 @@ export class UpdateScheduleComponent implements OnInit {
       this.form.controls.endDate.setErrors({dateError : null});
       this.form.controls.endDate.updateValueAndValidity({emitEvent : false});
     }
+  }
+
+  toggle = false;
+
+  viewHistory(){//수정 내역 보기
+    this.toggle = !this.toggle;//수정 내역 창 띄워주기
+    console.log(this.history);
   }
 }

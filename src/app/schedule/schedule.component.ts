@@ -26,9 +26,7 @@ export class ScheduleComponent implements AfterViewInit {
   check : string;
   //팀 정보
   teamList : Team[];
-  colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'yellow'];
-
-  history : ScheduleHistory[];
+  colorArray = ['pink', 'orange', 'lightgreen', 'purple', 'navy', 'black', 'red', 'violet', 'yellowgreen'];
 
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -237,11 +235,7 @@ export class ScheduleComponent implements AfterViewInit {
   openUpdate(arg) : void{
     //arg.event = EventApi
     const disable = this.loginUser.id != arg.event.extendedProps.schedule.writer;//로그인 유저가 일정 작성자가 아닐 경우
-
-    this.service.selectHistoryList(arg.event.extendedProps.schedule.scheduleNo).subscribe(data => {
-      this.history = data;
-    });
-
+    
     const dialogRef = this.dialog.open(UpdateScheduleComponent, {
       //open 메소드는 dialogRef를 리턴
       width : '530px',

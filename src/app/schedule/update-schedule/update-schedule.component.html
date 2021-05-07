@@ -1,3 +1,8 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
 <h2 mat-dialog-title *ngIf="data.complete != 'Y' && data.disable">
   {{ data.name }} 님의 일정
   <span>
@@ -142,6 +147,20 @@
       >
       </textarea>
     </mat-form-field>
+
+    <div *ngIf="historyLength > 0" class="update">
+      <span (click)="viewHistory()" class="md-18">수정 내역</span>
+      <mat-icon aria-hidden="false" aria-label="arrow" class="md-18"
+        >keyboard_arrow_down</mat-icon
+      >
+    </div>
+    <div *ngIf="toggle">
+      <table>
+        <tr>
+          <th>변경 일시</th>
+        </tr>
+      </table>
+    </div>
 
     <div class="btns">
       <div mat-dialog-actions>
