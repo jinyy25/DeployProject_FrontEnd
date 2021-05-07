@@ -74,8 +74,9 @@ export class DeployDetailComponent implements OnInit {
   downloadZip(deployNo){
     this.deployService.downloadZipFile(deployNo)
     .subscribe(
-      response => {this.deploy = response
-      alert("success");},
+      response => {
+        this.deploy = response
+      },
     );
   }
 

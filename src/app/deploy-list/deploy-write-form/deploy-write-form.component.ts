@@ -93,7 +93,7 @@ export class DeployWriteFormComponent implements OnInit {
   sendData(deploys){
     this.deployService.insertDeploy(deploys)
     .subscribe(data => {
-      alert('successDeployHistory');
+      alert('배포이력 등록 완료');
       location.href="/#/deploy-list";
     })
   }
@@ -143,7 +143,6 @@ export class DeployWriteFormComponent implements OnInit {
       for(let i = 0 ; i<this.files.length;i++){
         this.uploadService.upload(this.files[i])
         .subscribe(data=>{
-          alert("check");
           this.fileList.fileNames.push(data.data.name);
           this.fileList.directoryPaths.push(data.data.directoryPath);
           this.deploys.fileNames = this.fileList.fileNames
