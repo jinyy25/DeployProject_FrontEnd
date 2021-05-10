@@ -10,6 +10,8 @@ import {PageEvent} from '@angular/material/paginator';
 import { ExcelService } from 'src/app/common/excel-download/excel.service';
 import { UserExcelService } from 'src/app/common/excel-download/userExcel.service';
 import { Observable } from 'rxjs';
+import { error } from 'node:console';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'vex-deploy-detail',
@@ -25,6 +27,8 @@ export class DeployDetailComponent implements OnInit {
   scriptViews:ScriptView[];
 
   deploy:Deploy;
+
+  layoutCtrl = new FormControl('boxed');
 
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
@@ -60,10 +64,18 @@ export class DeployDetailComponent implements OnInit {
     .subscribe(
         response => {this.scriptViews = response},
     )
+  
+  //deploy정보
+  this.deployService.selectDeployContent(this.deployNo)
+      .subscribe(
+        response => {this.deploy = response}
+      )
+
   }
 
   //엑셀다운로드
   exportAsXLSX(listTitle:string):void {   
+    console.log("확인:"+listTitle);
     this.excelService.exportAsExcelFile(this.scriptViews, listTitle);
   }
 
@@ -75,6 +87,7 @@ export class DeployDetailComponent implements OnInit {
     this.deployService.downloadZipFile(deployNo)
     .subscribe(
       response => {
+        alert("확인");
         this.deploy = response
       },
     );

@@ -1,6 +1,7 @@
 import { CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Portal } from '@angular/cdk/portal';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -25,6 +26,7 @@ export class DeployWriteFormComponent implements OnInit {
   deployForm: FormGroup;  
   deploys: Deploy = new Deploy();
 
+  layoutCtrl = new FormControl('boxed');
   fileList:DeployFile = new DeployFile();
 
   selectedFiles? : FileList;
@@ -157,5 +159,9 @@ export class DeployWriteFormComponent implements OnInit {
     }
   }
   
+    resize(obj) {
+        obj.style.height = "1px";
+        obj.style.height = (12+obj.scrollHeight)+"px";
+      }
 
 }

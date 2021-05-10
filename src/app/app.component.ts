@@ -14,7 +14,9 @@ import { Style, StyleService } from '../@vex/services/style.service';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
+import icBubbleChart from '@iconify/icons-ic/twotone-bubble-chart';
 import roundBarcode from '@iconify/icons-ic/round-barcode';
+
 
 
 @Component({
@@ -91,7 +93,7 @@ export class AppComponent {
         type:'link',
         label: 'Deploy',
         route: '/deploy-list',        
-        icon: icLayers
+        icon: icBubbleChart,
       },
       {
         type:'link',
@@ -109,7 +111,7 @@ export class AppComponent {
         //   bgClass: 'bg-deep-purple',
         //   textClass: 'text-deep-purple-contrast',
         // }
-      },
+      },      
       {
         type:'link',
         label: 'Code Management',

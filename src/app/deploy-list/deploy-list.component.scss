@@ -1,19 +1,15 @@
-.deploy-list-header{
-    padding: 0em 0em 2em 0em;
-    display: flex;
-    justify-content: space-between;
+#boardWrap{
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
-p{
-    font-size: 1.7em;
-    font-weight: 600;
-}
-.deploy-outline{
-    padding: 4em;
-}
+// .deploy-outline{
+//     padding: 4em;
+// }
 
 .deploy-search{
-    
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
 }
@@ -23,13 +19,47 @@ p{
 }
 
 .search-field{
-    width: 34em;
+    width: 28em;
 }
 
-button{
-    height: 3.5em;
-    width: 6em;
+button{		
+    height: 3em;
+    width: 10%;
 }
-.deployBtn{
-    margin: 0em 0em 0em 7em;
+
+.search_btn{
+    margin:0.8em 0em 0em 15px;
+}
+
+.write_btn{
+    margin: 0.8em 0em 0em 460px;
+}
+
+tbody tr{
+    cursor:pointer;
+}
+
+.overflow-auto{
+    overflow: hidden!important;
+}
+.paginate-box{
+    height: 100px;
+    margin-top:30px;
+    float: right;
+}
+.table td, .table th{
+    vertical-align: center !important;
+    z-index: 1;
+}
+.mat-select-placeholder{
+    color:black;
+}
+.mat-form-field{
+    margin-bottom:20px;
+}
+.-mt-16 {
+margin-top: -4rem;
+}
+.excelBtn{
+    z-index: 999;
 }

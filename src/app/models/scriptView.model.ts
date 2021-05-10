@@ -7,4 +7,7 @@ export class ScriptView{
     backupScript: string
     reflectScript: string
     rollbackScript: string
+
+    deployTitle:string
+    deployContent:string 
 }

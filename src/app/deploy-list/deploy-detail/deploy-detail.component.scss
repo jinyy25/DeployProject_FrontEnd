@@ -1,3 +1,25 @@
 .outline{
     padding: 4em 0em;
 }
+table{
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+.paginate-box{
+    height: 100px;
+    margin-top:30px;
+    float: right;
+}
+.mat-form-field{
+    margin-bottom:20px;
+}
+.-mt-16 {
+    margin-top: -4rem;
+}
+.btn-outline{
+    float: right;
+}
+.deploy-content{
+    display: flex
+}

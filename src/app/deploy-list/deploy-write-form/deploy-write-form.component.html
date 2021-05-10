@@ -1,44 +1,62 @@
-<div class="deploy-outline">
-    <p>배포이력관리</p>
-    <form [formGroup]="deployForm" class="form-outline">
-        <mat-form-field class="block" appearance="standard">
-            <mat-label>제목</mat-label>
-            <input #deployTitle formControlName="deployTitle" matInput>
-            <mat-error *ngIf="deployForm.get('deployTitle').hasError('required')">제목을 입력해 주세요</mat-error>
-        </mat-form-field>    
-        <mat-form-field class="block">
-            <mat-label>내용</mat-label>
-            <textarea #deployContent formControlName="deployContent" matInput></textarea>
-            <mat-error *ngIf="deployForm.get('deployContent').hasError('required')">내용을 입력해 주세요</mat-error>
-        </mat-form-field>
-        <mat-form-field class="block">
-            <mat-label>portal</mat-label>
-            <textarea #portalScript matInput formControlName="portalScript"></textarea>
-        </mat-form-field>
-        <mat-form-field class="block">
-            <mat-label>tbwapp</mat-label>
-            <textarea #tbwappScript matInput formControlName="tbwappScript"></textarea>
-        </mat-form-field>
-        <mat-form-field class="block">
-            <mat-label>center</mat-label>
-            <textarea #centerScript matInput formControlName="centerScript"></textarea>
-        </mat-form-field>
+<vex-page-layout>
 
 
-		<div id = "fileWrap">
-			<div>
-				<input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
-				<label id="fileLabel" for="file">파일 선택</label>
-			</div>
-			<div *ngIf="display=='block'" id="fileBox">
-				<ul>
-					<li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
-				</ul>
-			</div>
-		</div>
-        
-        <div class="button-outline">
-            <button (click)="send(deployForm,deployTitle,deployContent,portalScript,tbwappScript,centerScript,files)" mat-flat-button color="primary">배포이력등록</button>
+    <vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+        <div [class.container]="layoutCtrl.value === 'boxed'"
+        [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+        class="w-full flex flex-col sm:flex-row justify-between"> 
+            <div>
+                <h1 class="title mt-0 mb-1">배포이력관리</h1>
+                <vex-breadcrumbs [crumbs]="['Deploy']"></vex-breadcrumbs>
+            </div>
         </div>
-    </form>
-</div>
+    </vex-page-layout-header>
+
+    <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+    [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+    class="-mt-6">
+
+        <form [formGroup]="deployForm" class="form-outline">
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>제목</mat-label>
+                <input #deployTitle formControlName="deployTitle" matInput>
+                <mat-error *ngIf="deployForm.get('deployTitle').hasError('required')">제목을 입력해 주세요</mat-error>
+            </mat-form-field>    
+            <mat-form-field class="block">
+                <mat-label>내용</mat-label>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" #deployContent formControlName="deployContent" matInput></textarea>
+                <mat-error *ngIf="deployForm.get('deployContent').hasError('required')">내용을 입력해 주세요</mat-error>
+            </mat-form-field>
+            <mat-form-field class="block">
+                <mat-label>portal</mat-label>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" #portalScript matInput formControlName="portalScript"></textarea>
+            </mat-form-field>
+            <mat-form-field class="block">
+                <mat-label>tbwapp</mat-label>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" #tbwappScript matInput formControlName="tbwappScript"></textarea>
+            </mat-form-field>
+            <mat-form-field class="block">
+                <mat-label>center</mat-label>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" #centerScript matInput formControlName="centerScript"></textarea>
+            </mat-form-field>
+
+
+            <div id = "fileWrap">
+                <div>
+                    <input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
+                    <label id="fileLabel" for="file">파일 선택</label>
+                </div>
+                <div *ngIf="display=='block'" id="fileBox">
+                    <ul>
+                        <li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="button-outline">
+                <button (click)="send(deployForm,deployTitle,deployContent,portalScript,tbwappScript,centerScript,files)" mat-flat-button color="primary">배포이력등록</button>
+            </div>
+        </form>
+    </vex-page-layout-content>  
+
+</vex-page-layout>
