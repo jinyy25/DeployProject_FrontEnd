@@ -17,7 +17,7 @@ export class BoardService {
   }
 
   selectNotice(){
-    return this.http.get<Notice[]>(this.userUrl);
+    return this.http.get<any>(this.userUrl);
   }
 
   selectNoticeDetail(boardNo){
@@ -32,5 +32,8 @@ export class BoardService {
   }
   searchNotice(type,word){
     return this.http.get<Notice[]>(this.userUrl+"/search?type="+type+"&word="+word);
+  }
+  selectTeamNotice(team){
+    return this.http.get<Notice[]>(this.userUrl+"/team?codeName="+team);
   }
 }

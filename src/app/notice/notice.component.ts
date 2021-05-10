@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { BoardService } from '../services/board.service';
 import { Notice } from '../models/notice.model';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import { Team } from '../models/team.model';
 
 @Component({
   selector: 'vex-notice',
@@ -22,7 +23,7 @@ export class NoticeComponent implements OnInit {
   notices:Notice[];
   layoutCtrl = new FormControl('boxed');
   icSearch = icSearch;
-  
+  teams:Team[];
   searchCtrl = new FormControl();
 
   
@@ -36,7 +37,8 @@ export class NoticeComponent implements OnInit {
   ngOnInit(): void {
     this.boardService.selectNotice()
     .subscribe(data =>{
-      this.notices=data;
+      this.teams=data.teamList;
+      this.notices=data.noticeList;
       
     })
     
@@ -58,6 +60,22 @@ export class NoticeComponent implements OnInit {
     .subscribe(res=>{
       this.notices=res;
     })
+  }
+
+  selectNotice(){
+    this.boardService.selectNotice()
+    .subscribe(data =>{
+      this.teams=data.teamList;
+      this.notices=data.noticeList;
+      
+    })
+  }
+
+  selectTeamNotice(team){
+    this.boardService.selectTeamNotice(team.codeName)
+      .subscribe(res =>{
+        this.notices=res;
+      })
   }
  
 }

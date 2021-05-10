@@ -7,4 +7,5 @@ export class Notice{
 	regdate:string;
 	updateDate:string;
 	id:string;
+	viewCount:number;
 }
