@@ -40,6 +40,7 @@ export class InsertUpdateCodeComponent implements OnInit {
       parentCodeId: [''],
       dsplOrder: ['', [Validators.required]],
       isInUse:  ['', [Validators.required]]
+      
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
 
     if (!this.isInsertMode) {//update용 dialog인 경우에는

@@ -67,12 +67,18 @@ export class CodeManagementComponent implements OnInit {
     });
   }
 
-  openInsertCodeDialog() : void{//코드 등록 모달창 띄움
-    const dialogRef = this.dialog.open(InsertUpdateCodeComponent, {
-      //open 메소드는 dialogRef를 리턴
-      width : '530px',
-      data : { registerer : this.loginUser.id}
-    });
+  openInsertCodeDialog() : void {//코드 등록 모달창 띄움
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      registerer: this.loginUser.id
+    };
+
+    dialogConfig.width = "250px";
+    
+
+    const dialogRef = this.dialog.open(InsertUpdateCodeComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
       result.registerer = this.loginUser.id;
@@ -88,7 +94,7 @@ export class CodeManagementComponent implements OnInit {
     });
   }//openInsertCodeDialog() end
    
-  openUpdateCodeDialog(codeId): void{
+  openUpdateCodeDialog(codeId): void {
 
     console.log(codeId);
 
@@ -98,8 +104,10 @@ export class CodeManagementComponent implements OnInit {
       codeId: codeId,
       modifier: this.loginUser.id
     };
-    dialogConfig.width = "530";
-    const dialogRef = this.dialog.open(InsertUpdateCodeComponent,dialogConfig);
+
+    dialogConfig.width = "250px";
+
+    const dialogRef = this.dialog.open(InsertUpdateCodeComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
       result.modifier = this.loginUser.id;
