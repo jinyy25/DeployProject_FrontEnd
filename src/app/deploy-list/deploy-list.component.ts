@@ -9,6 +9,11 @@ import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import icSearch from '@iconify/icons-ic/twotone-search';
+import { FormControl } from '@angular/forms';
+import { ExcelService } from '../common/excel-download/excel.service';
+import { UserExcelService } from '../common/excel-download/userExcel.service';
+import { ScriptView } from '../models/scriptView.model';
 
 @Component({
   selector: 'vex-deploy-list',
@@ -27,15 +32,22 @@ export class DeployListComponent implements OnInit{
   check:string;
 
   deploys:Deploy[];
+
   p: number;//현재 페이지 정보 담기 위함
-  itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
+  itemsPerPage = 10;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
   searchGroup :FormGroup;
+  layoutCtrl = new FormControl('boxed');
+  icSearch = icSearch;
+
+  scriptViews:ScriptView[];
 
   constructor(
     private deployService:DeployService,
     private jwtService:JwtService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private excelService : ExcelService,
+    private userService : UserExcelService, 
   ){}
 
 
@@ -57,7 +69,9 @@ export class DeployListComponent implements OnInit{
 
     this.deployService.getDeploys()
     .subscribe(
-      response => {this.deploys = response},
+      response => {
+      this.deploys = response
+    }
     );
   }
   
@@ -74,6 +88,17 @@ export class DeployListComponent implements OnInit{
     .subscribe(response => {
       this.deploys = response;
     })
+  }
 
+
+  exportAsXLSX(listTitle:string,deployNo:number):void {  
+      this.deployService.selectDeployDetail(deployNo)
+      .subscribe(
+          response => {
+            this.scriptViews = response
+            this.excelService.exportAsExcelFile(this.scriptViews, listTitle)
+          },
+          )
+  
   }
 }

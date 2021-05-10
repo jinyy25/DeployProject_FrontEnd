@@ -14,6 +14,7 @@ import { Style, StyleService } from '../@vex/services/style.service';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
+import icBubbleChart from '@iconify/icons-ic/twotone-bubble-chart';
 
 @Component({
   selector: 'vex-root',
@@ -89,7 +90,7 @@ export class AppComponent {
         type:'link',
         label: 'Deploy',
         route: '/deploy-list',        
-        icon: icLayers
+        icon: icBubbleChart,
       },
       {
         type:'link',

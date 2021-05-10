@@ -25,9 +25,12 @@ export class DeployService {
     return this.httpClient.post<Deploy>(this.deployURL,deploys);
   }
 
-  //3. select deploys
+  //3. select scripts
   public selectDeployDetail(deployNo){
       return this.httpClient.get<ScriptView[]>(this.deployURL+"/"+deployNo);
+  }
+  public selectDeployContent(deployNo){
+    return this.httpClient.get<Deploy>(this.deployURL+"/deployContent/"+deployNo);
   }
 
   //4. search deploys

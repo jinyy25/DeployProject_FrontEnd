@@ -1,37 +1,59 @@
-<div class="outline">
-    <h2 id="Script_List" #listTitle>배포이력 스크립트</h2>
-    <div>
-        <button mat-stroked-button (click)="downloadZip(deployNo)">zip</button>
-        <button mat-stroked-button (click)="exportAsXLSX(listTitle.id)">excel</button>
-        <button mat-stroked-button mat-dialog-close>취소</button>
-    </div>
-    <div>
-        <!-- <div>{{scriptView.title}}</div>
-        <div>{{scriptView.content}}</div> -->
-    </div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>구분</th>
-                <th>타입</th>
-                <th>소스경로</th>
-                <th>디렉토리생성</th>                
-                <th>백업스크립트(운영)</th>
-                <th>운영파일반영스크립트</th>
-                <th>원복스크립트</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
-                <td>{{scriptView.scriptNo}}</td>
-                <td>{{scriptView.fileType}}</td>
-                <td>{{scriptView.localPath}}</td>
-                <td>{{scriptView.directoryPath}}</td>
-                <td>{{scriptView.backupScript}}</td>
-                <td>{{scriptView.reflectScript}}</td>
-                <td>{{scriptView.rollbackScript}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
-</div>
+<vex-page-layout>
+        <vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+            <div [class.container]="layoutCtrl.value === 'boxed'"
+                 [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+                 class="w-full flex flex-col sm:flex-row justify-between">
+            <div>
+                <h1 class="title mt-0 mb-1" id="Script_List" #listTitle>배포이력 스크립트</h1>
+                <vex-breadcrumbs [crumbs]="['Deploy-Script']"></vex-breadcrumbs>
+            </div>
+            </div>
+        </vex-page-layout-header>
+
+        <vex-page-layout-content>
+            <mat-card>
+                <div>
+                    <div class="deploy-content">
+                        <h5>제목</h5>  
+                        <div>{{deploy.deployTitle}}</div>
+                    </div>   
+                    <div class="deploy-content">
+                        <h5>내용</h5>
+                        <div>{{deploy.deployContent}}</div>
+                    </div>
+                </div>
+                <div class="btn-outline">
+                    <button color="primary" mat-raised-button (click)="downloadZip(deployNo)">zip</button>
+                    <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
+                    <button color="primary" mat-raised-button mat-dialog-close>취소</button>
+                </div>
+            </mat-card>
+        <table class="table w-full">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>타입</th>
+                    <th>소스경로</th>
+                    <th>디렉토리생성</th>                
+                    <th>백업스크립트(운영)</th>
+                    <th>운영파일반영스크립트</th>
+                    <th>원복스크립트</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
+                    <td style="width: 10%;">{{scriptView.category}}</td>
+                    <td style="width: 10%;">{{scriptView.fileType}}</td>
+                    <td style="width: 10%;">{{scriptView.localPath}}</td>
+                    <td style="width: 10%;">{{scriptView.directoryPath}}</td>
+                    <td style="width: 10%;">{{scriptView.backupScript}}</td>
+                    <td style="width: 10%;">{{scriptView.reflectScript}}</td>
+                    <td style="width: 10%;">{{scriptView.rollbackScript}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="paginate-box">
+            <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+        </div>
+    </vex-page-layout-content>
+</vex-page-layout>

@@ -1,29 +1,45 @@
-
-    <div class="deploy-outline">
-        <div class="deploy-list-header">
-            <p>배포이력관리</p>
+<vex-page-layout>
+    <vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+        <div [class.container]="layoutCtrl.value === 'boxed'"
+        [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+        class="w-full flex flex-col sm:flex-row justify-between"> 
+            <div>
+                <h1 class="title mt-0 mb-1">배포이력관리</h1>
+                <vex-breadcrumbs [crumbs]="['Deploy']"></vex-breadcrumbs>
+            </div>
         </div>
+    </vex-page-layout-header>
 
-        <div class="deploy-search" [formGroup]="searchGroup">
+    <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+                             [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+                             class="-mt-6">
+    <div class="card overflow-auto -mt-16">
+        <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+            <div class="deploy-search" [formGroup]="searchGroup">
+                
                 <mat-form-field class="select-field" appearance="standard">
-                    <mat-label>분류</mat-label>
-                    <mat-select required formControlName="searchCategory">
-                        <mat-option value="all">전체</mat-option>
-                        <mat-option value="title">제목</mat-option>
-                        <mat-option value="writer">작성자</mat-option>
-                        <mat-option value="date">날짜</mat-option>
-                    </mat-select>
+                        <mat-label>분류</mat-label>
+                        <mat-select required formControlName="searchCategory">
+                            <mat-option value="all">전체</mat-option>
+                            <mat-option value="title">제목</mat-option>
+                            <mat-option value="writer">작성자</mat-option>
+                            <mat-option value="deployDate">날짜</mat-option>
+                        </mat-select>
                 </mat-form-field>
             
                 <mat-form-field class="search-field" appearance="standard">
                     <mat-label>검색어를 입력해주세요</mat-label>
                     <input matInput formControlName="keyword">       
                 </mat-form-field>
-                <button mat-stroked-button (click)="search(searchGroup)">검색</button>  
-                <button mat-stroked-button routerLink="deploy-write" class="deployBtn" >배포작성</button>              
+                <button color="primary" mat-raised-button (click)="search(searchGroup)" class="search_btn">검색</button>  
+                <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">배포작성</button>   
+                          
+            </div>
         </div>
+    </div>
 
-        <table class="table table-striped">
+    <div id="boardWrap">
+        <table class="table w-full">
             <thead>
                 <tr>
                     <th style="width: 10%;">번호</th>
@@ -35,16 +51,21 @@
             </thead>        
             <tbody>
                 <tr *ngFor="let deploy of deploys | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}" routerLink="{{deploy.deployNo}}">
-                    <td>{{deploy.deployNo}}</td>
-                    <td>{{deploy.deployTitle}}</td>
+                    <td #deployNo>{{deploy.deployNo}}</td>
+                    <td id="Script_List" #listTitle>{{deploy.deployTitle}}</td>
                     <td>{{deploy.writer}}</td>
                     <td>{{deploy.deployDate}}</td>
                     <td>
                         <button mat-stroked-button>zip</button>
-                        <button mat-stroked-button>excel</button>
+                        <button mat-stroked-button class="excelBtn" (click)="exportAsXLSX(listTitle.id,deploy.deployNo)">excel</button>
                     </td>                                
                 </tr>
             </tbody>        
         </table>
+    </div>
+    <div class="paginate-box">
         <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
     </div>
+    </vex-page-layout-content>
+
+</vex-page-layout>

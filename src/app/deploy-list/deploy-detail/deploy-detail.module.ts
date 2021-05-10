@@ -19,6 +19,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -43,7 +44,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCardModule
   ]
 })
 export class DeployDetailModule { }
