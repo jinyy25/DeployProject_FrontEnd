@@ -12,8 +12,9 @@ const httpOptions = {
 })
 export class CodeMgmtService {
 
-  constructor(private http:HttpClient) { }
   private userUrl = 'http://localhost:8080/code';
+
+  constructor(private http:HttpClient) { }
 
   public getParentCodeInfos() {
     return this.http.get<CodeMgmt[]>(this.userUrl);

@@ -32,8 +32,6 @@ export class CodeManagementComponent implements OnInit {
   public show: boolean = false;
   parentCodeId: string;
 
-  
-
   constructor(private router: Router,
               private codeMgmtService: CodeMgmtService,
               private dialog: MatDialog,
@@ -47,7 +45,7 @@ export class CodeManagementComponent implements OnInit {
 
     this.check = localStorage.getItem("AUTH_TOKEN");
 
-    if(this.check !=null) {
+    if(this.check != null) {
        
       this.loginUser = this.jwtService.decodeToUser(this.check);
       
@@ -55,7 +53,7 @@ export class CodeManagementComponent implements OnInit {
 
       this.check= sessionStorage.getItem("AUTH_TOKEN");
 
-      if(this.check !=null) {
+      if(this.check != null) {
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
@@ -73,7 +71,7 @@ export class CodeManagementComponent implements OnInit {
     const dialogRef = this.dialog.open(InsertUpdateCodeComponent, {
       //open 메소드는 dialogRef를 리턴
       width : '530px',
-      data : {registerer : this.loginUser.id}
+      data : { registerer : this.loginUser.id}
     });
 
     dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
@@ -86,12 +84,10 @@ export class CodeManagementComponent implements OnInit {
           alert("등록에 실패하였습니다");
         }//if~else end 
       }
-
       );
-
     });
-    
-  }//openInsertCodeDialog() end 
+  }//openInsertCodeDialog() end
+   
   openUpdateCodeDialog(codeId): void{
 
     console.log(codeId);

@@ -14,6 +14,8 @@ import { Style, StyleService } from '../@vex/services/style.service';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
+import roundBarcode from '@iconify/icons-ic/round-barcode';
+
 
 @Component({
   selector: 'vex-root',
@@ -107,6 +109,12 @@ export class AppComponent {
         //   bgClass: 'bg-deep-purple',
         //   textClass: 'text-deep-purple-contrast',
         // }
+      },
+      {
+        type:'link',
+        label: 'Code Management',
+        route:'/codeMgmt',
+        icon: roundBarcode
       }
 
     ];
