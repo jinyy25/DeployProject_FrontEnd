@@ -314,5 +314,13 @@ export class ScheduleComponent implements AfterViewInit {
     team.style.backgroundColor = this.colorArray[i];
     team.style.borderRadius = "3px";
   }
+
+  showMine(){//진행 중인 본인 일정 보이게
+
+  }
+
+  showEnd(){//완료 일정 보이게
+
+  }
 }
 

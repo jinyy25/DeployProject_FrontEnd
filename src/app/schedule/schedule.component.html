@@ -17,12 +17,12 @@
     </div>
   </div>
   <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine">
-    <div class="fc-event-main">본인</div>
+    <div class="fc-event-main" (click)="showMine()">본인</div>
   </div>
   <div
     class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
   >
-    <div class="fc-event-main">완료</div>
+    <div class="fc-event-main" (click)="showEnd()">완료</div>
   </div>
 </div>
 
