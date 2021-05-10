@@ -25,7 +25,6 @@
   position: relative;
   z-index: 1;
   padding-left: 200px;
-  background-color: white;
 }
 
 .fc-event {
@@ -75,4 +74,10 @@
 .tbody {
   border: none;
   border-bottom: 1px solid #dee2e6;
+}
+
+.has-fixed-footer {
+  .content {
+    margin-bottom: 0px;
+  }
 }

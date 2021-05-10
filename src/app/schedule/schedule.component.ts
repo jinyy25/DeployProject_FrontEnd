@@ -12,7 +12,6 @@ import { ScheduleService } from '../services/schedule.service';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
-import { ScheduleHistory } from '../models/schedule-history.model';
 
 @Component({
   selector: 'app-schedule',
@@ -20,6 +19,7 @@ import { ScheduleHistory } from '../models/schedule-history.model';
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements AfterViewInit {
+  @ViewChild('calendar') calendar : FullCalendarComponent;
 
   //로그인 회원 아이디 정보
   loginUser : User;
@@ -31,14 +31,14 @@ export class ScheduleComponent implements AfterViewInit {
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
 
-    if(this.check !=null){
+    if(this.check != null){
        
       this.loginUser = this.jwtService.decodeToUser(this.check);
       
     }else{
       this.check= sessionStorage.getItem("AUTH_TOKEN");
 
-      if(this.check !=null){
+      if(this.check != null){
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
@@ -50,8 +50,6 @@ export class ScheduleComponent implements AfterViewInit {
   }
 
   events : EventInput[] = [];
-
-  @ViewChild('calendar') calendar : FullCalendarComponent;
 
   constructor(
     private dialog : MatDialog,
@@ -112,6 +110,12 @@ export class ScheduleComponent implements AfterViewInit {
 
   ngAfterViewInit(){
     //let calendarApi = this.calendar.getApi();
+
+    const view = localStorage.getItem("calendarView");
+    if(view != null){
+      this.calendar.getApi().changeView(localStorage.getItem("calendarView"));//마지막으로 봤던 view
+    }
+
     this.service.selectScheduleList().subscribe(data => {
       data.forEach(element => {
 
@@ -194,6 +198,9 @@ export class ScheduleComponent implements AfterViewInit {
       });
 
     }else{//수정 안함
+      //view 기억하게
+      const view = this.calendar.getApi().view.type;//현재 view 타입 - dayGridMonth, timeGridWeek, timeGridDay
+      localStorage.setItem("calendarView", view);
       window.location.reload();
     }
   }
@@ -212,7 +219,6 @@ export class ScheduleComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {//onSave 메소드에서 리턴한 schedule 객체
-      console.log(result);
       //const calendarApi = arg.view.calendar;
       result.writer = this.loginUser.id;
 
@@ -227,6 +233,9 @@ export class ScheduleComponent implements AfterViewInit {
         }else{
           alert("등록에 실패하였습니다");
         }
+        //view 기억하게
+        const view = this.calendar.getApi().view.type;
+        localStorage.setItem("calendarView", view);
         window.location.reload();//새로고침
       });
     });
@@ -279,6 +288,9 @@ export class ScheduleComponent implements AfterViewInit {
           }else{
             alert("수정에 실패하였습니다")
           }
+          //view 기억하게
+          const view = this.calendar.getApi().view.type;
+          localStorage.setItem("calendarView", view);
           window.location.reload();
         });
       }
@@ -316,11 +328,13 @@ export class ScheduleComponent implements AfterViewInit {
   }
 
   showMine(){//진행 중인 본인 일정 보이게
-
+    const myEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id && event.schedule.complete != 'Y');
+    this.calendarOptions.events = myEvent;
   }
 
   showEnd(){//완료 일정 보이게
-
+    const endEvent = this.events.filter((event) => event.schedule.complete == 'Y');
+    this.calendarOptions.events = endEvent;
   }
 }
 

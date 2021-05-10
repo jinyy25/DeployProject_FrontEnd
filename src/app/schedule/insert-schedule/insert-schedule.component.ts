@@ -128,6 +128,10 @@ export class InsertScheduleComponent implements OnInit{
     const startDate = this.form.value.startDate + " " + this.form.value.startTime;
     const endDate = this.form.value.endDate + " " + this.form.value.endTime;
 
+    console.log(allDay);
+    console.log(startDate);
+    console.log(endDate);
+
     if(!allDay && startDate >= endDate){
       if(this.form.value.startTime == '' || this.form.value.endTime == ''){
         this.form.get('startTime').setValidators(Validators.required);
