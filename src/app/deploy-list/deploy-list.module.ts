@@ -23,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { DeployDetailComponent } from './deploy-detail/deploy-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [DeployListComponent],
@@ -48,7 +50,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonToggleModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MomentDateModule,
+    MatDatepickerModule,
   ]
 })
 export class DeployListModule { }

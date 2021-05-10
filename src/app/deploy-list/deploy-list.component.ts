@@ -14,6 +14,14 @@ import { FormControl } from '@angular/forms';
 import { ExcelService } from '../common/excel-download/excel.service';
 import { UserExcelService } from '../common/excel-download/userExcel.service';
 import { ScriptView } from '../models/scriptView.model';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+import { MY_FORMATS } from '../schedule/insert-schedule/insert-schedule.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Schedule } from '../models/schedule.model';
+import { Inject } from '@angular/core';
+
 
 @Component({
   selector: 'vex-deploy-list',
@@ -22,7 +30,11 @@ import { ScriptView } from '../models/scriptView.model';
   animations: [
     fadeInUp400ms,
     stagger40ms
-  ],  
+  ],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}
+  ]  
 })
 
 
@@ -39,7 +51,9 @@ export class DeployListComponent implements OnInit{
   searchGroup :FormGroup;
   layoutCtrl = new FormControl('boxed');
   icSearch = icSearch;
-
+  selected : string;
+  
+  category:string;
   scriptViews:ScriptView[];
 
   constructor(
@@ -47,7 +61,11 @@ export class DeployListComponent implements OnInit{
     private jwtService:JwtService,
     private formBuilder:FormBuilder,
     private excelService : ExcelService,
-    private userService : UserExcelService, 
+    private userService : UserExcelService,
+    // private dialogRef : MatDialogRef<DeployListComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: Schedule,
+    private pipe: DatePipe,
+    // private builder: FormBuilder 
   ){}
 
 
@@ -62,6 +80,7 @@ export class DeployListComponent implements OnInit{
       }
     }
 
+    // this.selected = 'all'
     this.searchGroup = this.formBuilder.group({
       searchCategory:['',Validators.required],
       keyword:['',Validators.required]
@@ -78,12 +97,13 @@ export class DeployListComponent implements OnInit{
   getPage(page) {}
 
   search(searchGroup){
-    console.log("checkk:"+this.searchGroup.controls.searchCategory);
     if(this.searchGroup.controls.searchCategory.errors != null){
       return false;
     }else if(this.searchGroup.controls.keyword.errors != null){
       return false;
     }
+
+    console.log( this.searchGroup.controls.keyword.value);
     this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.searchGroup.controls.keyword.value)
     .subscribe(response => {
       this.deploys = response;
@@ -98,7 +118,16 @@ export class DeployListComponent implements OnInit{
             this.scriptViews = response
             this.excelService.exportAsExcelFile(this.scriptViews, listTitle)
           },
-          )
-  
+          )  
   }
+
+  // dateCheck(){
+  // }
+  // public modeselect = 'Domain';
+  // public selected = 'all'
+
+  sc(value){
+    this.category = value
+    console.log(value);
+}
 }

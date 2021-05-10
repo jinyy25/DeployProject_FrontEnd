@@ -19,18 +19,29 @@
                 
                 <mat-form-field class="select-field" appearance="standard">
                         <mat-label>분류</mat-label>
-                        <mat-select required formControlName="searchCategory">
-                            <mat-option value="all">전체</mat-option>
+                        <mat-select [(value)]="selected" (selectionChange)="sc($event.value)" required formControlName="searchCategory" >
+                            <mat-option value="all" ng-selected>전체</mat-option>
                             <mat-option value="title">제목</mat-option>
                             <mat-option value="writer">작성자</mat-option>
                             <mat-option value="deployDate">날짜</mat-option>
                         </mat-select>
                 </mat-form-field>
-            
-                <mat-form-field class="search-field" appearance="standard">
-                    <mat-label>검색어를 입력해주세요</mat-label>
-                    <input matInput formControlName="keyword">       
-                </mat-form-field>
+                    <mat-form-field 
+                        class="search-field" 
+                        appearance="standard"
+                        *ngIf="category == 'all'||category == 'writer'||category == 'title'">
+                        <mat-label>검색어를 입력해주세요</mat-label>
+                        <input matInput formControlName="keyword">       
+                    </mat-form-field>
+                    <mat-form-field 
+                        class="search-field"  
+                        appearance="standard"
+                        *ngIf="category == 'deployDate'">
+                        <input matInput [matDatepicker]="start" formControlName="keyword"/>
+                        <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+                        <mat-datepicker #start></mat-datepicker>
+                    </mat-form-field>
+
                 <button color="primary" mat-raised-button (click)="search(searchGroup)" class="search_btn">검색</button>  
                 <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">배포작성</button>   
                           
