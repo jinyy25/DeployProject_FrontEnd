@@ -61,7 +61,17 @@
 			</tbody>
 		</table>
 		<div id="paginate">
-			<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+			<div id="item">
+				Items per Page:
+				<select (change)="handlePageSizeChange($event)">
+					<option *ngFor="let itemsPerPage of itemsPerPages" >
+					{{ itemsPerPage }}
+					</option>
+				</select>
+   		   </div>
+			<div id="page">
+				<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+			</div>
 		</div>
 	</div> 
 
