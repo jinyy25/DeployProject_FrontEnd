@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.user=form.value;
-    this.userService.createUser(this.user)
+    this.userService.insertUser(this.user)
       .subscribe(data=>{
         if(data){
             location.href="/";

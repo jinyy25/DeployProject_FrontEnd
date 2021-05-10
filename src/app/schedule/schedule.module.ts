@@ -19,6 +19,7 @@ import listPlugin from '@fullcalendar/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatTableModule } from '@angular/material/table';
+import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -31,7 +32,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   declarations: [
     ScheduleComponent,
     InsertScheduleComponent,
-    UpdateScheduleComponent
+    UpdateScheduleComponent,
+    SearchScheduleComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   ],
   entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
     InsertScheduleComponent,
-    UpdateScheduleComponent
+    UpdateScheduleComponent,
+    SearchScheduleComponent
   ],
 })
 export class ScheduleModule { }

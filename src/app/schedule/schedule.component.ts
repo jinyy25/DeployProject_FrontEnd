@@ -12,6 +12,7 @@ import { ScheduleService } from '../services/schedule.service';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
+import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 
 @Component({
   selector: 'app-schedule',
@@ -27,6 +28,7 @@ export class ScheduleComponent implements AfterViewInit {
   //팀 정보
   teamList : Team[];
   colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'lightgreen'];
+  userList : User[];
 
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -312,9 +314,24 @@ export class ScheduleComponent implements AfterViewInit {
     this.calendarOptions.events = teamEvent;
   }
 
-  showOne(){//자기꺼 보여주기
-    const oneEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id);
-    this.calendarOptions.events = oneEvent;
+  showOne(){//자기꺼 보여주기, 개인별 검색
+
+    const dialogRef = this.dialog.open(SearchScheduleComponent, {
+      //팀별 유저 리스트 보내주기, 본인 정보 보내주기
+      width : '400px',
+      data : {
+        teamList : this.teamList,
+        userList : this.userList,
+        loginUser : this.loginUser
+      }
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+
+    });
+
+    // const oneEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id);
+    // this.calendarOptions.events = oneEvent;
   }
 
   showTeam(team){//색상 안내도 눌렀을때 팀별 보여주기
