@@ -16,7 +16,7 @@ export class UserService {
 
   private userUrl = "http://localhost:8080/user";
 
-  public createUser(user){
+  public insertUser(user){
     return this.http.post<any>(this.userUrl+"/register",user);
   }
   public checkId(id){
