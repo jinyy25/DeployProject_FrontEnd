@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import {WorkSheet as XLSXWorkSheet, utils as XLSXUtils, WorkBook as XLSXWorkBook, write as StyleWrite, utils as StyleUtils, CellObject as StyleCellObject} from 'xlsx-style';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
