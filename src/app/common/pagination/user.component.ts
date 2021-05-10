@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {//OnInit implements 해주셔야 �
   users: User[];
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
+  itemsPerPages = [5, 10, 15];
   totalItems: any;
   
   constructor(private router: Router, 
@@ -34,6 +35,15 @@ export class UserComponent implements OnInit {//OnInit implements 해주셔야 �
     });
   };
 
-  getPage(page) {}//페이지 변경시 호출 될 메서드
+  //페이지 변경시 호출 될 메서드 
+  //20210510 정진하 인자와 중괄호 안 수정되었습니다.
+  getPage(event) {//The $event argument will be the number of the new page.
+    this.p = event;//새로운 페이지의 숫자 p에 담아준다.
+  }
+  //한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
+  handlePageSizeChange(event): void {
+    this.itemsPerPage = event.target.value;
+    this.p = 1;
+  }
 
 }

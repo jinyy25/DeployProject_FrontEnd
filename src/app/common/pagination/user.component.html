@@ -18,7 +18,28 @@
       </tr>
       </tbody>
     </table>
-    <!--ngx pagination 적용하였습니다.-->
-    <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+    <!--ngx pagination 적용하였습니다.
+    previousLabel, nextLabel 프로퍼티 설정을 통해서
+    원하는 이름으로 설정 가능합니다.
+    responsive="true" 해놓으면, 작은 화면에서
+    각각의 모든 페이지 수를 숨기고 
+    Prev 2/11 Next 등으로 간략하게 보여줍니다.
+    -->
+    <pagination-controls (pageChange)="getPage(p =$event)"
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        responsive="true"
+                        >
+    </pagination-controls>
+
+    <!--한 페이지 당 보여줄 아이템의 수 조정하기 위함-->
+    <div>
+      Items per Page:
+      <select (change)="handlePageSizeChange($event)">
+        <option *ngFor="let itemsPerPage of itemsPerPages" >
+          {{ itemsPerPage }}
+        </option>
+      </select>
+    </div>
   </div>
 

@@ -173,8 +173,7 @@ export class UpdateScheduleComponent implements OnInit {
 
   toggle = false;
 
-  viewHistory(){//수정 내역 보기
-    this.toggle = !this.toggle;//수정 내역 창 띄워주기
-    console.log(this.history);
+  viewHistory(){//수정 내역 창 띄워주기
+    this.toggle = !this.toggle;
   }
 }

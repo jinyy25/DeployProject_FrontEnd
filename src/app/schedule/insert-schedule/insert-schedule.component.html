@@ -8,6 +8,7 @@
         [matDatepicker]="start"
         formControlName="startDate"
         #startDate
+        (dateChange)="dateCheck()"
       />
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker #start></mat-datepicker>
@@ -87,10 +88,11 @@
     </mat-form-field>
 
     <div mat-dialog-actions>
-      <button mat-button mat-dialog-close>취소</button>
+      <button mat-raised-button color="primary" mat-dialog-close>취소</button>
       <button
         type="submit"
-        mat-button
+        mat-raised-button
+        color="primary"
         (click)="
           onSubmit(
             startDate,

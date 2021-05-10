@@ -2,7 +2,32 @@
 		 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 		 border-bottom-right-radius: 5px;
 		 border-bottom-left-radius: 5px;
-		// margin-top: 20px;
+		
+	 }
+	 #teamWrap{
+		 position: relative;
+		 width: 100%;
+		 top:0;
+		 left:0;
+		 margin:65px 0 0 -100px; 
+		 overflow-x: scroll;
+	 }
+	 #teamWrap button{
+		 width: 60px;
+		 border-top:1px solid #fff;
+		 border-bottom: 1px solid #fff;
+	 }
+	  #teamWrap button:first-child{
+		 padding-left: 10px; 
+		 border-left: 1px solid #fff;
+		 border-top-left-radius: 5px;
+		 border-bottom-left-radius: 5px;
+	 }
+	 #teamWrap button:last-child{
+		 padding-right: 10px;
+		 border-right: 1px solid #fff;
+		 border-top-right-radius: 5px;
+		 border-bottom-right-radius: 5px;
 	 }
 	.select-field{
 		width:10em;
@@ -35,6 +60,7 @@
 		overflow: hidden!important;
 	}
 	#paginate{
+		width:500px;
 		height: 100px;
 		margin-top:30px;
 		float: right;
@@ -46,6 +72,14 @@
 		margin-bottom:20px;
 	}
 	.-mt-16 {
-    margin-top: -4rem;
-}
+		margin-top: -4rem;
+	}
+
+	#item{
+		float: left;
+	}
+	#item select{
+		width:50px;
+	}
+
 	

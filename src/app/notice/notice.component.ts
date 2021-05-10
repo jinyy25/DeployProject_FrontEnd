@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { BoardService } from '../services/board.service';
 import { Notice } from '../models/notice.model';
 import icSearch from '@iconify/icons-ic/twotone-search';
+import { Team } from '../models/team.model';
 
 @Component({
   selector: 'vex-notice',
@@ -17,12 +18,13 @@ export class NoticeComponent implements OnInit {
 
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 10;//한 페이지 당 보여줄 데이터의 수
+  itemsPerPages=[10,15,20];
   totalItems: any;
   form: FormGroup;
   notices:Notice[];
   layoutCtrl = new FormControl('boxed');
   icSearch = icSearch;
-  
+  teams:Team[];
   searchCtrl = new FormControl();
 
   
@@ -36,7 +38,8 @@ export class NoticeComponent implements OnInit {
   ngOnInit(): void {
     this.boardService.selectNotice()
     .subscribe(data =>{
-      this.notices=data;
+      this.teams=data.teamList;
+      this.notices=data.noticeList;
       
     })
     
@@ -46,7 +49,9 @@ export class NoticeComponent implements OnInit {
       word:['',Validators.required]
     })
   }
-  getPage(page) {}//페이지 변경시 호출 될 메서드
+  getPage(event) {
+    this.p=event;
+  }//페이지 변경시 호출 될 메서드
 
   search(form){
     if(this.form.controls.type.errors !=null){
@@ -58,6 +63,28 @@ export class NoticeComponent implements OnInit {
     .subscribe(res=>{
       this.notices=res;
     })
+  }
+
+  selectNotice(){
+    this.boardService.selectNotice()
+    .subscribe(data =>{
+      this.teams=data.teamList;
+      this.notices=data.noticeList;
+      
+    })
+  }
+
+  selectTeamNotice(team){
+    this.boardService.selectTeamNotice(team.codeName)
+      .subscribe(res =>{
+        this.notices=res;
+      })
+  }
+
+  //한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
+  handlePageSizeChange(event): void {
+    this.itemsPerPage = event.target.value;
+    this.p = 1;
   }
  
 }

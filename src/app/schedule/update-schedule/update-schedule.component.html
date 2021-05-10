@@ -1,8 +1,3 @@
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
-
 <h2 mat-dialog-title *ngIf="data.complete != 'Y' && data.disable">
   {{ data.name }} 님의 일정
   <span>
@@ -135,9 +130,12 @@
       </textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="standard" class="field" [hidden]="data.disable">
-      <mat-label *ngIf="data.complete != 'Y'">수정/</mat-label>
-      <mat-label>삭제 사유</mat-label>
+    <mat-form-field
+      appearance="standard"
+      class="field"
+      [hidden]="data.complete == 'Y' || data.disable"
+    >
+      <mat-label>수정/삭제 사유</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -149,10 +147,8 @@
     </mat-form-field>
 
     <div *ngIf="historyLength > 0" class="update">
-      <span (click)="viewHistory()" class="md-18">수정 내역</span>
-      <mat-icon aria-hidden="false" aria-label="arrow" class="md-18"
-        >keyboard_arrow_down</mat-icon
-      >
+      <span (click)="viewHistory()" class="md-18">수정 이력</span>
+      <img src="/assets/img/arrow.png" class="arrow" />
     </div>
     <table *ngIf="toggle" class="table">
       <thead>
@@ -186,9 +182,9 @@
 
     <div class="btns">
       <div mat-dialog-actions>
-        <button mat-button mat-dialog-close>취소</button>
+        <button mat-raised-button color="primary" mat-dialog-close>취소</button>
         <button
-          mat-button
+          mat-raised-button
           color="primary"
           (click)="
             onUpdate(
@@ -203,18 +199,23 @@
               updateReason
             )
           "
-          [disabled]="data.complete == 'Y' || data.disable"
+          [hidden]="data.complete == 'Y' || data.disable"
         >
           완료
         </button>
       </div>
 
       <div mat-dialog-actions>
-        <button mat-button (click)="onDelete()" [disabled]="data.disable">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onDelete()"
+          [hidden]="data.complete == 'Y' || data.disable"
+        >
           삭제
         </button>
         <button
-          mat-button
+          mat-raised-button
           (click)="
             onUpdate(
               'update',
@@ -228,7 +229,7 @@
               updateReason
             )
           "
-          [disabled]="data.complete == 'Y' || data.disable"
+          [hidden]="data.complete == 'Y' || data.disable"
           color="primary"
         >
           수정

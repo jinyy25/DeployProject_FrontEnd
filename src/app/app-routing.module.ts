@@ -1,3 +1,4 @@
+import { CodeMgmt } from './common/code-management/codemgmt.model';
 
 
 
@@ -40,7 +41,11 @@ const routes: VexRoutes = [
       {
         path : 'schedule',
         loadChildren:() => import('./schedule/schedule.module').then(m => m.ScheduleModule)
-      }
+      },
+      /*{
+        path : 'codeMgmt',
+        loadChildren:() => import('./common/code-management/code-management.module').then(m => m.CodeManagementModule)
+      }*/
     ]
   },
   {

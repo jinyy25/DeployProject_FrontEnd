@@ -29,10 +29,10 @@ dt,dl{
 }
 #noticeTitle dt,#noticeWriter dt{
 	border:1px solid #d5d5db;
-	border-left:none;
+	
 }
 #noticeRegdate{
-	width:30%;
+	width:25%;
 }
 #noticeTitle dd{
 	margin-left: 100px;
@@ -47,10 +47,23 @@ dt,dl{
 }
 #noticeWriter{
 	width: 30%;
+	border-right: 1px solid #d5d5db;
 }
 #noticeWriter dt{
 	border-top: none;
 	
+}
+#viewCount{
+	
+	width: 20%;
+}
+#viewCount dt{
+	border:1px solid #d5d5db;
+	border-top: none;
+}
+#viewCount dd{
+	text-align: center;
+	border-bottom:1px solid #d5d5db;
 }
 #noticeWriter dd{
 	text-align: center;
@@ -58,7 +71,8 @@ dt,dl{
 	// background-color: red;
 }
 #phone{
-	width: 40%;
+	border-right: 1px solid #d5d5db;
+	width: 30%;
 }
 #phone dt{
 	border:1px solid #d5d5db;
@@ -69,7 +83,7 @@ dt,dl{
 	border-bottom:1px solid #d5d5db;
 }
 #noticeUpdate{
-	width: 30%;
+	width: 25%;
 }
 #noticeUpdate dt{
 	border:1px solid #d5d5db;

@@ -1,5 +1,5 @@
 {
-    "/schedule/*" : {
+    "/schedule/*": {
         "target" : "http://localhost:8080",
         "secure" : false,
         "changeOrigin" : true
@@ -8,6 +8,8 @@
         "target" : "http://localhost:8080/deploy-list",
         "secure" : false 
     }
+
+
 
     
 }

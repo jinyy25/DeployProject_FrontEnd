@@ -3,10 +3,14 @@
     <div [class.container]="layoutCtrl.value === 'boxed'"
          [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
          class="w-full flex flex-col sm:flex-row justify-between">
-      <div>
+      <div id="noticeWrap">
         <h1 class="title mt-0 mb-1">공지사항</h1>
         <vex-breadcrumbs [crumbs]="['Notice']"></vex-breadcrumbs>
-      </div>
+	  </div>
+	  <div id="teamWrap">
+		  <button (click)="selectNotice()" >전체</button>
+		  <button *ngFor="let team of teams" (click)="selectTeamNotice(team)">{{team.codeName}}</button>
+		</div>
     </div>
   </vex-page-layout-header>
   <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
@@ -14,7 +18,7 @@
 						   class="-mt-6">
 	<div class="card overflow-auto -mt-16">
     	<div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
-			<div id="searchBox" [formGroup]="form">
+			<div id="searchBox" [formGroup]="form" (keyup.enter)="search(form)">
 				<mat-form-field class="select-field" appearance="standard">
 					<mat-label>구분</mat-label>
 					<mat-select required formControlName="type">
@@ -28,8 +32,8 @@
 					<mat-label>검색어를 입력해 주세요.</mat-label>
 					<input formControlName="word" matInput>	
 				</mat-form-field> 
-				<button color="primary" mat-raised-button (click)="search(form)" class="search_btn">검색</button>
-				<button color="primary" mat-raised-button  routerLink="write" class="write_btn" >글쓰기</button>
+				<button color="primary" mat-raised-button (click)="search(form)" class="search_btn" (keyup.enter)="search(form)">검색</button>
+				<button color="primary" mat-raised-button  routerLink="write" class="write_btn" type="button" >작성</button>
 			</div>
 		</div>
 	</div>
@@ -39,10 +43,11 @@
 		<table id="boardTable" class="table w-full" >
 			<thead>
 				<tr>
-					<th style="width:15%">번호</th>
+					<th style="width:10%">번호</th>
 					<th style="width:50%">제목</th>
 					<th style="width:15%">작성자</th>
-					<th style="width:20%">작성일</th>
+					<th style="width:15%">작성일</th>
+					<th style="width:10%">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,12 +56,23 @@
 						<td>{{notice.title}}</td>
 						<td>{{notice.writer}}</td>
 						<td>{{notice.regdate}}</td>
+						<td>{{notice.viewCount}}</td>
 				</tr>
 
 			</tbody>
 		</table>
 		<div id="paginate">
-			<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+			<div id="item">
+				Items per Page:
+				<select (change)="handlePageSizeChange($event)">
+					<option *ngFor="let itemsPerPage of itemsPerPages" >
+					{{ itemsPerPage }}
+					</option>
+				</select>
+   		   </div>
+			<div id="page">
+				<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+			</div>
 		</div>
 	</div> 
 
