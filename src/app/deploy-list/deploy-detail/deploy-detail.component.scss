@@ -17,9 +17,28 @@ table{
 .-mt-16 {
     margin-top: -4rem;
 }
-.btn-outline{
-    float: right;
-}
+// .btn-outline{
+//     float: right;
+// }
 .deploy-content{
     display: flex
+}
+.deploy-content p{
+    font-size: 18px;
+    font-weight: 600;
+}
+.deploy-title{
+    padding-right: 200px;
+}
+button{
+    margin: 0px 9px;
+}
+.bg-app-bar{
+    background: white !important;
+    justify-content: space-between!important;
+}
+.deploy-search{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
 }

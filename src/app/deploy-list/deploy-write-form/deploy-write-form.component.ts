@@ -158,10 +158,8 @@ export class DeployWriteFormComponent implements OnInit {
       this.sendData(this.deploys);
     }
   }
-  
-    resize(obj) {
-        obj.style.height = "1px";
-        obj.style.height = (12+obj.scrollHeight)+"px";
-      }
 
+      cancel(){
+        this.router.navigate(['/deploy-list']);
+      }
 }

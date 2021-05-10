@@ -93,4 +93,8 @@ export class DeployDetailComponent implements OnInit {
     );
   }
 
+  cancel(){
+    this.router.navigate(['/deploy-list']);
+  }
+
 }

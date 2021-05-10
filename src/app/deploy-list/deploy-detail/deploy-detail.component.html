@@ -11,33 +11,39 @@
         </vex-page-layout-header>
 
         <vex-page-layout-content>
-            <mat-card>
-                <div>
-                    <div class="deploy-content">
-                        <h5>제목</h5>  
-                        <div>{{deploy.deployTitle}}</div>
-                    </div>   
-                    <div class="deploy-content">
-                        <h5>내용</h5>
-                        <div>{{deploy.deployContent}}</div>
-                    </div>
+            <div class="card overflow-auto -mt-16">
+                <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+                    <!-- <div class="deploy-search"> -->
+                        <div>
+                            <div class="deploy-content">
+                                <p class="deploy-title">제목</p>  
+                                <p>{{deploy.deployTitle}}</p>
+                            </div>   
+                            <div class="deploy-content">
+                                <p class="deploy-title">내용</p>
+                                <p>{{deploy.deployContent}}</p>
+                            </div>
+                        </div>
+                        <div class="btn-outline">
+                            <button color="primary" mat-raised-button (click)="downloadZip(deployNo)">zip</button>
+                            <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
+                            <button color="primary" mat-raised-button (click)="cancel()">취소</button>
+                        </div>
+                    <!-- </div> -->
                 </div>
-                <div class="btn-outline">
-                    <button color="primary" mat-raised-button (click)="downloadZip(deployNo)">zip</button>
-                    <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
-                    <button color="primary" mat-raised-button mat-dialog-close>취소</button>
-                </div>
-            </mat-card>
+            </div>
+
+    <div id="boardWrap">       
         <table class="table w-full">
             <thead>
                 <tr>
-                    <th>구분</th>
-                    <th>타입</th>
-                    <th>소스경로</th>
-                    <th>디렉토리생성</th>                
-                    <th>백업스크립트(운영)</th>
-                    <th>운영파일반영스크립트</th>
-                    <th>원복스크립트</th>
+                    <th style="width: 5%;">구분</th>
+                    <th style="width: 5%;">타입</th>
+                    <th style="width: 10%;">소스경로</th>
+                    <th style="width: 10%;">디렉토리생성</th>                
+                    <th style="width: 10%;">백업스크립트(운영)</th>
+                    <th style="width: 10%;">운영파일반영스크립트</th>
+                    <th style="width: 10%;">원복스크립트</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +58,7 @@
                 </tr>
             </tbody>
         </table>
+    </div>
         <div class="paginate-box">
             <pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
         </div>
