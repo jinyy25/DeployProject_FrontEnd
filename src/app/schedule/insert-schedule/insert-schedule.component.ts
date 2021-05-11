@@ -125,12 +125,8 @@ export class InsertScheduleComponent implements OnInit{
   dateCheck(){//날짜 유효성 검사
     this.form.markAllAsTouched();
     const allDay = this.form.value.allDay;
-    const startDate = this.form.value.startDate + " " + this.form.value.startTime;
-    const endDate = this.form.value.endDate + " " + this.form.value.endTime;
-
-    console.log(allDay);
-    console.log(startDate);
-    console.log(endDate);
+    const startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd') + " " + this.form.value.startTime;
+    const endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd') + " " + this.form.value.endTime;
 
     if(!allDay && startDate >= endDate){
       if(this.form.value.startTime == '' || this.form.value.endTime == ''){

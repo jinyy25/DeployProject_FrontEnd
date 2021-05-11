@@ -74,7 +74,7 @@ export class ScheduleComponent implements AfterViewInit {
     headerToolbar: {
       left: 'prev,next today all,team,one',
       center: 'title',
-      right: 'listMonth dayGridMonth,timeGridWeek,timeGridDay'
+      right: 'listMonth dayGridMonth,dayGridWeek,timeGridDay'
     },
     customButtons: {
       all: {
@@ -90,39 +90,32 @@ export class ScheduleComponent implements AfterViewInit {
         click: () => this.showOne()
       }
     },
-    initialView: 'dayGridMonth',
+    initialView: 
+    localStorage.getItem("calendarView") !== null ? localStorage.getItem("calendarView") : "dayGridMonth",//마지막으로 저장된 view
+    datesSet: function(info){//view 바뀌면 local storage에 저장
+      localStorage.setItem("calendarView", info.view.type);
+    },
     weekends: true,
     editable: true,                //event longclick 시, draggable과 resizing(date range 변경)이 가능하게 함(기본값 : false)
     eventDurationEditable: true,  //resize 가능
     eventStartEditable: true,      //드래그 가능
+    eventResizableFromStart: true,
     selectable: true,              //long click, long click & drag를 해야만, select가 이루어지고, select callback 반환 // 날짜 배경 Highlight 및 Range 선택가능
-    eventOverlap: true,            //해당 날짜에 하나이상의 과업이 있어도, drop 가능(기본값 : true)
-    eventLongPressDelay: 1000,     //event가 draggable 하게 만들기 위해 걸리는 시간(기본값 : 1초)
-    selectLongPressDelay: 1000,    //date가 select 하게 만들기 위해 걸리는 시간(기본값 : 1초)
-    // longPressDelay : 1000       //위에 두개를 합친것
     dayMaxEvents: true,            //하루에 일정 많을때 +버튼으로 표시
-    // eventBackgroundColor: 'red',   //기본값 배경색상 적용
-    // eventTextColor: 'white',         //기본값 글자색상 적용
+    views:{
+      timeGrid:{
+        dayMaxEvents : 1
+      }
+    },
     eventChange: this.handleEventChange.bind(this),
-    //dateClick: this.handleDateClick.bind(this), //date short click
     select: this.handleDateSelect.bind(this),   //date long click
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
     height: '90vh'
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
   };
 
   ngAfterViewInit(){
     //let calendarApi = this.calendar.getApi();
-
-    const view = localStorage.getItem("calendarView");
-    if(view != null){
-      this.calendar.getApi().changeView(localStorage.getItem("calendarView"));//마지막으로 봤던 view
-    }
 
     this.service.selectScheduleList().subscribe(res => {
       res.data.forEach(element => {
@@ -206,9 +199,6 @@ export class ScheduleComponent implements AfterViewInit {
       });
 
     }else{//수정 안함
-      //view 기억하게
-      const view = this.calendar.getApi().view.type;//현재 view 타입 - dayGridMonth, timeGridWeek, timeGridDay
-      localStorage.setItem("calendarView", view);
       window.location.reload();
     }
   }
@@ -241,9 +231,6 @@ export class ScheduleComponent implements AfterViewInit {
         }else{
           alert("등록에 실패하였습니다");
         }
-        //view 기억하게
-        const view = this.calendar.getApi().view.type;
-        localStorage.setItem("calendarView", view);
         window.location.reload();//새로고침
       });
     });
@@ -296,9 +283,6 @@ export class ScheduleComponent implements AfterViewInit {
           }else{
             alert("수정에 실패하였습니다")
           }
-          //view 기억하게
-          const view = this.calendar.getApi().view.type;
-          localStorage.setItem("calendarView", view);
           window.location.reload();
         });
       }

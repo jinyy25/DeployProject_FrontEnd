@@ -32,6 +32,7 @@
         formControlName="startDate"
         #startDate
         [readonly]="data.disable"
+        (dateChange)="dateCheck()"
       />
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker
@@ -48,6 +49,7 @@
         formControlName="startTime"
         #startTime
         [readonly]="data.disable"
+        (change)="dateCheck()"
       />
       <mat-error>시간을 입력해주세요</mat-error>
     </mat-form-field>
@@ -62,6 +64,7 @@
         [min]="form.controls.startDate.value"
         #endDate
         [readonly]="data.disable"
+        (dateChange)="dateCheck()"
       />
       <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
       <mat-datepicker
