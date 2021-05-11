@@ -72,15 +72,15 @@ const routes: VexRoutes = [
   {
     path:'password',
     canActivate:[AuthGuardService],
-    loadChildren: () => import('./password/password.module').then(m => m.PasswordModule),
+    loadChildren: () => import('./mypage/password/password.module').then(m => m.PasswordModule),
   },
   {
     path:'forgot-id',
-    loadChildren: () => import('./forgot-id/forgot-id.module').then(m => m.ForgotIdModule),
+    loadChildren: () => import('./login/forgot-id/forgot-id.module').then(m => m.ForgotIdModule),
   },
   {
     path:'forgot-password',
-    loadChildren: () => import('./forgot-password/forgot-password.module').then(m=> m.ForgotPasswordModule),
+    loadChildren: () => import('./login/forgot-password/forgot-password.module').then(m=> m.ForgotPasswordModule),
   },
 
 

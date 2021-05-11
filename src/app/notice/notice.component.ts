@@ -53,6 +53,7 @@ export class NoticeComponent implements OnInit {
     this.p=event;
   }//페이지 변경시 호출 될 메서드
 
+  //검색
   search(form){
     if(this.form.controls.type.errors !=null){
       return false;
@@ -66,6 +67,7 @@ export class NoticeComponent implements OnInit {
     })
   }
 
+  //전체
   selectNotice(){
     this.teamName="전체";
     this.boardService.selectNotice()
@@ -76,6 +78,7 @@ export class NoticeComponent implements OnInit {
     })
   }
 
+  //팀별검색
   selectTeamNotice(team){
     this.teamName=team.codeName;
     this.boardService.selectTeamNotice(team.codeName)

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'vex-forgot-password',
@@ -36,6 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
       newPasswordConfirm: ['', [Validators.required,this.equalTo('newPassword')]]
     })
   }
+  //비밀번호, 비밀번호 확인 일치하는지 확인
   public equalTo(newPassword:string): ValidatorFn{
    return (control: AbstractControl): { [key: string]: any } => {
             let isValid = control.root.value[newPassword] == control.value;
@@ -45,7 +45,9 @@ export class ForgotPasswordComponent implements OnInit {
             return null;
         };
   }
+  //비밀번호 일치하는지 확인
   findPassword(form){
+      //유효성 검사
       if(this.form.controls.email.errors != null){
         return false;
       }else if(this.form.controls.id.errors != null){
@@ -63,6 +65,7 @@ export class ForgotPasswordComponent implements OnInit {
       })//subscribe end
     }//findPassword end
 
+    //비밀번호 변경
     updatePassword(form){
      if(this.form.controls.newPasswordConfirm.errors != null){
       return false;

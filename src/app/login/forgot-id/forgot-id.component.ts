@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
-import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'vex-forgot-id',
@@ -32,7 +32,9 @@ export class ForgotIdComponent implements OnInit {
 
   }
 
+  //아이디 찾기
   findId(form){
+    //유효성 검사
     if(this.form.controls.email.errors != null){
       return false;
     }

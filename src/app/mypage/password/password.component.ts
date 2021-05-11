@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
-import { JwtService } from '../services/jwt.service';
+import { JwtService } from 'src/app/services/jwt.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'vex-password',
@@ -38,6 +38,7 @@ export class PasswordComponent implements OnInit {
       newPasswordConfirm: ['', [Validators.required,this.equalTo('newPassword')]],
     })
 
+    //로그인 유저 정보
     this.check = localStorage.getItem("AUTH_TOKEN");
 
     if(this.check !=null){
@@ -53,6 +54,7 @@ export class PasswordComponent implements OnInit {
     }
   }
 
+  //비밀번호,비밀번호 확인 일치하는지 확인
   public equalTo(newPassword:string): ValidatorFn{
    return (control: AbstractControl): { [key: string]: any } => {
             let isValid = control.root.value[newPassword] == control.value;
@@ -63,6 +65,7 @@ export class PasswordComponent implements OnInit {
         };
   }
 
+  //현재비밀번호 일치하는지 확인
   checkPassword(form){
     this.user.password=form.value.password;
     this.user.id=this.loginUser.id;
@@ -77,8 +80,10 @@ export class PasswordComponent implements OnInit {
     })
   }//checkPassword(form)
 
+  //비밀번호 변경
   updatePassword(form){
      if(this.form.controls.newPasswordConfirm.errors != null){
+       this.form.controls.password.setErrors({checkError:true});
       return false;
     }
     this.user.password=form.value.newPassword
@@ -91,5 +96,6 @@ export class PasswordComponent implements OnInit {
       }
     })
   }
+
 
 }

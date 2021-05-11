@@ -40,7 +40,7 @@
          
         <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>Name</mat-label>
-          <input #name formControlName="name" matInput required>
+          <input #name formControlName="name" matInput required maxlength="5">
            <mat-error *ngIf="form.get('name').hasError('required')">이름을 입력해 주세요.</mat-error>
           </mat-form-field>
           
@@ -48,7 +48,6 @@
             <mat-label>Position</mat-label>
             <mat-select #position formControlName="position">
               <mat-option *ngFor="let position of positionList" value="{{position.codeName}}" >{{position.codeName}}</mat-option>
-             
             </mat-select>
             <mat-error *ngIf="form.get('position').hasError('required')">직급을 선택해 주세요.</mat-error>
           </mat-form-field>
@@ -64,9 +63,8 @@
             <mat-label>Phone (ex:010-1234-5678)</mat-label>
             <input #phone formControlName="phone" matInput required>
             <mat-error *ngIf="form.get('phone').hasError('required')">핸드폰 번호를 입력해 주세요.</mat-error>
+            <mat-error *ngIf="form.get('phone').hasError('pattern')">핸드폰 번호를 형식에 맞게 입력해 주세요.</mat-error>
           </mat-form-field>
-          
-          
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Team</mat-label>

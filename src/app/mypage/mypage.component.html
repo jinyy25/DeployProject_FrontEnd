@@ -48,6 +48,7 @@
             <mat-label>Phone (ex:010-1234-5678)</mat-label>
             <input #phone formControlName="phone" matInput required [(ngModel)]="loginUser.phone">
             <mat-error *ngIf="form.get('phone').hasError('required')">핸드폰 번호를 입력해 주세요.</mat-error>
+            <mat-error *ngIf="form.get('phone').hasError('pattern')">핸드폰 번호를 형식에 맞게 입력해 주세요.</mat-error>
           </mat-form-field>
           
           

@@ -182,7 +182,14 @@
 
     <div class="btns">
       <div mat-dialog-actions>
-        <button mat-raised-button color="primary" mat-dialog-close>취소</button>
+        <button
+          mat-raised-button
+          color="primary"
+          mat-dialog-close
+          [autofocus]="false"
+        >
+          취소
+        </button>
         <button
           mat-raised-button
           color="primary"

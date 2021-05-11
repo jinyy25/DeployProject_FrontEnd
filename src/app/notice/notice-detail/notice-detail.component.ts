@@ -39,6 +39,7 @@ export class NoticeDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //로그인 유저 정보
      this.check = localStorage.getItem("AUTH_TOKEN"); 
       if(this.check !=null){ 
         this.loginUser=this.jwtService.decodeToUser(this.check);
@@ -52,6 +53,7 @@ export class NoticeDetailComponent implements OnInit {
       
     this.boardNo=this.route.snapshot.params['boardNo'];
 
+    //해당하는 공지사항 정보
     this.boardService.selectNoticeDetail(this.boardNo)
     .subscribe(data=>{
       this.notice=data.data.board;
@@ -64,14 +66,17 @@ export class NoticeDetailComponent implements OnInit {
     
   }
 
+  //목록
   selectList(){
     this.router.navigate(['/notice']);
   }
 
+  //수정
   updateNotice(boardNo){
     this.router.navigate(['/notice/modify/'+boardNo]);
   }
-
+  
+  //삭제
   deleteNotice(boardNo){
     this.boardService.deleteNotice(boardNo)
     .subscribe(res=>{
