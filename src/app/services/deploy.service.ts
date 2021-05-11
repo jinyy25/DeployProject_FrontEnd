@@ -13,7 +13,7 @@ export class DeployService {
     private httpClient:HttpClient
   ) { }
 
-  private deployURL='http://localhost:8080/deploy-list';
+  private deployURL='/deploy-list';
 
   //1. get all deploys
   public getDeploys(){
