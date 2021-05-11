@@ -8,4 +8,5 @@ export class Notice{
 	updateDate:string;
 	id:string;
 	viewCount:number;
+	team:string;
 }

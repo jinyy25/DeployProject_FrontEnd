@@ -20,8 +20,8 @@
     	<div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
 			<div id="searchBox" [formGroup]="form" (keyup.enter)="search(form)">
 				<mat-form-field class="select-field" appearance="standard">
-					<mat-label>구분</mat-label>
-					<mat-select required formControlName="type">
+					<mat-label>분류</mat-label>
+					<mat-select required formControlName="type" [(ngModel)]="title">
 						<mat-option value="title">제목</mat-option>
 						<mat-option value="writer">작성자</mat-option>
 						<mat-option value="content">내용</mat-option>
@@ -42,11 +42,12 @@
 		<table id="boardTable" class="table w-full" >
 			<thead>
 				<tr>
-					<th style="width:10%">번호</th>
+					<th style="width:5%">번호</th>
 					<th style="width:50%">제목</th>
-					<th style="width:15%">작성자</th>
+					<th style="width:10%">작성자</th>
+					<th style="width:10%">팀</th>
 					<th style="width:15%">작성일</th>
-					<th style="width:10%">조회수</th>
+					<th style="width:15%">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +55,7 @@
 						<td>{{notice.boardNo}}</td>
 						<td>{{notice.title}}</td>
 						<td>{{notice.writer}}</td>
+						<td>{{notice.team}}</td>
 						<td>{{notice.regdate}}</td>
 						<td>{{notice.viewCount}}</td>
 				</tr>
