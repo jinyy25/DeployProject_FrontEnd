@@ -1,7 +1,3 @@
-import { CodeMgmt } from './common/code-management/codemgmt.model';
-
-
-
 import { NgModule } from '@angular/core';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
@@ -25,6 +21,10 @@ const routes: VexRoutes = [
     component: CustomLayoutComponent,
     canActivate:[AuthGuardService],
     children: [
+      {
+        path:'',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
       {
         path:'deploy-list',
         loadChildren:() => import('./deploy-list/deploy-list.module').then(m => m.DeployListModule),
