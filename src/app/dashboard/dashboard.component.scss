@@ -1,12 +1,35 @@
-table {
-  text-align: center;
-}
-
 td {
   width: 60px;
+  height: 30px;
+  line-height: 30px;
   border-top: 1px solid #dee2e6;
 }
 
 th {
   border-top: 1px solid #dee2e6;
+  height: 30px;
+  line-height: 30px;
+}
+
+tr:nth-child(2) > th:first-child,
+td:first-child {
+  border-right: 1px solid #dee2e6;
+}
+
+.schedule {
+  width: 300px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+}
+
+table {
+  width: 300px;
+}
+
+h4 {
+  background: linear-gradient(to top, #ffe400 50%, transparent 50%);
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 10px;
 }

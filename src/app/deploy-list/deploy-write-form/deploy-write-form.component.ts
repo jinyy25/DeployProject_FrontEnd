@@ -85,9 +85,9 @@ export class DeployWriteFormComponent implements OnInit {
     this.deployForm = this.formBuilder.group({
       deployWriteTitle:['',[Validators.required]],
       deployWriteContent:['',[Validators.required]],
-      portalScript:[],
-      tbwappScript:[],
-      centerScript:[]
+      portalScript:['',[Validators.pattern(/^src/)]],
+      tbwappScript:['',[Validators.pattern(/^src/)]],
+      centerScript:['',[Validators.pattern(/^src/)]]
     });
   }
 

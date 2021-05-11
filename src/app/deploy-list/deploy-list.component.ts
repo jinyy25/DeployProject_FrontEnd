@@ -52,7 +52,7 @@ export class DeployListComponent implements OnInit{
   layoutCtrl = new FormControl('boxed');
   icSearch = icSearch;
   selected : string;
-  keyword : any;
+  resetKeyword : any;
   
   category:string;
   scriptViews:ScriptView[];
@@ -78,11 +78,11 @@ export class DeployListComponent implements OnInit{
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
-
+    
     //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
       searchCategory:['',Validators.required],
-      keyword:['',Validators.required]
+      keyword:['',Validators.required],
     })
 
     //리스트 불러오기
@@ -105,13 +105,13 @@ export class DeployListComponent implements OnInit{
     }
 
     //2-1 select option = all,writer,title
-    this.keyword  =this.searchGroup.controls.keyword.value
+    this.resetKeyword  =this.searchGroup.controls.keyword.value
 
     //2-2 select option = deployDate
     if(this.category == 'deployDate'){
-      this.keyword = this.pipe.transform(this.searchGroup.value.keyword, 'yyyy-MM-dd');
+      this.resetKeyword = this.pipe.transform(this.searchGroup.value.keyword, 'yyyy-MM-dd');
     }
-    this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.keyword)
+    this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.resetKeyword)
     .subscribe(response => {
       this.deploys = response;
     })
