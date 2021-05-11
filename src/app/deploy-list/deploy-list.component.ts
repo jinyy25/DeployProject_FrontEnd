@@ -84,7 +84,7 @@ export class DeployListComponent implements OnInit{
       keyword:['',Validators.required]
     })
 
-    this.deployService.getDeploys()
+    this.deployService.selectDeploys()
     .subscribe(
       response => {
       this.deploys = response

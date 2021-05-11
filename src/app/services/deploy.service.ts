@@ -16,7 +16,7 @@ export class DeployService {
   private deployURL='/deploy-list';
 
   //1. get all deploys
-  public getDeploys(){
+  public selectDeploys(){
     return this.httpClient.get<Deploy[]>(this.deployURL);
   }
 
