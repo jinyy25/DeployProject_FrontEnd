@@ -84,14 +84,14 @@ export class CodeManagementComponent implements OnInit {
       result.registerer = this.loginUser.id;
       
       this.codeMgmtService.insertCode(result).subscribe(data=> {
-        if(data > 0){
+        if(data > 0) {
           alert("코드가 등록되었습니다");
         } else {
           alert("등록에 실패하였습니다");
         }//if~else end 
       }
       );
-    });
+    });//subscribe() end 
   }//openInsertCodeDialog() end
    
   openUpdateCodeDialog(codeId): void {
@@ -104,7 +104,7 @@ export class CodeManagementComponent implements OnInit {
       codeId: codeId,
       modifier: this.loginUser.id
     };
-
+    
     dialogConfig.width = "250px";
 
     const dialogRef = this.dialog.open(InsertUpdateCodeComponent, dialogConfig);
