@@ -28,6 +28,7 @@ import { CodeManagementComponent } from './common/code-management/code-managemen
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
 import { ForgotIdComponent } from './forgot-id/forgot-id.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
      */
     UserComponent,//pagination sample용 Component
     ExcelComponent,//excel file download용 Component
-    UploadFilesComponent//file upload & download sample용 Component
+    UploadFilesComponent, DashboardComponent//file upload & download sample용 Component
     
   ],
   imports: [
