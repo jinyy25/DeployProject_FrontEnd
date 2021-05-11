@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { SecondaryToolbarModule } from 'src/@vex/components/secondary-toolbar/secondary-toolbar.module';
 
 
 
@@ -46,6 +47,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatFormFieldModule,
     MatSelectModule,
     MatButtonToggleModule,
+    SecondaryToolbarModule
   ]
 })
 export class DeployWriteFormModule { }

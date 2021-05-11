@@ -16,15 +16,15 @@
     <div class="card overflow-auto -mt-16">
         <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
             <div class="deploy-search" [formGroup]="searchGroup" (keyup.enter)="search(searchGroup)"> 
-                <mat-form-field class="select-field" appearance="standard">
-                        <mat-label>분류</mat-label>
-                        <mat-select [(value)]="selected" (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
-                            <mat-option value="all" ng-selected>전체</mat-option>
-                            <mat-option value="title">제목</mat-option>
-                            <mat-option value="writer">작성자</mat-option>
-                            <mat-option value="deployDate">날짜</mat-option>
-                        </mat-select>
-                </mat-form-field>
+                    <mat-form-field class="select-field" appearance="standard">
+                            <mat-label>분류</mat-label>
+                            <mat-select [(value)]="selected" (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
+                                <mat-option value="all" ng-selected>전체</mat-option>
+                                <mat-option value="title">제목</mat-option>
+                                <mat-option value="writer">작성자</mat-option>
+                                <mat-option value="deployDate">날짜</mat-option>
+                            </mat-select>
+                    </mat-form-field>
                     <mat-form-field 
                         class="search-field" 
                         appearance="standard"
