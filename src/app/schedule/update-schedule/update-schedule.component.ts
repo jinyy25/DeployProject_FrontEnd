@@ -36,8 +36,8 @@ export class UpdateScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.service.selectHistoryList(this.data.scheduleNo).subscribe(data => {
-      this.history = data;
+    this.service.selectHistoryList(this.data.scheduleNo).subscribe(res => {
+      this.history = res.data;
       this.historyLength = this.history.length;
     });
 

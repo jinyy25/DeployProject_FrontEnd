@@ -1,2 +1,51 @@
-<h2 mat-dialog-title>개인 일정 검색</h2>
-<div mat-dialog-content></div>
+<h2 mat-dialog-title>개인별 일정</h2>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="standard">
+    <mat-label>이름</mat-label>
+    <input matInput [formControl]="name" (keyup.enter)="search()" />
+    <mat-error>해당 이름의 팀원이 없습니다</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="search()" class="search">
+    검색
+  </button>
+  <button mat-raised-button (click)="showMine()" class="search">본인</button>
+</div>
+
+<div mat-dialog-content>
+  <ul class="team">
+    <li (click)="showAll()">전체</li>
+    <li *ngFor="let team of data.teamList" (click)="showUser(team)">
+      {{ team.codeName }}
+    </li>
+  </ul>
+  <div style="padding-left: 20px">
+    <form [formGroup]="form">
+      <mat-checkbox
+        color="primary"
+        *ngFor="let user of userList"
+        class="chk"
+        [value]="user"
+        (change)="onChange($event)"
+      >
+        {{ user.name }}
+      </mat-checkbox>
+    </form>
+  </div>
+  <div class="btns">
+    <div>
+      <span class="selectedName">선택 :</span>
+      <span *ngFor="let item of form.value.users" class="selectedName">
+        {{ item.name }}
+      </span>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+      style="height: 36px"
+    >
+      보기
+    </button>
+  </div>
+</div>

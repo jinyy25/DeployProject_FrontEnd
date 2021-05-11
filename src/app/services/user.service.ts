@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
 
 
 const httpOptions = {
@@ -36,6 +35,9 @@ export class UserService {
   }
   public findPassword(id,email){
     return this.http.get<any>(this.userUrl+"/find/password?id="+id+"&email="+email);
+  }
+  public selectUserList(){
+    return this.http.get<any>(this.userUrl);
   }
 
 }
