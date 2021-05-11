@@ -1,6 +1,21 @@
-<button (click)="openInsertCodeDialog()">코드등록</button>
-<table id="boardTable" class="table table-striped">
-    <thead>
+<vex-page-layout>
+	<vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+    <div [class.container]="layoutCtrl.value === 'boxed'"
+         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+         class="w-full flex flex-col sm:flex-row justify-between">
+        <div>
+            <h1 class="title mt-0 mb-1">코드관리</h1>
+            <vex-breadcrumbs [crumbs]="['Code Management']"></vex-breadcrumbs>
+	    </div>
+    </div>
+    </vex-page-layout-header>
+    <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+                             [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+						     class="-mt-6">
+                         
+    <button (click)="openInsertCodeDialog()">코드등록</button>
+    <table id="boardTable" class="table table-striped">
+        <thead>
         <tr>
             <th style="width:10%"></th>
             <th style="width:15%">코드 아이디</th>
@@ -11,8 +26,8 @@
             <th style="width:5%"></th>
             <th style="width:5%"></th>
         </tr>
-    </thead>
-    <tbody *ngFor="let codeMgmt of codeMgmts; let i = index">
+        </thead>
+        <tbody *ngFor="let codeMgmt of codeMgmts; let i = index">
         <tr>
             <td align="center">  
                 <a (click)="toggleChildCodeList(i,codeMgmt.codeId)" class="expand-row" *ngIf="!hideme[i]">  
@@ -59,5 +74,7 @@
                 </table>
             </td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</vex-page-layout-content>
+</vex-page-layout>

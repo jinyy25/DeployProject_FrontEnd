@@ -34,6 +34,11 @@ export class CodeManagementComponent implements OnInit {
   Index: any;
   hideme = [];
 
+
+  layoutCtrl = new FormControl('boxed');
+  searchCtrl = new FormControl();
+
+
   constructor(private router: Router,
               private codeMgmtService: CodeMgmtService,
               private dialog: MatDialog,
