@@ -73,26 +73,25 @@ export class DeployDetailComponent implements OnInit {
 
   }
 
-  //엑셀다운로드
+  //1. 엑셀다운로드
   exportAsXLSX(listTitle:string):void {   
-    console.log("확인:"+listTitle);
     this.excelService.exportAsExcelFile(this.scriptViews, listTitle);
   }
 
-  //페이징처리
+  //2. 페이징처리
   getPage(page) {}
 
-  //zip 다운로드
+  //3. zip 다운로드
   downloadZip(deployNo){
     this.deployService.downloadZipFile(deployNo)
     .subscribe(
       response => {
-        alert("확인");
         this.deploy = response
       },
     );
   }
 
+  //4. 취소버튼
   cancel(){
     this.router.navigate(['/deploy-list']);
   }

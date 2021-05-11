@@ -91,7 +91,7 @@ export class DeployWriteFormComponent implements OnInit {
     });
   }
 
-  // 1. send버튼 누를시
+  // 1. send버튼 누를시 마지막 경로
   sendData(deploys){
     this.deployService.insertDeploy(deploys)
     .subscribe(data => {
@@ -100,24 +100,29 @@ export class DeployWriteFormComponent implements OnInit {
     })
   }
 
+  // 2. send버튼 누를시
   send(deployForm,deployWriteTitle,deployWriteContent,
-        portalScript,tbwappScript,centerScript,
-        files
+        portalScript,tbwappScript,centerScript,files
         ){
 
+    //유효성 검사
     if(this.deployForm.controls.deployWriteTitle.errors != null){
       deployWriteTitle.focus();
       return false;
     }
 
+    //객체에 값 입력
     this.deploys = deployForm.value;
     this.deploys.writer = this.loginUser.name;
+
+    //초기화
     this.deploys.scriptDTO = [];
 
+    //* 변수이름 중복으로 명칭 변경처리
     this.deploys.deployTitle = this.deployForm.controls.deployWriteTitle.value;
     this.deploys.deployContent = this.deployForm.controls.deployWriteContent.value;
 
-    // 2. textarea enter구분
+    // 2-1. textarea enter구분
     if(portalScript !== null){
       try{
         portalScript = this.deployForm.controls.portalScript.value.split('\n');
@@ -143,7 +148,7 @@ export class DeployWriteFormComponent implements OnInit {
       }catch(e){}
     }
     
-    //3. 파일 추가
+    // 2-2. 파일 추가
     if(this.files.length !=0){
       for(let i = 0 ; i<this.files.length;i++){
         this.uploadService.upload(this.files[i])
@@ -162,7 +167,7 @@ export class DeployWriteFormComponent implements OnInit {
     }
   }
 
-      cancel(){
-        this.router.navigate(['/deploy-list']);
-      }
+  cancel(){
+    this.router.navigate(['/deploy-list']);
+  }
 }

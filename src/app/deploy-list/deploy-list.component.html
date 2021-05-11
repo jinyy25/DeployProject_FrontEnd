@@ -15,8 +15,7 @@
                              class="-mt-6">
     <div class="card overflow-auto -mt-16">
         <div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
-            <div class="deploy-search" [formGroup]="searchGroup">
-                
+            <div class="deploy-search" [formGroup]="searchGroup" (keyup.enter)="search(searchGroup)"> 
                 <mat-form-field class="select-field" appearance="standard">
                         <mat-label>분류</mat-label>
                         <mat-select [(value)]="selected" (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
@@ -42,7 +41,7 @@
                         <mat-datepicker #start></mat-datepicker>
                     </mat-form-field>
 
-                <button color="primary" mat-raised-button (click)="search(searchGroup)" class="search_btn">검색</button>  
+                <button color="primary" mat-raised-button (click)="search(searchGroup)" (keyup.enter)="search(searchGroup)"  class="search_btn">검색</button>  
                 <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">배포작성</button>   
                           
             </div>

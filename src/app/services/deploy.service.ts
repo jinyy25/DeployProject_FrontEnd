@@ -15,7 +15,7 @@ export class DeployService {
 
   private deployURL='/deploy-list';
 
-  //1. get all deploys
+  //1. select all deploys
   public selectDeploys(){
     return this.httpClient.get<Deploy[]>(this.deployURL);
   }
@@ -29,16 +29,18 @@ export class DeployService {
   public selectDeployDetail(deployNo){
       return this.httpClient.get<ScriptView[]>(this.deployURL+"/"+deployNo);
   }
+
+  //4. select deploy
   public selectDeployContent(deployNo){
     return this.httpClient.get<Deploy>(this.deployURL+"/deployContent/"+deployNo);
   }
 
-  //4. search deploys
+  //5. search deploys
   public searchDeploy(searchCategory,keyword){
     return this.httpClient.get<Deploy[]>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
   }
 
-  //5. zip download
+  //6. zip download
   public downloadZipFile(deployNo){
     return this.httpClient.post<any>(this.deployURL + "/download/"+deployNo, deployNo);
   }

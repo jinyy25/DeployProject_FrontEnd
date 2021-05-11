@@ -79,11 +79,13 @@ export class DeployListComponent implements OnInit{
       }
     }
 
+    //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
       searchCategory:['',Validators.required],
       keyword:['',Validators.required]
     })
 
+    //리스트 불러오기
     this.deployService.selectDeploys()
     .subscribe(
       response => {
@@ -91,9 +93,10 @@ export class DeployListComponent implements OnInit{
     }
     );
   }
-  
+  //1. 페이징처리
   getPage(page) {}
 
+  //2. 검색버튼
   search(searchGroup){
     if(this.searchGroup.controls.searchCategory.errors != null){
       return false;
@@ -101,10 +104,10 @@ export class DeployListComponent implements OnInit{
       return false;
     }
 
-    //select option = all,writer,title
+    //2-1 select option = all,writer,title
     this.keyword  =this.searchGroup.controls.keyword.value
 
-    //select option = deployDate
+    //2-2 select option = deployDate
     if(this.category == 'deployDate'){
       this.keyword = this.pipe.transform(this.searchGroup.value.keyword, 'yyyy-MM-dd');
     }
@@ -115,6 +118,7 @@ export class DeployListComponent implements OnInit{
   }
 
 
+  //3. 엑셀다운로드
   exportAsXLSX(listTitle:string,deployNo:number):void {  
       this.deployService.selectDeployDetail(deployNo)
       .subscribe(
@@ -125,11 +129,7 @@ export class DeployListComponent implements OnInit{
           )  
   }
 
-  // dateCheck(){
-  // }
-  // public modeselect = 'Domain';
-  // public selected = 'all'
-
+  //4. select option 변화시
   selectValue(value){
     this.category = value
   } 
