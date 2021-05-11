@@ -45,6 +45,13 @@ export class DashboardComponent implements OnInit {
 
     this.scheduleService.selectScheduleList().subscribe(res => {
       this.scheduleList = res.data.filter((user) => user.team == this.loginUser.team);
+
+      //스케쥴 개수 설정
+      this.loginUser.count = this.scheduleList.filter((schedule) => schedule.writer == this.loginUser.id).length;
+      for (let i = 0; i < this.userList.length; i++) {
+        const user = this.userList[i];
+        user.count = this.scheduleList.filter((schedule) => schedule.writer == user.id).length;
+      }
     });
   }
 

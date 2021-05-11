@@ -12,11 +12,11 @@
   <tbody>
     <tr>
       <td>본인</td>
-      <td>0</td>
+      <td>{{ loginUser.count }}</td>
     </tr>
     <tr *ngFor="let user of userList">
       <td>{{ user.name }}</td>
-      <td>0</td>
+      <td>{{ user.count }}</td>
     </tr>
   </tbody>
 </table>
