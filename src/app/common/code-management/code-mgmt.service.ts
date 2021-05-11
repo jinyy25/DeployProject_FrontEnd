@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class CodeMgmtService {
 
-  private userUrl = 'http://localhost:8080/code';
+  private userUrl = '/code';
 
   constructor(private http:HttpClient) { }
 

@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  private userUrl = "http://localhost:8080/user";
+  private userUrl = "/user";
 
   public insertUser(user){
     return this.http.post<any>(this.userUrl+"/register",user);

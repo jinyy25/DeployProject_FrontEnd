@@ -9,7 +9,7 @@ export class TeamService {
 
   constructor(private http:HttpClient) { }
 
-  private userUrl = "http://localhost:8080/user";
+  private userUrl = "/user";
 
   public selectTeamList(){
 	  return this.http.get<any>(this.userUrl+"/register");
