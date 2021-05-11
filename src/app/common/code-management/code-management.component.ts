@@ -102,7 +102,7 @@ export class CodeManagementComponent implements OnInit {
    
   openUpdateCodeDialog(codeId): void {
 
-    //console.log(codeId);
+    console.log(codeId);
 
     const dialogConfig = new MatDialogConfig();
 
@@ -117,7 +117,7 @@ export class CodeManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
       result.modifier = this.loginUser.id;
-      console.log(result);
+      result.codeId = codeId;
       this.codeMgmtService.updateCode(result).subscribe(data=> {
         if(data > 0){
           alert("코드가 수정되었습니다");
@@ -125,8 +125,7 @@ export class CodeManagementComponent implements OnInit {
           alert("코드수정에 실패하였습니다");
         }//if~else end 
       });
-
-    });//subscribe() end 
+    });
 }//openUpdateCodeDialog(codeId) end 
 
 deleteCode(codeId:string){
