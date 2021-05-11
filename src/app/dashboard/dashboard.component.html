@@ -1,1 +1,22 @@
-<p>dashboard works!</p>
+<div>오늘의 일정</div>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">{{ loginUser.team }} 팀</th>
+    </tr>
+    <tr>
+      <th>이름</th>
+      <th>개수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>본인</td>
+      <td>0</td>
+    </tr>
+    <tr *ngFor="let user of userList">
+      <td>{{ user.name }}</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
