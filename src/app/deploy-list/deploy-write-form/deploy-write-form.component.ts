@@ -21,6 +21,7 @@ import { JwtService } from '../../services/jwt.service';
 })
 export class DeployWriteFormComponent implements OnInit {
 
+  
   loginUser : User;
   check:string;
   deployForm: FormGroup;  
@@ -34,6 +35,8 @@ export class DeployWriteFormComponent implements OnInit {
   fileNames = [];
   display = "none";
 
+  date:any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -44,6 +47,10 @@ export class DeployWriteFormComponent implements OnInit {
 
     ) { 
       this.buildForm();
+      setInterval(() =>{
+        const currentDate = new Date();
+        this.date = currentDate.toLocaleTimeString();
+         }, 1000)
     }
 
   //로그인관련
@@ -170,4 +177,6 @@ export class DeployWriteFormComponent implements OnInit {
   cancel(){
     this.router.navigate(['/deploy-list']);
   }
+
+  
 }

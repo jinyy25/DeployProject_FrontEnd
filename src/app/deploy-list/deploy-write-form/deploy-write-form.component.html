@@ -1,6 +1,11 @@
+
 <vex-secondary-toolbar current="배포이력 등록">
     <vex-breadcrumbs [crumbs]="['Deploy-Write']"></vex-breadcrumbs>
-  </vex-secondary-toolbar>
+    <div class="clock-container">
+        <div class="time">{{date}}</div>
+    </div>
+</vex-secondary-toolbar>
+
 <div id="deployWrap">
     <div class="p-6" fxLayout="column" fxLayoutGap="16px">
         <form [formGroup]="deployForm" class="form-outline">
@@ -42,7 +47,7 @@
                 </div>
                 <div *ngIf="display=='block'" id="fileBox">
                     <ul>
-                        <li *ngFor="let file of files" ><button (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+                        <li *ngFor="let file of files" ><button mat-button color="warn" (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
                     </ul>
                 </div>
             </div>
