@@ -71,7 +71,7 @@ import { QuillModule } from 'ngx-quill';
 
           ['clean'],                                         // remove formatting button
 
-          ['link', 'image', 'video']                         // link and image, video
+          [ 'image']                         // link and image, video
         ]
       }
     })

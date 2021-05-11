@@ -26,7 +26,7 @@ export class NoticeComponent implements OnInit {
   icSearch = icSearch;
   teams:Team[];
   searchCtrl = new FormControl();
-
+  teamName:string;
   
 
 
@@ -37,10 +37,10 @@ export class NoticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardService.selectNotice()
-    .subscribe(data =>{
-      this.teams=data.teamList;
-      this.notices=data.noticeList;
-      
+    .subscribe(res =>{
+      this.teams=res.data.teamList;
+      this.notices=res.data.noticeList;
+      this.teamName="전체";
     })
     
 
@@ -61,23 +61,26 @@ export class NoticeComponent implements OnInit {
     }
     this.boardService.searchNotice(this.form.controls.type.value,this.form.controls.word.value)
     .subscribe(res=>{
-      this.notices=res;
+      this.teamName="전체";
+      this.notices=res.data;
     })
   }
 
   selectNotice(){
+    this.teamName="전체";
     this.boardService.selectNotice()
-    .subscribe(data =>{
-      this.teams=data.teamList;
-      this.notices=data.noticeList;
+    .subscribe(res =>{
+      this.teams=res.data.teamList;
+      this.notices=res.data.noticeList;
       
     })
   }
 
   selectTeamNotice(team){
+    this.teamName=team.codeName;
     this.boardService.selectTeamNotice(team.codeName)
       .subscribe(res =>{
-        this.notices=res;
+        this.notices=res.data;
       })
   }
 

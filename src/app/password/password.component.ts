@@ -68,7 +68,7 @@ export class PasswordComponent implements OnInit {
     this.user.id=this.loginUser.id;
     this.userService.checkPassword(this.user)
     .subscribe(res=>{
-      if(res.data){
+      if(res.success){
         this.password="none";
         this.newPassword="block";
       }else{
@@ -84,7 +84,7 @@ export class PasswordComponent implements OnInit {
     this.user.password=form.value.newPassword
     this.userService.updatePassword(this.user)
     .subscribe(res =>{
-      if(res.data){
+      if(res.success){
         localStorage.removeItem("AUTH_TOKEN");
         sessionStorage.removeItem("AUTH_TOKEN");
         this.router.navigate(['/login']);
