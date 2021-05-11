@@ -88,7 +88,7 @@ export class InsertUpdateCodeComponent implements OnInit {
               this.dialogRef.close(this.codeMgmt);
   }
 
-  disable(){
+  disableParentCodeId(){
     const isParentCode = this.form.value.isParentCode;
     if(!isParentCode){//부모코드이면 parentCodeId input요소 disable시키고 값 ''넣어줌
       this.form.get('parentCodeId').setValue('');
