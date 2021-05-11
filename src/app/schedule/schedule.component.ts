@@ -13,6 +13,7 @@ import { UpdateScheduleComponent } from './update-schedule/update-schedule.compo
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-schedule',
@@ -49,6 +50,10 @@ export class ScheduleComponent implements AfterViewInit {
       this.teamList = res.data.team;
     });
 
+    this.userService.selectUserList().subscribe(res => {
+      this.userList = res.data;
+    });
+
   }
 
   events : EventInput[] = [];
@@ -58,7 +63,8 @@ export class ScheduleComponent implements AfterViewInit {
     private service : ScheduleService,
     private pipe: DatePipe,
     private jwtService : JwtService,
-    private teamService : TeamService
+    private teamService : TeamService,
+    private userService : UserService
   ) {}
 
   calendarOptions : CalendarOptions = {
@@ -118,8 +124,8 @@ export class ScheduleComponent implements AfterViewInit {
       this.calendar.getApi().changeView(localStorage.getItem("calendarView"));//마지막으로 봤던 view
     }
 
-    this.service.selectScheduleList().subscribe(data => {
-      data.forEach(element => {
+    this.service.selectScheduleList().subscribe(res => {
+      res.data.forEach(element => {
 
         let endDate = element.endDate;
 
@@ -191,8 +197,8 @@ export class ScheduleComponent implements AfterViewInit {
 
       }
 
-      this.service.updateSchedule(schedule).subscribe(data => {
-        if(data > 0){
+      this.service.updateSchedule(schedule).subscribe(res => {
+        if(res.data){
           alert("일정을 수정하였습니다");
         }else{
           alert("수정에 실패하였습니다");
@@ -229,8 +235,8 @@ export class ScheduleComponent implements AfterViewInit {
         result.endDate = result.endDate+" "+result.endTime;
       }
 
-      this.service.insertSchedule(result).subscribe(data => {
-        if(data > 0){
+      this.service.insertSchedule(result).subscribe(res => {
+        if(res.data){
           alert("일정이 등록되었습니다");
         }else{
           alert("등록에 실패하였습니다");
@@ -268,8 +274,8 @@ export class ScheduleComponent implements AfterViewInit {
 
       if(result.delete == 'delete'){//삭제
 
-        this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo, result.reason).subscribe(data => {
-          if(data > 0){
+        this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo, result.reason).subscribe(res => {
+          if(res.data){
             alert("일정을 삭제하였습니다");
             arg.event.remove();
           }else{
@@ -284,8 +290,8 @@ export class ScheduleComponent implements AfterViewInit {
           result.endDate = result.endDate+" "+result.endTime;
         }
         
-        this.service.updateSchedule(result).subscribe(data => {
-          if(data > 0){
+        this.service.updateSchedule(result).subscribe(res => {
+          if(res.data){
             alert("일정을 수정하였습니다");
           }else{
             alert("수정에 실패하였습니다")
@@ -321,17 +327,28 @@ export class ScheduleComponent implements AfterViewInit {
       width : '400px',
       data : {
         teamList : this.teamList,
-        userList : this.userList,
+        userList : this.userList.filter((user) => user.id != this.loginUser.id),
         loginUser : this.loginUser
       }
     });
 
-    dialogRef.afterClosed().subscribe( result => {
-
+    dialogRef.afterClosed().subscribe( result => {//id 전달
+      if(result.length == 1){
+        const oneEvent = this.events.filter((event) => event.schedule.writer == result);
+        this.calendarOptions.events = oneEvent; 
+      }else{
+        let array = [];
+        for (let i = 0; i < result.length; i++) {
+          if(i == 0){//맨 처음 event list
+            array = this.events.filter((event) => event.schedule.writer == result[i]);
+          }else{
+            const oneEvent = this.events.filter((event) => event.schedule.writer == result[i]);
+            array = array.concat(oneEvent);
+          }
+        }
+        this.calendarOptions.events = array;
+      }
     });
-
-    // const oneEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id);
-    // this.calendarOptions.events = oneEvent;
   }
 
   showTeam(team){//색상 안내도 눌렀을때 팀별 보여주기

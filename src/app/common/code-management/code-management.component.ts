@@ -6,6 +6,7 @@ import { logging } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { CodeMgmt } from './codemgmt.model';
 import { ChildCodeMgmt } from './child.codemgmt.model';
@@ -29,16 +30,15 @@ export class CodeManagementComponent implements OnInit {
 
   codeMgmts: CodeMgmt[];
   childCodeMgmts: ChildCodeMgmt[];
-  public show: boolean = false;
   parentCodeId: string;
-  childCodeMgmtInformations: any = [];  
   Index: any;
-   hideme = [];  
+  hideme = [];
 
   constructor(private router: Router,
               private codeMgmtService: CodeMgmtService,
               private dialog: MatDialog,
               private jwtService : JwtService) { }
+
   ngOnInit(): void {
     this.codeMgmtService.getParentCodeInfos().
           subscribe( data => {
@@ -71,7 +71,7 @@ export class CodeManagementComponent implements OnInit {
     });
     this.hideme[i] = !this.hideme[i];  
     this.Index = i;
-  }
+  }//toggleChildCodeList end 
 
   openInsertCodeDialog() : void {//코드 등록 모달창 띄움
 
@@ -136,5 +136,5 @@ deleteCode(codeId:string){
        alert("코드를 삭제하지 못했습니다.");
      }//if~else end 
    });
-}
+}//deleteCode end 
 }

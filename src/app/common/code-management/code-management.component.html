@@ -1,5 +1,4 @@
-
-<button (click)="openInsertCodeDialog()">등록</button>
+<button (click)="openInsertCodeDialog()">코드등록</button>
 <table id="boardTable" class="table table-striped">
     <thead>
         <tr>
@@ -17,10 +16,10 @@
         <tr>
             <td align="center">  
                 <a (click)="toggleChildCodeList(i,codeMgmt.codeId)" class="expand-row" *ngIf="!hideme[i]">  
-                <img src="../../assets/img/plus.png" width="30"/>  
+                <img src="../../assets/img/plus.png" width="24"/>  
                 </a>  
                 <a class="expand-row" *ngIf="hideme[i]" (click)="hideme[i] = !hideme[i]"> 
-                <img src="../../assets/img/minus.png" width="30"/>  
+                <img src="../../assets/img/minus.png" width="24"/>  
                 </a> 
             </td>
             <td>{{codeMgmt.codeId}}</td>
@@ -28,8 +27,8 @@
             <td>{{codeMgmt.parentCodeId}}</td>
             <td>{{codeMgmt.codeUseYN}}</td>
             <td>{{codeMgmt.dsplOrder}}</td>
-            <td><button (click)="openUpdateCodeDialog(codeMgmt.codeId)">수정</button></td>
-            <td><button (click)="deleteCode(codeMgmt.codeId)">삭제</button></td>
+            <td><button (click)="openUpdateCodeDialog(codeMgmt.codeId)"><img src="../../assets/img/edit.png" width="16"/></button></td>
+            <td><button (click)="deleteCode(codeMgmt.codeId)"><img src="../../assets/img/delete.png" width="16"/></button></td>
         </tr>
         <tr [hidden]="!hideme[i]" >
             <td align="center"> </td>
@@ -53,8 +52,8 @@
                             <td>{{childCodeMgmt.parentCodeId}}</td>
                             <td>{{childCodeMgmt.codeUseYN}}</td>
                             <td>{{childCodeMgmt.dsplOrder}}</td>
-                            <td><button (click)="openUpdateCodeDialog(childCodeMgmt.codeId)">수정</button></td>
-                            <td><button (click)="deleteCode(childCodeMgmt.codeId)">삭제</button></td>
+                            <td><button (click)="openUpdateCodeDialog(childCodeMgmt.codeId)"><img src="../../assets/img/edit.png" width="16"/></button></td>
+                            <td><button (click)="deleteCode(childCodeMgmt.codeId)"><img src="../../assets/img/delete.png" width="16"/></button></td>
                         </tr>
                     </tbody>
                 </table>

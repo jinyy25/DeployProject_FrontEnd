@@ -75,3 +75,32 @@
   border: none;
   border-bottom: 1px solid #dee2e6;
 }
+
+.team {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
+.team > li {
+  cursor: pointer;
+}
+
+.search {
+  margin-left: 20px;
+}
+
+.chk {
+  width: 100px;
+}
+
+.selectedName {
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  margin-right: 5px;
+}

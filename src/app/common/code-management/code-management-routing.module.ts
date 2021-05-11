@@ -13,7 +13,7 @@ const routes: VexRoutes = [
 ];
 
 @NgModule({
-  imports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule, QuicklinkModule]
 })
 export class CodeManagementRoutingModule {

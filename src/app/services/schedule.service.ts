@@ -17,29 +17,29 @@ export class ScheduleService{
   constructor(private http : HttpClient) { }
 
   insertSchedule(schedule : Schedule){
-    return this.http.post(this.url, schedule);
+    return this.http.post<any>(this.url, schedule);
   }
 
   selectScheduleList(){
-    return this.http.get<Schedule[]>(this.url);
+    return this.http.get<any>(this.url);
   }
 
   updateSchedule(schedule : Schedule){
-    return this.http.patch(this.url, schedule);
+    return this.http.patch<any>(this.url, schedule);
   }
 
   deleteSchedule(scheduleNo : number, updateReason : string){
     if(updateReason == null || updateReason == ''){
-      return this.http.delete(this.url+"/"+scheduleNo);
+      return this.http.delete<any>(this.url+"/"+scheduleNo);
     }else{
       const schedule = new Schedule();
       schedule.scheduleNo = scheduleNo;
       schedule.updateReason = updateReason;
-      return this.http.post(this.url+"/deleteReason", schedule);
+      return this.http.post<any>(this.url+"/deleteReason", schedule);
     }
   }
 
   selectHistoryList(scheduleNo : number){
-    return this.http.get<ScheduleHistory[]>(this.url+"/history/"+scheduleNo);
+    return this.http.get<any>(this.url+"/history/"+scheduleNo);
   }
 }
