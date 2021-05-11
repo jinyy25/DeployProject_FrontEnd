@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
-import { JwtService } from '../services/jwt.service';
+import { JwtService } from 'src/app/services/jwt.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'vex-password',
@@ -93,8 +93,5 @@ export class PasswordComponent implements OnInit {
     })
   }
 
-  getkey(event){
-    console.log(event);
-  }
 
 }
