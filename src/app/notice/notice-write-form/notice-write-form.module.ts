@@ -69,7 +69,7 @@ import { NoticeRoutingModule } from '../notice-routing.module';
 
           ['clean'],                                         // remove formatting button
 
-          ['link', 'image', 'video']                         // link and image, video
+          [ 'image']                         // link and image, video
         ]
       }
     })
