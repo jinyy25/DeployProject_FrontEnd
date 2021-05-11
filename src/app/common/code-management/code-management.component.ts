@@ -135,7 +135,7 @@ export class CodeManagementComponent implements OnInit {
 
 deleteCode(codeId:string){
    this.codeMgmtService.deleteCode(codeId).subscribe(data =>{
-     if(data > 0){
+     if(data.success == true){
        alert("코드가 삭제되었습니다.");
      } else {
        alert("코드를 삭제하지 못했습니다.");

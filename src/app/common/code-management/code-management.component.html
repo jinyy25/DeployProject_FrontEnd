@@ -12,8 +12,14 @@
     <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
                              [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
 						     class="-mt-6">
-                         
-    <button (click)="openInsertCodeDialog()">코드등록</button>
+                             
+    <div>               
+    <button mat-raised-button
+            color="primary" 
+            (click)="openInsertCodeDialog()">
+            코드등록
+    </button>
+    </div>          
     <table id="boardTable" class="table table-striped">
         <thead>
         <tr>
