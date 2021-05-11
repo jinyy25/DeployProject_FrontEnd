@@ -91,7 +91,7 @@ const routes: VexRoutes = [
     path: 'sampleFileUpload', component: UploadFilesComponent 
   },
   { 
-    path: 'codeMgmt', component: CodeManagementComponent 
+    path: 'code-management', component: CodeManagementComponent 
   }
 ];
 

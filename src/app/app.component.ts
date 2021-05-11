@@ -115,7 +115,7 @@ export class AppComponent {
       {
         type:'link',
         label: 'Code Management',
-        route:'/codeMgmt',
+        route:'/code-management',
         icon: roundBarcode
       }
 
