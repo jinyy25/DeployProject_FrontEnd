@@ -33,21 +33,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
-
-
     
     
-    
-    
-    
-    //pagination sample용 Component
-    UserComponent,
-    ExcelComponent,
-    UploadFilesComponent
-   
-    
-   
-  
+    /**
+     공통 샘플 컴프넌트
+     */
+    UserComponent,//pagination sample용 Component
+    ExcelComponent,//excel file download용 Component
+    UploadFilesComponent//file upload & download sample용 Component
     
   ],
   imports: [
