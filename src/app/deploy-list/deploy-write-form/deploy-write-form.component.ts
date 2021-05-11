@@ -83,8 +83,8 @@ export class DeployWriteFormComponent implements OnInit {
   // 유효성검사
   buildForm(): void{
     this.deployForm = this.formBuilder.group({
-      deployTitle:['',[Validators.required]],
-      deployContent:['',[Validators.required]],
+      deployWriteTitle:['',[Validators.required]],
+      deployWriteContent:['',[Validators.required]],
       portalScript:[],
       tbwappScript:[],
       centerScript:[]
@@ -100,19 +100,22 @@ export class DeployWriteFormComponent implements OnInit {
     })
   }
 
-  send(deployForm,deployTitle,deployContent,
+  send(deployForm,deployWriteTitle,deployWriteContent,
         portalScript,tbwappScript,centerScript,
         files
         ){
 
-    if(this.deployForm.controls.deployTitle.errors != null){
-      deployTitle.focus();
+    if(this.deployForm.controls.deployWriteTitle.errors != null){
+      deployWriteTitle.focus();
       return false;
     }
+
     this.deploys = deployForm.value;
     this.deploys.writer = this.loginUser.name;
     this.deploys.scriptDTO = [];
 
+    this.deploys.deployTitle = this.deployForm.controls.deployWriteTitle.value;
+    this.deploys.deployContent = this.deployForm.controls.deployWriteContent.value;
 
     // 2. textarea enter구분
     if(portalScript !== null){

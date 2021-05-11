@@ -19,7 +19,7 @@
                 
                 <mat-form-field class="select-field" appearance="standard">
                         <mat-label>분류</mat-label>
-                        <mat-select [(value)]="selected" (selectionChange)="sc($event.value)" required formControlName="searchCategory" >
+                        <mat-select [(value)]="selected" (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
                             <mat-option value="all" ng-selected>전체</mat-option>
                             <mat-option value="title">제목</mat-option>
                             <mat-option value="writer">작성자</mat-option>

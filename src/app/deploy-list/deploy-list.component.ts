@@ -52,6 +52,7 @@ export class DeployListComponent implements OnInit{
   layoutCtrl = new FormControl('boxed');
   icSearch = icSearch;
   selected : string;
+  keyword : any;
   
   category:string;
   scriptViews:ScriptView[];
@@ -62,10 +63,8 @@ export class DeployListComponent implements OnInit{
     private formBuilder:FormBuilder,
     private excelService : ExcelService,
     private userService : UserExcelService,
-    // private dialogRef : MatDialogRef<DeployListComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: Schedule,
     private pipe: DatePipe,
-    // private builder: FormBuilder 
+
   ){}
 
 
@@ -80,7 +79,6 @@ export class DeployListComponent implements OnInit{
       }
     }
 
-    // this.selected = 'all'
     this.searchGroup = this.formBuilder.group({
       searchCategory:['',Validators.required],
       keyword:['',Validators.required]
@@ -103,8 +101,14 @@ export class DeployListComponent implements OnInit{
       return false;
     }
 
-    console.log( this.searchGroup.controls.keyword.value);
-    this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.searchGroup.controls.keyword.value)
+    //select option = all,writer,title
+    this.keyword  =this.searchGroup.controls.keyword.value
+
+    //select option = deployDate
+    if(this.category == 'deployDate'){
+      this.keyword = this.pipe.transform(this.searchGroup.value.keyword, 'yyyy-MM-dd');
+    }
+    this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.keyword)
     .subscribe(response => {
       this.deploys = response;
     })
@@ -126,8 +130,7 @@ export class DeployListComponent implements OnInit{
   // public modeselect = 'Domain';
   // public selected = 'all'
 
-  sc(value){
+  selectValue(value){
     this.category = value
-    console.log(value);
-}
+  } 
 }
