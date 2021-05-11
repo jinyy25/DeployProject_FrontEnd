@@ -3,38 +3,75 @@
 <table id="boardTable" class="table table-striped">
     <thead>
         <tr>
+            <th style="width:10%"></th>
             <th style="width:15%">코드 아이디</th>
-            <th style="width:50%">코드 이름</th>
+            <th style="width:30%">코드 이름</th>
             <th style="width:15%">부모 코드 아이디</th>
-            <th style="width:20%">사용여부</th>
-            <th style="width:20%">순서</th>
+            <th style="width:10%">사용여부</th>
+            <th style="width:10%">순서</th>
+            <th style="width:5%"></th>
+            <th style="width:5%"></th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let codeMgmt of codeMgmts" >
-                <td>
-                <button (click)="toggleChildCodeList(codeMgmt.codeId)" id="bt">
-                    버튼
-                </button>
-                {{codeMgmt.codeId}}
-                </td>
-                <td>{{codeMgmt.codeName}}</td>
-                <td>{{codeMgmt.parentCodeId}}</td>
-                <td>{{codeMgmt.codeUseYN}}</td>
-                <td>{{codeMgmt.dsplOrder}}</td>
-                <td><button (click)="openUpdateCodeDialog(codeMgmt.codeId)">수정</button></td>
-                <td><button (click)="deleteCode(codeMgmt.codeId)">삭제</button></td>
+    <tbody *ngFor="let codeMgmt of codeMgmts; let i = index">
+        <tr>
+            <td align="center">  
+                <a (click)="toggleChildCodeList(i,codeMgmt.codeId)" class="expand-row" *ngIf="!hideme[i]">  
+                <img src="../../assets/img/plus.png" width="30"/>  
+                </a>  
+                <a class="expand-row" *ngIf="hideme[i]" (click)="hideme[i] = !hideme[i]"> 
+                <img src="../../assets/img/minus.png" width="30"/>  
+                </a> 
+            </td>
+            <td>{{codeMgmt.codeId}}</td>
+            <td>{{codeMgmt.codeName}}</td>
+            <td>{{codeMgmt.parentCodeId}}</td>
+            <td>{{codeMgmt.codeUseYN}}</td>
+            <td>{{codeMgmt.dsplOrder}}</td>
+            <td><button (click)="openUpdateCodeDialog(codeMgmt.codeId)">수정</button></td>
+            <td><button (click)="deleteCode(codeMgmt.codeId)">삭제</button></td>
         </tr>
-        <ng-container *ngIf="show">
-            <tr *ngFor="let childCodeMgmt of childCodeMgmts">
-                <td>{{childCodeMgmt.codeId}}</td>
-                <td>{{childCodeMgmt.codeName}}</td>
-                <td>{{childCodeMgmt.parentCodeId}}</td>
-                <td>{{childCodeMgmt.codeUseYN}}</td>
-                <td>{{childCodeMgmt.dsplOrder}}</td>
-                <td><button (click)="openUpdateCodeDialog(childCodeMgmt.codeId)">수정</button></td>
-                <td><button (click)="deleteCode(childCodeMgmt.codeId)">삭제</button></td>
-            </tr>
-        </ng-container>
+        <tr [hidden]="!hideme[i]" >
+            <td align="center"> </td>
+                <td colspan="15">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>코드 아이디</th>
+                            <th>코드 이름</th>
+                            <th>부모 코드 아이디</th>
+                            <th>사용여부</th>
+                            <th>순서</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        <tr *ngFor="let childCodeMgmt of childCodeMgmts">
+                            <td>{{childCodeMgmt.codeId}}</td>
+                            <td>{{childCodeMgmt.codeName}}</td>
+                            <td>{{childCodeMgmt.parentCodeId}}</td>
+                            <td>{{childCodeMgmt.codeUseYN}}</td>
+                            <td>{{childCodeMgmt.dsplOrder}}</td>
+                            <td><button (click)="openUpdateCodeDialog(childCodeMgmt.codeId)">수정</button></td>
+                            <td><button (click)="deleteCode(childCodeMgmt.codeId)">삭제</button></td>
+                        </tr>
+                    </tbody>
+                    <!--
+                    <tbody>  
+                        <tr *ngFor="let childCodeMgmtInformation of childCodeMgmtInformations[i]">
+                            <td>{{childCodeMgmtInformation.codeId}}</td>
+                            <td>{{childCodeMgmtInformation.codeName}}</td>
+                            <td>{{childCodeMgmtInformation.parentCodeId}}</td>
+                            <td>{{childCodeMgmtInformation.codeUseYN}}</td>
+                            <td>{{childCodeMgmtInformation.dsplOrder}}</td>
+                            <td><button (click)="openUpdateCodeDialog(childCodeMgmtInformation.codeId)">수정</button></td>
+                            <td><button (click)="deleteCode(childCodeMgmtInformation.codeId)">삭제</button></td>
+                        </tr>
+                    </tbody>
+                    -->
+                </table>
+            </td>
+        </tr>
     </tbody>
 </table>

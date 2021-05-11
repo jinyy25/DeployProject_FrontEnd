@@ -31,12 +31,14 @@ export class CodeManagementComponent implements OnInit {
   childCodeMgmts: ChildCodeMgmt[];
   public show: boolean = false;
   parentCodeId: string;
+  childCodeMgmtInformations: any = [];  
+  Index: any;
+   hideme = [];  
 
   constructor(private router: Router,
               private codeMgmtService: CodeMgmtService,
               private dialog: MatDialog,
               private jwtService : JwtService) { }
-
   ngOnInit(): void {
     this.codeMgmtService.getParentCodeInfos().
           subscribe( data => {
@@ -57,14 +59,18 @@ export class CodeManagementComponent implements OnInit {
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
-  }
+  }//ngOnInit() end
 
-  toggleChildCodeList(parentCodeId) {
-    this.show = !this.show;
+  toggleChildCodeList(i,parentCodeId) {
+    
     this.codeMgmtService.getChildCodeInfos(parentCodeId)
     .subscribe( data => {
       this.childCodeMgmts = data;
+      //this.childCodeMgmtInformations[i] = data;
+      //console.log(this.childCodeMgmtInformations[i]);
     });
+    this.hideme[i] = !this.hideme[i];  
+    this.Index = i;
   }
 
   openInsertCodeDialog() : void {//코드 등록 모달창 띄움
@@ -96,7 +102,7 @@ export class CodeManagementComponent implements OnInit {
    
   openUpdateCodeDialog(codeId): void {
 
-    console.log(codeId);
+    //console.log(codeId);
 
     const dialogConfig = new MatDialogConfig();
 
@@ -104,7 +110,7 @@ export class CodeManagementComponent implements OnInit {
       codeId: codeId,
       modifier: this.loginUser.id
     };
-    
+
     dialogConfig.width = "250px";
 
     const dialogRef = this.dialog.open(InsertUpdateCodeComponent, dialogConfig);
