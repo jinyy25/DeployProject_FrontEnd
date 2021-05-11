@@ -79,6 +79,7 @@ export class PasswordComponent implements OnInit {
 
   updatePassword(form){
      if(this.form.controls.newPasswordConfirm.errors != null){
+       this.form.controls.password.setErrors({checkError:true});
       return false;
     }
     this.user.password=form.value.newPassword
@@ -90,6 +91,10 @@ export class PasswordComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     })
+  }
+
+  getkey(event){
+    console.log(event);
   }
 
 }

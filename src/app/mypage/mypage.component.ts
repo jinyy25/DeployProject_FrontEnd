@@ -61,7 +61,7 @@ export class MypageComponent implements OnInit {
      this.form = this.fb.group({
      
       email:['',[Validators.required,Validators.email]],
-      phone:['',Validators.required],
+      phone:['',[Validators.required,Validators.pattern(/^\d{3}-\d{3,4}-\d{4}$/ )]],
       position:['',Validators.required],
       name: ['', Validators.required],
       team: ['', Validators.required],    

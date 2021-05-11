@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     this.form = this.fb.group({
       id:['',[Validators.required]],
       email:['',[Validators.required,Validators.email]],
-      phone:['',Validators.required],
+      phone:['',[Validators.required,Validators.pattern(/^\d{3}-\d{3,4}-\d{4}$/ )]],
       position:['',Validators.required],
       name: ['', Validators.required],
       team: ['', Validators.required],
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
  public checkId(id){
    this.userService.checkId(id)
     .subscribe(res =>{
-      if(res.data==false){
+      if(res.success==false){
         this.form.controls.id.setErrors({checkError:true});
       }
 
@@ -112,7 +112,7 @@ export class RegisterComponent implements OnInit {
     this.user=form.value;
     this.userService.insertUser(this.user)
       .subscribe(data=>{
-        if(data){
+        if(data.success){
             location.href="/";
           }
       })
