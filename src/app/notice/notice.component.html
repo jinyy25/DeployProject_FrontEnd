@@ -3,7 +3,7 @@
     <div [class.container]="layoutCtrl.value === 'boxed'"
          [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
          class="w-full flex flex-col sm:flex-row justify-between">
-      <div id="noticeWrap">
+      <div>
         <h1 class="title mt-0 mb-1">공지사항</h1>
         <vex-breadcrumbs [crumbs]="['Notice']"></vex-breadcrumbs>
 	  </div>
@@ -24,7 +24,6 @@
 					<mat-select required formControlName="type">
 						<mat-option value="title">제목</mat-option>
 						<mat-option value="writer">작성자</mat-option>
-		
 						<mat-option value="content">내용</mat-option>
 					</mat-select>
 				</mat-form-field>
@@ -78,5 +77,7 @@
 
    </vex-page-layout-content>
 </vex-page-layout>
+
+
 
 

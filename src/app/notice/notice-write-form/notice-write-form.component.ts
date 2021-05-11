@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
-import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
 import { BoardFile } from 'src/app/models/boardfile.model';
 
@@ -15,14 +15,20 @@ import { Notice } from 'src/app/models/notice.model';
 @Component({
   selector: 'vex-notice-write-form',
   templateUrl: './notice-write-form.component.html',
-  styleUrls: ['./notice-write-form.component.scss'],
+  styleUrls: [
+    './notice-write-form.component.scss',
+    '../../../../node_modules/quill/dist/quill.snow.css',
+    '../../../@vex/styles/partials/plugins/_quill.scss'
+
+],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     fadeInUp400ms
   ]
 })
 export class NoticeWriteFormComponent implements OnInit {
  
- layoutCtrl = new FormControl('boxed');
+
   selectedFiles?: FileList;
   files = [];
   fileNames  = [];
@@ -35,6 +41,7 @@ export class NoticeWriteFormComponent implements OnInit {
   boardNo:number;
   notice:Notice = new Notice();
   
+
 
   constructor(
     private fb:FormBuilder,

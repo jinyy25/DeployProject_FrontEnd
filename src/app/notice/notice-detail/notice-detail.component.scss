@@ -1,4 +1,4 @@
-#noticeWrap{
+#noticeBox{
 	width: 80%;
 	margin:0 auto 0 auto;
 	border-top: 2px solid #2c3e7e;
@@ -113,10 +113,11 @@ dt,dl{
 	width: 100%;
 	padding: 15px 7px;
 	min-height: 200px;
+	//background-color: red;
 }
 #noticeFooter{
 	width: 100%;
-	background-color: red;
+
 }
 .btn{
 	float: right;

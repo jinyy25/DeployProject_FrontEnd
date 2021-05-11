@@ -54,9 +54,13 @@ export class NoticeDetailComponent implements OnInit {
 
     this.boardService.selectNoticeDetail(this.boardNo)
     .subscribe(data=>{
+      console.log(data);
       this.notice=data.data.board;
       this.files=data.data.files;
       
+      
+      
+      console.log(this.notice.content);
       if(this.files.length>0){
         this.display="block";
       }

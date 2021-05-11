@@ -10,7 +10,7 @@
     </div>
   </vex-page-layout-header>
   <vex-page-layout-content>
-		<div id="noticeWrap">
+		<div id="noticeBox">
 	<div id="noticeHeader">
 		<dl id="noticeTitle" class="notice_dl">
 			<dt class="notice_dt">제목</dt>
@@ -47,8 +47,8 @@
 				
 			</ul>
 		</div>
-		<div id="contentBox">
-			<span>{{notice.content}}</span>
+		<div id="contentBox" [innerHtml]="notice.content">
+			
 		</div>
 	</div>
 	<div id="noticeFooter">

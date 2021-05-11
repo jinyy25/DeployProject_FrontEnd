@@ -1,21 +1,8 @@
-<vex-page-layout>
-	<vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
-    <div [class.container]="layoutCtrl.value === 'boxed'"
-         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-         class="w-full flex flex-col sm:flex-row justify-between">
-      <div>
-        <h1 class="title mt-0 mb-1">공지사항</h1>
-        <vex-breadcrumbs [crumbs]="['Notice-write']"></vex-breadcrumbs>
-      </div>
-    </div>
-  </vex-page-layout-header>
-  <vex-page-layout-content>
-	  <div id="noticeWrap">
-	<div id="noticeHeader">
-		<h2>공지사항 작성</h2>
-	</div>
+<vex-secondary-toolbar current="공지사항 등록">
+  <vex-breadcrumbs [crumbs]="['Notice-write']"></vex-breadcrumbs>
+</vex-secondary-toolbar>
+<div id="noticeWrap">
 	<div id="formGroup" [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
-		
 		<div id="titleWrap" fxFlex="auto" fxLayout="column">
 			<mat-form-field fxFlex="grow" appearance="standard">
 				<mat-label>제목:</mat-label>
@@ -35,21 +22,19 @@
 				</ul>
 			</div>
 		</div>
-		
+
+
 		<div id="contentWrap">
-			<mat-form-field fxFlex="grow" >
-				<mat-label>내용:</mat-label>
-				<textarea *ngIf="boardNo==null" formControlName="content" matInput maxlength="100"></textarea>
-				<textarea *ngIf="boardNo!=null" formControlName="content" #content matInput [(ngModel)]="notice.content" matInput maxlength="100"></textarea>
-			</mat-form-field>
+			<quill-editor @fadeInUp formControlName="content"  [styles]="{ flex: '1 1 auto' }" [(ngModel)]="notice.content">
+		</quill-editor>
 		</div>
 
 		<div id="buttonWrap">
 			<button color="primary" mat-raised-button (click)="cancel()">취소</button>
 			<button color="primary" mat-raised-button  *ngIf="boardNo==null" (click)="insert(form)">등록</button>
-			<button color="primary" mat-raised-button  *ngIf="boardNo!=null" (click)="update(form)">등록</button>
+			<button color="primary" mat-raised-button  *ngIf="boardNo!=null" (click)="update(form)">수정</button>
 		</div>
 	</div>
 </div>
-  </vex-page-layout-content>
-</vex-page-layout>
+
+
