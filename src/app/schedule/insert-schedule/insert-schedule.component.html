@@ -15,7 +15,13 @@
       <mat-error>시작 날짜를 입력해주세요</mat-error>
     </mat-form-field>
     <mat-form-field appearance="standard">
-      <input matInput type="time" formControlName="startTime" #startTime />
+      <input
+        matInput
+        type="time"
+        formControlName="startTime"
+        #startTime
+        (change)="dateCheck()"
+      />
       <mat-error>시간을 입력해주세요</mat-error>
     </mat-form-field>
     <br />
@@ -28,6 +34,7 @@
         formControlName="endDate"
         [min]="form.controls.startDate.value"
         #endDate
+        (dateChange)="dateCheck()"
       />
       <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
       <mat-datepicker #end></mat-datepicker>
