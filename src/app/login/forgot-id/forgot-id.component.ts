@@ -32,7 +32,9 @@ export class ForgotIdComponent implements OnInit {
 
   }
 
+  //아이디 찾기
   findId(form){
+    //유효성 검사
     if(this.form.controls.email.errors != null){
       return false;
     }

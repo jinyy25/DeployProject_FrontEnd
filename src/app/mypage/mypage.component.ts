@@ -42,6 +42,7 @@ export class MypageComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+  //로그인 유저 정보
   this.check = localStorage.getItem("AUTH_TOKEN");
 
     if(this.check !=null){
@@ -56,7 +57,6 @@ export class MypageComponent implements OnInit {
       }
     }
 
-    console.log(this.loginUser);
 
      this.form = this.fb.group({
      
@@ -67,6 +67,7 @@ export class MypageComponent implements OnInit {
       team: ['', Validators.required],    
     });
 
+    //팀,직급 불러오기
     this.teamService.selectTeamList()
       .subscribe(res =>{
         this.teamList = res.data.team;
@@ -74,6 +75,7 @@ export class MypageComponent implements OnInit {
       })
   }
 
+  //내정보 수정
   send(form,id,name,position,email,phone,team) {
     
     //유효성검사

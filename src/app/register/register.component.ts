@@ -56,6 +56,7 @@ export class RegisterComponent implements OnInit {
       })
    
   }
+  //비밀번호,비밀번호 일치하는지 확인
  public equalTo(password:string): ValidatorFn{
    return (control: AbstractControl): { [key: string]: any } => {
             let isValid = control.root.value[password] == control.value;
@@ -66,6 +67,7 @@ export class RegisterComponent implements OnInit {
         };
  }
 
+ //아이디 중복체크
  public checkId(id){
    this.userService.checkId(id)
     .subscribe(res =>{
@@ -76,7 +78,7 @@ export class RegisterComponent implements OnInit {
     });
  }
   
-
+  //회원가입
   send(form,id,password,passwordConfirm,name,position,email,phone,team) {
     
     //유효성검사

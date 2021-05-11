@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  //로그인
   send(form,id,password) {
     if(this.form.controls.id.errors != null){
       id.focus();

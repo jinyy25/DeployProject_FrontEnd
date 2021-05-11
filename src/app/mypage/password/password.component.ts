@@ -38,6 +38,7 @@ export class PasswordComponent implements OnInit {
       newPasswordConfirm: ['', [Validators.required,this.equalTo('newPassword')]],
     })
 
+    //로그인 유저 정보
     this.check = localStorage.getItem("AUTH_TOKEN");
 
     if(this.check !=null){
@@ -53,6 +54,7 @@ export class PasswordComponent implements OnInit {
     }
   }
 
+  //비밀번호,비밀번호 확인 일치하는지 확인
   public equalTo(newPassword:string): ValidatorFn{
    return (control: AbstractControl): { [key: string]: any } => {
             let isValid = control.root.value[newPassword] == control.value;
@@ -63,6 +65,7 @@ export class PasswordComponent implements OnInit {
         };
   }
 
+  //현재비밀번호 일치하는지 확인
   checkPassword(form){
     this.user.password=form.value.password;
     this.user.id=this.loginUser.id;
@@ -77,6 +80,7 @@ export class PasswordComponent implements OnInit {
     })
   }//checkPassword(form)
 
+  //비밀번호 변경
   updatePassword(form){
      if(this.form.controls.newPasswordConfirm.errors != null){
        this.form.controls.password.setErrors({checkError:true});
