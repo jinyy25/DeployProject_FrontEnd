@@ -13,7 +13,6 @@
         <vex-page-layout-content>
             <div class="card overflow-auto -mt-16">
                 <div class="bg-app-bar px-6 h-16 sticky left-0" fxLayout="row" fxLayoutAlign="start center">
-                    <!-- <div class="deploy-search"> -->
                         <div>
                             <div class="deploy-content">
                                 <p class="deploy-title">제목</p>  
@@ -27,13 +26,16 @@
                                 <p class="deploy-title">날짜</p>
                                 <h6>{{deploy.deployDate}}</h6>
                             </div>
+                            <div class="deploy-content">
+                                <p class="deploy-title title-extra">작성자</p>
+                                <h6>{{deploy.writer}}</h6>
+                            </div>
                         </div>
                         <div class="btn-outline">
                             <button color="primary" mat-raised-button (click)="downloadZip(deployNo)">zip</button>
                             <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
                             <button color="primary" mat-raised-button (click)="cancel()">취소</button>
                         </div>
-                    <!-- </div> -->
                 </div>
             </div>
 

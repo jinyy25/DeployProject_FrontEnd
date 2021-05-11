@@ -26,7 +26,9 @@ export class DeployDetailComponent implements OnInit {
   deployNo:number;
   scriptViews:ScriptView[];
 
-  deploy:Deploy;
+  deploy:Deploy = new Deploy();
+  deployDetailTitle:string;
+  deployDetailContent:string;
 
   layoutCtrl = new FormControl('boxed');
 
@@ -68,7 +70,11 @@ export class DeployDetailComponent implements OnInit {
   //deploy정보
   this.deployService.selectDeployContent(this.deployNo)
       .subscribe(
-        response => {this.deploy = response}
+        response => {
+          this.deploy = response
+          this.deployDetailTitle = this.deploy.deployTitle
+          this.deployDetailContent = this.deploy.deployContent
+        }
       )
 
   }
