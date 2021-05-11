@@ -1,3 +1,4 @@
+import { CodeManagementRoutingModule } from './code-management-routing.module';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -31,6 +32,7 @@ import { CodeManagementComponent } from './code-management.component';
   ],
   imports: [
     CommonModule,
+    CodeManagementRoutingModule,//side bar와 병행하기 위해 필요함
     MatButtonModule,
     MatDialogModule,
     FormsModule,

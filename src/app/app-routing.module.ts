@@ -41,8 +41,8 @@ const routes: VexRoutes = [
       {
         path : 'schedule',
         loadChildren:() => import('./schedule/schedule.module').then(m => m.ScheduleModule)
-      }
-    /*
+      },
+   
       {
         path : 'code-management',
         children:[
@@ -52,7 +52,7 @@ const routes: VexRoutes = [
           }
         ]
         
-      }*/
+      }
     
     ]
   },
@@ -97,10 +97,10 @@ const routes: VexRoutes = [
   },
   { 
     path: 'sampleFileUpload', component: UploadFilesComponent 
-  },
+  }/*
   { 
     path: 'code-management', component: CodeManagementComponent 
-  }
+  }*/
 ];
 
 
