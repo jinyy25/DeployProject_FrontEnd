@@ -1,7 +1,3 @@
-import { CodeMgmt } from './common/code-management/codemgmt.model';
-
-
-
 import { NgModule } from '@angular/core';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
@@ -26,6 +22,10 @@ const routes: VexRoutes = [
     canActivate:[AuthGuardService],
     children: [
       {
+        path:'',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path:'deploy-list',
         loadChildren:() => import('./deploy-list/deploy-list.module').then(m => m.DeployListModule),
       },
@@ -41,13 +41,19 @@ const routes: VexRoutes = [
       {
         path : 'schedule',
         loadChildren:() => import('./schedule/schedule.module').then(m => m.ScheduleModule)
-      }
-      /*
+      },
+   
       {
         path : 'code-management',
-        loadChildren:() => import('./common/code-management/code-management.module').then(m => m.CodeManagementModule)
+        children:[
+          {
+            path:'',
+            loadChildren:() => import('./common/code-management/code-management.module').then(m => m.CodeManagementModule)
+          }
+        ]
+        
       }
-      */
+    
     ]
   },
   {
@@ -91,10 +97,10 @@ const routes: VexRoutes = [
   },
   { 
     path: 'sampleFileUpload', component: UploadFilesComponent 
-  },
+  }/*
   { 
     path: 'code-management', component: CodeManagementComponent 
-  }
+  }*/
 ];
 
 
