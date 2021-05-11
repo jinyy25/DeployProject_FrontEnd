@@ -53,7 +53,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
       this.userService.findPassword(form.controls.id.value,form.controls.email.value)
       .subscribe(res=>{
-        if(res.success == false){
+        if(res.data == null){
           alert("아이디,이메일이 일치하지 않습니다.");
         }else{
           this.display="block";
@@ -71,7 +71,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.user.password=form.value.newPassword
     this.userService.updatePassword(this.user)
     .subscribe(res =>{
-      if(res.success){
+      if(res.data){
         this.router.navigate(['/login']);
       }
     })

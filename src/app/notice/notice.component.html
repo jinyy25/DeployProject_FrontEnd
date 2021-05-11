@@ -8,8 +8,8 @@
         <vex-breadcrumbs [crumbs]="['Notice']"></vex-breadcrumbs>
 	  </div>
 	  <div id="teamWrap">
-		  <button  (click)="selectNotice()"  [ngClass]="teamName=='전체'?'on':'off'">전체</button>
-		  <button *ngFor="let team of teams" (click)="selectTeamNotice(team)" [ngClass]="teamName==team.codeName?'on':'off'" >{{team.codeName}}</button>
+		  <button (click)="selectNotice()" >전체</button>
+		  <button *ngFor="let team of teams" (click)="selectTeamNotice(team)">{{team.codeName}}</button>
 		</div>
     </div>
   </vex-page-layout-header>
