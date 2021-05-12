@@ -9,6 +9,8 @@ import { User } from 'src/app/models/user.model';
 import { BoardService } from 'src/app/services/board.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice.model';
+import { delay, tap } from 'rxjs/operators';
+import { async } from 'rxjs';
 
 
 
@@ -40,7 +42,7 @@ export class NoticeWriteFormComponent implements OnInit {
   fileList:BoardFile = new BoardFile();
   boardNo:number;
   notice:Notice = new Notice();
-  
+  status="true";
 
 
   constructor(
@@ -50,7 +52,9 @@ export class NoticeWriteFormComponent implements OnInit {
 
     private boardService:BoardService,
     private route:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    
+    
     
 
   ) { }
@@ -81,6 +85,12 @@ export class NoticeWriteFormComponent implements OnInit {
       })
     }
   }
+
+   delay = () => {
+    const randomDelay = Math.floor(Math.random() * 4) * 100
+    return new Promise(resolve => setTimeout(resolve, randomDelay))
+  }
+
 
   selectFiles(event): void {
     this.files=event.target.files;
@@ -117,6 +127,8 @@ export class NoticeWriteFormComponent implements OnInit {
     
   }//close() end
 
+  
+
   //업로드된 파일과 공지사항내용 DB insert 메서드
   addFileList(form,type){
 
@@ -149,14 +161,15 @@ export class NoticeWriteFormComponent implements OnInit {
 
         this.boardService.updateNotice(this.fileList,this.boardNo)
         .subscribe(res =>{
-
+          this.status="true";
            this.router.navigate(['/notice/'+res.data]);
 
         })
       }
- 
+     
       
   }
+ 
 
   //파일 업로드 메서드
   upload(form,type){
@@ -169,21 +182,18 @@ export class NoticeWriteFormComponent implements OnInit {
       }
     }//if end
 
-
+    this.status="wait";  
     if(this.files.length !=0){
-      for(let i = 0 ; i<this.files.length;i++){
-        this.uploadService.upload(this.files[i])
-          .subscribe(data=>{
-            this.fileList.names.push(data.data.name);
-            this.fileList.directoryPaths[i]=data.data.directoryPath;
-            
-            if(this.files.length-1==i){
-                this.addFileList(form,type);
-            
-            }//if end
+         this.uploadService.upload(this.files)
+         .pipe(tap((res:any)=>{
+           this.fileList.names=res.data.names;
+           this.fileList.directoryPaths=res.data.directoryPaths;
 
           })
-      }//for end
+         )
+         .subscribe(res=>{
+                this.addFileList(form,type);
+          })
 
     }else{
       this.addFileList(form,type);
@@ -199,7 +209,7 @@ export class NoticeWriteFormComponent implements OnInit {
 
   update(form){
     const type="update";
-
+    
     //기존에 있었던 파일 일때
     if(this.fileConfirm.length>0){
 

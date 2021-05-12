@@ -14,7 +14,6 @@ import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 import { UserService } from '../services/user.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule',
@@ -315,7 +314,7 @@ export class ScheduleComponent implements AfterViewInit {
       width : '400px',
       data : {
         teamList : this.teamList,
-        userList : this.userList.filter((user) => user.id != this.loginUser.id),
+        userList : this.userList,
         loginUser : this.loginUser
       }
     });

@@ -72,7 +72,9 @@
 				</select>
    		   </div>
 			<div id="page">
-				<pagination-controls (pageChange)="getPage(p =$event)"></pagination-controls>
+				<pagination-controls (pageChange)="getPage(p =$event)"  previousLabel=""
+                        nextLabel=""
+                        responsive="true"></pagination-controls>
 			</div>
 		</div>
 	</div> 

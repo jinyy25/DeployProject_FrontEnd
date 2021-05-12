@@ -6,7 +6,7 @@ import { logging } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { CodeMgmt } from './codemgmt.model';
 import { ChildCodeMgmt } from './child.codemgmt.model';
@@ -33,7 +33,8 @@ export class CodeManagementComponent implements OnInit {
   parentCodeId: string;
   Index: any;
   hideme = [];
-
+  
+  //subscribe에서 넘어온 data 받기 용
   dataRegister:any={}
 
 
