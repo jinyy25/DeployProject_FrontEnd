@@ -26,12 +26,12 @@
                             </div>
                             <div class="right-content">
                                 <div class="deploy-content">
-                                    <p class="deploy-title">날짜</p>
-                                    <h6>{{deploy.deployDate}}</h6>
+                                    <p class="deploy-title">작성자</p>
+                                    <h6>{{deploy.writer}}</h6>
                                 </div>
                                 <div class="deploy-content">
-                                    <p class="deploy-title title-extra">작성자</p>
-                                    <h6>{{deploy.writer}}</h6>
+                                    <p class="deploy-title">작성일</p>
+                                    <h6>{{deploy.deployDate}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +70,14 @@
         </table>
     </div>
         <div class="paginate-box">
+            <div id="item">
+                Items per Page:
+                <select (change)="handlePageSizeChange($event)">
+                    <option *ngFor="let itemsPerPage of itemsPerPages" >
+                    {{ itemsPerPage }}
+                    </option>
+                </select>
+            </div> 
             <pagination-controls (pageChange)="getPage(p =$event)" previousLabel="" nextLabel="" responsive="true">
             </pagination-controls>
         </div>

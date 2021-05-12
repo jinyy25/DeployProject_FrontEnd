@@ -85,7 +85,7 @@ export class DeployListComponent implements OnInit{
     
     //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
-      searchCategory:['',Validators.required],
+      searchCategory:[''],
       keyword:[''],
     })
 
@@ -117,7 +117,6 @@ export class DeployListComponent implements OnInit{
     }
     this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.keyword)
     .subscribe(response => {
-      this.keyword = '';
       this.deploys = response;
     })
   }

@@ -36,6 +36,8 @@ export class DeployDetailComponent implements OnInit {
   itemsPerPage = 5;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
 
+  itemsPerPages=[5,10,15];
+
   files:File[];
   fileInfos?: Observable<any>;
 
@@ -100,6 +102,12 @@ export class DeployDetailComponent implements OnInit {
   //4. 취소버튼
   cancel(){
     this.router.navigate(['/deploy-list']);
+  }
+
+  //5. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
+  handlePageSizeChange(event): void {
+      this.itemsPerPage = event.target.value;
+      this.p = 1;
   }
 
 }

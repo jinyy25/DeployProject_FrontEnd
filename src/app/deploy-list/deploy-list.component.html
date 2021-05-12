@@ -18,11 +18,11 @@
             <div class="deploy-search" [formGroup]="searchGroup" (keyup.enter)="search(searchGroup)"> 
                     <mat-form-field class="select-field" appearance="standard">
                             <mat-label>분류</mat-label>
-                            <mat-select [(value)]="selected" (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
+                            <mat-select (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
                                 <mat-option value="all">전체</mat-option>
                                 <mat-option value="title">제목</mat-option>
                                 <mat-option value="writer">작성자</mat-option>
-                                <mat-option value="deployDate">날짜</mat-option>
+                                <mat-option value="deployDate">작성일</mat-option>
                             </mat-select>
                     </mat-form-field>
                     <mat-form-field 
@@ -40,10 +40,8 @@
                         <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
                         <mat-datepicker #start></mat-datepicker>
                     </mat-form-field>
-
-                <button color="primary" mat-raised-button (click)="search(searchGroup)" (keyup.enter)="search(searchGroup)"  class="search_btn">검색</button>  
-                <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">배포작성</button>   
-                          
+                    <button color="primary" mat-raised-button (click)="search(searchGroup)" (keyup.enter)="search(searchGroup)"  class="search_btn">검색</button>  
+                    <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">배포작성</button>   
             </div>
         </div>
     </div>
@@ -55,7 +53,7 @@
                     <th style="width: 10%;">번호</th>
                     <th style="width: 40%;">제목</th>
                     <th style="width: 10%;">작성자</th>
-                    <th style="width: 15%;">날짜</th>                
+                    <th style="width: 15%;">작성일</th>                
                     <th style="width: 25%;">다운로드</th>
                 </tr>
             </thead>        
