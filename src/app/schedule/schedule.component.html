@@ -1,3 +1,18 @@
+<!--<vex-page-layout>
+	<vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
+    <div [class.container]="layoutCtrl.value === 'boxed'"
+         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+         class="w-full flex flex-col sm:flex-row justify-between">
+        <div>
+            <h1 class="title mt-0 mb-1">스케줄</h1>
+            <vex-breadcrumbs [crumbs]="['Schedule']"></vex-breadcrumbs>
+	    </div>
+    </div>
+    </vex-page-layout-header>
+    <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+                             [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+						     class="-mt-6">-->
+
 <div id="external">
   <p>
     <strong>색상 안내도</strong>
@@ -29,3 +44,7 @@
 <div class="app-calendar">
   <full-calendar #calendar [options]="calendarOptions"></full-calendar>
 </div>
+<!--
+</vex-page-layout-content>
+</vex-page-layout>
+-->
