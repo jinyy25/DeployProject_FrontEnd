@@ -17,10 +17,10 @@
   border-bottom: 1px solid #fff;
 }
 #teamWrap button:hover {
-  text-shadow: 0px 0px 2px white;
+  font-weight: bold;
 }
 #teamWrap button.on {
-  text-shadow: 0px 0px 2px white;
+  font-weight: bold;
 }
 
 #teamWrap button:first-child {
@@ -64,11 +64,10 @@ button {
   overflow: hidden !important;
 }
 #paginate {
-  width: 500px;
-  height: 100px;
-  margin-top: 30px;
+  width: 330px;
+  height: 120px;
   float: right;
-  text-align: right;
+  text-align: left;
 }
 .mat-select-placeholder {
   color: black;
@@ -82,7 +81,8 @@ button {
 
 #item {
   float: right;
-  margin-top: 5px;
+  margin-top:15px;
+
 }
 #item select {
   width: 50px;

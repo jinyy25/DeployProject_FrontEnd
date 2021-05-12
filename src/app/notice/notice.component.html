@@ -63,6 +63,10 @@
 			</tbody>
 		</table>
 		<div id="paginate">
+			<pagination-controls (pageChange)="getPage(p =$event)"  previousLabel=""
+                        nextLabel=""
+                        responsive="true"></pagination-controls>
+		</div>
 			<div id="item">
 				Items per Page:
 				<select (change)="handlePageSizeChange($event)">
@@ -71,12 +75,9 @@
 					</option>
 				</select>
    		   </div>
-			<div id="page">
-				<pagination-controls (pageChange)="getPage(p =$event)"  previousLabel=""
-                        nextLabel=""
-                        responsive="true"></pagination-controls>
-			</div>
-		</div>
+			
+				
+			
 	</div> 
 
    </vex-page-layout-content>
