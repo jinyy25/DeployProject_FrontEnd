@@ -4,7 +4,7 @@
                  [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
                  class="w-full flex flex-col sm:flex-row justify-between">
             <div>
-                <h1 class="title mt-0 mb-1" id="Script_List" #listTitle>배포이력 스크립트</h1>
+                <h1 class="title mt-0 mb-1">배포이력 스크립트</h1>
                 <vex-breadcrumbs [crumbs]="['Deploy-Script']"></vex-breadcrumbs>
             </div>
             </div>
@@ -16,7 +16,7 @@
                         <div>
                             <div class="deploy-content">
                                 <p class="deploy-title">제목</p>  
-                                <h6>{{deploy.deployTitle}}</h6>
+                                <h6 #listTitle id={{deploy.deployTitle}}>{{deploy.deployTitle}}</h6>
                             </div>   
                             <div class="deploy-content">
                                 <p class="deploy-title">내용</p>

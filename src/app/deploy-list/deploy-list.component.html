@@ -62,7 +62,7 @@
             <tbody>
                 <tr *ngFor="let deploy of deploys | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
                     <td #deployNo routerLink="{{deploy.deployNo}}">{{deploy.deployNo}}</td>
-                    <td id="Script_List" #listTitle routerLink="{{deploy.deployNo}}">{{deploy.deployTitle}}</td>
+                    <td id="Script_List" #listTitle routerLink="{{deploy.deployNo}}" id={{deploy.deployTitle}}>{{deploy.deployTitle}}</td>
                     <td routerLink="{{deploy.deployNo}}">{{deploy.writer}}</td>
                     <td routerLink="{{deploy.deployNo}}">{{deploy.deployDate}}</td>
                     <td>
