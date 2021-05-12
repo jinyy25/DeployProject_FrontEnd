@@ -1,50 +1,61 @@
-<!--<vex-page-layout>
-	<vex-page-layout-header class="pb-16" fxLayout="column" fxLayoutAlign="center start">
-    <div [class.container]="layoutCtrl.value === 'boxed'"
-         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-         class="w-full flex flex-col sm:flex-row justify-between">
-        <div>
-            <h1 class="title mt-0 mb-1">스케줄</h1>
-            <vex-breadcrumbs [crumbs]="['Schedule']"></vex-breadcrumbs>
-	    </div>
-    </div>
-    </vex-page-layout-header>
-    <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
-                             [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-						     class="-mt-6">-->
-
-<div id="external">
-  <p>
-    <strong>색상 안내도</strong>
-  </p>
-
-  <div
-    class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
-    *ngFor="let item of teamList; let i = index"
+<vex-page-layout>
+  <vex-page-layout-header
+    class="pb-16"
+    fxLayout="column"
+    fxLayoutAlign="center start"
   >
     <div
-      class="fc-event-main"
-      #team
-      (click)="showTeam(item)"
-      [ngStyle]="{ 'background-color': teamColor(team, i) }"
+      [class.container]="layoutCtrl.value === 'boxed'"
+      [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+      class="w-full flex flex-col sm:flex-row justify-between"
     >
-      {{ item.codeName }} 팀
+      <div>
+        <h1 class="title mt-0 mb-1">스케줄</h1>
+        <vex-breadcrumbs [crumbs]="['Schedule']"></vex-breadcrumbs>
+      </div>
     </div>
-  </div>
-  <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine">
-    <div class="fc-event-main" (click)="showMine()">본인</div>
-  </div>
-  <div
-    class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
+  </vex-page-layout-header>
+  <vex-page-layout-content
+    [class.container]="layoutCtrl.value === 'boxed'"
+    [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+    class="-mt-6"
   >
-    <div class="fc-event-main" (click)="showEnd()">완료</div>
-  </div>
-</div>
+    <div id="external">
+      <p>
+        <strong>색상 안내도</strong>
+      </p>
 
-<div class="app-calendar">
-  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
-</div>
-<!--
+      <div
+        class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
+        *ngFor="let item of teamList; let i = index"
+      >
+        <div
+          class="fc-event-main"
+          #team
+          (click)="showTeam(item)"
+          [ngStyle]="{ 'background-color': teamColor(team, i) }"
+        >
+          {{ item.codeName }} 팀
+        </div>
+      </div>
+      <div
+        class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine"
+      >
+        <div class="fc-event-main" (click)="showMine()">본인</div>
+      </div>
+      <div
+        class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
+      >
+        <div class="fc-event-main" (click)="showEnd()">완료</div>
+      </div>
+    </div>
+
+    <div class="app-calendar">
+      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </div>
+    <!--
 </vex-page-layout-content>
 </vex-page-layout>
 -->
+  </vex-page-layout-content></vex-page-layout
+>

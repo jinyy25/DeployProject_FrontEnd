@@ -14,6 +14,7 @@ import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 import { UserService } from '../services/user.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule',
@@ -31,8 +32,9 @@ export class ScheduleComponent implements AfterViewInit {
   colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'lightgreen'];
   userList : User[];
   
-  //layoutCtrl = new FormControl('boxed');
-  //searchCtrl = new FormControl();
+  //헤더
+  layoutCtrl = new FormControl('boxed');
+  searchCtrl = new FormControl();
 
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
