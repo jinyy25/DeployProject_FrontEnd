@@ -42,7 +42,7 @@ export class NoticeWriteFormComponent implements OnInit {
   fileList:BoardFile = new BoardFile();
   boardNo:number;
   notice:Notice = new Notice();
-  
+  status="true";
 
 
   constructor(
@@ -161,12 +161,12 @@ export class NoticeWriteFormComponent implements OnInit {
 
         this.boardService.updateNotice(this.fileList,this.boardNo)
         .subscribe(res =>{
-
+          this.status="true";
            this.router.navigate(['/notice/'+res.data]);
 
         })
       }
-      console.log(this.fileList);
+     
       
   }
  
@@ -182,8 +182,8 @@ export class NoticeWriteFormComponent implements OnInit {
       }
     }//if end
 
+    this.status="wait";  
     if(this.files.length !=0){
-            
          this.uploadService.upload(this.files)
          .pipe(tap((res:any)=>{
            this.fileList.names=res.data.names;
@@ -209,7 +209,7 @@ export class NoticeWriteFormComponent implements OnInit {
 
   update(form){
     const type="update";
-
+    
     //기존에 있었던 파일 일때
     if(this.fileConfirm.length>0){
 

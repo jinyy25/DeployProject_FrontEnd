@@ -66,4 +66,21 @@
 	line-height: 28px;
 	text-align: center;
 	padding:0;
+}
+#loader {
+    position: fixed;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    background-image: url(../../../assets/img/loader.gif);
+    background-color:#fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* 로딩이미지는 우선 숨김 */
+    display: none;
+    opacity:.8;
+}
+#loader.on{
+	display: block;
 }	
