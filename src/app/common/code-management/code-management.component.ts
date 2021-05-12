@@ -34,6 +34,8 @@ export class CodeManagementComponent implements OnInit {
   Index: any;
   hideme = [];
 
+  dataRegister:any={}
+
 
   layoutCtrl = new FormControl('boxed');
   searchCtrl = new FormControl();
@@ -95,7 +97,8 @@ export class CodeManagementComponent implements OnInit {
       result.registerer = this.loginUser.id;
       
       this.codeMgmtService.insertCode(result).subscribe(data=> {
-        if(data > 0) {
+        this.dataRegister = data;//바로 data.success하면 에러 뜸.
+        if(this.dataRegister.success == true) {
           alert("코드가 등록되었습니다");
         } else {
           alert("등록에 실패하였습니다");
@@ -124,7 +127,8 @@ export class CodeManagementComponent implements OnInit {
       result.modifier = this.loginUser.id;
       result.codeId = codeId;
       this.codeMgmtService.updateCode(result).subscribe(data=> {
-        if(data > 0){
+        this.dataRegister = data;//바로 data.success하면 에러 뜸.
+        if(this.dataRegister.success == true){
           alert("코드가 수정되었습니다");
         } else {
           alert("코드수정에 실패하였습니다");

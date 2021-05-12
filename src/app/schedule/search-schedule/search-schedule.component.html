@@ -33,11 +33,16 @@
     </form>
   </div>
   <div class="btns">
-    <div>
-      <span class="selectedName">선택 :</span>
-      <span *ngFor="let item of form.value.users" class="selectedName">
-        {{ item.name }}
-      </span>
+    <div class="chkwrap">
+      <mat-checkbox
+        color="accent"
+        *ngFor="let user of form.value.users"
+        labelPosition="before"
+        class="chkbox"
+        indeterminate="true"
+        (click)="deleteName(user)"
+        >{{ user.name }}
+      </mat-checkbox>
     </div>
     <button
       mat-raised-button

@@ -27,7 +27,7 @@ export class NoticeComponent implements OnInit {
   teams:Team[];
   searchCtrl = new FormControl();
   teamName:string;
-  
+  title="title";
 
 
   constructor(

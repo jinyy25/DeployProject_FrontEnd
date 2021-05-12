@@ -13,6 +13,7 @@ export class SearchScheduleComponent implements OnInit {
   name = new FormControl('');
   userList : Array<User> = [];
   form : FormGroup;
+  nameList;
 
   constructor(
     private dialogRef : MatDialogRef<SearchScheduleComponent>,
@@ -85,5 +86,10 @@ export class SearchScheduleComponent implements OnInit {
       const i = users.controls.findIndex(x => x.value === event.source.value);
       users.removeAt(i);
     }
+  }
+
+  deleteName(user){//이름 선택 해제
+    console.log(user);
+    console.log(this.form.value.users);
   }
 }

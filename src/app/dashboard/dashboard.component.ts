@@ -21,8 +21,12 @@ export class DashboardComponent implements OnInit {
   userList : User[];
   scheduleList : Schedule[];
   teamList : Team[];
+  teamUser : User[];
 
   teamControl;
+
+  layoutCtrl = new FormControl('boxed');
+  searchCtrl = new FormControl();
 
   constructor(
     private jwtService : JwtService,
@@ -47,16 +51,21 @@ export class DashboardComponent implements OnInit {
     }
 
     this.userService.selectUserList().subscribe(res => {//같은 팀 유저 리스트
-      this.userList = res.data.filter((user) => user.team == this.loginUser.team);
+      this.userList = res.data;
+      this.teamUser = res.data.filter((user) => user.team == this.loginUser.team);
     });
 
-    this.scheduleService.selectScheduleList().subscribe(res => {
-      this.scheduleList = res.data.filter((user) => user.team == this.loginUser.team);
-
-      //스케쥴 개수 설정
+    this.scheduleService.selectTodayCount().subscribe(res => {
       for (let i = 0; i < this.userList.length; i++) {
         const user = this.userList[i];
-        user.count = this.scheduleList.filter((schedule) => schedule.writer == user.id).length;
+        user.count = 0;
+        
+        for (let j = 0; j < res.data.length; j++) {//스케쥴 개수 있는 애들
+          const today = res.data[j];
+          if(user.id == today.writer){
+            user.count = today.count;
+          }
+        }
       }
     });
 
@@ -67,20 +76,8 @@ export class DashboardComponent implements OnInit {
     this.teamControl = new FormControl(this.loginUser.team);
   }
 
-  changeTeam(){
-    this.userService.selectUserList().subscribe(res => {//선택한 팀 유저 리스트
-      this.userList = res.data.filter((user) => user.team == this.teamControl.value);
-    });
-
-    this.scheduleService.selectScheduleList().subscribe(res => {
-      this.scheduleList = res.data.filter((user) => user.team == this.teamControl.value);
-
-      //스케쥴 개수 설정
-      for (let i = 0; i < this.userList.length; i++) {
-        const user = this.userList[i];
-        user.count = this.scheduleList.filter((schedule) => schedule.writer == user.id).length;
-      }
-    });
+  changeTeam(){//선택한 팀 유저리스트
+    this.teamUser = this.userList.filter((user) => user.team == this.teamControl.value);
   }
 
 }
