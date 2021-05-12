@@ -170,6 +170,8 @@ export class DeployWriteFormComponent implements OnInit {
     }
   }
 
+
+  // 취소버튼
   cancel(){
     this.router.navigate(['/deploy-list']);
   }

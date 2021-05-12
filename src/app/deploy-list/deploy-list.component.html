@@ -60,11 +60,11 @@
                 </tr>
             </thead>        
             <tbody>
-                <tr *ngFor="let deploy of deploys | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}" routerLink="{{deploy.deployNo}}">
-                    <td #deployNo>{{deploy.deployNo}}</td>
-                    <td id="Script_List" #listTitle>{{deploy.deployTitle}}</td>
-                    <td>{{deploy.writer}}</td>
-                    <td>{{deploy.deployDate}}</td>
+                <tr *ngFor="let deploy of deploys | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
+                    <td #deployNo routerLink="{{deploy.deployNo}}">{{deploy.deployNo}}</td>
+                    <td id="Script_List" #listTitle routerLink="{{deploy.deployNo}}">{{deploy.deployTitle}}</td>
+                    <td routerLink="{{deploy.deployNo}}">{{deploy.writer}}</td>
+                    <td routerLink="{{deploy.deployNo}}">{{deploy.deployDate}}</td>
                     <td>
                         <button mat-stroked-button>zip</button>
                         <button mat-stroked-button class="excelBtn" (click)="exportAsXLSX(listTitle.id,deploy.deployNo)">excel</button>
@@ -74,8 +74,16 @@
         </table>
     </div>
     <div class="paginate-box">
-        <pagination-controls (pageChange)="getPage(p =$event)"
-        ></pagination-controls>
+        <div id="item">
+            Items per Page:
+            <select (change)="handlePageSizeChange($event)">
+                <option *ngFor="let itemsPerPage of itemsPerPages" >
+                {{ itemsPerPage }}
+                </option>
+            </select>
+        </div>    
+        <pagination-controls (pageChange)="getPage(p =$event)" previousLabel="" nextLabel="" responsive="true">
+        </pagination-controls>
     </div>
     </vex-page-layout-content>
 

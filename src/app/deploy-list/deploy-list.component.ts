@@ -48,6 +48,9 @@ export class DeployListComponent implements OnInit{
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 10;//한 페이지 당 보여줄 데이터의 수
   totalItems: any;
+  
+  itemsPerPages=[10,15,20];
+
   searchGroup :FormGroup;
   layoutCtrl = new FormControl('boxed');
   icSearch = icSearch;
@@ -134,4 +137,10 @@ export class DeployListComponent implements OnInit{
   selectValue(value){
     this.category = value
   } 
+
+  //5. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
+  handlePageSizeChange(event): void {
+      this.itemsPerPage = event.target.value;
+      this.p = 1;
+  }
 }
