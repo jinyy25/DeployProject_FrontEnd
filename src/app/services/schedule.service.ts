@@ -42,4 +42,8 @@ export class ScheduleService{
   selectHistoryList(scheduleNo : number){
     return this.http.get<any>(this.url+"/history/"+scheduleNo);
   }
+
+  selectTodayCount(){
+    return this.http.get<any>(this.url+"/today");
+  }
 }

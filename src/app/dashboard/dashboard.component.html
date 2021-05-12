@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of userList">
+        <tr *ngFor="let user of teamUser">
           <td *ngIf="user.id == loginUser.id">본인</td>
           <td *ngIf="user.id == loginUser.id">{{ user.count }}</td>
           <td *ngIf="user.id != loginUser.id">{{ user.name }}</td>
