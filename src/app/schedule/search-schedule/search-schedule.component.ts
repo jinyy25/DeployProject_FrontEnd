@@ -13,6 +13,7 @@ export class SearchScheduleComponent implements OnInit {
   name = new FormControl('');
   userList : Array<User> = [];
   form : FormGroup;
+  menu;
 
   constructor(
     private dialogRef : MatDialogRef<SearchScheduleComponent>,
@@ -24,11 +25,12 @@ export class SearchScheduleComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {//본인 빼고 리스트 보여줌
+  ngOnInit(): void {
     this.userList = this.data.userList;
     for (let i = 0; i < this.userList.length; i++) {//처음 로딩될때 체크박스 리셋
       this.userList[i].chk = false;
     }
+    this.menu = "전체";//처음 선택 메뉴
   }
 
   search(){//이름 검색
@@ -53,10 +55,12 @@ export class SearchScheduleComponent implements OnInit {
 
   showAll(){//전체 유저 보여주기
     this.userList = this.data.userList;
+    this.menu = "전체";
   }
 
   showUser(team){//팀별 유저 보여주기
     this.userList = this.data.userList.filter((user) => user.team == team.codeName);
+    this.menu = team.codeName;
   }
 
   showMine(){//본인꺼 보여주기

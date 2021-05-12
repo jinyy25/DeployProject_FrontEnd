@@ -81,13 +81,21 @@
   justify-content: space-around;
   border-top: 1px solid #dee2e6;
   border-bottom: 1px solid #dee2e6;
-  height: 30px;
+  height: 32px;
   line-height: 30px;
   margin-bottom: 10px;
 }
 
 .team > li {
   cursor: pointer;
+}
+
+.team > li:hover {
+  text-shadow: 0px 0px 1px black;
+}
+
+.on {
+  text-shadow: 0px 0px 1px black;
 }
 
 .search {
