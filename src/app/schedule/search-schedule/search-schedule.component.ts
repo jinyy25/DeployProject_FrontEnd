@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User } from 'src/app/common/pagination/user.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'vex-search-schedule',
@@ -13,7 +13,6 @@ export class SearchScheduleComponent implements OnInit {
   name = new FormControl('');
   userList : Array<User> = [];
   form : FormGroup;
-  nameList;
 
   constructor(
     private dialogRef : MatDialogRef<SearchScheduleComponent>,
@@ -27,6 +26,9 @@ export class SearchScheduleComponent implements OnInit {
 
   ngOnInit(): void {//본인 빼고 리스트 보여줌
     this.userList = this.data.userList;
+    for (let i = 0; i < this.userList.length; i++) {//처음 로딩될때 체크박스 리셋
+      this.userList[i].chk = false;
+    }
   }
 
   search(){//이름 검색
@@ -76,20 +78,26 @@ export class SearchScheduleComponent implements OnInit {
     }
   }
 
-  onChange(event){//체크박스 선택할때마다 달라지는거
-    const users = <FormArray>this.form.get('users') as FormArray;
+  onChange(event, index){//체크박스 선택할때마다 달라지는거
+    const users = <FormArray>this.form.controls.users as FormArray;
 
     //event.source.value는 방금 선택한 user
     if(event.checked) {//체크되어있으면 users에 추가
       users.push(new FormControl(event.source.value));
+      this.userList[index].chk = true;
     } else {//체크 해제 시 users에서 삭제
       const i = users.controls.findIndex(x => x.value === event.source.value);
       users.removeAt(i);
+      this.userList[index].chk = false;
     }
   }
 
   deleteName(user){//이름 선택 해제
-    console.log(user);
-    console.log(this.form.value.users);
+    const users = <FormArray>this.form.get('users') as FormArray;
+    const i = users.controls.findIndex(x => x.value === user);
+    users.removeAt(i);//창에 보이는 리스트에서 이름 삭제
+
+    const index = this.userList.findIndex(x => x.id === user.id)
+    this.userList[index].chk = false;//체크박스 선택 해제
   }
 }

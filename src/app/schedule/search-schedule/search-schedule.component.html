@@ -23,10 +23,11 @@
     <form [formGroup]="form">
       <mat-checkbox
         color="primary"
-        *ngFor="let user of userList"
+        *ngFor="let user of userList; let i = index"
         class="chk"
         [value]="user"
-        (change)="onChange($event)"
+        (change)="onChange($event, i)"
+        [checked]="user.chk"
       >
         {{ user.name }}
       </mat-checkbox>
