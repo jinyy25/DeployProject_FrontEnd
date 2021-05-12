@@ -153,18 +153,12 @@ export class DeployWriteFormComponent implements OnInit {
 
     // 2-2. 파일 추가
     if(this.files.length !=0){
-      for(let i = 0 ; i<this.files.length;i++){
-        this.uploadService.upload(this.files[i])
+        this.uploadService.upload(this.files)
         .subscribe(data=>{
-          this.fileList.fileNames.push(data.data.name);
-          this.fileList.directoryPaths.push(data.data.directoryPath);
-          this.deploys.fileNames = this.fileList.fileNames
-          this.deploys.directoryPaths = this.fileList.directoryPaths
-            if(this.files.length-1==i){
-              this.sendData(this.deploys);
-            }
+          this.deploys.fileNames =data.data.names
+          this.deploys.directoryPaths = data.data.directoryPaths
+          this.sendData(this.deploys);
           })
-      }
     }else{
       this.sendData(this.deploys);
     }
