@@ -34,11 +34,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     
     
     /**
-     공통 샘플 컴프넌트
+     공통
      */
     UserComponent,//pagination sample용 Component
     ExcelComponent,//excel file download용 Component
-    UploadFilesComponent,//file upload & download sample용 Component
+    UploadFilesComponent//file upload & download sample용 Component
     
   ],
   imports: [

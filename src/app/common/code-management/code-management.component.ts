@@ -33,7 +33,7 @@ export class CodeManagementComponent implements OnInit {
   parentCodeId: string;
   Index: any;
   hideme = [];
-  
+
   //subscribe에서 넘어온 data 받기 용
   dataRegister:any={}
 
@@ -96,7 +96,7 @@ export class CodeManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
       result.registerer = this.loginUser.id;
-      
+    
       this.codeMgmtService.insertCode(result).subscribe(data=> {
         this.dataRegister = data;//바로 data.success하면 에러 뜸.
         if(this.dataRegister.success == true) {
