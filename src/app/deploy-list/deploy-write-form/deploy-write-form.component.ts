@@ -25,7 +25,7 @@ export class DeployWriteFormComponent implements OnInit {
   loginUser : User;
   check:string;
   deployForm: FormGroup;  
-  deploys: Deploy = new Deploy();
+  deploys: Deploy = new Deploy;
 
   layoutCtrl = new FormControl('boxed');
   fileList:DeployFile = new DeployFile();
@@ -90,8 +90,8 @@ export class DeployWriteFormComponent implements OnInit {
   // 유효성검사
   buildForm(): void{
     this.deployForm = this.formBuilder.group({
-      deployWriteTitle:['',[Validators.required]],
-      deployWriteContent:['',[Validators.required]],
+      deployTitle:['',[Validators.required]],
+      deployContent:['',[Validators.required]],
       portalScript:['',[Validators.pattern(/^src/)]],
       tbwappScript:['',[Validators.pattern(/^src/)]],
       centerScript:['',[Validators.pattern(/^src/)]]
@@ -108,13 +108,13 @@ export class DeployWriteFormComponent implements OnInit {
   }
 
   // 2. send버튼 누를시
-  send(deployForm,deployWriteTitle,deployWriteContent,
+  send(deployForm,deployTitle,deployContent,
         portalScript,tbwappScript,centerScript,files
         ){
 
     //유효성 검사
-    if(this.deployForm.controls.deployWriteTitle.errors != null){
-      deployWriteTitle.focus();
+    if(this.deployForm.controls.deployTitle.errors != null){
+      deployTitle.focus();
       return false;
     }
 
@@ -125,12 +125,8 @@ export class DeployWriteFormComponent implements OnInit {
     //초기화
     this.deploys.scriptDTO = [];
 
-    //* 변수이름 중복으로 명칭 변경처리
-    this.deploys.deployTitle = this.deployForm.controls.deployWriteTitle.value;
-    this.deploys.deployContent = this.deployForm.controls.deployWriteContent.value;
-
     // 2-1. textarea enter구분
-    if(portalScript !== null){
+    if(portalScript.value != ''){
       try{
         portalScript = this.deployForm.controls.portalScript.value.split('\n');
         for(var i in portalScript){
@@ -138,7 +134,7 @@ export class DeployWriteFormComponent implements OnInit {
         }
       }catch(e){}
     } 
-    if(centerScript != null){
+    if(centerScript.value != ''){
       try{
         centerScript = this.deployForm.controls.centerScript.value.split('\n');
         for(var j in centerScript){
@@ -146,7 +142,7 @@ export class DeployWriteFormComponent implements OnInit {
         }
       }catch(e){}
     }
-    if(tbwappScript != null){
+    if(tbwappScript.value != ''){
       try{
         tbwappScript = this.deployForm.controls.tbwappScript.value.split('\n');
         for(var z in tbwappScript){
@@ -154,7 +150,7 @@ export class DeployWriteFormComponent implements OnInit {
         }
       }catch(e){}
     }
-    
+
     // 2-2. 파일 추가
     if(this.files.length !=0){
       for(let i = 0 ; i<this.files.length;i++){

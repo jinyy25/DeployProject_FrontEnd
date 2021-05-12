@@ -1,6 +1,7 @@
 
 <vex-secondary-toolbar current="배포이력 등록">
     <vex-breadcrumbs [crumbs]="['Deploy-Write']"></vex-breadcrumbs>
+
     <div class="clock-container">
         <div class="time">{{date}}</div>
     </div>
@@ -11,15 +12,15 @@
         <form [formGroup]="deployForm" class="form-outline">
             <mat-form-field class="block" appearance="standard">
                 <mat-label>제목</mat-label>
-                <input #deployWriteTitle formControlName="deployWriteTitle" maxlength="33" matInput>
-                <mat-error *ngIf="deployForm.get('deployWriteTitle').hasError('required')">제목을 입력해 주세요</mat-error>
+                <input #deployTitle formControlName="deployTitle" maxlength="33" matInput>
+                <mat-error *ngIf="deployForm.get('deployTitle').hasError('required')">제목을 입력해 주세요</mat-error>
             </mat-form-field>    
             <mat-form-field class="block">
                 <mat-label>내용</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
-                #deployWriteContent formControlName="deployWriteContent" 
+                #deployContent formControlName="deployContent" 
                 maxlength="166" matInput></textarea>
-                <mat-error *ngIf="deployForm.get('deployWriteContent').hasError('required')">내용을 입력해 주세요</mat-error>
+                <mat-error *ngIf="deployForm.get('deployContent').hasError('required')">내용을 입력해 주세요</mat-error>
             </mat-form-field>
             <mat-form-field class="block">
                 <mat-label>portal</mat-label>
@@ -31,13 +32,13 @@
                 <mat-label>tbwapp</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
                 #tbwappScript formControlName="tbwappScript" matInput></textarea>
-                <mat-error *ngIf="deployForm.get('portalScript').hasError('pattern')">스크립트를 올바르게 입력해 주세요</mat-error>
+                <mat-error *ngIf="deployForm.get('tbwappScript').hasError('pattern')">스크립트를 올바르게 입력해 주세요</mat-error>
             </mat-form-field>
             <mat-form-field class="block">
                 <mat-label>center</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
                 #centerScript formControlName="centerScript" matInput></textarea>
-                <mat-error *ngIf="deployForm.get('portalScript').hasError('pattern')">스크립트를 올바르게 입력해 주세요</mat-error>
+                <mat-error *ngIf="deployForm.get('centerScript').hasError('pattern')">스크립트를 올바르게 입력해 주세요</mat-error>
             </mat-form-field>
 
             <div id = "fileWrap">
@@ -54,7 +55,7 @@
             
             <div class="button-outline">
                 <button (click)="cancel()" mat-flat-button color="primary">취소</button>
-                <button (click)="send(deployForm,deployWriteTitle,deployWriteContent,portalScript,tbwappScript,centerScript,files)" mat-flat-button color="primary">배포이력등록</button>
+                <button (click)="send(deployForm,deployTitle,deployContent,portalScript,tbwappScript,centerScript,files)" mat-flat-button color="primary">배포이력등록</button>
             </div>
         </form>
     </div>

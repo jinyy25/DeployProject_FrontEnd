@@ -72,8 +72,6 @@ export class DeployDetailComponent implements OnInit {
       .subscribe(
         response => {
           this.deploy = response
-          this.deployDetailTitle = this.deploy.deployTitle
-          this.deployDetailContent = this.deploy.deployContent
         }
       )
 
