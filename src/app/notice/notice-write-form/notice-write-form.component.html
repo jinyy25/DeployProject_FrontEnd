@@ -18,7 +18,7 @@
 			</div>
 			<div *ngIf="display=='block'" id="fileBox">
 				<ul>
-					<li *ngFor="let file of files" ><button mat-button color="warn" (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+					<li *ngFor="let file of files" ><button  (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
 				</ul>
 			</div>
 		</div>

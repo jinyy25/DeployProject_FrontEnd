@@ -101,6 +101,7 @@ export class NoticeWriteFormComponent implements OnInit {
   }
   
   close(obj,text:string): void{
+    console.log("눌림");
     text=text.substr(1);
     
     //files는 기존에 선택된 파일을 저장하는 변수
