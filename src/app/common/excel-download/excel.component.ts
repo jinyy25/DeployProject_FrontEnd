@@ -17,6 +17,7 @@ export class ExcelComponent implements OnInit {
   
   users: User[];//엑셀로 export할 데이타
   dataForExcel = [];
+  //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
   dataHeaders = ["아이디", "이름", "성", "이메일"]
  
 
