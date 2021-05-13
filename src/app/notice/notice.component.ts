@@ -76,7 +76,7 @@ export class NoticeComponent implements OnInit {
     .subscribe(res =>{
       this.teams=res.data.teamList;
       this.notices=res.data.noticeList;
-      
+      this.p=1;
     })
   }
 
@@ -86,6 +86,7 @@ export class NoticeComponent implements OnInit {
     this.boardService.selectTeamNotice(team.codeName)
       .subscribe(res =>{
         this.notices=res.data;
+        this.p=1;
       })
   }
 
