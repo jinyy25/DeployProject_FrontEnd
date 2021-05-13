@@ -1,26 +1,4 @@
-<vex-page-layout>
-  <vex-page-layout-header
-    class="pb-16"
-    fxLayout="column"
-    fxLayoutAlign="center start"
-  >
-    <div
-      [class.container]="layoutCtrl.value === 'boxed'"
-      [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-      class="w-full flex flex-col sm:flex-row justify-between"
-    >
-      <div>
-        <h1 class="title mt-0 mb-1">대쉬보드</h1>
-        <vex-breadcrumbs [crumbs]="['Dashboard']"></vex-breadcrumbs>
-      </div>
-    </div>
-  </vex-page-layout-header>
-  <vex-page-layout-content
-    [class.container]="layoutCtrl.value === 'boxed'"
-    [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-    class="-mt-6"
-  >
-    <div class="schedule">
+<div class="schedule">
       <h4>오늘의 일정</h4>
       <mat-form-field appearance="standard">
         <mat-label>팀</mat-label>
@@ -48,7 +26,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
     </div>
-  </vex-page-layout-content>
-</vex-page-layout>
+</div>
+  

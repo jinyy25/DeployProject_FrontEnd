@@ -60,11 +60,11 @@ export class MypageComponent implements OnInit {
 
      this.form = this.fb.group({
      
-      email:['',[Validators.required,Validators.email]],
-      phone:['',[Validators.required,Validators.pattern(/^\d{3}-\d{3,4}-\d{4}$/ )]],
-      position:['',Validators.required],
-      name: ['', Validators.required],
-      team: ['', Validators.required],    
+      email:[this.loginUser.email,[Validators.required,Validators.email]],
+      phone:[this.loginUser.phone,[Validators.required,Validators.pattern(/^\d{3}-\d{3,4}-\d{4}$/ )]],
+      position:[this.loginUser.position,Validators.required],
+      name: [this.loginUser.name, Validators.required],
+      team: [this.loginUser.team, Validators.required],    
     });
 
     //팀,직급 불러오기

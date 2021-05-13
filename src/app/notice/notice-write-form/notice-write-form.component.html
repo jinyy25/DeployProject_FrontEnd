@@ -1,13 +1,16 @@
-<vex-secondary-toolbar current="공지사항 등록">
-  <vex-breadcrumbs [crumbs]="['Notice-write']"></vex-breadcrumbs>
+<vex-secondary-toolbar *ngIf="boardNo == null" current="공지사항 등록">
+  <vex-breadcrumbs [crumbs]="['Notice','Notice-write']"></vex-breadcrumbs>
+</vex-secondary-toolbar>
+<vex-secondary-toolbar *ngIf="boardNo != null" current="공지사항 수정">
+  <vex-breadcrumbs [crumbs]="['Notice','Notice-update']"></vex-breadcrumbs>
 </vex-secondary-toolbar>
 <div id="noticeWrap">
 	<div id="formGroup" [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
 		<div id="titleWrap" fxFlex="auto" fxLayout="column">
 			<mat-form-field fxFlex="grow" appearance="standard">
 				<mat-label>제목:</mat-label>
-				<input  *ngIf="boardNo==null" formControlName="title" matInput maxlength="34">
-				<input *ngIf="boardNo!=null" formControlName="title"  #title [(ngModel)]="notice.title" matInput maxlength="34">
+				<input  formControlName="title"  matInput maxlength="34"    #title >
+				<mat-error *ngIf="form.get('title').hasError('required')">제목을 입력해주세요.</mat-error>
 			</mat-form-field>
 		</div>
 
@@ -25,14 +28,14 @@
 
 
 		<div id="contentWrap">
-			<quill-editor @fadeInUp formControlName="content"  [styles]="{ flex: '1 1 auto' }" [(ngModel)]="notice.content">
+			<quill-editor #content @fadeInUp formControlName="content"  [styles]="{ flex: '1 1 auto' }" >
 		</quill-editor>
 		</div>
 
 		<div id="buttonWrap">
 			<button color="primary" mat-raised-button (click)="cancel()">취소</button>
-			<button color="primary" mat-raised-button  *ngIf="boardNo==null" (click)="insert(form)">등록</button>
-			<button color="primary" mat-raised-button  *ngIf="boardNo!=null" (click)="update(form)">수정</button>
+			<button color="primary" mat-raised-button  *ngIf="boardNo==null" (click)="insert(form,title)">등록</button>
+			<button color="primary" mat-raised-button  *ngIf="boardNo!=null" (click)="update(form,title)">수정</button>
 		</div>
 	</div>
 </div>
