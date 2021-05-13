@@ -50,23 +50,9 @@ export class DashboardComponent implements OnInit {
       }
     }
 
-    this.userService.selectUserList().subscribe(res => {//같은 팀 유저 리스트
+    this.scheduleService.selectTodayCount().subscribe(res => {//같은 팀 유저 리스트
       this.userList = res.data;
       this.teamUser = res.data.filter((user) => user.team == this.loginUser.team);
-    });
-
-    this.scheduleService.selectTodayCount().subscribe(res => {
-      for (let i = 0; i < this.userList.length; i++) {
-        const user = this.userList[i];
-        user.count = 0;
-        
-        for (let j = 0; j < res.data.length; j++) {//스케쥴 개수 있는 애들
-          const today = res.data[j];
-          if(user.id == today.writer){
-            user.count = today.count;
-          }
-        }
-      }
     });
 
     this.teamService.selectTeamList().subscribe(res => {

@@ -32,10 +32,6 @@ export class ScheduleComponent implements AfterViewInit {
   colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'lightgreen'];
   userList : User[];
   
-  //헤더
-  layoutCtrl = new FormControl('boxed');
-  searchCtrl = new FormControl();
-
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
 

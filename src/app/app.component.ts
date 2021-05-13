@@ -27,7 +27,6 @@ import { ScheduleService } from './services/schedule.service';
 })
 export class AppComponent {
   title = 'vex';
-  count = '';
 
   constructor(private configService: ConfigService,
               private styleService: StyleService,
@@ -38,8 +37,7 @@ export class AppComponent {
               private layoutService: LayoutService,
               private route: ActivatedRoute,
               private navigationService: NavigationService,
-              private splashScreenService: SplashScreenService,
-              private scheduleService : ScheduleService) {
+              private splashScreenService: SplashScreenService) {
     Settings.defaultLocale = this.localeId;
 
     if (this.platform.BLINK) {
@@ -84,14 +82,6 @@ export class AppComponent {
       filter(queryParamMap => queryParamMap.has('style'))
     ).subscribe(queryParamMap => this.styleService.setStyle(queryParamMap.get('style') as Style));
 
-    this.scheduleService.selectTodayCount().subscribe(res => {
-      let total = 0;
-      for (let i = 0; i < res.data.length; i++) {
-        total += res.data[i].count;
-      }
-      this.count = total.toString();
-    });
-
     this.navigationService.items = [
       {
         type: 'link',
@@ -116,11 +106,11 @@ export class AppComponent {
         label: 'Schedule',
         route:'/schedule',
         icon: icDateRange,
-        badge: {
-          value: this.count,
-          bgClass: 'bg-deep-purple',
-          textClass: 'text-deep-purple-contrast',
-        }
+        // badge: {
+        //   value: this.count,
+        //   bgClass: 'bg-deep-purple',
+        //   textClass: 'text-deep-purple-contrast',
+        // }
       },      
       {
         type:'link',
