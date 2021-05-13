@@ -9,11 +9,7 @@ import { User } from 'src/app/models/user.model';
 import { BoardService } from 'src/app/services/board.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice.model';
-import { delay, tap } from 'rxjs/operators';
-import { async } from 'rxjs';
-import { R3TargetBinder } from '@angular/compiler';
-
-
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'vex-notice-write-form',
@@ -87,24 +83,28 @@ export class NoticeWriteFormComponent implements OnInit {
     }
   }
 
-   delay = () => {
-    const randomDelay = Math.floor(Math.random() * 4) * 100
-    return new Promise(resolve => setTimeout(resolve, randomDelay))
-  }
 
+  reset(){
+    this.fileUploader.nativeElement.value=null;
+  }
 
   selectFiles(event): void {
     this.files=event.target.files;
     this.display="block";
-
     //파일 선택하면 기존파일이 사라지므로 확인하는 변수 초기화
     this.fileConfirm=[];
+
+    //파일이 없을때 닫음
+    if(this.files.length==0){
+      this.display="none";
+      this.fileConfirm=[];
+    }
     
   }
   
   close(obj,text:string): void{
     text=text.substr(1);
-    
+   
     //files는 기존에 선택된 파일을 저장하는 변수
     for(let i =0 ; i<this.files.length;i++){
       
@@ -123,7 +123,6 @@ export class NoticeWriteFormComponent implements OnInit {
     
     //파일이 없을때 닫음
     if(this.files.length==0){
-      //this.fileUploader.nativeElement.target=null;
       this.display="none";
       this.fileConfirm=[];
     }

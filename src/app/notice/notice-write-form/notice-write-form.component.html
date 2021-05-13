@@ -13,8 +13,8 @@
 
 		<div id="fileWrap">
 			<div>
-				<input type="file" multiple id="file" #fileUploader (change)="selectFiles($event)" style="display: none;">
-				<label id="fileLabel" for="file">파일 선택</label>
+				<input type="file" multiple id="file" #fileUploader  (change)="selectFiles($event)" style="display: none;">
+				<label id="fileLabel" for="file" (click)="reset()">파일 선택</label>
 			</div>
 			<div *ngIf="display=='block'" id="fileBox">
 				<ul>
