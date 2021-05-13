@@ -10,7 +10,7 @@
 	  <div id="teamWrap">
 		  <button  (click)="selectNotice()"  [ngClass]="teamName=='전체'?'on':'off'">전체</button>
 		  <button *ngFor="let team of teams" (click)="selectTeamNotice(team)" [ngClass]="teamName==team.codeName?'on':'off'" >{{team.codeName}}</button>
-		</div>
+	  </div>
     </div>
   </vex-page-layout-header>
   <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
@@ -31,6 +31,7 @@
 					<mat-label>검색어를 입력해 주세요.</mat-label>
 					<input formControlName="word" matInput>	
 				</mat-form-field> 
+				
 				<button color="primary" mat-raised-button (click)="search(form)" class="search_btn" (keyup.enter)="search(form)">검색</button>
 				<button color="primary" mat-raised-button  routerLink="write" class="write_btn" type="button" >작성</button>
 			</div>

@@ -175,14 +175,6 @@ export class NoticeWriteFormComponent implements OnInit {
 
   //파일 업로드 메서드
   upload(form,type){
-  
-    if(type=="insert"){
-      if(this.form.controls.title.errors != null){
-        return false;
-      }else if(this.form.controls.content.errors != null){
-        return false;
-      }
-    }//if end
 
     this.status="wait";  
     if(this.files.length !=0){
@@ -204,12 +196,25 @@ export class NoticeWriteFormComponent implements OnInit {
   }//upload()end
 
 
-  insert(form){
+  insert(form,content){
+    if(this.form.controls.title.errors != null){
+      return false;
+    }else if(this.form.controls.content.errors != null){
+      content.focus();
+        return false;
+      }
     const type="insert";
     this.upload(form,type);
   }
 
   update(form){
+     if(this.form.controls.title.errors != null){
+        alert("제목을 입력해 주세요.");
+        return false;
+      }else if(this.form.controls.content.errors != null){
+        alert("내용을 입력해 주세요.");
+        return false;
+      }
     const type="update";
     
     //기존에 있었던 파일 일때
