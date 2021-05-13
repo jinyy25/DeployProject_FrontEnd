@@ -12,14 +12,15 @@
     <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
                              [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
 						     class="-mt-6">
-                             
-    <div>               
-    <button mat-raised-button
+        <div class="card overflow-auto -mt-16">
+    	<div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-raised-button
             color="primary" 
             (click)="openInsertCodeDialog()">
             코드등록
-    </button>
-    </div>          
+            </button>
+		</div>
+	    </div>    
     <table id="boardTable" class="table table-striped">
         <thead>
         <tr>
