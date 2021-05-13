@@ -24,9 +24,7 @@ export class DashboardComponent implements OnInit {
   teamUser : User[];
 
   teamControl;
-
-  layoutCtrl = new FormControl('boxed');
-  searchCtrl = new FormControl();
+  
 
   constructor(
     private jwtService : JwtService,
