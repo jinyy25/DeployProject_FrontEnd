@@ -13,35 +13,41 @@ export class DeployService {
     private httpClient:HttpClient
   ) { }
 
-  private deployURL='/deploy-list';
+  private deployURL='/deploy';
 
   //1. select all deploys
   public selectDeploys(){
-    return this.httpClient.get<Deploy[]>(this.deployURL);
+    return this.httpClient.get<any>(this.deployURL);
   }
 
   //2. insert deploys
   public insertDeploy(deploys){
-    return this.httpClient.post<Deploy>(this.deployURL,deploys);
+    return this.httpClient.post<any>(this.deployURL,deploys);
   }
 
   //3. select scripts
   public selectDeployDetail(deployNo){
-      return this.httpClient.get<ScriptView[]>(this.deployURL+"/"+deployNo);
+      return this.httpClient.get<any>(this.deployURL+"/"+deployNo);
   }
 
   //4. select deploy
   public selectDeployContent(deployNo){
-    return this.httpClient.get<Deploy>(this.deployURL+"/deployContent/"+deployNo);
+    return this.httpClient.get<any>(this.deployURL+"/deployContent/"+deployNo);
   }
 
   //5. search deploys
   public searchDeploy(searchCategory,keyword){
-    return this.httpClient.get<Deploy[]>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
+    return this.httpClient.get<any>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
   }
 
   //6. zip download
   public downloadZipFile(deployNo){
     return this.httpClient.post<any>(this.deployURL + "/download/"+deployNo, deployNo);
   }
+
+
+  //7. file download
+  // public fileDownload(deployNo){
+  //   return this.httpClient.post<any>();
+  // }
 }

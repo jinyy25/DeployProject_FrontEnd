@@ -41,7 +41,7 @@
                         <mat-datepicker #start></mat-datepicker>
                     </mat-form-field>
                     <button color="primary" mat-raised-button (click)="search(searchGroup)" (keyup.enter)="search(searchGroup)"  class="search_btn">검색</button>  
-                    <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">배포작성</button>   
+                    <button color="primary" mat-raised-button routerLink="deploy-write" class="write_btn">작성</button>   
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
                     <td routerLink="{{deploy.deployNo}}">{{deploy.writer}}</td>
                     <td routerLink="{{deploy.deployNo}}">{{deploy.deployDate}}</td>
                     <td>
-                        <button mat-stroked-button>zip</button>
+                        <button mat-stroked-button (click)="downloadZip(deployNo)">zip</button>
                         <button mat-stroked-button class="excelBtn" (click)="exportAsXLSX(listTitle.id,deploy.deployNo)">excel</button>
                     </td>                                
                 </tr>

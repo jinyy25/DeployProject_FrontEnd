@@ -93,7 +93,7 @@ export class DeployListComponent implements OnInit{
     this.deployService.selectDeploys()
     .subscribe(
       response => {
-      this.deploys = response
+      this.deploys = response.data
     }
     );
   }
@@ -117,7 +117,7 @@ export class DeployListComponent implements OnInit{
     }
     this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.keyword)
     .subscribe(response => {
-      this.deploys = response;
+      this.deploys = response.data;
     })
   }
 
@@ -127,7 +127,7 @@ export class DeployListComponent implements OnInit{
       this.deployService.selectDeployDetail(deployNo)
       .subscribe(
           response => {
-            this.scriptViews = response
+            this.scriptViews = response.data
             this.excelService.exportAsExcelFile(this.scriptViews, listTitle)
           },
           )  
@@ -143,4 +143,24 @@ export class DeployListComponent implements OnInit{
       this.itemsPerPage = event.target.value;
       this.p = 1;
   }
+
+  //6
+  downloadZip(deployNo){
+    this.deployService.downloadZipFile(deployNo)
+    .subscribe(
+      response => {
+
+        // 다운로드 보류
+        // this.deployService.fileDownload(deployNo)
+        // .subscribe(
+        //   response => {
+        //     alert("확인");
+        //   }
+        // )
+
+        // this.deploy = response.data
+      },
+    );
+  }
+
 }

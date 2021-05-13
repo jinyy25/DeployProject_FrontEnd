@@ -67,7 +67,7 @@ export class DeployDetailComponent implements OnInit {
   this.deployService.selectDeployDetail(this.deployNo)
     .subscribe(
         response => {
-          this.scriptViews = response
+          this.scriptViews = response.data
         },
     )
   
@@ -75,7 +75,7 @@ export class DeployDetailComponent implements OnInit {
   this.deployService.selectDeployContent(this.deployNo)
       .subscribe(
         response => {
-          this.deploy = response
+          this.deploy = response.data
         }
       )
 
@@ -94,7 +94,7 @@ export class DeployDetailComponent implements OnInit {
     this.deployService.downloadZipFile(deployNo)
     .subscribe(
       response => {
-        this.deploy = response
+        this.deploy = response.data
       },
     );
   }
@@ -109,5 +109,6 @@ export class DeployDetailComponent implements OnInit {
       this.itemsPerPage = event.target.value;
       this.p = 1;
   }
+  
 
 }
