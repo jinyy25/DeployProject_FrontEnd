@@ -20,10 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatTableModule } from '@angular/material/table';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
-import { PageLayoutModule } from 'src/@vex/components/page-layout/page-layout.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BreadcrumbsModule } from 'src/@vex/components/breadcrumbs/breadcrumbs.module';
-import { ContainerModule } from 'src/@vex/directives/container/container.module';
+import { MatIconModule } from '@angular/material/icon';
+import { IconModule } from '@visurel/iconify-angular';
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
@@ -54,10 +52,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatNativeDateModule,
     MomentDateModule,
     MatTableModule,
-    PageLayoutModule,
-    FlexLayoutModule,
-    BreadcrumbsModule,
-    ContainerModule
+    MatIconModule,
+    IconModule
   ],
   entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
     InsertScheduleComponent,

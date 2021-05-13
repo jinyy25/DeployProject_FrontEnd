@@ -14,7 +14,8 @@ import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.model';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 import { UserService } from '../services/user.service';
-import { FormControl } from '@angular/forms';
+import icChevronLeft from '@iconify/icons-ic/twotone-chevron-left';
+import icChevronRight from '@iconify/icons-ic/twotone-chevron-right';
 
 @Component({
   selector: 'app-schedule',
@@ -31,6 +32,10 @@ export class ScheduleComponent implements AfterViewInit {
   teamList : Team[];
   colorArray = ['pink', 'orange', 'yellowgreen', 'purple', 'navy', 'black', 'red', 'violet', 'lightgreen'];
   userList : User[];
+
+  viewDate;
+  icChevronLeft = icChevronLeft;
+  icChevronRight = icChevronRight;
   
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -54,7 +59,6 @@ export class ScheduleComponent implements AfterViewInit {
     this.userService.selectUserList().subscribe(res => {
       this.userList = res.data;
     });
-
   }
 
   events : EventInput[] = [];
@@ -158,6 +162,8 @@ export class ScheduleComponent implements AfterViewInit {
       });
       this.calendarOptions.events = this.events;
     });
+
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
   }
 
   //이벤트 클릭시 수정, 삭제

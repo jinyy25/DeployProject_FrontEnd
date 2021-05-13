@@ -13,7 +13,7 @@
 #external {
   position: absolute;
   z-index: 2;
-  top: 0;
+  top: 180px;
   left: 20px;
   width: 160px;
   padding: 10px;
@@ -119,4 +119,20 @@
   padding: 2px;
   padding-left: 10px;
   margin-left: 5px;
+}
+
+.names {
+  padding-left: 20px;
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.calendar-bg {
+  background: url("/assets/img/demo/landscape.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.center {
+  font: 400 24px/32px var(--font);
+  letter-spacing: -0.019em;
 }
