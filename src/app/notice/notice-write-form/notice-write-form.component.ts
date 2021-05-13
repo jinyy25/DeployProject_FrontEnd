@@ -196,21 +196,23 @@ export class NoticeWriteFormComponent implements OnInit {
   }//upload()end
 
 
-  insert(form,content){
+  insert(form,title){
     this.form.markAllAsTouched();//mat error 뜨게
     if(this.form.controls.title.errors != null){
+      title.focus();
       return false;
     }else if(this.form.controls.content.errors != null){
-      content.focus();
+      alert("내용을 입력해 주세요.");
       return false;
     }
     const type="insert";
     this.upload(form,type);
   }
 
-  update(form){
+  update(form,title){
+    this.form.markAllAsTouched();//mat error 뜨게
      if(this.form.controls.title.errors != null){
-        alert("제목을 입력해 주세요.");
+        title.focus();
         return false;
       }else if(this.form.controls.content.errors != null){
         alert("내용을 입력해 주세요.");
