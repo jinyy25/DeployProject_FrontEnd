@@ -68,7 +68,8 @@ export class NoticeDetailComponent implements OnInit {
 
   //목록
   selectList(){
-    this.router.navigate(['/notice']);
+    //this.router.navigate(['/notice']);
+    window.history.go(-1);
   }
 
   //수정

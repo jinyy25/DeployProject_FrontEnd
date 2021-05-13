@@ -43,7 +43,11 @@ export class ScheduleService{
     return this.http.get<any>(this.url+"/history/"+scheduleNo);
   }
 
-  selectTodayCount(){
+  selectTodayCount(){//오늘의 일정 개개인 개수
     return this.http.get<any>(this.url+"/today");
+  }
+
+  selectTotalCount(){//오늘의 일정 총 개수
+    return this.http.get<any>(this.url+"/count")
   }
 }

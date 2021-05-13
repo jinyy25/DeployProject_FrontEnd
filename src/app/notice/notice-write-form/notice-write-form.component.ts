@@ -57,10 +57,13 @@ export class NoticeWriteFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.form=this.fb.group({
-      title:['',Validators.required],
-      content:['',Validators.required]
-    })
+    if(this.boardNo == null){
+
+      this.form=this.fb.group({
+        title:['',Validators.required],
+        content:['',Validators.required]
+      })
+    }
 
 
     //수정일 경우
@@ -71,6 +74,11 @@ export class NoticeWriteFormComponent implements OnInit {
         
         this.notice=res.data.board;
         this.files=res.data.files;
+        
+        this.form=this.fb.group({
+          title:[this.notice.title,Validators.required],
+          content:[this.notice.content,Validators.required]
+        })
 
         //기존에 있던 파일인지 확인하는 변수
         this.fileConfirm=res.data.files;
@@ -175,14 +183,6 @@ export class NoticeWriteFormComponent implements OnInit {
 
   //파일 업로드 메서드
   upload(form,type){
-  
-    if(type=="insert"){
-      if(this.form.controls.title.errors != null){
-        return false;
-      }else if(this.form.controls.content.errors != null){
-        return false;
-      }
-    }//if end
 
     this.status="wait";  
     if(this.files.length !=0){
@@ -204,12 +204,28 @@ export class NoticeWriteFormComponent implements OnInit {
   }//upload()end
 
 
-  insert(form){
+  insert(form,title){
+    this.form.markAllAsTouched();//mat error 뜨게
+    if(this.form.controls.title.errors != null){
+      title.focus();
+      return false;
+    }else if(this.form.controls.content.errors != null){
+      alert("내용을 입력해 주세요.");
+      return false;
+    }
     const type="insert";
     this.upload(form,type);
   }
 
-  update(form){
+  update(form,title){
+    this.form.markAllAsTouched();//mat error 뜨게
+     if(this.form.controls.title.errors != null){
+        title.focus();
+        return false;
+      }else if(this.form.controls.content.errors != null){
+        alert("내용을 입력해 주세요.");
+        return false;
+      }
     const type="update";
     
     //기존에 있었던 파일 일때

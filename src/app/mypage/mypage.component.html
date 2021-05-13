@@ -25,13 +25,13 @@
        
         <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>Name</mat-label>
-          <input #name formControlName="name" matInput required [(ngModel)]="loginUser.name">
+          <input #name formControlName="name" matInput required >
            <mat-error *ngIf="form.get('name').hasError('required')">이름을 입력해 주세요.</mat-error>
           </mat-form-field>
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Position</mat-label>
-            <mat-select #position formControlName="position" [(ngModel)]="loginUser.position">
+            <mat-select #position formControlName="position" >
              <mat-option *ngFor="let position of positionList"  value="{{position.codeName}}" >{{position.codeName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.get('position').hasError('required')">직급을 선택해 주세요.</mat-error>
@@ -39,14 +39,14 @@
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>E-Mail</mat-label>
-            <input #email formControlName="email" matInput required [(ngModel)]="loginUser.email">
+            <input #email formControlName="email" matInput required >
             <mat-error *ngIf="form.get('email').hasError('required')">이메일을 입력해 주세요.</mat-error>
             <mat-error *ngIf="form.get('email').hasError('email')">이메일 형식에 맞게 입력해 주세요.</mat-error>
           </mat-form-field>
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Phone (ex:010-1234-5678)</mat-label>
-            <input #phone formControlName="phone" matInput required [(ngModel)]="loginUser.phone">
+            <input #phone formControlName="phone" matInput required >
             <mat-error *ngIf="form.get('phone').hasError('required')">핸드폰 번호를 입력해 주세요.</mat-error>
             <mat-error *ngIf="form.get('phone').hasError('pattern')">핸드폰 번호를 형식에 맞게 입력해 주세요.</mat-error>
           </mat-form-field>
@@ -55,7 +55,7 @@
           
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Team</mat-label>
-            <mat-select #team formControlName="team" [(ngModel)]="loginUser.team">
+            <mat-select #team formControlName="team" >
               <mat-option  *ngFor="let team of teamList" value="{{team.codeName}}" >{{team.codeName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.get('team').hasError('required')">팀을 선택해 주세요.</mat-error>
