@@ -13,12 +13,12 @@
 
 		<div id="fileWrap">
 			<div>
-				<input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;">
-				<label id="fileLabel" for="file">파일 선택</label>
+				<input type="file" multiple id="file" #fileUploader  (change)="selectFiles($event)" style="display: none;">
+				<label id="fileLabel" for="file" (click)="reset()">파일 선택</label>
 			</div>
 			<div *ngIf="display=='block'" id="fileBox">
 				<ul>
-					<li *ngFor="let file of files" ><button mat-button color="warn" (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+					<li *ngFor="let file of files" ><button  (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
 				</ul>
 			</div>
 		</div>

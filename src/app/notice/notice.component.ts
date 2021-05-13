@@ -36,6 +36,7 @@ export class NoticeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.boardService.selectNotice()
     .subscribe(res =>{
       this.teams=res.data.teamList;
@@ -64,6 +65,7 @@ export class NoticeComponent implements OnInit {
     .subscribe(res=>{
       this.teamName="전체";
       this.notices=res.data;
+      this.p=1;
     })
   }
 

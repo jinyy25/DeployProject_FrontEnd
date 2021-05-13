@@ -60,6 +60,7 @@
 .update {
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
 }
 
 .table {
@@ -91,7 +92,7 @@
 }
 
 .team > li:hover {
-  text-shadow: 0px 0px 1px black;
+  text-shadow: 0px 0px 2px gray;
 }
 
 .on {

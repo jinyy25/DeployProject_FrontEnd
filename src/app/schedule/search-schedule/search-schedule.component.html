@@ -14,7 +14,7 @@
 
 <div mat-dialog-content>
   <ul class="team">
-    <li (click)="showAll()" [ngClass]="menu == '전체' ? 'on' : 'off'">전체</li>
+    <li (click)="showAll()" [class.on]="menu == '전체'">전체</li>
     <li
       *ngFor="let team of data.teamList"
       (click)="showUser(team)"

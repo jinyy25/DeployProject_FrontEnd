@@ -16,7 +16,7 @@ export class UserService {
   private userUrl = "/user";
 
   public insertUser(user){
-    return this.http.post<any>(this.userUrl+"/register",user);
+    return this.http.post<any>(this.userUrl,user);
   }
   public checkId(id){
     return this.http.get<any>(this.userUrl+"/check/"+id);

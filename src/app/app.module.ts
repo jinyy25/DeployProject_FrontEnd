@@ -1,3 +1,4 @@
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +24,7 @@ import { UserComponent } from './common/pagination/user.component';
 import { UserExcelService } from './common/excel-download/userExcel.service';
 import { ExcelComponent } from './common/excel-download/excel.component';
 import { ExcelService } from './common/excel-download/excel.service';
+import { ExcelDownloadService } from './common/excel-download/excel-download.service';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -34,11 +36,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     
     
     /**
-     공통 샘플 컴프넌트
+     공통
      */
     UserComponent,//pagination sample용 Component
     ExcelComponent,//excel file download용 Component
-    UploadFilesComponent,//file upload & download sample용 Component
+    UploadFilesComponent//file upload & download sample용 Component
     
   ],
   imports: [
@@ -66,7 +68,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     UserService,
     UserExcelService,
     ExcelService,
-    CodeMgmtService
+    CodeMgmtService,
+    ExcelDownloadService//excelJS Library 이용
     
   ],
   bootstrap: [AppComponent]

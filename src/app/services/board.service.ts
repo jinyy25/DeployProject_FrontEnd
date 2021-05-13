@@ -13,7 +13,7 @@ export class BoardService {
   constructor(private http: HttpClient) { }
 
   upload(fileList:BoardFile){
-    return this.http.post<any>(this.userUrl+"/register",fileList);
+    return this.http.post<any>(this.userUrl,fileList);
   }
 
   selectNotice(){
