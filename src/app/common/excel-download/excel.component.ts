@@ -43,7 +43,6 @@ export class ExcelComponent implements OnInit {
   exportToExcel(listTitle:string) {
     this.users.forEach((row: any) => {
       this.dataForExcel.push(Object.values(row))
-      console.log(this.dataForExcel);
     })
 
     let reportData = {
