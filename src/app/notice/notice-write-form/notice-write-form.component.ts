@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice.model';
 import { delay, tap } from 'rxjs/operators';
 import { async } from 'rxjs';
+import { R3TargetBinder } from '@angular/compiler';
 
 
 
@@ -29,7 +30,6 @@ import { async } from 'rxjs';
   ]
 })
 export class NoticeWriteFormComponent implements OnInit {
- 
 
   selectedFiles?: FileList;
   files = [];
@@ -44,6 +44,7 @@ export class NoticeWriteFormComponent implements OnInit {
   notice:Notice = new Notice();
   status="true";
 
+  @ViewChild('fileUploader') fileUploader:ElementRef;
 
   constructor(
     private fb:FormBuilder,
@@ -98,10 +99,10 @@ export class NoticeWriteFormComponent implements OnInit {
 
     //파일 선택하면 기존파일이 사라지므로 확인하는 변수 초기화
     this.fileConfirm=[];
+    
   }
   
   close(obj,text:string): void{
-    console.log("눌림");
     text=text.substr(1);
     
     //files는 기존에 선택된 파일을 저장하는 변수
@@ -115,13 +116,14 @@ export class NoticeWriteFormComponent implements OnInit {
       }//if end
       
     }//for end
-
+    
     
     this.files=this.fileNames;
     this.fileNames=[];
-
+    
     //파일이 없을때 닫음
     if(this.files.length==0){
+      //this.fileUploader.nativeElement.target=null;
       this.display="none";
       this.fileConfirm=[];
     }
