@@ -197,12 +197,13 @@ export class NoticeWriteFormComponent implements OnInit {
 
 
   insert(form,content){
+    this.form.markAllAsTouched();//mat error 뜨게
     if(this.form.controls.title.errors != null){
       return false;
     }else if(this.form.controls.content.errors != null){
       content.focus();
-        return false;
-      }
+      return false;
+    }
     const type="insert";
     this.upload(form,type);
   }
