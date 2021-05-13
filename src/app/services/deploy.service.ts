@@ -37,6 +37,7 @@ export class DeployService {
 
   //5. search deploys
   public searchDeploy(searchCategory,keyword){
+    alert("click:"+searchCategory+keyword);
     return this.httpClient.get<any>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
   }
 

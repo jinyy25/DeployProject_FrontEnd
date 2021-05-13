@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import { FormControl } from '@angular/forms';
-// import { ExcelService } from '../common/excel-download/excel.service';
 import { UserExcelService } from '../common/excel-download/userExcel.service';
 import { ScriptView } from '../models/scriptView.model';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -61,6 +60,13 @@ export class DeployListComponent implements OnInit{
   category:string;
   scriptViews:ScriptView[];
 
+  all="all";
+
+  //엑셀관련
+  dataForExcel = [];
+  //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
+  dataHeaders = ["구분", "타입", "소스경로", "디렉토리생성","	백업스크립트(운영)","운영파일반영스크립트","	원복스크립트"]
+
   constructor(
     private deployService:DeployService,
     private jwtService:JwtService,
@@ -98,16 +104,12 @@ export class DeployListComponent implements OnInit{
     );
   }
   //1. 페이징처리
-  getPage(page) {}
+  getPage(page) {
+    this.p = page;
+  }
 
   //2. 검색버튼
   search(searchGroup){
-    if(this.searchGroup.controls.searchCategory.errors != null){
-      return false;
-    }else if(this.searchGroup.controls.keyword.errors != null){
-      return false;
-    }
-
     //2-1 select option = all,writer,title
     this.keyword  =this.searchGroup.controls.keyword.value
 
@@ -123,12 +125,28 @@ export class DeployListComponent implements OnInit{
 
 
   //3. 엑셀다운로드
-  exportAsXLSX(listTitle:string,deployNo:number):void {  
+  exportToExcel(listTitle:string,deployNo:number):void {  
+
       this.deployService.selectDeployDetail(deployNo)
       .subscribe(
           response => {
             this.scriptViews = response.data
-            this.excelService.exportAsExcelFile(this.scriptViews, listTitle)
+
+            // this.excelViews = this.scriptViews
+
+            this.scriptViews.forEach((row: any) => {
+              
+              this.dataForExcel.push(Object.values(row))
+              // this.dataForExcel.push(this.scriptViews.)
+            })
+        
+            let reportData = {
+              title: listTitle,
+              data: this.dataForExcel,
+              headers: this.dataHeaders
+            }
+
+            this.excelService.exportExcel(reportData);
           },
           )  
   }
@@ -149,16 +167,7 @@ export class DeployListComponent implements OnInit{
     this.deployService.downloadZipFile(deployNo)
     .subscribe(
       response => {
-
-        // 다운로드 보류
-        // this.deployService.fileDownload(deployNo)
-        // .subscribe(
-        //   response => {
-        //     alert("확인");
-        //   }
-        // )
-
-        // this.deploy = response.data
+        this.deploys = response.data
       },
     );
   }

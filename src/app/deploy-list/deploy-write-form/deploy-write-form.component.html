@@ -15,26 +15,26 @@
                 <input #deployTitle formControlName="deployTitle" maxlength="33" matInput>
                 <mat-error *ngIf="deployForm.get('deployTitle').hasError('required')">제목을 입력해 주세요</mat-error>
             </mat-form-field>    
-            <mat-form-field class="block">
+            <mat-form-field class="block" appearance="standard">
                 <mat-label>내용</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
                 #deployContent formControlName="deployContent" 
                 maxlength="166" matInput></textarea>
                 <mat-error *ngIf="deployForm.get('deployContent').hasError('required')">내용을 입력해 주세요</mat-error>
             </mat-form-field>
-            <mat-form-field class="block">
+            <mat-form-field class="block" appearance="standard">
                 <mat-label>portal</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
                 #portalScript formControlName="portalScript" matInput></textarea>
                 <mat-error *ngIf="deployForm.get('portalScript').hasError('pattern')">스크립트를 올바르게 입력해 주세요</mat-error>
             </mat-form-field>
-            <mat-form-field class="block">
+            <mat-form-field class="block" appearance="standard">
                 <mat-label>tbwapp</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
                 #tbwappScript formControlName="tbwappScript" matInput></textarea>
                 <mat-error *ngIf="deployForm.get('tbwappScript').hasError('pattern')">스크립트를 올바르게 입력해 주세요</mat-error>
             </mat-form-field>
-            <mat-form-field class="block">
+            <mat-form-field class="block" appearance="standard">
                 <mat-label>center</mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="3" 
                 #centerScript formControlName="centerScript" matInput></textarea>
@@ -43,8 +43,8 @@
 
             <div id = "fileWrap">
                 <div>
-                    <input type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;" accept=".jar">
-                    <label id="fileLabel" for="file">파일 선택</label>
+                    <input #fileUploader type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;" accept=".jar">
+                    <label id="fileLabel" for="file" (click)="reset()">파일 선택</label>
                 </div>
                 <div *ngIf="display=='block'" id="fileBox">
                     <ul>

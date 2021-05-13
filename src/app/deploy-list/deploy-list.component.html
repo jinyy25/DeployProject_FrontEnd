@@ -18,7 +18,7 @@
             <div class="deploy-search" [formGroup]="searchGroup" (keyup.enter)="search(searchGroup)"> 
                     <mat-form-field class="select-field" appearance="standard">
                             <mat-label>분류</mat-label>
-                            <mat-select (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" >
+                            <mat-select (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" [(ngModel)]="all" >
                                 <mat-option value="all">전체</mat-option>
                                 <mat-option value="title">제목</mat-option>
                                 <mat-option value="writer">작성자</mat-option>
@@ -64,14 +64,17 @@
                     <td routerLink="{{deploy.deployNo}}">{{deploy.writer}}</td>
                     <td routerLink="{{deploy.deployNo}}">{{deploy.deployDate}}</td>
                     <td>
-                        <button mat-stroked-button (click)="downloadZip(deployNo)">zip</button>
-                        <button mat-stroked-button class="excelBtn" (click)="exportAsXLSX(listTitle.id,deploy.deployNo)">excel</button>
+                        <button mat-stroked-button (click)="downloadZip(deploy.deployNo)">zip</button>
+                        <button mat-stroked-button class="excelBtn" (click)="exportToExcel(listTitle.id,deploy.deployNo)">excel</button>
                     </td>                                
                 </tr>
             </tbody>        
         </table>
     </div>
-    <div class="paginate-box">
+    <div class="paginate-box">   
+        <pagination-controls (pageChange)="getPage(p =$event)" previousLabel="" nextLabel="" responsive="true">
+        </pagination-controls>
+
         <div id="item">
             Items per Page:
             <select (change)="handlePageSizeChange($event)">
@@ -79,9 +82,7 @@
                 {{ itemsPerPage }}
                 </option>
             </select>
-        </div>    
-        <pagination-controls (pageChange)="getPage(p =$event)" previousLabel="" nextLabel="" responsive="true">
-        </pagination-controls>
+        </div> 
     </div>
     </vex-page-layout-content>
 

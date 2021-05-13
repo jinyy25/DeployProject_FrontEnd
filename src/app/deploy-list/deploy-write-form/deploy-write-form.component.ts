@@ -1,6 +1,6 @@
 import { CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Portal } from '@angular/cdk/portal';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,6 +37,7 @@ export class DeployWriteFormComponent implements OnInit {
 
   date:any;
 
+  @ViewChild('fileUploader') fileUploader:ElementRef;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -85,6 +86,11 @@ export class DeployWriteFormComponent implements OnInit {
     if(this.files.length==0){
       this.display="none";
     }
+  }
+
+  //파일명초기화
+  reset(){
+    this.fileUploader.nativeElement.value=null;
   }
 
   // 유효성검사

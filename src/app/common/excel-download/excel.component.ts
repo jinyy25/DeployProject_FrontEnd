@@ -49,7 +49,6 @@ export class ExcelComponent implements OnInit {
       title: listTitle,
       data: this.dataForExcel,
       headers: this.dataHeaders
-      //headers: Object.keys(this.users[0])
     }
 
     this.excelDownloadService.exportExcel(reportData);
