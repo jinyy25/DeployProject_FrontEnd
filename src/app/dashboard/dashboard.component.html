@@ -1,26 +1,4 @@
-<vex-page-layout>
-  <vex-page-layout-header
-    class="pb-16"
-    fxLayout="column"
-    fxLayoutAlign="center start"
-  >
-    <div
-      [class.container]="layoutCtrl.value === 'boxed'"
-      [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-      class="w-full flex flex-col sm:flex-row justify-between"
-    >
-      <div>
-        <h1 class="title mt-0 mb-1">대쉬보드</h1>
-        <vex-breadcrumbs [crumbs]="['Dashboard']"></vex-breadcrumbs>
-      </div>
-    </div>
-  </vex-page-layout-header>
-  <vex-page-layout-content
-    [class.container]="layoutCtrl.value === 'boxed'"
-    [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
-    class="-mt-6"
-  >
-    <div class="schedule">
+<div class="schedule">
       <h4>오늘의 일정</h4>
       <mat-form-field appearance="standard">
         <mat-label>팀</mat-label>
@@ -48,45 +26,5 @@
             </tr>
           </tbody>
         </table>
-      </div>
     </div>
-    <div id="notice">
-      <table id="noticeTable" >
-        <thead>
-          <tr>
-            <th style="width:60%">제목</th>
-            <th style="width:20%">작성자</th>
-            <th style="width:20%">팀</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-              <td>제목이에요</td>
-              <td>작성자에요</td>
-              <td>팀이에여ㅛ</td>
-          </tr>
-          <tr>
-            <td>제목이에요</td>
-            <td>작성자에요</td>
-            <td>팀이에여ㅛ</td>
-        </tr>
-        <tr>
-          <td>제목이에요</td>
-          <td>작성자에요</td>
-          <td>팀이에여ㅛ</td>
-      </tr>
-      <tr>
-        <td>제목이에요</td>
-        <td>작성자에요</td>
-        <td>팀이에여ㅛ</td>
-    </tr>
-    <tr>
-      <td>제목이에요</td>
-      <td>작성자에요</td>
-      <td>팀이에여ㅛ</td>
-  </tr>
-        </tbody>
-      </table>
-    </div>
-  </vex-page-layout-content>
-</vex-page-layout>
+
