@@ -25,6 +25,7 @@ td:first-child {
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
+  float: left;
 }
 
 table {
@@ -37,3 +38,29 @@ h4 {
   margin: 0 auto;
   margin-top: 10px;
 }
+
+#notice{
+  float: left;
+  width: 800px;
+  margin-top: 24px;
+  margin-left: 60px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+}
+
+#notice table{
+  width: 800px;
+}
+
+#noticeTable th{
+  border-top:none;
+  height: 40px;
+  line-height: 40px;
+}
+
+#noticeTable td{
+  height: 60px;
+  line-height: 50px;
+  border-right:none;
+}
+
