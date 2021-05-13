@@ -57,10 +57,13 @@ export class NoticeWriteFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.form=this.fb.group({
-      title:['',Validators.required],
-      content:['',Validators.required]
-    })
+    if(this.boardNo == null){
+
+      this.form=this.fb.group({
+        title:['',Validators.required],
+        content:['',Validators.required]
+      })
+    }
 
 
     //수정일 경우
@@ -71,6 +74,11 @@ export class NoticeWriteFormComponent implements OnInit {
         
         this.notice=res.data.board;
         this.files=res.data.files;
+        
+        this.form=this.fb.group({
+          title:[this.notice.title,Validators.required],
+          content:[this.notice.content,Validators.required]
+        })
 
         //기존에 있던 파일인지 확인하는 변수
         this.fileConfirm=res.data.files;

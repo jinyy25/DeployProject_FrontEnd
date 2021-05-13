@@ -46,7 +46,7 @@ export class NoticeComponent implements OnInit {
     
 
     this.form=this.fb.group({
-      type:['',Validators.required],
+      type:[this.title,Validators.required],
       word:['',Validators.required]
     })
   }

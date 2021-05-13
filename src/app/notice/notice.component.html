@@ -21,7 +21,7 @@
 			<div id="searchBox" [formGroup]="form" (keyup.enter)="search(form)">
 				<mat-form-field class="select-field" appearance="standard">
 					<mat-label>분류</mat-label>
-					<mat-select required formControlName="type" [(ngModel)]="title">
+					<mat-select required formControlName="type" >
 						<mat-option value="title">제목</mat-option>
 						<mat-option value="writer">작성자</mat-option>
 						<mat-option value="content">내용</mat-option>
