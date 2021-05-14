@@ -3,63 +3,62 @@
     <div
       class="bg-contrast-black opacity-25 absolute top-0 left-0 right-0 bottom-0 z-0 w-full h-full"
     ></div>
-    <div class="container py-4 px-6 h-40 z-10 relative flex items-end">
+    <div class="container px-6 h-40 z-10 relative flex items-end">
       <div
         class="flex-auto flex flex-col sm:flex-row justify-between items-center"
       >
         <div>
-          <button mat-button>전체</button>
-          <button mat-button>팀</button>
-          <button mat-button>개인</button>
+          <button (click)="showAll()" class="date">전체</button>
+          <button (click)="showMyTeam()" class="date">팀</button>
+          <div *ngIf="toggle" id="external" [@dropdown]="toggle ? true : false">
+            <div
+              class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
+              *ngFor="let item of teamList; let i = index"
+            >
+              <div
+                class="fc-event-main"
+                #team
+                (click)="showTeam(item)"
+                [ngStyle]="{ 'background-color': teamColor(team, i) }"
+              >
+                {{ item.codeName }} 팀
+              </div>
+            </div>
+            <div
+              class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine"
+            >
+              <div class="fc-event-main" (click)="showMine()">본인</div>
+            </div>
+            <div
+              class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
+            >
+              <div class="fc-event-main" (click)="showEnd()">완료</div>
+            </div>
+          </div>
+          <button (click)="showOne()" class="date">개인</button>
         </div>
 
         <div class="center">{{ viewDate }}</div>
 
         <div class="actions flex flex-col sm:flex-row justify-end items-center">
+          <div>
+            <button (click)="showToday()" class="date">오늘</button>
+          </div>
           <div class="chevrons">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="showPrev()">
               <mat-icon [icIcon]="icChevronLeft"></mat-icon>
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="showNext()">
               <mat-icon [icIcon]="icChevronRight"></mat-icon>
             </button>
           </div>
-          <div class="flex">
-            <button mat-button>월</button>
-            <button mat-button>주</button>
-            <button mat-button>일</button>
+          <div>
+            <button (click)="showMonth()" class="date">월</button>
+            <button (click)="showWeek()" class="date">주</button>
+            <button (click)="showDay()" class="date">일</button>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div id="external">
-    <p>
-      <strong>색상 안내도</strong>
-    </p>
-
-    <div
-      class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
-      *ngFor="let item of teamList; let i = index"
-    >
-      <div
-        class="fc-event-main"
-        #team
-        (click)="showTeam(item)"
-        [ngStyle]="{ 'background-color': teamColor(team, i) }"
-      >
-        {{ item.codeName }} 팀
-      </div>
-    </div>
-    <div
-      class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine"
-    >
-      <div class="fc-event-main" (click)="showMine()">본인</div>
-    </div>
-    <div
-      class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
-    >
-      <div class="fc-event-main" (click)="showEnd()">완료</div>
     </div>
   </div>
 

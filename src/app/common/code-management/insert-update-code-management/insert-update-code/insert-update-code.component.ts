@@ -1,6 +1,6 @@
 import { CodeMgmtService } from './../../code-mgmt.service';
 import { CodeMgmt } from './../../codemgmt.model';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
@@ -88,7 +88,7 @@ export class InsertUpdateCodeComponent implements OnInit {
               this.dialogRef.close(this.codeMgmt);
   }
 
-  disableParentCodeId(){
+  disableParentCodeId() {
     const isParentCode = this.form.value.isParentCode;
     if(!isParentCode){//부모코드이면 parentCodeId input요소 disable시키고 값 ''넣어줌
       this.form.get('parentCodeId').setValue('');
@@ -96,6 +96,24 @@ export class InsertUpdateCodeComponent implements OnInit {
     } else { //부모코드가 아니면
       this.form.get('parentCodeId').enable();
     }
+  }//disableParentCodeId() end
+  checkDsplOrder(dsplOrder,isParentCode,parentCodeId){
+    if(isParentCode==true){//부모코드끼리 순서비교하기
+      this.codeMgmtService.checkParentCodeDsplOrder(dsplOrder)
+      .subscribe(data => {
+        if(data.success==true){
+          this.form.controls.dsplOrder.setErrors({checkError:true});
+        }
+      })
+    } else {//자식코드끼리 순서 비교하기
+      this.codeMgmtService.checkChildCodeDsplOrder(dsplOrder,parentCodeId)
+      .subscribe(data => {
+        if(data.success==true){
+          this.form.controls.dsplOrder.setErrors({checkError:true});
+        }
+      })
+    }//if~else end 
+   
   }
   
     

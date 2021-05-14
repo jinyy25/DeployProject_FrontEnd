@@ -21,12 +21,12 @@
   text-align: center;
   border: 1px solid #dee2e6;
   border-radius: 10px;
-  margin-top: 24px;
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 24px 0 0 24px;
   float: left;
+  background-color: white;
 }
 
 .schedule table {
@@ -46,23 +46,26 @@
   margin-top: 24px;
   margin-left: 60px;
   // border-radius: 5px;
-   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-// #notice th.mat-sort-header-sorted {
-//   color: black;
-// }
-#noticeTable{
- // border-radius: 10px;
- // border:1px solid #dee2e6;
- cursor: pointer;
-}
-#notice .notice_title{
+
+#notice .notice_title {
   min-width: 60%;
 }
 
-#notice .notice_writer, #notice .notice_team{
+#notice .notice_writer,
+#notice .notice_team {
   max-width: 20%;
   justify-content: center;
 }
 
+#notice mat-header-cell {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: rgb(var(--color-primary));
+}
 
+#notice mat-cell {
+  cursor: pointer;
+}

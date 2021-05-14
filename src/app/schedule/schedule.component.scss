@@ -12,19 +12,18 @@
 
 #external {
   position: absolute;
+  top: 160px;
   z-index: 2;
-  top: 180px;
-  left: 20px;
   width: 160px;
   padding: 10px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.6);
+  animation-duration: 1s;
 }
 
 .app-calendar {
   position: relative;
   z-index: 1;
-  padding-left: 200px;
 }
 
 .fc-event {
@@ -124,7 +123,8 @@
 .names {
   padding-left: 20px;
   height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  margin-bottom: 20px;
 }
 
 .calendar-bg {
@@ -135,4 +135,22 @@
 .center {
   font: 400 24px/32px var(--font);
   letter-spacing: -0.019em;
+}
+
+.date {
+  font: 400 20px var(--font);
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.container {
+  padding-bottom: 10px;
+}
+
+.content {
+  height: 432px;
+}
+
+.long {
+  height: 450px;
 }
