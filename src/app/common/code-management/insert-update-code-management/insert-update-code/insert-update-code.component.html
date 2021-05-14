@@ -41,9 +41,13 @@
         <mat-label>순서</mat-label>
         <input
             matInput
+            (keyup)="checkDsplOrder(dsplOrder.value,form.value.isParentCode,parentCodeId.value)"
             formControlName="dsplOrder"
             #dsplOrder
         />
+        <mat-error *ngIf="form.get('dsplOrder').hasError('checkError')">
+        동일 순서를 입력할 수 없습니다.
+        </mat-error>
         </mat-form-field>
         <br/>
         <mat-checkbox
