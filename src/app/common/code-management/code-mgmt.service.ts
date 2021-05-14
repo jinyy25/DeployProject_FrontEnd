@@ -34,7 +34,7 @@ export class CodeMgmtService {
   public selectOneCodeByCodeId(codeId: string) {
     return this.http.get<CodeMgmt>(this.userUrl+"/dialog/"+codeId);
   }
-  public checkDsplOrder(dsplOrder: number) {
+  public checkParentCodeDsplOrder(dsplOrder: number) {
     return this.http.get<any>(this.userUrl+"/checkParentOrder/"+dsplOrder);
   }
   public checkChildCodeDsplOrder(dsplOrder: number,parentCodeId: string) {

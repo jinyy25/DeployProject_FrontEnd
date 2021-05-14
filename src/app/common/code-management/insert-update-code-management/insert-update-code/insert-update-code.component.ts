@@ -99,14 +99,13 @@ export class InsertUpdateCodeComponent implements OnInit {
   }//disableParentCodeId() end
   checkDsplOrder(dsplOrder,isParentCode,parentCodeId){
     if(isParentCode==true){//부모코드끼리 순서비교하기
-      this.codeMgmtService.checkDsplOrder(dsplOrder)
+      this.codeMgmtService.checkParentCodeDsplOrder(dsplOrder)
       .subscribe(data => {
         if(data.success==true){
           this.form.controls.dsplOrder.setErrors({checkError:true});
         }
       })
     } else {//자식코드끼리 순서 비교하기
-      console.log(parentCodeId);
       this.codeMgmtService.checkChildCodeDsplOrder(dsplOrder,parentCodeId)
       .subscribe(data => {
         if(data.success==true){
