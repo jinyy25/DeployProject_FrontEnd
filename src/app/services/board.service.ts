@@ -36,4 +36,7 @@ export class BoardService {
   selectTeamNotice(team){
     return this.http.get<any>(this.userUrl+"/team?codeName="+team);
   }
+  selectDashboardNotice(){
+    return this.http.get<any>(this.userUrl+"/dashboard");
+  }
 }
