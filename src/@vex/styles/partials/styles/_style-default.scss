@@ -104,7 +104,7 @@
   --foreground-divider: #{map-get(map-get($vex-theme, foreground), divider)};
 
   // Background
-  --background-base: white;
+  --background-base: rgb(245, 245, 248);
   --background-card: #{map-get(map-get($vex-theme, background), card)};
   --background-app-bar: #{map-get(map-get($vex-theme, background), app-bar)};
   --background-hover: #{map-get(map-get($vex-theme, background), hover)};
