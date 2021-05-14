@@ -168,8 +168,15 @@ export class DeployListComponent implements OnInit{
     this.deployService.selectFileInfo(deployNo)
     .subscribe(
       response => {
-        this.file = response.data        
-        this.deployService.fileDownload(this.file.name)
+         this.file = response.data
+        alert("성공확인:"+this.file.name);
+        
+          this.deployService.fileDownload(this.file.name);
+          // .subscribe(
+          //   response => {
+          //     alert("성공");
+          //   }
+          // )
       },
     );
   }
