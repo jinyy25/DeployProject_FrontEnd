@@ -16,10 +16,12 @@ import { SearchScheduleComponent } from './search-schedule/search-schedule.compo
 import { UserService } from '../services/user.service';
 import icChevronLeft from '@iconify/icons-ic/twotone-chevron-left';
 import icChevronRight from '@iconify/icons-ic/twotone-chevron-right';
+import { dropdownAnimation } from 'src/@vex/animations/dropdown.animation';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
+  animations: [dropdownAnimation],
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements AfterViewInit {
@@ -36,6 +38,8 @@ export class ScheduleComponent implements AfterViewInit {
   viewDate;
   icChevronLeft = icChevronLeft;
   icChevronRight = icChevronRight;
+
+  toggle;
   
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -76,25 +80,7 @@ export class ScheduleComponent implements AfterViewInit {
     locales:[enLocale, koLocale],
     locale: 'ko',//한국어
     displayEventTime: false,
-    headerToolbar: {
-      left: 'prev,next today all,team,one',
-      center: 'title',
-      right: 'listMonth dayGridMonth,dayGridWeek,timeGridDay'
-    },
-    customButtons: {
-      all: {
-        text: '전체',
-        click: () => this.showAll()
-      },
-      team: {
-        text: '팀',
-        click: () => this.showMyTeam()
-      },
-      one: {
-        text: '개인',
-        click: () => this.showOne()
-      }
-    },
+    headerToolbar: false,
     initialView: 
     localStorage.getItem("calendarView") !== null ? localStorage.getItem("calendarView") : "dayGridMonth",//마지막으로 저장된 view
     datesSet: function(info){//view 바뀌면 local storage에 저장
@@ -306,9 +292,8 @@ export class ScheduleComponent implements AfterViewInit {
     this.calendarOptions.events = this.events;
   }
 
-  showMyTeam(){//본인 팀 보여주기
-    const teamEvent = this.events.filter((event) => event.schedule.team == this.loginUser.team);
-    this.calendarOptions.events = teamEvent;
+  showMyTeam(){//색상 안내도 토글
+    this.toggle = !this.toggle;
   }
 
   showOne(){//자기꺼 보여주기, 개인별 검색
@@ -361,5 +346,36 @@ export class ScheduleComponent implements AfterViewInit {
     const endEvent = this.events.filter((event) => event.schedule.complete == 'Y');
     this.calendarOptions.events = endEvent;
   }
+
+  showMonth(){//월
+    this.calendar.getApi().changeView('dayGridMonth');
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+  }
+
+  showWeek(){//주
+    this.calendar.getApi().changeView('dayGridWeek');
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+  }
+
+  showDay(){//일
+    this.calendar.getApi().changeView('timeGridDay');
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+  }
+
+  showPrev(){//이전 날짜
+    this.calendar.getApi().prev();
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+  }
+
+  showNext(){//이후 날짜
+    this.calendar.getApi().next();
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+  }
+
+  showToday(){//오늘 날짜
+    this.calendar.getApi().today();
+    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+  }
+
 }
 
