@@ -28,6 +28,9 @@ table{
 .deploy-title{
     padding-right: 4em;
 }
+.title-extra{
+    padding-left: 4em;
+}
 button{
     margin: 0px 9px;
 }
@@ -47,11 +50,15 @@ button{
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 .bg-app-bar{
-    margin: 1.5em 0em !important;
+    margin: 4.5em 0em !important;
 }
 .content-outline{
     display:flex;
+    justify-content: space-around;
 }
 .right-content{
     margin-left: 5.5em;
+}
+.content-extra{
+    padding: 1em 0em;
 }

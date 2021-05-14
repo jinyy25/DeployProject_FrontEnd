@@ -108,8 +108,12 @@ export class DeployWriteFormComponent implements OnInit {
   sendData(deploys){
     this.deployService.insertDeploy(deploys)
     .subscribe(data => {
-      alert('배포이력 등록 완료');
-      location.href="/#/deploy-list";
+      if(data.false){
+        alert('배포 등록 실패');
+      }else{
+        alert('배포이력 등록 완료');
+        location.href="/#/deploy-list";
+      }
     })
   }
 

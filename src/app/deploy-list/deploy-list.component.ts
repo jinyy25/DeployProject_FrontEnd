@@ -164,21 +164,22 @@ export class DeployListComponent implements OnInit{
   }
 
   //6. zip download
-  downloadZip(deployNo){
-    this.deployService.selectFileInfo(deployNo)
-    .subscribe(
-      response => {
-         this.file = response.data
-        alert("성공확인:"+this.file.name);
+  // downloadZip(deployNo){
+  //   this.deployService.selectFileInfo(deployNo)
+  //   .subscribe(
+  //     response => {
+  //        this.file = response.data
+  //       alert("성공확인:"+this.file.name);
         
-          this.deployService.fileDownload(this.file.name);
-          // .subscribe(
-          //   response => {
-          //     alert("성공");
-          //   }
-          // )
-      },
-    );
-  }
+  //         this.deployService.fileDownload(this.file.name);
+  //         // .subscribe(
+  //         //   response => {
+  //         //     response.data
+  //         //     alert("성공");
+  //         //   }
+  //         // )
+  //     },
+  //   );
+  // }
 
 }

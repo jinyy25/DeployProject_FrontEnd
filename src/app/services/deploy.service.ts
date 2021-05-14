@@ -54,7 +54,7 @@ export class DeployService {
 
   // to download method
   public fileDownload(filename){
-    return this.httpClient.get<any>(this.fileURL + "/files/" + filename);
+    this.httpClient.get<any>(this.fileURL + "/files/" + filename);
   }
 
 
