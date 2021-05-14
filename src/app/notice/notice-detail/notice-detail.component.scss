@@ -1,7 +1,7 @@
 #noticeBox{
 	width: 80%;
 	margin:0 auto 0 auto;
-	border-top: 2px solid #2c3e7e;
+	border-top: 1px solid #d5d5db;
 }
 #noticeHeader{
 	 overflow: hidden;
@@ -14,8 +14,8 @@
 #noticeHeader dt{
 	width: 100px;
 	text-align: center;
-	color:#103581;
-	background-color: #f2f4fb;
+	color:white;
+	background-color: rgb(var(--color-primary))
 }
 #noticeHeader .notice_dt{
 	border-top:none;

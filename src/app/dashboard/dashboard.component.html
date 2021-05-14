@@ -42,7 +42,7 @@
         <mat-cell class="notice_team" routerLink="/notice/{{notice.boardNo}}" *matCellDef="let notice">{{notice.team}}</mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['title','writer','team']"></mat-header-row> 
+      <mat-header-row class="list_header" *matHeaderRowDef="['title','writer','team']"></mat-header-row> 
           <mat-row *matRowDef="let notice; columns: ['title','writer','team'];"> </mat-row>
     </mat-table>
 </div>
