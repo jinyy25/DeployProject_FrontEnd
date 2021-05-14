@@ -25,7 +25,7 @@ import { SecondaryToolbarModule } from 'src/@vex/components/secondary-toolbar/se
 
 
 @NgModule({
-  declarations: [],
+  declarations: [DefaultPathFormComponent],
   imports: [
     CommonModule,        
     PageLayoutModule,

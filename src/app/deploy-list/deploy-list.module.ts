@@ -30,7 +30,7 @@ import { DefaultPathFormComponent } from './default-path-form/default-path-form.
 
 
 @NgModule({
-  declarations: [DeployListComponent, DefaultPathFormComponent],
+  declarations: [DeployListComponent],
   imports: [
     CommonModule,
     DeployListRoutingModule,        
