@@ -18,6 +18,7 @@
   padding: 10px;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.6);
+  animation-duration: 1s;
 }
 
 .app-calendar {
@@ -138,8 +139,8 @@
 
 .date {
   font: 400 20px var(--font);
-  width: 30px;
-  min-width: none !important;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .container {
