@@ -1,18 +1,18 @@
-td {
+.schedule td {
   width: 60px;
   height: 30px;
   line-height: 30px;
   border-top: 1px solid #dee2e6;
 }
 
-th {
+.schedule th {
   border-top: 1px solid #dee2e6;
   height: 30px;
   line-height: 30px;
 }
 
-tr:nth-child(2) > th:first-child,
-td:first-child {
+.schedule tr:nth-child(2) > th:first-child,
+.schedule td:first-child {
   border-right: 1px solid #dee2e6;
 }
 
@@ -25,18 +25,42 @@ td:first-child {
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 24px 0 0  24px;
+  margin: 24px 0 0 24px;
   position: absolute;
-
 }
 
-table {
+.schedule table {
   width: 300px;
 }
 
-h4 {
+.schedule h4 {
   background: linear-gradient(to top, #ffe400 50%, transparent 50%);
   width: 100px;
   margin: 0 auto;
   margin-top: 10px;
+}
+
+#notice {
+  float: left;
+  width: 800px;
+  margin-top: 24px;
+  margin-left: 60px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+}
+
+#notice table {
+  width: 800px;
+}
+
+#noticeTable th {
+  border-top: none;
+  height: 40px;
+  line-height: 40px;
+}
+
+#noticeTable td {
+  height: 60px;
+  line-height: 50px;
+  border-right: none;
 }

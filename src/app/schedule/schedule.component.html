@@ -1,31 +1,69 @@
-<div id="external">
-  <p>
-    <strong>색상 안내도</strong>
-  </p>
-
-  <div
-    class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
-    *ngFor="let item of teamList; let i = index"
-  >
+<div class="h-full flex flex-col">
+  <div class="calendar-bg relative text-contrast-white flex-none">
     <div
-      class="fc-event-main"
-      #team
-      (click)="showTeam(item)"
-      [ngStyle]="{ 'background-color': teamColor(team, i) }"
-    >
-      {{ item.codeName }} 팀
+      class="bg-contrast-black opacity-25 absolute top-0 left-0 right-0 bottom-0 z-0 w-full h-full"
+    ></div>
+    <div class="container py-4 px-6 h-40 z-10 relative flex items-end">
+      <div
+        class="flex-auto flex flex-col sm:flex-row justify-between items-center"
+      >
+        <div>
+          <button mat-button>전체</button>
+          <button mat-button>팀</button>
+          <button mat-button>개인</button>
+        </div>
+
+        <div class="center">{{ viewDate }}</div>
+
+        <div class="actions flex flex-col sm:flex-row justify-end items-center">
+          <div class="chevrons">
+            <button mat-icon-button>
+              <mat-icon [icIcon]="icChevronLeft"></mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon [icIcon]="icChevronRight"></mat-icon>
+            </button>
+          </div>
+          <div class="flex">
+            <button mat-button>월</button>
+            <button mat-button>주</button>
+            <button mat-button>일</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine">
-    <div class="fc-event-main" (click)="showMine()">본인</div>
-  </div>
-  <div
-    class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
-  >
-    <div class="fc-event-main" (click)="showEnd()">완료</div>
-  </div>
-</div>
+  <div id="external">
+    <p>
+      <strong>색상 안내도</strong>
+    </p>
 
-<div class="app-calendar">
-  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    <div
+      class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
+      *ngFor="let item of teamList; let i = index"
+    >
+      <div
+        class="fc-event-main"
+        #team
+        (click)="showTeam(item)"
+        [ngStyle]="{ 'background-color': teamColor(team, i) }"
+      >
+        {{ item.codeName }} 팀
+      </div>
+    </div>
+    <div
+      class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mine"
+    >
+      <div class="fc-event-main" (click)="showMine()">본인</div>
+    </div>
+    <div
+      class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event complete"
+    >
+      <div class="fc-event-main" (click)="showEnd()">완료</div>
+    </div>
+  </div>
+
+  <div class="app-calendar">
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  </div>
 </div>
