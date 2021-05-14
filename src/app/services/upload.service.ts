@@ -11,15 +11,19 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
+  file:File;
+  
   upload(files: File[]) {
 
     
     const formData: FormData = new FormData();
 
     for(let i = 0; i< files.length ; i++){
-      formData.append('files', files[i]);
+      this.file=files[i];
+      for(let j in this.file ){
+        formData.append('files', this.file[j]);
+      }
     }
-
     return this.http.post<any>(this.userUrl+"/multi/upload",formData);
    
   }

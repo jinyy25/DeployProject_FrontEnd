@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ɵɵtrustConstantResourceUrl, ComponentFactoryResolver } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
@@ -27,7 +27,10 @@ import { tap } from 'rxjs/operators';
 })
 export class NoticeWriteFormComponent implements OnInit {
 
-  selectedFiles?: FileList;
+  //selectedFiles?: FileList;
+  names=[];
+  directoryPaths=[];
+  temporary:any[];
   files = [];
   fileNames  = [];
   fileConfirm = [];
@@ -73,8 +76,10 @@ export class NoticeWriteFormComponent implements OnInit {
       .subscribe(res=>{
         
         this.notice=res.data.board;
-        this.files=res.data.files;
+        this.files.push(res.data.files);
+        this.fileConfirm=res.data.files;
         
+
         this.form=this.fb.group({
           title:[this.notice.title,Validators.required],
           content:[this.notice.content,Validators.required]
@@ -97,43 +102,40 @@ export class NoticeWriteFormComponent implements OnInit {
   }
 
   selectFiles(event): void {
-    this.files=event.target.files;
-    this.display="block";
-    //파일 선택하면 기존파일이 사라지므로 확인하는 변수 초기화
-    this.fileConfirm=[];
-
-    //파일이 없을때 닫음
-    if(this.files.length==0){
-      this.display="none";
-      this.fileConfirm=[];
-    }
+   
     
+    this.files.push(event.target.files);
+
+    this.display="block";
+    
+
   }
   
-  close(obj,text:string): void{
+  close(text:string): void{
+    
     text=text.substr(1);
-   
+
     //files는 기존에 선택된 파일을 저장하는 변수
     for(let i =0 ; i<this.files.length;i++){
-      
-      //삭제한 파일이름과 다를때 fileNames에 넣어줌
-      if(this.files[i].name!=text){
-        
-        this.fileNames.push(this.files[i]);
-        
-      }//if end
-      
+      this.temporary=this.files[i];
+      for(let j=0; j<this.temporary.length;j++){
+        if(this.temporary[j].name!=text){
+          this.fileNames.push(this.temporary[j]);
+        }
+      }
+
     }//for end
     
-    
-    this.files=this.fileNames;
+    this.files=[];
+    this.files.push(this.fileNames);
     this.fileNames=[];
     
+    
     //파일이 없을때 닫음
-    if(this.files.length==0){
+    if(this.files[0].length==0){
       this.display="none";
-      this.fileConfirm=[];
     }
+    
     
   }//close() end
 
@@ -169,6 +171,13 @@ export class NoticeWriteFormComponent implements OnInit {
         })
       }else{
 
+        for(let i in this.names){
+          this.fileList.names.push(this.names[i]);
+        }
+        for(let i in this.directoryPaths){
+          this.fileList.directoryPaths.push(this.directoryPaths[i]);
+        }
+
         this.boardService.updateNotice(this.fileList,this.boardNo)
         .subscribe(res =>{
           this.status="true";
@@ -188,9 +197,11 @@ export class NoticeWriteFormComponent implements OnInit {
     if(this.files.length !=0){
          this.uploadService.upload(this.files)
          .pipe(tap((res:any)=>{
-           this.fileList.names=res.data.names;
-           this.fileList.directoryPaths=res.data.directoryPaths;
-
+          if(res.data!=null){
+            this.fileList.names=res.data.names;
+            this.fileList.directoryPaths=res.data.directoryPaths;
+          }
+           
           })
          )
          .subscribe(res=>{
@@ -228,28 +239,24 @@ export class NoticeWriteFormComponent implements OnInit {
       }
     const type="update";
     
-    //기존에 있었던 파일 일때
-    if(this.fileConfirm.length>0){
-
+    
+    for(let j=0; j< this.files.length; j++){ 
+        this.temporary = this.files[j];
       for(let i =0; i < this.fileConfirm.length;i++){
-        for(let j=0; j< this.files.length; j++){ 
-          
-          //기존에 있던 파일 선별
-          if(this.files[j]==this.fileConfirm[i]){
-            this.fileList.names.push(this.files[j].name);
-            this.fileList.directoryPaths.push(this.files[j].directoryPath);
-            
-          }//if end
+          for(let temp in this.temporary){
+            if(this.temporary[temp].name==this.fileConfirm[i].name){
+               this.names.push(this.temporary[temp].name);
+               this.directoryPaths.push(this.temporary[temp].directoryPath); 
+            }
+             
+          }
+
         }//for end
       }//for end
+     
 
-
-      this.addFileList(form,type);
-
-    }else{
       this.upload(form,type);
-    }
-    
+
   }
 
   cancel(){
