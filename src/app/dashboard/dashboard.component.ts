@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { Notice } from '../models/notice.model';
 import { Schedule } from '../models/schedule.model';
 import { Team } from '../models/team.model';
 import { User } from '../models/user.model';
+import { BoardService } from '../services/board.service';
 import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
 import { TeamService } from '../services/team.service';
@@ -22,15 +25,17 @@ export class DashboardComponent implements OnInit {
   scheduleList : Schedule[];
   teamList : Team[];
   teamUser : User[];
-
+  notices:Notice[];
   teamControl;
-  
+  dataSource;
 
+  
   constructor(
     private jwtService : JwtService,
     private userService : UserService,
     private scheduleService : ScheduleService,
-    private teamService : TeamService
+    private teamService : TeamService,
+    private boardService : BoardService
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +63,13 @@ export class DashboardComponent implements OnInit {
     });
 
     this.teamControl = new FormControl(this.loginUser.team);
+
+    this.boardService.selectDashboardNotice()
+    .subscribe(res=>{
+      this.notices=res.data;
+      this.dataSource=this.notices;
+    })
+
   }
 
   changeTeam(){//선택한 팀 유저리스트
