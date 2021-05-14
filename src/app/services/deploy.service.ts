@@ -14,6 +14,7 @@ export class DeployService {
   ) { }
 
   private deployURL='/deploy';
+  private fileURL='/file';
 
   //1. select all deploys
   public selectDeploys(){
@@ -37,18 +38,22 @@ export class DeployService {
 
   //5. search deploys
   public searchDeploy(searchCategory,keyword){
-    alert("click:"+searchCategory+keyword);
     return this.httpClient.get<any>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
   }
 
-  //6. zip download
+  //6. zip download(보류)
   public downloadZipFile(deployNo){
     return this.httpClient.post<any>(this.deployURL + "/download/"+deployNo, deployNo);
   }
 
 
-  //7. file download
-  // public fileDownload(deployNo){
-  //   return this.httpClient.post<any>();
-  // }
+  //7. select File info
+  public selectFileInfo(deployNo){
+    return this.httpClient.get<any>(this.deployURL + "/search/" + deployNo);
+  }
+
+  // to download method
+  public fileDownload(filename){
+    return this.httpClient.get<any>(this.fileURL + "/files/" + filename);
+  }
 }

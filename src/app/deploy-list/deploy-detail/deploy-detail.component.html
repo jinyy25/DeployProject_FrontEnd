@@ -58,13 +58,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
-                    <td style="width: 10%;">{{scriptView.category}}</td>
-                    <td style="width: 10%;">{{scriptView.fileType}}</td>
-                    <td style="width: 10%;">{{scriptView.localPath}}</td>
-                    <td style="width: 10%;">{{scriptView.directoryPath}}</td>
-                    <td style="width: 10%;">{{scriptView.backupScript}}</td>
-                    <td style="width: 10%;">{{scriptView.reflectScript}}</td>
-                    <td style="width: 10%;">{{scriptView.rollbackScript}}</td>
+                    <td>{{scriptView.category}}</td>
+                    <td>{{scriptView.fileType}}</td>
+                    <td>{{scriptView.localPath}}</td>
+                    <td>{{scriptView.directoryPath}}</td>
+                    <td>{{scriptView.backupScript}}</td>
+                    <td>{{scriptView.reflectScript}}</td>
+                    <td>{{scriptView.rollbackScript}}</td>
                 </tr>
             </tbody>
         </table>

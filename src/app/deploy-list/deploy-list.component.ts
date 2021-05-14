@@ -21,6 +21,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Schedule } from '../models/schedule.model';
 import { Inject } from '@angular/core';
 import { ExcelService } from '../services/excel-file.service';
+import { File } from '../models/file.model';
+
 
 
 @Component({
@@ -44,6 +46,8 @@ export class DeployListComponent implements OnInit{
   check:string;
 
   deploys:Deploy[];
+  deploy:Deploy=new Deploy;
+
 
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 10;//한 페이지 당 보여줄 데이터의 수
@@ -62,10 +66,12 @@ export class DeployListComponent implements OnInit{
 
   all="all";
 
+  file:File = new File();
+
   //엑셀관련
   dataForExcel = [];
   //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
-  dataHeaders = ["구분", "타입", "소스경로", "디렉토리생성","	백업스크립트(운영)","운영파일반영스크립트","	원복스크립트"]
+  dataHeaders = ["스크립트번호","배포번호","구분", "타입", "소스경로", "디렉토리생성","백업스크립트(운영)","운영파일반영스크립트","원복스크립트"]
 
   constructor(
     private deployService:DeployService,
@@ -131,15 +137,10 @@ export class DeployListComponent implements OnInit{
       .subscribe(
           response => {
             this.scriptViews = response.data
-
-            // this.excelViews = this.scriptViews
-
             this.scriptViews.forEach((row: any) => {
-              
               this.dataForExcel.push(Object.values(row))
-              // this.dataForExcel.push(this.scriptViews.)
             })
-        
+  
             let reportData = {
               title: listTitle,
               data: this.dataForExcel,
@@ -148,7 +149,7 @@ export class DeployListComponent implements OnInit{
 
             this.excelService.exportExcel(reportData);
           },
-          )  
+      )  
   }
 
   //4. select option 변화시
@@ -162,12 +163,13 @@ export class DeployListComponent implements OnInit{
       this.p = 1;
   }
 
-  //6
+  //6. zip download
   downloadZip(deployNo){
-    this.deployService.downloadZipFile(deployNo)
+    this.deployService.selectFileInfo(deployNo)
     .subscribe(
       response => {
-        this.deploys = response.data
+        this.file = response.data        
+        this.deployService.fileDownload(this.file.name)
       },
     );
   }

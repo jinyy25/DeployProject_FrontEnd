@@ -45,7 +45,7 @@ export class DeployDetailComponent implements OnInit {
   //엑셀관련
   dataForExcel = [];
   //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
-  dataHeaders = ["구분", "타입", "소스경로", "디렉토리생성","	백업스크립트(운영)","운영파일반영스크립트","	원복스크립트"]
+  dataHeaders = ["스크립트번호","배포번호","구분", "타입", "소스경로", "디렉토리생성","백업스크립트(운영)","운영파일반영스크립트","원복스크립트"]
 
   constructor(
     private deployService:DeployService,
@@ -89,19 +89,15 @@ export class DeployDetailComponent implements OnInit {
 
   //1. 엑셀다운로드
   exportAsXLSX(listTitle:string):void {   
-
     this.scriptViews.forEach((row: any) => {
       this.dataForExcel.push(Object.values(row))
     })
-
     let reportData = {
       title: listTitle,
       data: this.dataForExcel,
       headers: this.dataHeaders
-      //headers: Object.keys(this.users[0])
     }
     this.excelService.exportExcel(reportData);
-    // this.excelService.exportAsExcelFile(this.scriptViews, listTitle);
   }
 
   //2. 페이징처리

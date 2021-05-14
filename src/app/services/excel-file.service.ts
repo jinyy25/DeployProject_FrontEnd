@@ -87,7 +87,7 @@ export class ExcelService {
     );
 
     //데이터 길이에 따라 컬럼 길이 조절하고 싶으면 여기서 해주시면 됩니다.
-    worksheet.getColumn(1).width = 5;
+    worksheet.getColumn(1).width = 10;
     worksheet.getColumn(2).width = 10;
     worksheet.getColumn(3).width = 10;
     worksheet.getColumn(4).width = 10;
@@ -97,17 +97,6 @@ export class ExcelService {
     worksheet.getColumn(8).width = 100;
     worksheet.getColumn(9).width = 100;
     worksheet.addRow([]);
-
-    //Footer Row
-    let footerRow = worksheet.addRow(['Sample Excel File Downloaded At ' + date]);
-    footerRow.getCell(1).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFB050' }
-    };
-
-    //footer로 지정하고 싶으신 범위만큼 여기서 지정해주시면 됩니다.
-    worksheet.mergeCells(`A${footerRow.number}:D${footerRow.number}`);
 
     //Generate & Save Excel File
     workbook.xlsx.writeBuffer().then((data) => {
