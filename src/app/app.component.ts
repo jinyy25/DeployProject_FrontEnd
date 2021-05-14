@@ -16,7 +16,6 @@ import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
 import icBubbleChart from '@iconify/icons-ic/twotone-bubble-chart';
 import roundBarcode from '@iconify/icons-ic/round-barcode';
-import { ScheduleService } from './services/schedule.service';
 
 
 
@@ -27,7 +26,6 @@ import { ScheduleService } from './services/schedule.service';
 })
 export class AppComponent {
   title = 'vex';
-  count = '';
 
   constructor(private configService: ConfigService,
               private styleService: StyleService,
@@ -38,8 +36,7 @@ export class AppComponent {
               private layoutService: LayoutService,
               private route: ActivatedRoute,
               private navigationService: NavigationService,
-              private splashScreenService: SplashScreenService,
-              private scheduleService : ScheduleService) {
+              private splashScreenService: SplashScreenService) {
     Settings.defaultLocale = this.localeId;
 
     if (this.platform.BLINK) {
@@ -84,10 +81,6 @@ export class AppComponent {
       filter(queryParamMap => queryParamMap.has('style'))
     ).subscribe(queryParamMap => this.styleService.setStyle(queryParamMap.get('style') as Style));
 
-    this.scheduleService.selectTotalCount().subscribe(res => {
-      this.count = res.data;
-    });
-
     this.navigationService.items = [
       {
         type: 'link',
@@ -114,7 +107,7 @@ export class AppComponent {
         route:'/schedule',
         icon: icDateRange,
         badge: {
-          value: this.count,
+          value: '',
           bgClass: 'bg-deep-purple',
           textClass: 'text-deep-purple-contrast',
         }
