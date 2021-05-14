@@ -106,7 +106,7 @@ export class DeployListComponent implements OnInit{
     .subscribe(
       response => {
       this.deploys = response.data
-    }
+     }
     );
   }
   //1. 페이징처리
@@ -168,8 +168,16 @@ export class DeployListComponent implements OnInit{
     this.deployService.selectFileInfo(deployNo)
     .subscribe(
       response => {
-        this.file = response.data        
-        this.deployService.fileDownload(this.file.name)
+         this.file = response.data
+        alert("성공확인:"+this.file.name);
+        
+          // this.deployService.fileDownload(this.file.name);
+          // .subscribe(
+          //   response => {
+          //     response.data
+          //     alert("성공");
+          //   }
+          // )
       },
     );
   }
