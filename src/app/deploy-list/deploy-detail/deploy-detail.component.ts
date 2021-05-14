@@ -104,14 +104,14 @@ export class DeployDetailComponent implements OnInit {
   getPage(page) {}
 
   //3. zip 다운로드
-  downloadZip(deployNo){
-    this.deployService.downloadZipFile(deployNo)
-    .subscribe(
-      response => {
-        this.deploy = response.data
-      },
-    );
-  }
+  // downloadZip(deployNo){
+  //   this.deployService.downloadZipFile(deployNo)
+  //   .subscribe(
+  //     response => {
+  //       this.deploy = response.data
+  //     },
+  //   );
+  // }
 
   //4. 취소버튼
   cancel(){

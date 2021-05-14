@@ -41,11 +41,6 @@ export class DeployService {
     return this.httpClient.get<any>(this.deployURL + "/search?searchCategory=" + searchCategory + "&keyword=" + keyword)
   }
 
-  //6. zip download(보류)
-  public downloadZipFile(deployNo){
-    return this.httpClient.post<any>(this.deployURL + "/download/"+deployNo, deployNo);
-  }
-
 
   //7. select File info
   public selectFileInfo(deployNo){
