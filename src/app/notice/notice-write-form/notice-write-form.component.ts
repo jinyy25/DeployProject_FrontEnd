@@ -102,13 +102,11 @@ export class NoticeWriteFormComponent implements OnInit {
   }
 
   selectFiles(event): void {
-   
-    
+
     this.files.push(event.target.files);
 
     this.display="block";
-    
-
+   
   }
   
   close(text:string): void{
@@ -134,6 +132,7 @@ export class NoticeWriteFormComponent implements OnInit {
     //파일이 없을때 닫음
     if(this.files[0].length==0){
       this.display="none";
+      this.fileUploader.nativeElement.value=null;
     }
     
     
