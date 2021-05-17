@@ -6,7 +6,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs/operators';
 import { NavigationService } from '../../../services/navigation.service';
 import icKeyboardArrowRight from '@iconify/icons-ic/twotone-keyboard-arrow-right';
-import { ScheduleService } from 'src/app/services/schedule.service';
 
 
 @UntilDestroy()
@@ -29,12 +28,9 @@ export class SidenavItemComponent implements OnInit, OnChanges {
   isDropdown = this.navigationService.isDropdown;
   isSubheading = this.navigationService.isSubheading;
 
-  badge;
-
   constructor(private router: Router,
               private cd: ChangeDetectorRef,
-              private navigationService: NavigationService,
-              private scheduleService: ScheduleService) { }
+              private navigationService: NavigationService) { }
 
   @HostBinding('class')
   get levelClass() {
@@ -52,13 +48,6 @@ export class SidenavItemComponent implements OnInit, OnChanges {
       filter(() => this.isDropdown(this.item)),
       untilDestroyed(this)
     ).subscribe(item => this.onOpenChange(item));
-
-    if(this.item.label == 'Schedule'){
-      this.item as NavigationLink;
-      this.scheduleService.selectTotalCount().subscribe(res => {
-        this.badge = {value: res.data.toString()};
-      });
-    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

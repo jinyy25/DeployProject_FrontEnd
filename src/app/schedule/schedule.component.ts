@@ -149,7 +149,7 @@ export class ScheduleComponent implements AfterViewInit {
       this.calendarOptions.events = this.events;
     });
 
-    this.viewDate = this.calendar.getApi().currentData.viewTitle;
+    setTimeout(() => this.viewDate = this.calendar.getApi().currentData.viewTitle);//ChangeDetectorRef 써도 됨
   }
 
   //이벤트 클릭시 수정, 삭제
