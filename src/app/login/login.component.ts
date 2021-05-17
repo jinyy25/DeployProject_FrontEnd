@@ -41,10 +41,12 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       check:[false,[]]
     });
+    
   }
 
   //로그인
   send(form,id,password) {
+    
     if(this.form.controls.id.errors != null){
       id.focus();
       return false;
@@ -52,9 +54,11 @@ export class LoginComponent implements OnInit {
       password.focus();
       return false;
     }
+    
     this.user=form.value;
     this.loginService.login(this.user).pipe(
       tap((res :any) => {
+        if(res.success){
           if(form.value.check){
             localStorage.setItem("AUTH_TOKEN", res.data);
             this.loginService.loginUser = this.jwtService.decodeToUser(res.data); 
@@ -62,15 +66,20 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("AUTH_TOKEN", res.data);
             this.loginService.loginUser = this.jwtService.decodeToUser(res.data);
           }
+          
+        }
       })
 
-    )
-      .subscribe(
-      res =>{this.router.navigate(['/'])},
-      error =>{alert("아이디 비번이 올바르지 않습니다.")}
-    )
-
-  }
+    )//tap end
+    .subscribe(res =>{
+      if(res.success){
+        this.router.navigate(['/']);
+      }else{
+          //this.form.controls.password.setErrors({checkError:true});
+        alert("아이디, 비번이 올바르지 않습니다.");
+      }
+    })
+  }//send end
 
  
 }

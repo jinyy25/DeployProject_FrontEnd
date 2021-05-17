@@ -32,12 +32,13 @@ export class PasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.form = this.fb.group({
       password: ['', Validators.required],
       newPassword: ['', Validators.required],
       newPasswordConfirm: ['', [Validators.required,this.equalTo('newPassword')]],
     })
-
+    
     //로그인 유저 정보
     this.check = localStorage.getItem("AUTH_TOKEN");
 
@@ -67,21 +68,27 @@ export class PasswordComponent implements OnInit {
 
   //현재비밀번호 일치하는지 확인
   checkPassword(form){
+    
+    this.form.markAllAsTouched();//mat error 뜨게
     this.user.password=form.value.password;
     this.user.id=this.loginUser.id;
     this.userService.checkPassword(this.user)
     .subscribe(res=>{
       if(res.success){
+        this.form.markAsUntouched();
         this.password="none";
         this.newPassword="block";
+        
       }else{
         this.form.controls.password.setErrors({checkError:true});
+        
       }
     })
   }//checkPassword(form)
 
   //비밀번호 변경
   updatePassword(form){
+    this.form.markAllAsTouched();//mat error 뜨게
      if(this.form.controls.newPasswordConfirm.errors != null){
        this.form.controls.password.setErrors({checkError:true});
       return false;

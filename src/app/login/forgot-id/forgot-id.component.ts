@@ -21,8 +21,7 @@ export class ForgotIdComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private router: Router
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +33,7 @@ export class ForgotIdComponent implements OnInit {
 
   //아이디 찾기
   findId(form){
+    this.form.markAllAsTouched();//mat error 뜨게
     //유효성 검사
     if(this.form.controls.email.errors != null){
       return false;
