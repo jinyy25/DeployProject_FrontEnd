@@ -27,6 +27,8 @@ import { ExcelDownloadService } from './common/excel-download/excel-download.ser
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DefaultErrorComponent } from './common/error/default-error/default-error.component';
+import { NotfoundErrorComponent } from './common/error/notfound-error/notfound-error.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { MatDialogModule } from '@angular/material/dialog';
      */
     UserComponent,//pagination sample용 Component
     ExcelComponent,//excel file download용 Component
-    UploadFilesComponent//file upload & download sample용 Component
+    UploadFilesComponent, //file upload & download sample용 Component
+    DefaultErrorComponent, 
+    NotfoundErrorComponent
    
   
     
