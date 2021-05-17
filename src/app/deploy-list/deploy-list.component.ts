@@ -124,7 +124,7 @@ export class DeployListComponent implements OnInit{
     }
     this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.keyword)
     .subscribe(response => {
-      this.deploys = response.data;
+      this.deploys = response.data; 
     })
   }
 

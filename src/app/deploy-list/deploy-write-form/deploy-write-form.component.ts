@@ -161,6 +161,10 @@ export class DeployWriteFormComponent implements OnInit {
         portalScript = this.deployForm.controls.portalScript.value.split('\n');
         for(var i in portalScript){
           this.deploys.scriptDTO.push({portalScript:portalScript[i],tbwappScript:null,centerScript:null,category:'portal'});
+          //마지막 enter 구분자일경우 제거
+          if(portalScript[portalScript.length-1] = '\n'){
+            portalScript.remove(portalScript[portalScript.length-1]);
+          }
         }
       }catch(e){}
     } 
@@ -169,6 +173,9 @@ export class DeployWriteFormComponent implements OnInit {
         centerScript = this.deployForm.controls.centerScript.value.split('\n');
         for(var j in centerScript){
           this.deploys.scriptDTO.push({portalScript:null,tbwappScript:null,centerScript:centerScript[j],category:'center'});
+          if(centerScript[centerScript.length-1] = '\n'){
+            centerScript.remove(centerScript[centerScript.length-1]);
+          }
         }
       }catch(e){}
     }
@@ -177,6 +184,9 @@ export class DeployWriteFormComponent implements OnInit {
         tbwappScript = this.deployForm.controls.tbwappScript.value.split('\n');
         for(var z in tbwappScript){
           this.deploys.scriptDTO.push({portalScript:null,tbwappScript:tbwappScript[z],centerScript:null,category:'tbwapp'});
+          if(tbwappScript[tbwappScript.length-1] = '\n'){
+            tbwappScript.remove(tbwappScript[tbwappScript.length-1]);
+          }
         }
       }catch(e){}
     }
