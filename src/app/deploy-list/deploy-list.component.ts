@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { fadeInUp400ms } from '../../@vex/animations/fade-in-up.animation';
 import { DeployService} from '../services/deploy.service';
@@ -73,6 +73,7 @@ export class DeployListComponent implements OnInit{
   //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
   dataHeaders = ["스크립트번호","배포번호","구분", "타입", "소스경로", "디렉토리생성","백업스크립트(운영)","운영파일반영스크립트","원복스크립트"]
 
+  @ViewChild('searchValue') searchValue:any; 
   constructor(
     private deployService:DeployService,
     private jwtService:JwtService,
@@ -94,12 +95,14 @@ export class DeployListComponent implements OnInit{
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
-    
+
     //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
       searchCategory:[''],
       keyword:[''],
     })
+
+    this.changeValue='';
 
     //리스트 불러오기
     this.deployService.selectDeploys()
@@ -125,7 +128,7 @@ export class DeployListComponent implements OnInit{
     }
     this.deployService.searchDeploy(this.searchGroup.controls.searchCategory.value,this.keyword)
     .subscribe(response => {
-      this.deploys = response.data; 
+      this.deploys = response.data;
     })
   }
 
@@ -155,7 +158,8 @@ export class DeployListComponent implements OnInit{
   //4. select option 변화시
   selectValue(value){
     this.category = value;
-    this.changeValue = null;
+    this.searchValue.nativeElement.value = null;
+    this.changeValue= undefined 
   } 
 
   //5. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드

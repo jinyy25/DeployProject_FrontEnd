@@ -30,15 +30,15 @@
                         appearance="standard"
                         *ngIf="category == null||category == 'all'||category == 'writer'||category == 'title'">
                         <mat-label>검색어를 입력해주세요</mat-label>
-                        <input matInput formControlName="keyword" value="{{changeValue}}">       
+                        <input #searchValue matInput formControlName="keyword" [(ngModel)]="changeValue">       
                     </mat-form-field>
                     <mat-form-field 
                         class="search-field"  
                         appearance="standard"
                         *ngIf="category == 'deployDate'">
-                        <input matInput [matDatepicker]="start" formControlName="keyword"/>
-                        <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-                        <mat-datepicker #start></mat-datepicker>
+                        <input matInput [matDatepicker]="fromDatePicker" formControlName="keyword"/>
+                        <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDatePicker></mat-datepicker>
                     </mat-form-field>
                     <button color="primary" mat-raised-button (click)="search(searchGroup)" (keyup.enter)="search(searchGroup)"  class="search_btn">검색</button>  
                     
