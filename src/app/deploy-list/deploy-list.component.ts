@@ -67,6 +67,7 @@ export class DeployListComponent implements OnInit{
 
   file:File = new File();
 
+  changeValue = new String;
   //엑셀관련
   dataForExcel = [];
   //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
@@ -153,7 +154,8 @@ export class DeployListComponent implements OnInit{
 
   //4. select option 변화시
   selectValue(value){
-    this.category = value
+    this.category = value;
+    this.changeValue = null;
   } 
 
   //5. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드

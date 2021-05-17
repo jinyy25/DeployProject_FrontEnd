@@ -30,7 +30,7 @@
                         appearance="standard"
                         *ngIf="category == null||category == 'all'||category == 'writer'||category == 'title'">
                         <mat-label>검색어를 입력해주세요</mat-label>
-                        <input matInput formControlName="keyword">       
+                        <input matInput formControlName="keyword" value="{{changeValue}}">       
                     </mat-form-field>
                     <mat-form-field 
                         class="search-field"  
