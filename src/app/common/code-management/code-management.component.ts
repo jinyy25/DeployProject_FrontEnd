@@ -50,7 +50,8 @@ export class CodeManagementComponent implements OnInit {
   ngOnInit(): void {
     this.codeMgmtService.getParentCodeInfos().
           subscribe( data => {
-          this.codeMgmts = data;
+          this.dataRegister = data;
+          this.codeMgmts = this.dataRegister.data;
     });
 
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -73,7 +74,8 @@ export class CodeManagementComponent implements OnInit {
     
     this.codeMgmtService.getChildCodeInfos(parentCodeId)
     .subscribe( data => {
-      this.childCodeMgmts = data;
+      this.dataRegister = data;
+      this.childCodeMgmts = this.dataRegister.data;
       //this.childCodeMgmtInformations[i] = data;
       //console.log(this.childCodeMgmtInformations[i]);
     });
@@ -110,8 +112,6 @@ export class CodeManagementComponent implements OnInit {
   }//openInsertCodeDialog() end
    
   openUpdateCodeDialog(codeId): void {
-
-    console.log(codeId);
 
     const dialogConfig = new MatDialogConfig();
 

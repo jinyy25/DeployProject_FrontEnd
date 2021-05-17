@@ -17,6 +17,9 @@ export class InsertUpdateCodeComponent implements OnInit {
   isParentCode: boolean;
   codeId:string;
 
+  //subscribe에서 넘어온 data 받기 용
+  dataRegister:any={}
+
   constructor(
       private dialogRef : MatDialogRef<InsertUpdateCodeComponent>,
       private formBuilder : FormBuilder,
@@ -45,18 +48,20 @@ export class InsertUpdateCodeComponent implements OnInit {
 
     if (!this.isInsertMode) {//update용 dialog인 경우에는
       this.codeMgmtService.selectOneCodeByCodeId(this.codeId)//codeId를 통해 codeMgmt 정보 불러옴
-          .subscribe(x => 
-          { this.form.patchValue(x);
+          .subscribe(data => 
+          { this.dataRegister = data;
+            this.form.patchValue(this.dataRegister.data);
             //codeUseYN 값이 Y이면 isInUse true로 setting
-            if(x.codeUseYN=='Y') {
+            if(this.dataRegister.data.codeUseYN=='Y') {
             this.form.get('isInUse').setValue(true);
           } else {
             this.form.get('isInUse').setValue(false);
           }//if~else end 
 
             //부모코드이면 isParentCode true로
-            if(x.parentCodeId==null) {
+            if(this.dataRegister.data.parentCodeId==null) {
             this.form.get('isParentCode').setValue(true);
+            this.form.get('isParentCode').disable();//부모 코드 여부도 수정 불가능하게
             //다이얼로그에서 parentCodeId disable 되어있어야 함
             this.form.get('parentCodeId').disable();
           } else {
