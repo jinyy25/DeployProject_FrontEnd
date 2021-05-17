@@ -21,8 +21,8 @@ import { dropdownAnimation } from 'src/@vex/animations/dropdown.animation';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  animations: [dropdownAnimation],
-  styleUrls: ['./schedule.component.scss']
+  styleUrls: ['./schedule.component.scss'],
+  animations: [dropdownAnimation]
 })
 export class ScheduleComponent implements AfterViewInit {
   @ViewChild('calendar') calendar : FullCalendarComponent;
@@ -39,7 +39,7 @@ export class ScheduleComponent implements AfterViewInit {
   icChevronLeft = icChevronLeft;
   icChevronRight = icChevronRight;
 
-  toggle;
+  toggle : boolean;
   
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
@@ -341,6 +341,8 @@ export class ScheduleComponent implements AfterViewInit {
   showTeam(team){//색상 안내도 눌렀을때 팀별 보여주기
     const teamEvent = this.events.filter((event) => event.schedule.team == team.codeName);
     this.calendarOptions.events = teamEvent;
+
+    this.toggle = !this.toggle;//팀 안내도 닫히게
   }
 
   teamColor(team, i){//색상 안내도에 팀 색 입혀주기
@@ -351,11 +353,15 @@ export class ScheduleComponent implements AfterViewInit {
   showMine(){//진행 중인 본인 일정 보이게
     const myEvent = this.events.filter((event) => event.schedule.writer == this.loginUser.id && event.schedule.complete != 'Y');
     this.calendarOptions.events = myEvent;
+
+    this.toggle = !this.toggle;//팀 안내도 닫히게
   }
 
   showEnd(){//완료 일정 보이게
     const endEvent = this.events.filter((event) => event.schedule.complete == 'Y');
     this.calendarOptions.events = endEvent;
+
+    this.toggle = !this.toggle;//팀 안내도 닫히게
   }
 
   showMonth(){//월

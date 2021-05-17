@@ -10,7 +10,7 @@
         <div>
           <button (click)="showAll()" class="date">전체</button>
           <button (click)="showMyTeam()" class="date">팀</button>
-          <div *ngIf="toggle" id="external" [@dropdown]="toggle ? true : false">
+          <div *ngIf="toggle" id="external" [@dropdown]="toggle">
             <div
               class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
               *ngFor="let item of teamList; let i = index"

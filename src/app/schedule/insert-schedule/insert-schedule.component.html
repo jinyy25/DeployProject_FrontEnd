@@ -9,6 +9,7 @@
         formControlName="startDate"
         #startDate
         (dateChange)="dateCheck()"
+        readonly
       />
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker #start></mat-datepicker>
@@ -35,6 +36,7 @@
         [min]="form.controls.startDate.value"
         #endDate
         (dateChange)="dateCheck()"
+        readonly
       />
       <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
       <mat-datepicker #end></mat-datepicker>

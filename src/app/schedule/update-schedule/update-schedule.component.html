@@ -10,7 +10,7 @@
     <small>< {{ data.name }} 님 ></small>
   </span>
 </h2>
-<div mat-dialog-content class="content" [class.long]="historyLength > 0">
+<div mat-dialog-content class="content">
   <form [formGroup]="form">
     <mat-form-field appearance="standard">
       <mat-label>시작 날짜</mat-label>
@@ -19,8 +19,8 @@
         [matDatepicker]="start"
         formControlName="startDate"
         #startDate
-        [readonly]="data.disable"
         (dateChange)="dateCheck()"
+        readonly
       />
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker
@@ -51,8 +51,8 @@
         formControlName="endDate"
         [min]="form.controls.startDate.value"
         #endDate
-        [readonly]="data.disable"
         (dateChange)="dateCheck()"
+        readonly
       />
       <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
       <mat-datepicker
@@ -139,7 +139,11 @@
 
     <div *ngIf="historyLength > 0" class="update">
       <span (click)="viewHistory()" class="md-18">수정 이력</span>
-      <img src="/assets/img/demo/arrow.png" class="arrow" />
+      <img
+        src="/assets/img/demo/arrow.png"
+        class="arrow"
+        (click)="viewHistory()"
+      />
     </div>
     <table *ngIf="toggle" class="table">
       <thead>
