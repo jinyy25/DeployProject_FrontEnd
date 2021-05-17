@@ -74,8 +74,8 @@ import { ErrorHandler } from '@angular/core';
     UserExcelService,
     ExcelService,
     CodeMgmtService,
-    ExcelDownloadService,//excelJS Library 이용
-    {provide: ErrorHandler, useClass: ErrorHandlingService}
+    ExcelDownloadService//excelJS Library 이용
+    //{provide: ErrorHandler, useClass: ErrorHandlingService}
     
   ],
   bootstrap: [AppComponent] 
