@@ -62,7 +62,9 @@
     </div>
   </div>
 
-  <div class="app-calendar">
-    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
-  </div>
+  <vex-scrollbar class="px-0 shadow flex-auto relative" vexContainer>
+    <div class="app-calendar">
+      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </div>
+  </vex-scrollbar>
 </div>

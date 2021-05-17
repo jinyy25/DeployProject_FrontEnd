@@ -253,33 +253,34 @@ export class ScheduleComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {
+      if(result){
+        if(result.delete == 'delete'){//삭제
 
-      if(result.delete == 'delete'){//삭제
-
-        this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo, result.reason).subscribe(res => {
-          if(res.data){
-            alert("일정을 삭제하였습니다");
-            arg.event.remove();
-          }else{
-            alert("삭제에 실패하였습니다")
+          this.service.deleteSchedule(arg.event.extendedProps.schedule.scheduleNo, result.reason).subscribe(res => {
+            if(res.data){
+              alert("일정을 삭제하였습니다");
+              arg.event.remove();
+            }else{
+              alert("삭제에 실패하였습니다")
+            }
+          });
+  
+        }else if(result){//수정
+  
+          if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
+            result.startDate = result.startDate+" "+result.startTime;
+            result.endDate = result.endDate+" "+result.endTime;
           }
-        });
-
-      }else if(result){//수정
-
-        if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
-          result.startDate = result.startDate+" "+result.startTime;
-          result.endDate = result.endDate+" "+result.endTime;
+          
+          this.service.updateSchedule(result).subscribe(res => {
+            if(res.data){
+              alert("일정을 수정하였습니다");
+            }else{
+              alert("수정에 실패하였습니다")
+            }
+            window.location.reload();
+          });
         }
-        
-        this.service.updateSchedule(result).subscribe(res => {
-          if(res.data){
-            alert("일정을 수정하였습니다");
-          }else{
-            alert("수정에 실패하였습니다")
-          }
-          window.location.reload();
-        });
       }
     });
   }

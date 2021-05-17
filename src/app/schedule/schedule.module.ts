@@ -22,6 +22,8 @@ import { MatTableModule } from '@angular/material/table';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 import { MatIconModule } from '@angular/material/icon';
 import { IconModule } from '@visurel/iconify-angular';
+import { ContainerModule } from 'src/@vex/directives/container/container.module';
+import { ScrollbarModule } from 'src/@vex/components/scrollbar/scrollbar.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -54,7 +56,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MomentDateModule,
     MatTableModule,
     MatIconModule,
-    IconModule
+    IconModule,
+    ContainerModule,
+    ScrollbarModule
   ],
   entryComponents: [//dialog 동적으로 생성. component factory에 추가됨
     InsertScheduleComponent,

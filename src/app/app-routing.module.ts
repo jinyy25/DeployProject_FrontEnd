@@ -1,3 +1,5 @@
+
+
 import { NgModule } from '@angular/core';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
@@ -13,6 +15,8 @@ import { ExcelComponent } from './common/excel-download/excel.component';
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeManagementComponent } from './common/code-management/code-management.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { DefaultErrorComponent } from './common/error/default-error/default-error.component';
+import { NotfoundErrorComponent } from './common/error/notfound-error/notfound-error.component';
 
 
 const routes: VexRoutes = [
@@ -97,6 +101,12 @@ const routes: VexRoutes = [
   },
   { 
     path: 'sampleFileUpload', component: UploadFilesComponent 
+  },
+  { 
+    path: 'error', component: DefaultErrorComponent
+  },
+  { 
+    path: 'not-found', component: NotfoundErrorComponent
   }
 ];
 
