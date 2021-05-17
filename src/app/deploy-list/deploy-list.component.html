@@ -66,9 +66,10 @@
                     <td id="Script_List" #listTitle routerLink="{{deploy.deployNo}}" id={{deploy.deployTitle}}>{{deploy.deployTitle}}</td>
                     <td routerLink="{{deploy.deployNo}}">{{deploy.writer}}</td>
                     <td routerLink="{{deploy.deployNo}}">{{deploy.deployDate}}</td>
-                    <td>
-                        <!-- <button mat-stroked-button>zip<a href="http://localhost:8080/file/files/{{deploy.filename}}"></a> </button> -->
-                        <button mat-stroked-button (click)="downloadZip(deploy.deployNo)">zip</button>
+                    <td style="display: flex;">
+                        <div class="fileBtn">
+                            <a href="http://localhost:8080/file/files/{{deploy.name}}">zip</a>
+                        </div>
                         <button mat-stroked-button class="excelBtn" (click)="exportToExcel(listTitle.id,deploy.deployNo)">excel</button>
                     </td>                                
                 </tr>

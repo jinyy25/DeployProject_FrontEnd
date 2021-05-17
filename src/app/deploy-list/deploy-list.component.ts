@@ -46,7 +46,6 @@ export class DeployListComponent implements OnInit{
   check:string;
 
   deploys:Deploy[];
-  deploy:Deploy=new Deploy;
 
 
   p: number;//현재 페이지 정보 담기 위함
@@ -169,16 +168,18 @@ export class DeployListComponent implements OnInit{
     .subscribe(
       response => {
          this.file = response.data
+        //  this.fileName = this.file.name
         alert("성공확인:"+this.file.name);
         
-          // this.deployService.fileDownload(this.file.name);
-          // .subscribe(
-          //   response => {
-          //     response.data
-          //     alert("성공");
-          //   }
-          // )
-      },
+        //  this.deployService.fileDownload(this.fileName)
+        //  .subscribe(
+        //    responses => {
+        //      alert("성공");
+        //    }
+        // )
+        
+
+      }
     );
   }
 

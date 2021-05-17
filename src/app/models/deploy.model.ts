@@ -10,11 +10,14 @@ export class Deploy{
     writer:string
     deployDate:Date
     
+    filename:string
+    // fileName:String
 
     //스크립트 textarea구분
     scriptDTO:Script[]
 
     //파일 list 구분
     fileNames:string[]=[];
+    names:string[]=[];
     directoryPaths:string[]=[];
 }

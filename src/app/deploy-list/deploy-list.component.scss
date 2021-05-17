@@ -59,3 +59,13 @@ margin-top: -4rem;
 .table td, .table th {
     vertical-align: center !important;
 }
+
+.fileBtn {
+    height: 3em;
+    width: 30%;
+    border-color: rgba(82, 63, 105, 0.06);
+    text-align: center;
+    border: 1px solid;
+    border-radius: 7px;
+    cursor:pointer;
+}

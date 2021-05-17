@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Deploy } from '../models/deploy.model';
 import { Script } from '../models/script.model';
 import { ScriptView } from '../models/scriptView.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,7 @@ export class DeployService {
 
   // to download method
   public fileDownload(filename){
+    console.log(filename);
     this.httpClient.get<any>(this.fileURL + "/files/" + filename);
   }
 
