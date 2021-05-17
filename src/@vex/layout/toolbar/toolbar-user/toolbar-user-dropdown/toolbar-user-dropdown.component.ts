@@ -64,24 +64,6 @@ export class ToolbarUserDropdownComponent implements OnInit {
       label: 'Online',
       icon: icCheckCircle,
       colorClass: 'text-green'
-    },
-    {
-      id: 'away',
-      label: 'Away',
-      icon: icAccessTime,
-      colorClass: 'text-orange'
-    },
-    {
-      id: 'dnd',
-      label: 'Do not disturb',
-      icon: icDoNotDisturb,
-      colorClass: 'text-red'
-    },
-    {
-      id: 'offline',
-      label: 'Offline',
-      icon: icOfflineBolt,
-      colorClass: 'text-gray'
     }
   ];
 

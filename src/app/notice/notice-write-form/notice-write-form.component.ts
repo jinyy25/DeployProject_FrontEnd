@@ -97,20 +97,20 @@ export class NoticeWriteFormComponent implements OnInit {
   }
 
 
-  reset(){
-    this.fileUploader.nativeElement.value=null;
+  reset(event){
+    event.target.value=null;
+    //this.fileUploader.nativeElement.value=null;
   }
 
   selectFiles(event): void {
 
     this.files.push(event.target.files);
-
+    
     this.display="block";
-   
   }
   
   close(text:string): void{
-    
+   
     text=text.substr(1);
 
     //files는 기존에 선택된 파일을 저장하는 변수
