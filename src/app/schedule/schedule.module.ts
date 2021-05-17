@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { SearchScheduleComponent } from './search-schedule/search-schedule.component';
 import { MatIconModule } from '@angular/material/icon';
 import { IconModule } from '@visurel/iconify-angular';
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
