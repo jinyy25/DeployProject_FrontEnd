@@ -1,5 +1,3 @@
-import { ErrorHandlingComponent } from './common/error-handling/error-handling.component';
-
 import { NgModule } from '@angular/core';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
@@ -99,9 +97,6 @@ const routes: VexRoutes = [
   },
   { 
     path: 'sampleFileUpload', component: UploadFilesComponent 
-  },
-  { 
-    path: 'error', component: ErrorHandlingComponent
   }
 ];
 
