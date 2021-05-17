@@ -18,7 +18,7 @@
             <div class="deploy-search" [formGroup]="searchGroup" (keyup.enter)="search(searchGroup)"> 
                     <mat-form-field class="select-field" appearance="standard">
                             <mat-label>분류</mat-label>
-                            <mat-select (selectionChange)="selectValue($event.value)" required formControlName="searchCategory" [(ngModel)]="all" >
+                            <mat-select (selectionChange)="selectValue($event.value)" formControlName="searchCategory" [(ngModel)]="all" >
                                 <mat-option value="all">전체</mat-option>
                                 <mat-option value="title">제목</mat-option>
                                 <mat-option value="writer">작성자</mat-option>
@@ -69,7 +69,7 @@
                         <div class="fileBtn">
                             <a href="http://localhost:8080/file/files/{{deploy.name}}">zip</a>
                         </div>
-                        <button mat-stroked-button class="excelBtn" (click)="exportToExcel(listTitle.id,deploy.deployNo)">excel</button>
+                        <button color="primary" mat-raised-button class="excelBtn" (click)="exportToExcel(listTitle.id,deploy.deployNo)">excel</button>
                     </td>                                
                 </tr>
                 

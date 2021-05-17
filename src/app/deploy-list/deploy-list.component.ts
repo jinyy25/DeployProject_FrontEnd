@@ -162,25 +162,5 @@ export class DeployListComponent implements OnInit{
       this.p = 1;
   }
 
-  //6. zip download
-  downloadZip(deployNo){
-    this.deployService.selectFileInfo(deployNo)
-    .subscribe(
-      response => {
-         this.file = response.data
-        //  this.fileName = this.file.name
-        alert("성공확인:"+this.file.name);
-        
-        //  this.deployService.fileDownload(this.fileName)
-        //  .subscribe(
-        //    responses => {
-        //      alert("성공");
-        //    }
-        // )
-        
-
-      }
-    );
-  }
 
 }

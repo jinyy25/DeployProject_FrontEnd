@@ -103,15 +103,6 @@ export class DeployDetailComponent implements OnInit {
   //2. 페이징처리
   getPage(page) {}
 
-  //3. zip 다운로드
-  // downloadZip(deployNo){
-  //   this.deployService.downloadZipFile(deployNo)
-  //   .subscribe(
-  //     response => {
-  //       this.deploy = response.data
-  //     },
-  //   );
-  // }
 
   //4. 취소버튼
   cancel(){
