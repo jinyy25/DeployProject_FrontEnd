@@ -34,7 +34,9 @@
                             </div>
                         </div>
                         <div class="btn-outline">
-                            <button color="primary" mat-raised-button>zip</button>
+                            <div class="fileBtn"> 
+                                <a href="http://localhost:8080/file/files/{{deploy.name}}">zip</a>
+                            </div>
                             <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
                             <button color="primary" mat-raised-button (click)="cancel()">취소</button>
                         </div>

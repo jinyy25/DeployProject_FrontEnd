@@ -69,7 +69,16 @@ margin-top: -4rem;
     width: 30%;
     border-color: rgba(82, 63, 105, 0.06);
     text-align: center;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
     border: 1px solid;
     border-radius: 7px;
     cursor:pointer;
+}
+
+.fileBtn a{
+    padding: 1em 2em;
+    text-decoration: none;
+    color: black;
 }

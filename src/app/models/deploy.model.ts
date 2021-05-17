@@ -11,7 +11,7 @@ export class Deploy{
     deployDate:Date
     
     filename:string
-    // fileName:String
+    name:string //파일이름
 
     //스크립트 textarea구분
     scriptDTO:Script[]
