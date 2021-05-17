@@ -1,5 +1,3 @@
-
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VexModule } from '../@vex/vex.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
 import { NgxPaginationModule } from 'ngx-pagination';//for pagination
 
@@ -29,9 +27,6 @@ import { ExcelDownloadService } from './common/excel-download/excel-download.ser
 import { UploadFilesComponent } from './common/file-upload/upload-files.component';
 import { CodeMgmtService } from './common/code-management/code-mgmt.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ErrorHandlingComponent } from './common/error-handling/error-handling.component';
-import { ErrorHandlingService } from './common/error-handling/error-handling.service';
-import { ErrorHandler } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -43,8 +38,8 @@ import { ErrorHandler } from '@angular/core';
      */
     UserComponent,//pagination sample용 Component
     ExcelComponent,//excel file download용 Component
-    UploadFilesComponent,//file upload & download sample용 Component
-    ErrorHandlingComponent 
+    UploadFilesComponent//file upload & download sample용 Component
+   
   
     
   ],
@@ -75,7 +70,6 @@ import { ErrorHandler } from '@angular/core';
     ExcelService,
     CodeMgmtService,
     ExcelDownloadService//excelJS Library 이용
-    //{provide: ErrorHandler, useClass: ErrorHandlingService}
     
   ],
   bootstrap: [AppComponent] 

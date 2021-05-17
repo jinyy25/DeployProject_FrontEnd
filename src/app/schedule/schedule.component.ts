@@ -211,21 +211,23 @@ export class ScheduleComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe( result => {//onSave 메소드에서 리턴한 schedule 객체
       //const calendarApi = arg.view.calendar;
-      result.writer = this.loginUser.id;
+      if(result){
+        result.writer = this.loginUser.id;
 
-      if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
-        result.startDate = result.startDate+" "+result.startTime;
-        result.endDate = result.endDate+" "+result.endTime;
-      }
-
-      this.service.insertSchedule(result).subscribe(res => {
-        if(res.data){
-          alert("일정이 등록되었습니다");
-        }else{
-          alert("등록에 실패하였습니다");
+        if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
+          result.startDate = result.startDate+" "+result.startTime;
+          result.endDate = result.endDate+" "+result.endTime;
         }
-        window.location.reload();//새로고침
-      });
+
+        this.service.insertSchedule(result).subscribe(res => {
+          if(res.data){
+            alert("일정이 등록되었습니다");
+          }else{
+            alert("등록에 실패하였습니다");
+          }
+          window.location.reload();//새로고침
+        });
+      }
     });
   }
 
@@ -290,6 +292,10 @@ export class ScheduleComponent implements AfterViewInit {
 
   showAll(){//전체 스케쥴 보여주기
     this.calendarOptions.events = this.events;
+
+    if(this.toggle){//팀별 안 보이게
+      this.toggle = !this.toggle;
+    }
   }
 
   showMyTeam(){//색상 안내도 토글
@@ -297,6 +303,9 @@ export class ScheduleComponent implements AfterViewInit {
   }
 
   showOne(){//자기꺼 보여주기, 개인별 검색
+    if(this.toggle){//팀별 안 보이게
+      this.toggle = !this.toggle;
+    }
 
     const dialogRef = this.dialog.open(SearchScheduleComponent, {
       //팀별 유저 리스트 보내주기, 본인 정보 보내주기
@@ -309,20 +318,22 @@ export class ScheduleComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {//id 전달
-      if(result.length == 1){
-        const oneEvent = this.events.filter((event) => event.schedule.writer == result);
-        this.calendarOptions.events = oneEvent; 
-      }else{
-        let array = [];
-        for (let i = 0; i < result.length; i++) {
-          if(i == 0){//맨 처음 event list
-            array = this.events.filter((event) => event.schedule.writer == result[i]);
-          }else{
-            const oneEvent = this.events.filter((event) => event.schedule.writer == result[i]);
-            array = array.concat(oneEvent);
+      if(result){
+        if(result.length == 1){
+          const oneEvent = this.events.filter((event) => event.schedule.writer == result);
+          this.calendarOptions.events = oneEvent; 
+        }else{
+          let array = [];
+          for (let i = 0; i < result.length; i++) {
+            if(i == 0){//맨 처음 event list
+              array = this.events.filter((event) => event.schedule.writer == result[i]);
+            }else{
+              const oneEvent = this.events.filter((event) => event.schedule.writer == result[i]);
+              array = array.concat(oneEvent);
+            }
           }
+          this.calendarOptions.events = array;
         }
-        this.calendarOptions.events = array;
       }
     });
   }
