@@ -39,7 +39,7 @@ export class ScheduleComponent implements AfterViewInit {
   icChevronLeft = icChevronLeft;
   icChevronRight = icChevronRight;
 
-  toggle : boolean;
+  toggle = false;
   
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
