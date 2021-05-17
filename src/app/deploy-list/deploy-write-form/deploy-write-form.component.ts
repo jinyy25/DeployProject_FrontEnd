@@ -127,11 +127,11 @@ export class DeployWriteFormComponent implements OnInit {
   sendData(deploys){
     this.deployService.insertDeploy(deploys)
     .subscribe(data => {
-      if(data.false){
-        alert('배포 등록 실패');
-      }else{
+      if(data.success){
         alert('배포이력 등록 완료');
         location.href="/#/deploy-list";
+      }else{
+        alert('배포 등록 실패');
       }
     })
   }
@@ -202,8 +202,11 @@ export class DeployWriteFormComponent implements OnInit {
         })
         )
         .subscribe(data=>{
-          this.sendData(this.deploys);
-          console.log(data.success);
+          if(data.success){
+            this.sendData(this.deploys);
+          }else{
+            alert("파일을 올바르게 입력해주세요");
+          }
           })
     }else{
       this.sendData(this.deploys);
