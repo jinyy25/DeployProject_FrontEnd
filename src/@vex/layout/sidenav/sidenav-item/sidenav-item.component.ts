@@ -54,8 +54,9 @@ export class SidenavItemComponent implements OnInit, OnChanges {
     ).subscribe(item => this.onOpenChange(item));
 
     if(this.item.label == 'Schedule'){
+      this.item as NavigationLink;
       this.scheduleService.selectTotalCount().subscribe(res => {
-        this.badge = {value: res.data};
+        this.badge = {value: res.data.toString()};
       });
     }
   }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExcelDownloadService } from './excel-download.service';
+import { ErrorHandlingService } from './error-handling.service';
 
-describe('ExcelDownloadService', () => {
-  let service: ExcelDownloadService;
+describe('ErrorHandlingService', () => {
+  let service: ErrorHandlingService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ExcelDownloadService);
+    service = TestBed.inject(ErrorHandlingService);
   });
 
   it('should be created', () => {

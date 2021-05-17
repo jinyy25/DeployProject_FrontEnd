@@ -32,7 +32,6 @@ export class NoticeDetailComponent implements OnInit {
   
   constructor(
     private boardService:BoardService,
-    private uploadService:UploadService,
     private route:ActivatedRoute,
     private router:Router,
     private jwtService:JwtService

@@ -47,6 +47,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
   //비밀번호 일치하는지 확인
   findPassword(form){
+      this.form.markAllAsTouched();//mat error 뜨게
       //유효성 검사
       if(this.form.controls.email.errors != null){
         return false;
@@ -56,8 +57,10 @@ export class ForgotPasswordComponent implements OnInit {
       this.userService.findPassword(form.controls.id.value,form.controls.email.value)
       .subscribe(res=>{
         if(res.success == false){
-          alert("아이디,이메일이 일치하지 않습니다.");
+          this.form.controls.email.setErrors({checkError:true});
+         
         }else{
+          this.form.markAsUntouched();
           this.display="block";
           this.user.id=res.data;
         }//if~else end
@@ -67,8 +70,10 @@ export class ForgotPasswordComponent implements OnInit {
 
     //비밀번호 변경
     updatePassword(form){
+      this.form.markAllAsTouched();//mat error 뜨게
      if(this.form.controls.newPasswordConfirm.errors != null){
       return false;
+      
     }
     
     this.user.password=form.value.newPassword
