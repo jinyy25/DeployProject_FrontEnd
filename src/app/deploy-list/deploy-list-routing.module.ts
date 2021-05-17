@@ -5,12 +5,17 @@ import { DeployListComponent } from './deploy-list.component';
 import { VexRoutes } from '../../@vex/interfaces/vex-route.interface';
 import { DeployWriteFormComponent } from './deploy-write-form/deploy-write-form.component';
 import { DeployDetailComponent } from './deploy-detail/deploy-detail.component';
+import { DefaultPathFormComponent } from './default-path-form/default-path-form.component';
 
 
 const routes: VexRoutes = [
   {
     path: '',
     component: DeployListComponent
+  },
+  {
+    path: 'default-path',
+    component:DefaultPathFormComponent
   },
   {
     path:'deploy-write',
