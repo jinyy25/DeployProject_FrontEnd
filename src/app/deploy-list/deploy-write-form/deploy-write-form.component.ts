@@ -4,7 +4,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import { BoardFile } from 'src/app/models/boardfile.model';
 import { DeployFile } from 'src/app/models/deploy-file.model';
 import { DeployService } from 'src/app/services/deploy.service';
@@ -30,10 +30,17 @@ export class DeployWriteFormComponent implements OnInit {
   layoutCtrl = new FormControl('boxed');
   fileList:DeployFile = new DeployFile();
 
-  selectedFiles? : FileList;
+  // selectedFiles? : FileList;
+
+  fileConfirm = [];
+
   files = [];
   fileNames = [];
   display = "none";
+
+  names=[];
+  directoryPaths=[];
+  temporary:any[];
 
   date:any;
 
@@ -75,16 +82,28 @@ export class DeployWriteFormComponent implements OnInit {
 
   //파일 닫기 누를시
   close(obj,text:string): void{
-    text=text.substr(1);
-   for(let i =0 ; i<this.files.length;i++){
-     if(this.files[i].name!=text){
-        this.fileNames.push(this.files[i]);
-      }
+
+   text=text.substr(1);
+
+   for(let i =0 ; i<this.files.length; i++){
+     this.temporary = this.files[i];
+     for(let j = 0; j<this.temporary.length; j++){
+       if(this.temporary[i].name!=text){
+          this.fileNames.push(this.temporary[i]);
+        }
      }
-    this.files=this.fileNames;
-    this.fileNames=[];
-    if(this.files.length==0){
+    }
+
+
+    this.files = [];
+    this.files.push(this.fileNames);
+
+    //초기화
+    this.fileNames = [];
+
+    if(this.files[0].length==0){
       this.display="none";
+      this.fileUploader.nativeElement.value = null;
     }
   }
 
@@ -121,6 +140,7 @@ export class DeployWriteFormComponent implements OnInit {
   send(deployForm,deployTitle,deployContent,
         portalScript,tbwappScript,centerScript,files
         ){
+    this.deployForm.markAllAsTouched();
 
     //유효성 검사
     if(this.deployForm.controls.deployTitle.errors != null){
@@ -164,10 +184,16 @@ export class DeployWriteFormComponent implements OnInit {
     // 2-2. 파일 추가
     if(this.files.length !=0){
         this.uploadService.upload(this.files)
+        .pipe(tap((response:any)=>{
+          if(response.data != null){            
+            this.deploys.names = response.data.names
+            this.deploys.directoryPaths = response.data.directoryPaths
+          }
+        })
+        )
         .subscribe(data=>{
-          this.deploys.fileNames =data.data.names
-          this.deploys.directoryPaths = data.data.directoryPaths
           this.sendData(this.deploys);
+          console.log(data.success);
           })
     }else{
       this.sendData(this.deploys);
