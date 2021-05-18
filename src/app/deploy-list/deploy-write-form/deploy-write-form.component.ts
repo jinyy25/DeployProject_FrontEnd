@@ -66,44 +66,40 @@ export class DeployWriteFormComponent implements OnInit {
     this.check = localStorage.getItem("AUTH_TOKEN");
     if(this.check !=null){
       this.loginUser = this.jwtService.decodeToUser(this.check);
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-      if(this.check !=null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
     }
   } 
 
   //파일다수추가시
   selectFiles(event): void{
-    this.files = event.target.files;
+    this.files.push(event.target.files);
     this.display = "block";
   }
 
   //파일 닫기 누를시
-  close(obj,text:string): void{
+  close(text:string): void{
+   
+    text=text.substr(1);
 
-   text=text.substr(1);
-
-   for(let i =0 ; i<this.files.length; i++){
-     this.temporary = this.files[i];
-     for(let j = 0; j<this.temporary.length; j++){
-       if(this.temporary[i].name!=text){
-          this.fileNames.push(this.temporary[i]);
+    //files는 기존에 선택된 파일을 저장하는 변수
+    for(let i =0 ; i<this.files.length;i++){
+      this.temporary=this.files[i];
+      for(let j=0; j<this.temporary.length;j++){
+        if(this.temporary[j].name!=text){
+          this.fileNames.push(this.temporary[j]);
         }
-     }
-    }
+      }
 
-
-    this.files = [];
+    }//for end
+    
+    this.files=[];
     this.files.push(this.fileNames);
-
-    //초기화
-    this.fileNames = [];
-
+    this.fileNames=[];
+    
+    
+    //파일이 없을때 닫음
     if(this.files[0].length==0){
       this.display="none";
-      this.fileUploader.nativeElement.value = null;
+      this.fileUploader.nativeElement.value=null;
     }
   }
 
@@ -128,8 +124,8 @@ export class DeployWriteFormComponent implements OnInit {
     this.deployService.insertDeploy(deploys)
     .subscribe(data => {
       if(data.success){
-        alert('배포이력 등록 완료');
-        location.href="/#/deploy-list";
+        alert('배포 등록 성공');
+        this.router.navigate(['/deploy-list']);
       }else{
         alert('배포 등록 실패');
       }
@@ -194,19 +190,14 @@ export class DeployWriteFormComponent implements OnInit {
     // 2-2. 파일 추가
     if(this.files.length !=0){
         this.uploadService.upload(this.files)
-        .pipe(tap((response:any)=>{
-          if(response.data != null){            
-            this.deploys.names = response.data.names
-            this.deploys.directoryPaths = response.data.directoryPaths
-          }
-        })
-        )
         .subscribe(data=>{
-          if(data.success){
-            this.sendData(this.deploys);
-          }else{
-            alert("파일을 올바르게 입력해주세요");
-          }
+            if(data.success){
+              this.deploys.names = data.data.names
+              this.deploys.directoryPaths = data.data.directoryPaths
+              this.sendData(this.deploys);
+            }else{
+              alert("파일을 올바르게 입력해주세요");
+            }
           })
     }else{
       this.sendData(this.deploys);

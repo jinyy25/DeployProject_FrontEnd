@@ -43,8 +43,7 @@
 	<div id="noticeContent">
 		<div *ngIf="display=='block'" id="fileBox">
 			<ul>
-				<li *ngFor="let file of files"><a href="http://localhost:8080/file/files/{{file.name}}">{{file.name}}</a></li>
-				
+				<li *ngFor="let file of files"><a href="http://localhost:8080/file/files/{{file.name}}">{{file.name}}</a></li>			
 			</ul>
 		</div>
 		<div id="contentBox" [innerHtml]="notice.content">
