@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="btn-outline">
-                            <div class="fileBtn"> 
+                            <div class="fileBtn"  *ngIf="zipName !== undefined"> 
                                 <a href="http://localhost:8080/file/files/{{zipName}}">zip</a>
                             </div>
                             <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
