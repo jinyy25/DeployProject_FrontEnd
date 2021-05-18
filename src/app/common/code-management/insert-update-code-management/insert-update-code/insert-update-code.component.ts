@@ -133,28 +133,50 @@ export class InsertUpdateCodeComponent implements OnInit {
 
 
 
+  //디스플레이 순서 중복 검사
+  //업데이트 다이얼로그 열 때 dsplOrder 값을 받아서 전역변수로 넣어주어 값 비교하였음
+  checkDsplOrder(dsplOrder,isParentCode,parentCodeId) {
 
-  checkDsplOrder(dsplOrder,isParentCode,parentCodeId){
-    console.log(this.dsplOrder);
-
-    if(isParentCode==true&&this.isInsertMode==true){//insert dialog 부모코드끼리 순서비교하기
-      
+    if(isParentCode == true && this.isInsertMode == true) {//부모코드 insert 시에 순서비교
       this.codeMgmtService.checkParentCodeDsplOrder(dsplOrder)
       .subscribe(data => {
         if(data.success==true){
         this.form.controls.dsplOrder.setErrors({checkError:true});
         }
-      })
-      //부모코드 비교 내 if~else end 
-    } else if(isParentCode==false&&this.isInsertMode==true) {//insert dialog 자식코드끼리 순서 비교하기
-      this.codeMgmtService.checkChildCodeDsplOrder(dsplOrder,parentCodeId)
+      })//subscribe end 
+
+    } else if (isParentCode == false && this.isInsertMode == true) {//자식코드 insert 시에 순서비교
+      this.codeMgmtService.checkChildCodeDsplOrder(dsplOrder, parentCodeId)
+          .subscribe(data => {
+        if(data.success==true){
+          this.form.controls.dsplOrder.setErrors({checkError:true});
+        }
+      })//subscribe end 
+    } else if (isParentCode == true && this.isInsertMode == false) {//부모코드 update시에 순서비교
+        if(this.dsplOrder==dsplOrder){
+          this.form.controls.dsplOrder.valid;
+        } else {
+          this.codeMgmtService.checkParentCodeDsplOrder(dsplOrder)
+          .subscribe(data => {
+        if(data.success==true){
+        this.form.controls.dsplOrder.setErrors({checkError:true});
+        }
+      })//subscribe end 
+      }
+
+    } else if (isParentCode == false && this.isInsertMode == false) {
+      if(this.dsplOrder==dsplOrder) {
+      this.form.controls.dsplOrder.valid;
+      } else {
+        this.codeMgmtService.checkChildCodeDsplOrder(dsplOrder,parentCodeId)
       .subscribe(data => {
         if(data.success==true){
           this.form.controls.dsplOrder.setErrors({checkError:true});
         }
       })//subscribe end 
-    }//if~else if end 
-   
-  }
+
+      }//업데이트 자식코드 비교 내 if~else end 
+    }//if~ else if ~ else if ~else if end 
+  }//checkDsplOrder() end
 
 }
