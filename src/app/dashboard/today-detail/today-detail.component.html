@@ -6,12 +6,16 @@
       <tr>
         <th>제목</th>
         <th>내용</th>
+        <th>시작 날짜</th>
+        <th>종료 날짜</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of scheduleList">
         <td>{{ item.scheduleTitle }}</td>
         <td>{{ item.scheduleContent }}</td>
+        <td>{{ item.startDate }}</td>
+        <td>{{ item.endDate }}</td>
       </tr>
     </tbody>
   </table>

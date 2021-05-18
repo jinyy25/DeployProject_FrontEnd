@@ -69,13 +69,9 @@ export class DashboardComponent implements OnInit {
   }
 
   todayDetail(user, complete){
-    const dialogRef = this.dialog.open(TodayDetailComponent, {
-      width: '500px',
+    this.dialog.open(TodayDetailComponent, {
+      width: '600px',
       data: {user : user, complete : complete}
-    });
-
-    dialogRef.afterClosed().subscribe( result => {
-
     });
   }
 
