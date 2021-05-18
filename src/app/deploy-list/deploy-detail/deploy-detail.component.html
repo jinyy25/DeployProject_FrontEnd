@@ -33,7 +33,7 @@
                             <div class="fileBtn"  *ngIf="zipName !== undefined"> 
                                 <a href="http://localhost:8080/file/files/{{zipName}}">zip</a>
                             </div>
-                            <button color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
+                            <button *ngIf="zipName !== undefined" color="primary" mat-raised-button (click)="exportAsXLSX(listTitle.id)">excel</button>
                             <button color="primary" mat-raised-button (click)="cancel()">목록</button>
                         </div>
                 </div>
@@ -49,7 +49,7 @@
                 </div> 
             </div>
 
-            <div id = "deployContent">
+            <div id = "deployContent"  *ngIf="zipName === undefined">
                 <div  id = "fileBox">
                     <ul>
                         <li *ngFor = "let file of files"><a href="http://localhost:8080/file/files/{{file.name}}">{{file.name}}</a></li>

@@ -69,7 +69,7 @@
                         <div class="fileBtn" *ngIf="deploy.name !== null">
                             <a href="http://localhost:8080/file/files/{{deploy.name}}">zip</a>
                         </div>
-                        <button color="primary" mat-raised-button class="excelBtn" (click)="exportToExcel(listTitle.id,deploy.deployNo)">excel</button>
+                        <button *ngIf="deploy.name !== null"  color="primary" mat-raised-button class="excelBtn" (click)="exportToExcel(listTitle.id,deploy.deployNo)">excel</button>
                     </td>                                
                 </tr>
                 

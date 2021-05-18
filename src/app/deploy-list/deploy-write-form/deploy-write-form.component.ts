@@ -144,6 +144,18 @@ export class DeployWriteFormComponent implements OnInit {
       return false;
     }
 
+        //로그인 유저정보 추출
+        this.check = localStorage.getItem("AUTH_TOKEN"); 
+        if(this.check !=null){ 
+          this.loginUser=this.jwtService.decodeToUser(this.check);
+        }else{
+          this.check= sessionStorage.getItem("AUTH_TOKEN");
+  
+          if(this.check !=null){
+            this.loginUser = this.jwtService.decodeToUser(this.check);
+          }//if end
+        }//if~else end
+
     //객체에 값 입력
     this.deploys = deployForm.value;
     this.deploys.writer = this.loginUser.name;
