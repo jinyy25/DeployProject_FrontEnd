@@ -26,21 +26,33 @@ import { tap } from 'rxjs/operators';
   ]
 })
 export class NoticeWriteFormComponent implements OnInit {
-
-  //selectedFiles?: FileList;
+  
+  //update 때 임시로 파일이름들
   names=[];
+  //update 때 임시로 파일경로들
   directoryPaths=[];
+  //update 때 임시변수
   temporary:any[];
+  //event.target.files 를 넣어주는 변수
   files = [];
+  //파일 박스에 파일이름들 넣어주는 변수
   fileNames  = [];
+  //기존에 공지사항에 있는 파일을 넣어주는 변수
   fileConfirm = [];
   form: FormGroup;
+  //파일박스 디스플레이
   display ="none";
+  //로그인유저
   loginUser:User;
+  //체크
   check:string;
+  //공지사항 인서트 할때 변수
   fileList:BoardFile = new BoardFile();
+  //공지사항 번호
   boardNo:number;
+  //공지사항
   notice:Notice = new Notice();
+  //로딩 이미지 넣을때 상태
   status="true";
 
   @ViewChild('fileUploader') fileUploader:ElementRef;
@@ -49,25 +61,20 @@ export class NoticeWriteFormComponent implements OnInit {
     private fb:FormBuilder,
     private uploadService:UploadService,
     private jwtService:JwtService,
-
     private boardService:BoardService,
     private route:ActivatedRoute,
-    private router:Router,
-    
-    
-    
-
+    private router:Router
   ) { }
 
   ngOnInit(): void {
+    
+    //수정이 아닐 경우
     if(this.boardNo == null){
-
       this.form=this.fb.group({
         title:['',Validators.required],
         content:['',Validators.required]
       })
     }
-
 
     //수정일 경우
     this.boardNo=this.route.snapshot.params['boardNo'];
@@ -96,12 +103,7 @@ export class NoticeWriteFormComponent implements OnInit {
     }
   }
 
-
-  reset(event){
-    event.target.value=null;
-    //this.fileUploader.nativeElement.value=null;
-  }
-
+  //파일선택 시
   selectFiles(event): void {
 
     this.files.push(event.target.files);
@@ -113,7 +115,7 @@ export class NoticeWriteFormComponent implements OnInit {
    
     text=text.substr(1);
 
-    //files는 기존에 선택된 파일을 저장하는 변수
+    //x버튼 누른 파일 이외에 파일을 다시 넣어줌
     for(let i =0 ; i<this.files.length;i++){
       this.temporary=this.files[i];
       for(let j=0; j<this.temporary.length;j++){
@@ -125,6 +127,7 @@ export class NoticeWriteFormComponent implements OnInit {
     }//for end
     
     this.files=[];
+    //다시 files에 넣어줌
     this.files.push(this.fileNames);
     this.fileNames=[];
     
@@ -160,11 +163,12 @@ export class NoticeWriteFormComponent implements OnInit {
       this.fileList.content=form.controls.content.value;
       this.fileList.title=form.controls.title.value;
 
+      
       if(type=="insert"){
 
         this.boardService.upload(this.fileList)
         .subscribe(data =>{
-
+          this.status="true";
           this.router.navigate(['/notice/'+data.data]);
 
         })
@@ -213,7 +217,7 @@ export class NoticeWriteFormComponent implements OnInit {
     }//if~else end 
   }//upload()end
 
-
+  
   insert(form,title){
     this.form.markAllAsTouched();//mat error 뜨게
     if(this.form.controls.title.errors != null){
@@ -239,6 +243,7 @@ export class NoticeWriteFormComponent implements OnInit {
     const type="update";
     
     
+    //기존에 있었던 파일인지 확인 (기존에 있었던 파일은 디비에서 가져오기때문에 파일로 인식을 못하기때문 )
     for(let j=0; j< this.files.length; j++){ 
         this.temporary = this.files[j];
       for(let i =0; i < this.fileConfirm.length;i++){
