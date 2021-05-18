@@ -43,19 +43,19 @@ export class DefaultPathFormComponent implements OnInit {
 
   buildForm(): void{
     this.defaultPathForm = this.formBuilder.group({
-      developportal:['',[Validators.required,Validators.pattern(/^\//)]],
-      developtbwapp:['',[Validators.required,Validators.pattern(/^\//)]],
-      developcenter:['',[Validators.required,Validators.pattern(/^\//)]],
-      developtmp:['',[Validators.required,Validators.pattern(/^\//)]],
-      prdtmp:['',[Validators.required,Validators.pattern(/^\//)]],
-      portaljava:['',[Validators.required,Validators.pattern(/^\//)]],
-      portaljsp:['',[Validators.required,Validators.pattern(/^\//)]],
-      portaljs:['',[Validators.required,Validators.pattern(/^\//)]],
-      portalxml:['',[Validators.required,Validators.pattern(/^\//)]],
-      tbwappjava:['',[Validators.required,Validators.pattern(/^\//)]],
-      tbwappxml:['',[Validators.required,Validators.pattern(/^\//)]],
-      centerjava:['',[Validators.required,Validators.pattern(/^\//)]],
-      centerxml:['',[Validators.required,Validators.pattern(/^\//)]],
+      developPortal:['',[Validators.required,Validators.pattern(/^\//)]],
+      developTbwapp:['',[Validators.required,Validators.pattern(/^\//)]],
+      developCenter:['',[Validators.required,Validators.pattern(/^\//)]],
+      developTmp:['',[Validators.required,Validators.pattern(/^\//)]],
+      prdTmp:['',[Validators.required,Validators.pattern(/^\//)]],
+      portalJava:['',[Validators.required,Validators.pattern(/^\//)]],
+      portalJsp:['',[Validators.required,Validators.pattern(/^\//)]],
+      portalJs:['',[Validators.required,Validators.pattern(/^\//)]],
+      portalXml:['',[Validators.required,Validators.pattern(/^\//)]],
+      tbwappJava:['',[Validators.required,Validators.pattern(/^\//)]],
+      tbwappXml:['',[Validators.required,Validators.pattern(/^\//)]],
+      centerJava:['',[Validators.required,Validators.pattern(/^\//)]],
+      centerXml:['',[Validators.required,Validators.pattern(/^\//)]],
     });
   }
 
@@ -96,9 +96,7 @@ export class DefaultPathFormComponent implements OnInit {
     this.router.navigate(['/deploy-list']);
   }
 
-  send(defaultPathForm:FormGroup,developportal:string,developtbwapp:string,developcenter:string
-    ,developtmp:string,prdtmp:string,portaljava:string,portaljsp:string,portaljs:string,portalxml:string
-    ,tbwappjava:string,tbwappxml:string,centerjava:string,centerxml:string){
+  send(defaultPathForm:FormGroup){
       
       this.defaultPathList = this.defaultPathForm.value;
    
