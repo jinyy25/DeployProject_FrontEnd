@@ -7,11 +7,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DashboardComponent } from './dashboard.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TodayDetailComponent } from './today-detail/today-detail.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, TodayDetailComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -20,9 +23,12 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTableModule
-    
-
-  ]
+    MatTableModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
+  entryComponents: [
+    TodayDetailComponent
+  ],
 })
 export class DashboardModule { }
