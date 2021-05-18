@@ -1,89 +1,23 @@
 #scriptWrap{
-	width: 700px;
+	width: 60%;
 	margin :30px 160px;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.outline{
-    padding: 4em 0em;
-}
 table{
     table-layout: fixed;
     word-break: break-all;
 }
 
-.paginate-box{
-    height: 100px;
-    margin-top:30px;
-    float: right;
-}
-.mat-form-field{
-    margin-bottom:20px;
-}
-.-mt-16 {
-    margin-top: -4rem;
-}
-.deploy-content{
-    display: flex;
-    padding: 0.6em 0em;
-}
-.deploy-content p{
-    font-size: 18px;
-    font-weight: 600;
-}
-.deploy-title{
-    padding-right: 4em;
-}
-.title-extra{
-    padding-left: 4em;
-}
 button{
     margin: 0px 9px;
     float:right;
 }
-.bg-app-bar{
-    background: white !important;
-    justify-content: space-between!important;
-}
-.deploy-search{
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-}
 
 
-.outline-extra{
-    padding: 4.5em 2em;
-}
 .content-outline{
     display:flex;
     justify-content: space-around;
-}
-.right-content{
-    margin-left: 5.5em;
-}
-.content-extra{
-    padding: 1em 0em;
-}
-
-.fileBtn {
-    height: 3em;
-    width: 5em;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-    background-color: rgb(var(--color-primary));
-    border-radius: 0.4em;
-    cursor:pointer;
-    margin-right: 0.6em;
-}
-
-.fileBtn a{
-    padding: 0.7em 2em 0em 2em;
-    text-decoration: none;
-    font-weight: 600 !important;
-    color: white;
 }
 
 .btn-outline{
