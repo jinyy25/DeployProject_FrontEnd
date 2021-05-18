@@ -49,55 +49,53 @@
                 </div> 
             </div>
 
-            <div id = "deployContent"  *ngIf="zipName === undefined">
+            <div id = "deployContent" *ngIf="zipName === undefined">
                 <div  id = "fileBox">
                     <ul>
                         <li *ngFor = "let file of files"><a href="http://localhost:8080/file/files/{{file.name}}">{{file.name}}</a></li>
                     </ul>
                 </div>
             </div>
-            
-            
-
-            
-
-    <div id="scriptWrap">       
-        <table class="table w-full">
-            <thead>
-                <tr>
-                    <th style="width: 5%;">구분</th>
-                    <th style="width: 5%;">타입</th>
-                    <th style="width: 10%;">소스경로</th>
-                    <th style="width: 10%;">디렉토리생성</th>                
-                    <th style="width: 10%;">백업스크립트(운영)</th>
-                    <th style="width: 10%;">운영파일반영스크립트</th>
-                    <th style="width: 10%;">원복스크립트</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
-                    <td>{{scriptView.category}}</td>
-                    <td>{{scriptView.fileType}}</td>
-                    <td>{{scriptView.localPath}}</td>
-                    <td>{{scriptView.directoryPath}}</td>
-                    <td>{{scriptView.backupScript}}</td>
-                    <td>{{scriptView.reflectScript}}</td>
-                    <td>{{scriptView.rollbackScript}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+     <div *ngIf="zipName !== undefined">       
+        <div id="scriptWrap">       
+            <table class="table w-full" >
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">구분</th>
+                        <th style="width: 5%;">타입</th>
+                        <th style="width: 10%;">소스경로</th>
+                        <th style="width: 10%;">디렉토리생성</th>                
+                        <th style="width: 10%;">백업스크립트(운영)</th>
+                        <th style="width: 10%;">운영파일반영스크립트</th>
+                        <th style="width: 10%;">원복스크립트</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let scriptView of scriptViews | paginate: {itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems}">
+                        <td>{{scriptView.category}}</td>
+                        <td>{{scriptView.fileType}}</td>
+                        <td>{{scriptView.localPath}}</td>
+                        <td>{{scriptView.directoryPath}}</td>
+                        <td>{{scriptView.backupScript}}</td>
+                        <td>{{scriptView.reflectScript}}</td>
+                        <td>{{scriptView.rollbackScript}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="paginate-box">
-            <div id="item">
-                Items per Page:
-                <select (change)="handlePageSizeChange($event)">
-                    <option *ngFor="let itemsPerPage of itemsPerPages" >
-                    {{ itemsPerPage }}
-                    </option>
-                </select>
-            </div> 
             <pagination-controls (pageChange)="getPage(p =$event)" previousLabel="" nextLabel="" responsive="true">
             </pagination-controls>
         </div>
+
+        <div id="item">
+            Items per Page:
+            <select (change)="handlePageSizeChange($event)">
+                <option *ngFor="let itemsPerPage of itemsPerPages" >
+                {{ itemsPerPage }}
+                </option>
+            </select>
+        </div> 
+    </div>
     </vex-page-layout-content>
 </vex-page-layout>

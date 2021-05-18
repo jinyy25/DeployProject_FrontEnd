@@ -136,25 +136,35 @@ export class DeployWriteFormComponent implements OnInit {
   send(deployForm,deployTitle,deployContent,
         portalScript,tbwappScript,centerScript,files
         ){
+    //에러표시      
     this.deployForm.markAllAsTouched();
 
     //유효성 검사
     if(this.deployForm.controls.deployTitle.errors != null){
       deployTitle.focus();
+      alert("제목을 입력해주세요");
       return false;
+    } else if(this.deployForm.controls.deployContent.errors != null){
+      deployContent.focus();
+      alert("내용을 입력해주세요");
+    } else if(this.deployForm.controls.portalScript.errors != null){
+      alert("스크립트를 입력해주세요");
+    } else if(this.deployForm.controls.tbwappScript.errors != null){
+      alert("스크립트를 입력해주세요");
+    } else if(this.deployForm.controls.centerScript.errors != null){
+      alert("스크립트를 입력해주세요");
     }
 
-        //로그인 유저정보 추출
-        this.check = localStorage.getItem("AUTH_TOKEN"); 
-        if(this.check !=null){ 
-          this.loginUser=this.jwtService.decodeToUser(this.check);
-        }else{
-          this.check= sessionStorage.getItem("AUTH_TOKEN");
-  
-          if(this.check !=null){
-            this.loginUser = this.jwtService.decodeToUser(this.check);
-          }//if end
-        }//if~else end
+    //로그인 유저정보 추출
+    this.check = localStorage.getItem("AUTH_TOKEN"); 
+      if(this.check !=null){ 
+        this.loginUser=this.jwtService.decodeToUser(this.check);
+      }else{
+        this.check= sessionStorage.getItem("AUTH_TOKEN");  
+      if(this.check !=null){
+        this.loginUser = this.jwtService.decodeToUser(this.check);
+        }
+      }
 
     //객체에 값 입력
     this.deploys = deployForm.value;

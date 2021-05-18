@@ -6,11 +6,6 @@ table{
     word-break: break-all;
 }
 
-.paginate-box{
-    height: 100px;
-    margin-top:30px;
-    float: right;
-}
 .mat-form-field{
     margin-bottom:20px;
 }
@@ -111,3 +106,20 @@ button{
 	min-height: 200px;
 	border: 1px solid #d5d5db;
 }
+
+
+#item {
+    float: right;
+    margin-top: 15px;
+  }
+#item select {
+    width: 50px;
+}
+
+.paginate-box {
+    height: 120px;
+    float: right;
+    text-align: left;
+  }
+
+table {background: white;}

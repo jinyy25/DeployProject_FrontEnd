@@ -44,11 +44,6 @@ tbody tr td:not(:last-child){
 .overflow-auto{
     overflow: hidden!important;
 }
-.paginate-box{
-    height: 100px;
-    margin-top:30px;
-    float: right;
-}
 .mat-select-placeholder{
     color:black;
 }
@@ -85,4 +80,23 @@ margin-top: -4rem;
     text-decoration: none;
     font-weight: 600 !important;
     color: white;
+}
+
+#item {
+    float: right;
+    margin-top: 15px;
+  }
+#item select {
+    width: 50px;
+}
+
+.paginate-box {
+    width: 330px;
+    height: 120px;
+    float: right;
+    text-align: left;
+  }
+
+table{
+    background: white;
 }

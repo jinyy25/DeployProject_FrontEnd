@@ -79,16 +79,16 @@
     <div class="paginate-box">   
         <pagination-controls (pageChange)="getPage(p =$event)" previousLabel="" nextLabel="" responsive="true">
         </pagination-controls>
-
-        <div id="item">
-            Items per Page:
-            <select (change)="handlePageSizeChange($event)">
-                <option *ngFor="let itemsPerPage of itemsPerPages" >
-                {{ itemsPerPage }}
-                </option>
-            </select>
-        </div> 
     </div>
+    
+    <div id="item">
+        Items per Page:
+        <select (change)="handlePageSizeChange($event)">
+            <option *ngFor="let itemsPerPage of itemsPerPages" >
+            {{ itemsPerPage }}
+            </option>
+        </select>
+    </div> 
     </vex-page-layout-content>
 
 </vex-page-layout>
