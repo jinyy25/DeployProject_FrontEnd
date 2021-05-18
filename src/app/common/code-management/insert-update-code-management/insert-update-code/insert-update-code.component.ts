@@ -43,9 +43,9 @@ export class InsertUpdateCodeComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       isParentCode: [''],
-      codeId: ['', [Validators.required]],
-      codeName: ['', [Validators.required]],
-      parentCodeId: ['',[Validators.required]],
+      codeId: ['', [Validators.required, Validators.pattern("[/^\s+|\s+$/g]")]],
+      codeName: ['', [Validators.required,Validators.pattern("[/^\s+|\s+$/g]")]],
+      parentCodeId: ['',[Validators.required, Validators.pattern("[/^\s+|\s+$/g]")]],
       dsplOrder: ['', [Validators.required,Validators.pattern("^[0-9]*$")]],
       isInUse:  ['']
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
