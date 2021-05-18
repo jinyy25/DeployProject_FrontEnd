@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Notice } from '../models/notice.model';
 import { Schedule } from '../models/schedule.model';
@@ -10,6 +11,7 @@ import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
 import { TeamService } from '../services/team.service';
 import { UserService } from '../services/user.service';
+import { TodayDetailComponent } from './today-detail/today-detail.component';
 
 @Component({
   selector: 'vex-dashboard',
@@ -35,7 +37,8 @@ export class DashboardComponent implements OnInit {
     private userService : UserService,
     private scheduleService : ScheduleService,
     private teamService : TeamService,
-    private boardService : BoardService
+    private boardService : BoardService,
+    private dialog : MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +77,17 @@ export class DashboardComponent implements OnInit {
 
   changeTeam(){//선택한 팀 유저리스트
     this.teamUser = this.userList.filter((user) => user.team == this.teamControl.value);
+  }
+
+  viewCount(user){
+    const dialogRef = this.dialog.open(TodayDetailComponent, {
+      width: '400px',
+      data: {user : user}
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+
+    });
   }
 
 }

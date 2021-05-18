@@ -29,7 +29,8 @@ export class CodeManagementComponent implements OnInit {
   check : string;
 
   codeMgmts: CodeMgmt[];
-  childCodeMgmts: ChildCodeMgmt[];
+  //childCodeMgmts: ChildCodeMgmt[];
+  childCodeMgmtInformations: any = [];  
   parentCodeId: string;
   Index: any;
   hideme = [];
@@ -75,8 +76,8 @@ export class CodeManagementComponent implements OnInit {
     this.codeMgmtService.getChildCodeInfos(parentCodeId)
     .subscribe( data => {
       this.dataRegister = data;
-      this.childCodeMgmts = this.dataRegister.data;
-      //this.childCodeMgmtInformations[i] = data;
+      //this.childCodeMgmts = this.dataRegister.data;
+      this.childCodeMgmtInformations[i] = this.dataRegister.data;
       //console.log(this.childCodeMgmtInformations[i]);
     });
     this.hideme[i] = !this.hideme[i];  

@@ -68,14 +68,14 @@
                         </tr>
                     </thead>
                     <tbody>  
-                        <tr *ngFor="let childCodeMgmt of childCodeMgmts">
-                            <td>{{childCodeMgmt.codeId}}</td>
-                            <td>{{childCodeMgmt.codeName}}</td>
-                            <td>{{childCodeMgmt.parentCodeId}}</td>
-                            <td>{{childCodeMgmt.codeUseYN}}</td>
-                            <td>{{childCodeMgmt.dsplOrder}}</td>
-                            <td><button (click)="openUpdateCodeDialog(childCodeMgmt.codeId)"><img src="../../assets/img/edit.png" width="16"/></button></td>
-                            <td><button (click)="deleteCode(childCodeMgmt.codeId)"><img src="../../assets/img/delete.png" width="16"/></button></td>
+                        <tr *ngFor="let childCodeMgmtInformation of childCodeMgmtInformations[i]">
+                            <td>{{childCodeMgmtInformation.codeId}}</td>
+                            <td>{{childCodeMgmtInformation.codeName}}</td>
+                            <td>{{childCodeMgmtInformation.parentCodeId}}</td>
+                            <td>{{childCodeMgmtInformation.codeUseYN}}</td>
+                            <td>{{childCodeMgmtInformation.dsplOrder}}</td>
+                            <td><button (click)="openUpdateCodeDialog(childCodeMgmtInformation.codeId)"><img src="../../assets/img/edit.png" width="16"/></button></td>
+                            <td><button (click)="deleteCode(childCodeMgmtInformation.codeId)"><img src="../../assets/img/delete.png" width="16"/></button></td>
                         </tr>
                     </tbody>
                 </table>

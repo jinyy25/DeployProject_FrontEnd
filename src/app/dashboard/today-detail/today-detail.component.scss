@@ -1,0 +1,13 @@
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  border: 1px;
+  text-align: center;
+}
+
+.table td:first-child {
+  width: 100px;
+}
