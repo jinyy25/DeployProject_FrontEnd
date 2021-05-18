@@ -35,12 +35,13 @@
         </mat-form-field>
         <br/>
         <mat-form-field appearance="standard">
-        <mat-label>부모 코드 아이디</mat-label>
+        <mat-label>최상위 코드 아이디</mat-label>
         <input
             matInput
             formControlName="parentCodeId"
             #parentCodeId
         />
+        <mat-error *ngIf="form.get('codeName').hasError('required')">최상위 코드 아이디를 입력해 주세요.</mat-error>
         </mat-form-field>
         <br/>
         <mat-form-field appearance="standard">
@@ -70,19 +71,20 @@
     <mat-dialog-actions class="btns">
       <button mat-raised-button
               color="primary" 
-              mat-dialog-close>취소
+              mat-dialog-close
+      >취소
       </button>
       <button mat-raised-button
               color="primary"
               *ngIf="isInsertMode"
-              type="submit"
+              type="button"
               (click)="onSubmit()"
       >생성
       </button>
       <button mat-raised-button
               color="primary"
               *ngIf="!isInsertMode"
-              type="submit"
+              type="button"
               (click)="onSubmit()"
      >수정
      </button>

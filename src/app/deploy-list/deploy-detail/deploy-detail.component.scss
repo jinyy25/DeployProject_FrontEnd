@@ -87,3 +87,27 @@ button{
 .btn-outline{
     display: flex;
 }
+
+
+#fileBox{
+	width: 100%;
+	height: 220px;
+	margin: 20px auto 0 auto;
+	border: 1px solid #d5d5db;
+	overflow-y: scroll;
+}
+#fileBox ul{
+	margin-left: 10px;
+	margin-top:10px;
+}
+#fileBox li{
+	margin-top:10px;
+}
+
+#contentBox{
+	margin-top: 20px;
+	width: 100%;
+	padding: 15px 7px;
+	min-height: 200px;
+	border: 1px solid #d5d5db;
+}

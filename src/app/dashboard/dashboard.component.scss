@@ -37,7 +37,7 @@
 
 #notice {
   float: left;
-  width: 800px;
+  width: 700px;
   margin-top: 24px;
   margin-left: 60px;
   user-select: none;
@@ -49,12 +49,13 @@
 }
 
 #notice .notice_title {
-  min-width: 60%;
+  min-width: 58%;
 }
 
 #notice .notice_writer,
-#notice .notice_team {
-  max-width: 20%;
+#notice .notice_team,
+#notice .notice_regdate {
+  max-width: 14%;
   justify-content: center;
 }
 

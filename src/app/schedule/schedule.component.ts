@@ -44,16 +44,8 @@ export class ScheduleComponent implements AfterViewInit {
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
 
-    if(this.check != null){
-       
+    if(this.check !=null){
       this.loginUser = this.jwtService.decodeToUser(this.check);
-      
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-
-      if(this.check != null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
     }
 
     this.teamService.selectTeamList().subscribe(res => {

@@ -90,19 +90,18 @@ export class InsertUpdateCodeComponent implements OnInit {
    });
   }
   onSubmit(){
-            //this.submitted = true;//제출됨
-
+            this.form.markAllAsTouched();//에러 한번에 다 뜨게
+           
+        
             if (this.form.controls.codeId.errors != null) {
               return false;
-            }else if(this.form.controls.codeName.errors != null) {
+            } else if(this.form.controls.codeName.errors != null) {
               return false;
-            }else if(this.form.controls.dsplOrder.errors != null) {
+            } else if(this.form.controls.dsplOrder.errors != null) {
               return false;
-            }else if(this.form.controls.parentCodeId.errors != null) {
+            } else if(this.form.controls.parentCodeId.errors != null) {
               return false;
             }
-
-            //this.loading = true;
 
             if(this.form.value.isInUse==true){//코드 사용중이면, codeUseYN 값 Y로 setting 해주기
               this.codeMgmt.codeUseYN ='Y';
@@ -129,8 +128,12 @@ export class InsertUpdateCodeComponent implements OnInit {
       this.form.get('parentCodeId').disable();
     } else { //부모코드가 아니면
       this.form.get('parentCodeId').enable();
-    }
+    }//if~else end 
   }//disableParentCodeId() end
+
+
+
+
   checkDsplOrder(dsplOrder,isParentCode,parentCodeId){
     console.log(this.dsplOrder);
 

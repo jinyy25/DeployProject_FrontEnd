@@ -14,8 +14,6 @@ export class UploadService {
   file:File;
   
   upload(files: File[]) {
-
-    
     const formData: FormData = new FormData();
 
     for(let i = 0; i< files.length ; i++){
@@ -24,6 +22,7 @@ export class UploadService {
         formData.append('files', this.file[j]);
       }
     }
+
     return this.http.post<any>(this.userUrl+"/multi/upload",formData);
    
   }

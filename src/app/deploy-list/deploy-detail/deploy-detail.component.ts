@@ -40,7 +40,9 @@ export class DeployDetailComponent implements OnInit {
 
   files:File[];
   fileInfos?: Observable<any>;
+  display:string;
 
+  zipName: string;
 
   //엑셀관련
   dataForExcel = [];
@@ -59,12 +61,7 @@ export class DeployDetailComponent implements OnInit {
   ngOnInit(): void {
     this.check = localStorage.getItem("AUTH_TOKEN");
     if(this.check !=null){
-       this.loginUser = this.jwtService.decodeToUser(this.check);
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-      if(this.check !=null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
+      this.loginUser = this.jwtService.decodeToUser(this.check);
     }
 
   this.deployNo=this.route.snapshot.params['deployNo'];
@@ -73,7 +70,7 @@ export class DeployDetailComponent implements OnInit {
   this.deployService.selectDeployDetail(this.deployNo)
     .subscribe(
         response => {
-          this.scriptViews = response.data
+          this.scriptViews = response.data;  
         },
     )
   
@@ -81,10 +78,11 @@ export class DeployDetailComponent implements OnInit {
   this.deployService.selectDeployContent(this.deployNo)
       .subscribe(
         response => {
-          this.deploy = response.data
+          this.deploy = response.data.deploy;
+          this.files = response.data.files; 
+          this.zipName = response.data.deployZip;
         }
       )
-
   }
 
   //1. 엑셀다운로드
