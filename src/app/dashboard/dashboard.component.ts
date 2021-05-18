@@ -79,15 +79,17 @@ export class DashboardComponent implements OnInit {
     this.teamUser = this.userList.filter((user) => user.team == this.teamControl.value);
   }
 
-  viewCount(user){
-    const dialogRef = this.dialog.open(TodayDetailComponent, {
-      width: '400px',
-      data: {user : user}
-    });
-
-    dialogRef.afterClosed().subscribe( result => {
-
-    });
+  todayDetail(user, complete){
+    if(user.count > 0){//개수 1개 이상만
+      const dialogRef = this.dialog.open(TodayDetailComponent, {
+        width: '400px',
+        data: {user : user, complete : complete}
+      });
+  
+      dialogRef.afterClosed().subscribe( result => {
+  
+      }); 
+    }
   }
 
 }

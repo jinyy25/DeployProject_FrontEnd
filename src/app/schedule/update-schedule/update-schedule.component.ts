@@ -126,7 +126,7 @@ export class UpdateScheduleComponent implements OnInit {
 
     }else if(type == 'complete'){//완료 버튼
 
-      if(confirm("완료 후에는 수정이 불가능합니다. 계속하시겠습니까?")){
+      if(confirm("완료 후에는 수정 및 삭제가 불가능합니다. 계속하시겠습니까?")){
         this.schedule = this.form.value;
         this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
         this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');

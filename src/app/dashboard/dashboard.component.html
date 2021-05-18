@@ -21,9 +21,11 @@
       <tbody>
         <tr *ngFor="let user of teamUser">
           <td>{{ user.name }}</td>
-          <td (click)="viewCount(user)" class="count">{{ user.count }}</td>
-          <td></td>
-          <td></td>
+          <td (click)="todayDetail(user, 'N')" class="count">
+            {{ user.countN }}
+          </td>
+          <td>{{ user.countY }}</td>
+          <td>{{ user.countE }}</td>
         </tr>
       </tbody>
     </table>

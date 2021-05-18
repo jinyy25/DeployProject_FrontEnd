@@ -51,7 +51,7 @@ export class ScheduleService{
     return this.http.get<any>(this.url+"/count");
   }
 
-  selectTodayList(id : string){//오늘의 일정 개인의 상세 리스트
-    return this.http.get<any>(this.url+"/todayList/"+id);
+  selectTodayList(schedule : Schedule){//오늘의 일정 개인의 상세 리스트. id, 진행/완료/초과
+    return this.http.post<any>(this.url+"/todayList", schedule);
   }
 }

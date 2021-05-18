@@ -8,6 +8,8 @@ export class User {
   regdate : string;
   team : string;
   result : string;
-  count : number;//스케쥴 개수
   chk : boolean;//개인별 검색 선택 여부
+  countN : number;//진행
+  countY : number;//완료
+  countE : number;//초과
 }
