@@ -98,6 +98,8 @@ export class InsertUpdateCodeComponent implements OnInit {
               return false;
             }else if(this.form.controls.dsplOrder.errors != null) {
               return false;
+            }else if(this.form.controls.parentCodeId.errors != null) {
+              return false;
             }
 
             //this.loading = true;
