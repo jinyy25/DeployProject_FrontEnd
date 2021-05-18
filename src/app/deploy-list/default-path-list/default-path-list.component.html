@@ -14,13 +14,13 @@
     <table class="table w-full">
         <thead>
             <tr>
-                <th style="width: 5%;">타입</th>
-                <th style="width: 10%;">경로</th>
+                <th style="width: 20%;">타입</th>
+                <th style="width: 80%;">경로</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let defaultPath of defaultPaths">
-                <td style="width: 134px;">{{defaultPath.id}}</td>
+                <td>{{defaultPath.id}}</td>
                 <td>{{defaultPath.path}}</td>
             </tr>
         </tbody>
