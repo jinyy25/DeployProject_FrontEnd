@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { Notice } from '../models/notice.model';
 import { Schedule } from '../models/schedule.model';
 import { Team } from '../models/team.model';
@@ -10,7 +9,6 @@ import { BoardService } from '../services/board.service';
 import { JwtService } from '../services/jwt.service';
 import { ScheduleService } from '../services/schedule.service';
 import { TeamService } from '../services/team.service';
-import { UserService } from '../services/user.service';
 import { TodayDetailComponent } from './today-detail/today-detail.component';
 
 @Component({
@@ -34,7 +32,6 @@ export class DashboardComponent implements OnInit {
   
   constructor(
     private jwtService : JwtService,
-    private userService : UserService,
     private scheduleService : ScheduleService,
     private teamService : TeamService,
     private boardService : BoardService,
@@ -44,18 +41,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.check = localStorage.getItem("AUTH_TOKEN");
 
-    if(this.check != null){
-       
+    if(this.check !=null){
       this.loginUser = this.jwtService.decodeToUser(this.check);
-      
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-
-      if(this.check != null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
     }
-
+    
     this.scheduleService.selectTodayCount().subscribe(res => {//같은 팀 유저 리스트
       this.userList = res.data;
       this.teamUser = res.data.filter((user) => user.team == this.loginUser.team);
@@ -80,16 +69,14 @@ export class DashboardComponent implements OnInit {
   }
 
   todayDetail(user, complete){
-    if(user.count > 0){//개수 1개 이상만
-      const dialogRef = this.dialog.open(TodayDetailComponent, {
-        width: '400px',
-        data: {user : user, complete : complete}
-      });
-  
-      dialogRef.afterClosed().subscribe( result => {
-  
-      }); 
-    }
+    const dialogRef = this.dialog.open(TodayDetailComponent, {
+      width: '500px',
+      data: {user : user, complete : complete}
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+
+    });
   }
 
 }
