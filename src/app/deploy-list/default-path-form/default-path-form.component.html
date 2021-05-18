@@ -2,9 +2,12 @@
     <vex-breadcrumbs [crumbs]="['Default-Path']"></vex-breadcrumbs>
 </vex-secondary-toolbar>
 
-<div id="defaultFormWrap">
-    <button (click)="getDefaultPath()" mat-flat-button color="primary" class="get_btn">현재 경로 불러오기</button>
-    <button (click)="reset()" mat-flat-button color="primary" class="reset_btn">초기화</button>
+<div id="defaultPathWrap">
+    <div class="button-outline">
+        <button (click)="getDefaultPath()" mat-flat-button color="primary" class="get_btn">현재 경로 불러오기</button>
+        <button (click)="reset()" mat-flat-button color="primary" class="reset_btn">초기화</button>
+    </div>
+    <div id="defaultFormWrap">
     <div class="p-6" fxLayout="column" fxLayoutGap="16px">
         <form [formGroup]="defaultPathForm" class="form-outline">
             <mat-form-field class="block" appearance="standard">
@@ -79,5 +82,6 @@
             <button (click)="send(defaultPathForm)" mat-flat-button color="primary" [disabled]="!defaultPathForm.valid">등록</button>
         </div>
     </form>
+    </div>
     </div>
 </div>
