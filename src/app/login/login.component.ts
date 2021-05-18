@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       id: ['', Validators.required],
-      password: ['', Validators.required],
-      check:[false,[]]
+      password: ['', Validators.required]
     });
     
   }
@@ -59,14 +58,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user).pipe(
       tap((res :any) => {
         if(res.success){
-          if(form.value.check){
             localStorage.setItem("AUTH_TOKEN", res.data);
             this.loginService.loginUser = this.jwtService.decodeToUser(res.data); 
-          }else{
-            sessionStorage.setItem("AUTH_TOKEN", res.data);
-            this.loginService.loginUser = this.jwtService.decodeToUser(res.data);
-          }
-          
         }
       })
 
@@ -75,8 +68,12 @@ export class LoginComponent implements OnInit {
       if(res.success){
         this.router.navigate(['/']);
       }else{
-          //this.form.controls.password.setErrors({checkError:true});
-        alert("아이디, 비번이 올바르지 않습니다.");
+          if(res.data=='signd'){
+            alert("중복된 로그인 입니다.");
+          }else{
+            alert("아이디, 비번이 올바르지 않습니다.");
+          }
+        
       }
     })
   }//send end

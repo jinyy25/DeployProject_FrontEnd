@@ -16,4 +16,8 @@ export class LoginService {
   public login(user){
     return this.http.post<any>(this.userUrl+"/session",user);
   }
+
+  public logout(id){
+    return this.http.patch<any>(this.userUrl+"/session?id="+id,id);
+  }
 }

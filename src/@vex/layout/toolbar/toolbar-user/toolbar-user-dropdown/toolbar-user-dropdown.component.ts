@@ -21,6 +21,7 @@ import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
 import { User } from 'src/app/models/user.model';
 import { JwtService } from 'src/app/services/jwt.service';
+import { LoginService } from 'src/app/services/login.service';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -83,8 +84,8 @@ export class ToolbarUserDropdownComponent implements OnInit {
   check:string;
   constructor(private cd: ChangeDetectorRef,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
-              private jwtService:JwtService
-              
+              private jwtService:JwtService,
+              private loginService:LoginService
               ) { }
 
   ngOnInit() {
@@ -95,12 +96,6 @@ export class ToolbarUserDropdownComponent implements OnInit {
        
       this.loginUser = this.jwtService.decodeToUser(this.check);
       
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-
-      if(this.check !=null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
     }
 
   }
@@ -110,9 +105,17 @@ export class ToolbarUserDropdownComponent implements OnInit {
     this.cd.markForCheck();
   }
   logout(){
-    localStorage.removeItem("AUTH_TOKEN");
-    sessionStorage.removeItem("AUTH_TOKEN");
     this.popoverRef.close();
+    this.loginService.logout(this.loginUser.id)
+    .subscribe(res=>{
+      if(res.success){
+        localStorage.removeItem("AUTH_TOKEN");
+        
+      }else{
+        alert("로그아웃에 실패했습니다.");
+      }
+    })
+    
   }
   
   close() {

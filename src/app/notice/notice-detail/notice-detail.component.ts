@@ -67,8 +67,11 @@ export class NoticeDetailComponent implements OnInit {
 
   //목록
   selectList(){
-    this.router.navigate(['/notice']);
-    //window.history.go(-1);
+    
+    
+    window.history.go(-1);
+    
+    console.log(window);
   }
 
   //수정
@@ -81,6 +84,7 @@ export class NoticeDetailComponent implements OnInit {
     this.boardService.deleteNotice(boardNo)
     .subscribe(res=>{
       if(res.sucess){
+        alert("삭제 되었습니다.");
         this.router.navigate(['/notice']);
       }
     })
