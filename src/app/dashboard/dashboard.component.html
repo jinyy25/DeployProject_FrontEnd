@@ -21,11 +21,36 @@
       <tbody>
         <tr *ngFor="let user of teamUser">
           <td>{{ user.name }}</td>
-          <td (click)="todayDetail(user, 'N')" class="count">
+          <td
+            *ngIf="user.countN > 0"
+            (click)="todayDetail(user, 'N')"
+            class="count"
+          >
             {{ user.countN }}
           </td>
-          <td>{{ user.countY }}</td>
-          <td>{{ user.countE }}</td>
+          <td *ngIf="user.countN <= 0">
+            {{ user.countN }}
+          </td>
+          <td
+            *ngIf="user.countY > 0"
+            (click)="todayDetail(user, 'Y')"
+            class="count"
+          >
+            {{ user.countY }}
+          </td>
+          <td *ngIf="user.countY <= 0">
+            {{ user.countY }}
+          </td>
+          <td
+            *ngIf="user.countE > 0"
+            (click)="todayDetail(user, 'E')"
+            class="count"
+          >
+            {{ user.countE }}
+          </td>
+          <td *ngIf="user.countE <= 0">
+            {{ user.countE }}
+          </td>
         </tr>
       </tbody>
     </table>

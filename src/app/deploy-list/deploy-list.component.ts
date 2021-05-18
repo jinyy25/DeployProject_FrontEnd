@@ -68,6 +68,9 @@ export class DeployListComponent implements OnInit{
   file:File = new File();
 
   changeValue = new String;
+
+  zipName: string;
+  
   //엑셀관련
   dataForExcel = [];
   //객체 속성명을 그대로 컬럼명으로 쓰지 않고싶으면 따로 설정 해주어야 함
@@ -87,15 +90,11 @@ export class DeployListComponent implements OnInit{
 
   ngOnInit(){
     this.check = localStorage.getItem("AUTH_TOKEN");
-    if(this.check !=null){
-       this.loginUser = this.jwtService.decodeToUser(this.check);
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-      if(this.check !=null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
+    if(this.check !=null){ 
+      this.loginUser = this.jwtService.decodeToUser(this.check);
     }
 
+    
     //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
       searchCategory:[''],
@@ -109,6 +108,7 @@ export class DeployListComponent implements OnInit{
     .subscribe(
       response => {
       this.deploys = response.data
+      this.zipName = response.data.zipName
      }
     );
   }

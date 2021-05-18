@@ -31,6 +31,9 @@ export class DefaultPathFormComponent implements OnInit {
   defaultPathForm : FormGroup;
 
   defaultPathList : DefaultPathList = new DefaultPathList();
+  
+  endRegExp = new RegExp('[^\/]$');
+  startRegExp = new RegExp('^[\/]');
 
   constructor(
     private formBuilder : FormBuilder,
@@ -43,19 +46,19 @@ export class DefaultPathFormComponent implements OnInit {
 
   buildForm(): void{
     this.defaultPathForm = this.formBuilder.group({
-      developPortal:['',[Validators.required,Validators.pattern(/^\//)]],
-      developTbwapp:['',[Validators.required,Validators.pattern(/^\//)]],
-      developCenter:['',[Validators.required,Validators.pattern(/^\//)]],
-      developTmp:['',[Validators.required,Validators.pattern(/^\//)]],
-      prdTmp:['',[Validators.required,Validators.pattern(/^\//)]],
-      portalJava:['',[Validators.required,Validators.pattern(/^\//)]],
-      portalJsp:['',[Validators.required,Validators.pattern(/^\//)]],
-      portalJs:['',[Validators.required,Validators.pattern(/^\//)]],
-      portalXml:['',[Validators.required,Validators.pattern(/^\//)]],
-      tbwappJava:['',[Validators.required,Validators.pattern(/^\//)]],
-      tbwappXml:['',[Validators.required,Validators.pattern(/^\//)]],
-      centerJava:['',[Validators.required,Validators.pattern(/^\//)]],
-      centerXml:['',[Validators.required,Validators.pattern(/^\//)]],
+      developPortal:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      developTbwapp:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      developCenter:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      developTmp:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      prdTmp:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      portalJava:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      portalJsp:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      portalJs:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      portalXml:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      tbwappJava:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      tbwappXml:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      centerJava:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
+      centerXml:['',[Validators.required,Validators.pattern(this.endRegExp),Validators.pattern(this.startRegExp)]],
     });
   }
 

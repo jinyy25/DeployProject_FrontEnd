@@ -47,8 +47,8 @@
                     <label id="fileLabel" for="file" (click)="reset()">파일 선택</label>
                 </div>
                 <div *ngIf="display=='block'" id="fileBox">
-                    <ul>
-                        <li *ngFor="let file of files" ><button mat-button color="warn" (click)="close(this,$event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
+                    <ul *ngFor = "let fileList of files">
+                        <li *ngFor="let file of fileList" ><button  (click)="close($event.srcElement.parentElement.textContent)" class="close_btn">x</button>{{file.name}}</li>
                     </ul>
                 </div>
             </div>

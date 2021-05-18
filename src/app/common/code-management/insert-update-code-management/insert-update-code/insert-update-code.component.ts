@@ -45,7 +45,7 @@ export class InsertUpdateCodeComponent implements OnInit {
       isParentCode: [''],
       codeId: ['', [Validators.required]],
       codeName: ['', [Validators.required]],
-      parentCodeId: [''],
+      parentCodeId: ['',[Validators.required]],
       dsplOrder: ['', [Validators.required]],
       isInUse:  ['']
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
@@ -82,24 +82,26 @@ export class InsertUpdateCodeComponent implements OnInit {
  public checkCodeId(codeId){
   this.codeMgmtService.checkCodeId(codeId)
    .subscribe(data =>{
-     if(data.success==false){
+     console.log(data.success);
+     if(data.success==true){
        this.form.controls.codeId.setErrors({checkError:true});
      }
 
    });
   }
   onSubmit(){
-            //this.submitted = true;//제출됨
-
-            if (this.f.codeId.errors != null) {
+            this.form.markAllAsTouched();//에러 한번에 다 뜨게
+           
+        
+            if (this.form.controls.codeId.errors != null) {
               return false;
-            }else if(this.f.codeName.errors != null) {
+            } else if(this.form.controls.codeName.errors != null) {
               return false;
-            }else if(this.f.dsplOrder.errors != null) {
+            } else if(this.form.controls.dsplOrder.errors != null) {
+              return false;
+            } else if(this.form.controls.parentCodeId.errors != null) {
               return false;
             }
-
-            //this.loading = true;
 
             if(this.form.value.isInUse==true){//코드 사용중이면, codeUseYN 값 Y로 setting 해주기
               this.codeMgmt.codeUseYN ='Y';
@@ -121,13 +123,17 @@ export class InsertUpdateCodeComponent implements OnInit {
 
   disableParentCodeId() {
     const isParentCode = this.form.value.isParentCode;
-    if(!isParentCode){//부모코드이면 parentCodeId input요소 disable시키고 값 ''넣어줌
-      this.form.get('parentCodeId').setValue('');
+    if(!isParentCode){//부모코드이면 parentCodeId input요소 disable시키고 값 null넣어줌
+      this.form.get('parentCodeId').setValue(null);
       this.form.get('parentCodeId').disable();
     } else { //부모코드가 아니면
       this.form.get('parentCodeId').enable();
-    }
+    }//if~else end 
   }//disableParentCodeId() end
+
+
+
+
   checkDsplOrder(dsplOrder,isParentCode,parentCodeId){
     console.log(this.dsplOrder);
 
