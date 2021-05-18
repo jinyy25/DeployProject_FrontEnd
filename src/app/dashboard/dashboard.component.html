@@ -13,13 +13,17 @@
       <thead>
         <tr>
           <th>이름</th>
-          <th>개수</th>
+          <th>진행</th>
+          <th>완료</th>
+          <th>초과</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of teamUser">
           <td>{{ user.name }}</td>
           <td (click)="viewCount(user)" class="count">{{ user.count }}</td>
+          <td></td>
+          <td></td>
         </tr>
       </tbody>
     </table>

@@ -48,6 +48,10 @@ export class ScheduleService{
   }
 
   selectTotalCount(){//오늘의 일정 총 개수
-    return this.http.get<any>(this.url+"/count")
+    return this.http.get<any>(this.url+"/count");
+  }
+
+  selectTodayList(id : string){//오늘의 일정 개인의 상세 리스트
+    return this.http.get<any>(this.url+"/todayList/"+id);
   }
 }
