@@ -1,3 +1,84 @@
 <vex-secondary-toolbar current="기본경로 등록">
     <vex-breadcrumbs [crumbs]="['Default-Path']"></vex-breadcrumbs>
 </vex-secondary-toolbar>
+
+<div id="defaultFormWrap">
+    <button (click)="getDefaultPath()" mat-flat-button color="primary" class="get_btn">현재 경로 불러오기</button>
+    <button (click)="reset()" mat-flat-button color="primary" class="reset_btn">초기화</button>
+    <div class="p-6" fxLayout="column" fxLayoutGap="16px">
+        <form [formGroup]="defaultPathForm" class="form-outline">
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>develop portal</mat-label>
+                <input #developportal formControlName="developportal" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('developportal').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /var/jenkins_home/workspace/gmd-portal</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>develop tbwapp</mat-label>
+                <input #developtbwapp formControlName="developtbwapp" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('developtbwapp').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /var/jenkins_home/workspace/tbwapp/gmd</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>develop center</mat-label>
+                <input #developcenter formControlName="developcenter" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('developcenter').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/eips/deployed-sources</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard"> 
+                <mat-label>develop tmp (eips deployed-sources)</mat-label>
+                <input #developtmp formControlName="developtmp" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('developtmp').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/eips/deployed-sources</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard"> 
+                <mat-label>prd tmp (jbossmdm deployed-sources)</mat-label>
+                <input #prdtmp formControlName="prdtmp" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('prdtmp').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/deployed-sources</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>portal java</mat-label>
+                <input #portaljava formControlName="portaljava" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('portaljava').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/WebAppMDM/deploy/gmdportal/gmd.war/WEB-INF/classes</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>portal jsp</mat-label>
+                <input #portaljsp formControlName="portaljsp" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('portaljsp').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/WebAppMDM/deploy/gmdportal/gmd.war</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>portal js</mat-label>
+                <input #portaljs formControlName="portaljs" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('portaljs').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/WebAppMDM/deploy/gmdportal/gmd.war</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>portal xml</mat-label>
+                <input #portalxml formControlName="portalxml" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('portalxml').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/WebAppMDM/deploy/gmdmdm/applications/gmd.war/WEB-INF/classes</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>tbwapp java</mat-label>
+                <input #tbwappjava formControlName="tbwappjava" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('tbwappjava').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/WebAppMDM/deploy/gmdmdm/applications/tbwapp.war/WEB-INF/classes</mat-error>
+            </mat-form-field>  
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>tbwapp xml</mat-label>
+                <input #tbwappxml formControlName="tbwappxml" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('tbwappxml').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jbossmdm/WebAppMDM/deploy/gmdmdm/applications/tbwapp.war/WEB-INF/classes</mat-error>
+            </mat-form-field> 
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>center java</mat-label>
+                <input #centerjava formControlName="centerjava" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('centerjava').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jboss/center/center.war/WEB-INF/classes</mat-error>
+            </mat-form-field> 
+            <mat-form-field class="block" appearance="standard">
+                <mat-label>center xml</mat-label>
+                <input #centerxml formControlName="centerxml" maxlength="166" matInput>
+                <mat-error *ngIf="defaultPathForm.get('centerxml').hasError('pattern')">경로는 "/"로 시작해서 문자로 끝나야 합니다. 예시) /home/jboss/center/center.war/WEB-INF/classes/mapper</mat-error>
+            </mat-form-field>  
+      
+
+        <div class="button-outline">
+            <button (click)="cancel()" mat-flat-button color="primary">취소</button>
+            <button (click)="send(defaultPathForm,developportal,developtbwapp,developcenter,developtmp,prdtmp,portaljava,
+            portaljsp,portaljs,portalxml,tbwappjava,tbwappxml,centerjava,centerxml)" mat-flat-button color="primary" [disabled]="!defaultPathForm.valid">등록</button>
+        </div>
+    </form>
+    </div>
+</div>
