@@ -40,4 +40,7 @@ export class CodeMgmtService {
   public checkChildCodeDsplOrder(dsplOrder: number,parentCodeId: string) {
     return this.http.get<any>(this.userUrl+"/"+parentCodeId+"/check/"+dsplOrder);
   }
+  public checkCodeId(codeId:string) {
+    return this.http.get<any>(this.userUrl+"/checkCodeId/"+codeId);
+  }
 }

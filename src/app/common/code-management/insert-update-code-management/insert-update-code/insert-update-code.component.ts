@@ -11,6 +11,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 })
 export class InsertUpdateCodeComponent implements OnInit {
   form : FormGroup;
+  //submitted = false;
+  //loading = false;
+  // form 요소에 편하게 접근하기 위한 getter
+  get f() { return this.form.controls; }
 
   codeMgmt : CodeMgmt = new CodeMgmt();
   isInsertMode: boolean;
@@ -43,8 +47,7 @@ export class InsertUpdateCodeComponent implements OnInit {
       codeName: ['', [Validators.required]],
       parentCodeId: [''],
       dsplOrder: ['', [Validators.required]],
-      isInUse:  ['', [Validators.required]]
-      
+      isInUse:  ['']
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
 
     if (!this.isInsertMode) {//update용 dialog인 경우에는
@@ -75,8 +78,29 @@ export class InsertUpdateCodeComponent implements OnInit {
           );//이 정보를 업데이트 dialog에 붙여줌!
     }
   }
-  
-  onSubmit(){ 
+  //코드아이디 중복체크
+ public checkCodeId(codeId){
+  this.codeMgmtService.checkCodeId(codeId)
+   .subscribe(data =>{
+     if(data.success==false){
+       this.form.controls.codeId.setErrors({checkError:true});
+     }
+
+   });
+  }
+  onSubmit(){
+            //this.submitted = true;//제출됨
+
+            if (this.f.codeId.errors != null) {
+              return false;
+            }else if(this.f.codeName.errors != null) {
+              return false;
+            }else if(this.f.dsplOrder.errors != null) {
+              return false;
+            }
+
+            //this.loading = true;
+
             if(this.form.value.isInUse==true){//코드 사용중이면, codeUseYN 값 Y로 setting 해주기
               this.codeMgmt.codeUseYN ='Y';
             } else {
@@ -126,5 +150,5 @@ export class InsertUpdateCodeComponent implements OnInit {
     }//if~else if end 
    
   }
-  
+
 }
