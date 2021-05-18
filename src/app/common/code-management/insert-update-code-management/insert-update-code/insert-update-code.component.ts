@@ -15,10 +15,11 @@ export class InsertUpdateCodeComponent implements OnInit {
   codeMgmt : CodeMgmt = new CodeMgmt();
   isInsertMode: boolean;
   isParentCode: boolean;
-  codeId:string;
+  codeId: string;
+  dsplOrder: number;//업데이트 다이얼로그에서 같은 번호는 에러창 뜨지 않게 하기 위함
 
   //subscribe에서 넘어온 data 받기 용
-  dataRegister:any={}
+  dataRegister: any={}
 
   constructor(
       private dialogRef : MatDialogRef<InsertUpdateCodeComponent>,
@@ -50,6 +51,7 @@ export class InsertUpdateCodeComponent implements OnInit {
       this.codeMgmtService.selectOneCodeByCodeId(this.codeId)//codeId를 통해 codeMgmt 정보 불러옴
           .subscribe(data => 
           { this.dataRegister = data;
+            this.dsplOrder = this.dataRegister.data.dsplOrder;
             this.form.patchValue(this.dataRegister.data);
             //codeUseYN 값이 Y이면 isInUse true로 setting
             if(this.dataRegister.data.codeUseYN=='Y') {
@@ -61,7 +63,7 @@ export class InsertUpdateCodeComponent implements OnInit {
             //부모코드이면 isParentCode true로
             if(this.dataRegister.data.parentCodeId==null) {
             this.form.get('isParentCode').setValue(true);
-            this.form.get('isParentCode').disable();//부모 코드 여부도 수정 불가능하게
+            
             //다이얼로그에서 parentCodeId disable 되어있어야 함
             this.form.get('parentCodeId').disable();
           } else {
@@ -103,24 +105,26 @@ export class InsertUpdateCodeComponent implements OnInit {
     }
   }//disableParentCodeId() end
   checkDsplOrder(dsplOrder,isParentCode,parentCodeId){
-    if(isParentCode==true){//부모코드끼리 순서비교하기
+    console.log(this.dsplOrder);
+
+    if(isParentCode==true&&this.isInsertMode==true){//insert dialog 부모코드끼리 순서비교하기
+      
       this.codeMgmtService.checkParentCodeDsplOrder(dsplOrder)
       .subscribe(data => {
         if(data.success==true){
-          this.form.controls.dsplOrder.setErrors({checkError:true});
+        this.form.controls.dsplOrder.setErrors({checkError:true});
         }
       })
-    } else {//자식코드끼리 순서 비교하기
+      //부모코드 비교 내 if~else end 
+    } else if(isParentCode==false&&this.isInsertMode==true) {//insert dialog 자식코드끼리 순서 비교하기
       this.codeMgmtService.checkChildCodeDsplOrder(dsplOrder,parentCodeId)
       .subscribe(data => {
         if(data.success==true){
           this.form.controls.dsplOrder.setErrors({checkError:true});
         }
-      })
-    }//if~else end 
+      })//subscribe end 
+    }//if~else if end 
    
   }
   
-    
-
 }
