@@ -71,8 +71,8 @@ export class NoticeWriteFormComponent implements OnInit {
     //수정이 아닐 경우
     if(this.boardNo == null){
       this.form=this.fb.group({
-        title:['',Validators.required],
-        content:['',Validators.required]
+        title:['',[Validators.required,Validators.pattern(/^\S/)]],
+        content:['',[Validators.required,Validators.pattern(/^<p>\S/)]]
       })
     }
 
@@ -88,8 +88,8 @@ export class NoticeWriteFormComponent implements OnInit {
         
 
         this.form=this.fb.group({
-          title:[this.notice.title,Validators.required],
-          content:[this.notice.content,Validators.required]
+          title:[this.notice.title,[Validators.required,Validators.pattern(/^\S/)]],
+          content:[this.notice.content,[Validators.required,Validators.pattern(/^<p>\S/)]]
         })
 
         //기존에 있던 파일인지 확인하는 변수

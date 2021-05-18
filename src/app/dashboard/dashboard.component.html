@@ -70,11 +70,23 @@
       >
     </ng-container>
 
+    <ng-container matColumnDef="regdate">
+      <mat-header-cell class="notice_regdate" *matHeaderCellDef
+        >등록일</mat-header-cell
+      >
+      <mat-cell
+        class="notice_regdate"
+        routerLink="/notice/{{ notice.boardNo }}"
+        *matCellDef="let notice"
+        >{{ notice.regdate }}</mat-cell
+      >
+    </ng-container>
+
     <mat-header-row
       class="list_header"
-      *matHeaderRowDef="['title', 'writer', 'team']"
+      *matHeaderRowDef="['title', 'writer', 'team','regdate']"
     ></mat-header-row>
-    <mat-row *matRowDef="let notice; columns: ['title', 'writer', 'team']">
+    <mat-row *matRowDef="let notice; columns: ['title', 'writer', 'team','regdate']">
     </mat-row>
   </mat-table>
 </div>
