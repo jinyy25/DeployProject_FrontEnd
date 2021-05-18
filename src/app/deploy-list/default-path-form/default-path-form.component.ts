@@ -32,7 +32,6 @@ export class DefaultPathFormComponent implements OnInit {
 
   defaultPathList : DefaultPathList = new DefaultPathList();
   
-  regExp = new RegExp('^[\/]|[^\/]$');
   endRegExp = new RegExp('[^\/]$');
   startRegExp = new RegExp('^[\/]');
 
