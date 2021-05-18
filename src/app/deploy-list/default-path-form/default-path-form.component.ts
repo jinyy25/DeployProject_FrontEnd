@@ -96,9 +96,7 @@ export class DefaultPathFormComponent implements OnInit {
     this.router.navigate(['/deploy-list']);
   }
 
-  send(defaultPathForm:FormGroup,developportal:string,developtbwapp:string,developcenter:string
-    ,developtmp:string,prdtmp:string,portaljava:string,portaljsp:string,portaljs:string,portalxml:string
-    ,tbwappjava:string,tbwappxml:string,centerjava:string,centerxml:string){
+  send(defaultPathForm:FormGroup){
       
       this.defaultPathList = this.defaultPathForm.value;
    
