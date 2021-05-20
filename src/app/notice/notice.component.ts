@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { BoardService } from '../services/board.service';
@@ -27,10 +27,12 @@ export class NoticeComponent implements OnInit {
   icSearch = icSearch;
   teams:Team[];
   searchCtrl = new FormControl();
-  teamName:string;
-  title="title";
+  teamName:string="전체";
   page:string;
   itemPage:string;
+  noticeTeam:string;
+  noticeType:string;
+  noticeWord:string;
 
   constructor(
      private fb:FormBuilder,
@@ -42,6 +44,9 @@ export class NoticeComponent implements OnInit {
     
     this.page = localStorage.getItem("NOTICE_PAGE");
     this.itemPage = localStorage.getItem("NOTICE_ITEM_PAGE");
+    this.noticeTeam = localStorage.getItem("NOTICE_TEAM");
+    this.noticeType = localStorage.getItem("NOTICE_TYPE");
+    this.noticeWord = localStorage.getItem("NOTICE_WORD");
     if(this.page!=null){
       this.p=parseInt(this.page);
       localStorage.removeItem("NOTICE_PAGE");
@@ -54,18 +59,48 @@ export class NoticeComponent implements OnInit {
       localStorage.removeItem("NOTICE_ITEM_PAGE");
     }
 
+    if(this.noticeWord!=null){
 
-    this.boardService.selectNotice()
-    .subscribe(res =>{
-      this.teams=res.data.teamList;
+      if(this.noticeTeam!=null){
+        this.teamName=this.noticeTeam;
+      }
+
+      this.boardService.searchNotice(this.teamName,this.noticeType,this.noticeWord)
+    .subscribe(res=>{
       this.notices=res.data.noticeList;
-      this.teamName="전체";
+      this.teams=res.data.teamList;
+      localStorage.removeItem("NOTICE_TYPE");
+      localStorage.removeItem("NOTICE_WORD");
     })
+      
+    }else{
+      this.noticeType="title";
+      if(this.noticeTeam!=null){
+        this.teamName=this.noticeTeam;
+        this.boardService.selectTeamNotice(this.teamName)
+        .subscribe(res =>{
+          this.notices=res.data.noticeList;
+          this.teams=res.data.teamList;
+          localStorage.removeItem("NOTICE_TEAM");
+        })
+        
+      }else{
+        this.boardService.selectNotice()
+        .subscribe(res =>{
+          this.teams=res.data.teamList;
+          this.notices=res.data.noticeList;
+          localStorage.removeItem("NOTICE_TEAM");
+        })
+      }
+
+
+    }
+
     
 
     this.form=this.fb.group({
-      type:[this.title,Validators.required],
-      word:['',Validators.required]
+      type:[this.noticeType,Validators.required],
+      word:[this.noticeWord,Validators.required]
     })
   }
 
@@ -80,31 +115,41 @@ export class NoticeComponent implements OnInit {
     }else if(this.form.controls.word.errors !=null){
       return false;
     }
-    this.boardService.searchNotice(this.form.controls.type.value,this.form.controls.word.value)
+    this.boardService.searchNotice(this.teamName,this.form.controls.type.value,this.form.controls.word.value)
     .subscribe(res=>{
-      this.teamName="전체";
-      this.notices=res.data;
+      this.notices=res.data.noticeList;
       this.p=1;
     })
   }
 
   //전체
   selectNotice(){
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
     this.teamName="전체";
+    localStorage.setItem("NOTICE_TEAM",this.teamName);
     this.boardService.selectNotice()
     .subscribe(res =>{
       this.teams=res.data.teamList;
       this.notices=res.data.noticeList;
+      this.form.controls.type.setValue(this.noticeType);
+      this.form.controls.word.setValue("");
       this.p=1;
     })
   }
 
   //팀별검색
   selectTeamNotice(team){
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
     this.teamName=team.codeName;
+    localStorage.setItem("NOTICE_TEAM",this.teamName);
     this.boardService.selectTeamNotice(team.codeName)
       .subscribe(res =>{
-        this.notices=res.data;
+        this.notices=res.data.noticeList;
+        this.noticeType="title";
+        this.form.controls.type.setValue(this.noticeType);
+        this.form.controls.word.setValue("");
         this.p=1;
       })
   }
@@ -115,10 +160,17 @@ export class NoticeComponent implements OnInit {
     this.p = 1;
   }
 
-  link(boardNo){
+  link(boardNo,form){
     localStorage.setItem("NOTICE_PAGE",""+this.p);
     localStorage.setItem("NOTICE_ITEM_PAGE",""+this.itemsPerPage);
     this.router.navigate(["/notice/"+boardNo]);
+    console.log(this.form.controls.word.value);
+    if(this.form.controls.word.value!=null){
+      console.log("ca");
+      localStorage.setItem("NOTICE_TYPE",form.controls.type.value);
+      localStorage.setItem("NOTICE_WORD",form.controls.word.value);
+    }
+    
   }
  
 }

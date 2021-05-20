@@ -62,6 +62,11 @@ export class DashboardComponent implements OnInit {
       this.dataSource=this.notices;
     })
 
+    localStorage.removeItem("NOTICE_PAGE");
+    localStorage.removeItem("NOTICE_ITEM_PAGE");
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
+    localStorage.removeItem("NOTICE_TEAM");
   }
 
   changeTeam(){//선택한 팀 유저리스트
