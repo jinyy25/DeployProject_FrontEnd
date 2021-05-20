@@ -5,7 +5,7 @@ import { BoardService } from '../services/board.service';
 import { Notice } from '../models/notice.model';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import { Team } from '../models/team.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'vex-notice',
@@ -29,15 +29,31 @@ export class NoticeComponent implements OnInit {
   searchCtrl = new FormControl();
   teamName:string;
   title="title";
-
+  page:string;
+  itemPage:string;
 
   constructor(
      private fb:FormBuilder,
      private boardService:BoardService,
-     private route:ActivatedRoute
+     private router:Router
   ) { }
 
   ngOnInit(): void {
+    
+    this.page = localStorage.getItem("NOTICE_PAGE");
+    this.itemPage = localStorage.getItem("NOTICE_ITEM_PAGE");
+    if(this.page!=null){
+      this.p=parseInt(this.page);
+      localStorage.removeItem("NOTICE_PAGE");
+    }else{
+      this.p=1;
+    }
+
+    if(this.itemPage!=null){
+      this.itemsPerPage=parseInt(this.itemPage);
+      localStorage.removeItem("NOTICE_ITEM_PAGE");
+    }
+
 
     this.boardService.selectNotice()
     .subscribe(res =>{
@@ -54,7 +70,6 @@ export class NoticeComponent implements OnInit {
   }
 
   getPage(event) {
-    console.log(event);
     this.p=event;
   }//페이지 변경시 호출 될 메서드
 
@@ -98,6 +113,12 @@ export class NoticeComponent implements OnInit {
   handlePageSizeChange(event): void {
     this.itemsPerPage = event.target.value;
     this.p = 1;
+  }
+
+  link(boardNo){
+    localStorage.setItem("NOTICE_PAGE",""+this.p);
+    localStorage.setItem("NOTICE_ITEM_PAGE",""+this.itemsPerPage);
+    this.router.navigate(["/notice/"+boardNo]);
   }
  
 }
