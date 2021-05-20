@@ -5,6 +5,7 @@ import { BoardService } from '../services/board.service';
 import { Notice } from '../models/notice.model';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import { Team } from '../models/team.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'vex-notice',
@@ -32,11 +33,12 @@ export class NoticeComponent implements OnInit {
 
   constructor(
      private fb:FormBuilder,
-     private boardService:BoardService
+     private boardService:BoardService,
+     private route:ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    
+
     this.boardService.selectNotice()
     .subscribe(res =>{
       this.teams=res.data.teamList;
@@ -50,7 +52,9 @@ export class NoticeComponent implements OnInit {
       word:['',Validators.required]
     })
   }
+
   getPage(event) {
+    console.log(event);
     this.p=event;
   }//페이지 변경시 호출 될 메서드
 

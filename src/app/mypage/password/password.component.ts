@@ -5,6 +5,7 @@ import { JwtService } from 'src/app/services/jwt.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'vex-password',
@@ -28,7 +29,8 @@ export class PasswordComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private jwtService : JwtService,
-    private router: Router
+    private router: Router,
+    private loginService : LoginService
   ) { }
 
   ngOnInit(): void {
@@ -91,9 +93,16 @@ export class PasswordComponent implements OnInit {
     this.userService.updatePassword(this.user)
     .subscribe(res =>{
       if(res.success){
-        localStorage.removeItem("AUTH_TOKEN");
-        sessionStorage.removeItem("AUTH_TOKEN");
-        this.router.navigate(['/login']);
+        this.loginService.logout(this.user.id)
+        .subscribe(res=>{
+          if(res.success){
+            localStorage.removeItem("AUTH_TOKEN");
+            this.router.navigate(['/login']);
+          }else{
+            
+          }
+          
+        })
       }
     })
   }

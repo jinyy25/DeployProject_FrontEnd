@@ -63,10 +63,15 @@
 
       
       </div>
+      <div id="buttonWrap">
 
-      <button (click)="send(form,id,name,position,email,phone,team)" color="primary" mat-raised-button type="button" >
-        수정
-      </button>
+        <button (click)="cancel()" color="primary" mat-raised-button type="button" >
+          취소
+        </button>
+        <button (click)="send(form,id,name,position,email,phone,team)" color="primary" mat-raised-button type="button" >
+          수정
+        </button>
+      </div>
       
     </div>
   </div>
