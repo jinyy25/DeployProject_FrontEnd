@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Deploy } from 'src/app/models/deploy.model';
 import { ScriptView } from 'src/app/models/scriptView.model';
 import { DeployService } from 'src/app/services/deploy.service';
 import { User } from '../../models/user.model';
 import { JwtService } from '../../services/jwt.service';
-import {PageEvent} from '@angular/material/paginator';
-import { UserExcelService } from 'src/app/common/excel-download/userExcel.service';
 import { Observable } from 'rxjs';
-import { error } from 'node:console';
 import { FormControl } from '@angular/forms';
 import { ExcelService } from 'src/app/services/excel-file.service';
 
@@ -54,8 +50,7 @@ export class DeployDetailComponent implements OnInit {
     private route:ActivatedRoute,
     private router:Router,
     private jwtService:JwtService,
-    private excelService : ExcelService,
-    private userService : UserExcelService, 
+    private excelService : ExcelService
   ) { }
 
   ngOnInit(): void {
@@ -102,12 +97,12 @@ export class DeployDetailComponent implements OnInit {
   getPage(page) {}
 
 
-  //4. 취소버튼
+  //3. 취소버튼
   cancel(){
     this.router.navigate(['/deploy-list']);
   }
 
-  //5. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
+  //4. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
   handlePageSizeChange(event): void {
       this.itemsPerPage = event.target.value;
       this.p = 1;

@@ -1,16 +1,11 @@
-import { CdkDragEnter } from '@angular/cdk/drag-drop';
-import { Portal } from '@angular/cdk/portal';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first, tap } from 'rxjs/operators';
-import { BoardFile } from 'src/app/models/boardfile.model';
 import { DeployFile } from 'src/app/models/deploy-file.model';
 import { DeployService } from 'src/app/services/deploy.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Deploy } from '../../models/deploy.model';
-import { Script } from '../../models/script.model';
 import { User } from '../../models/user.model';
 import { JwtService } from '../../services/jwt.service';
 
@@ -100,7 +95,7 @@ export class DeployWriteFormComponent implements OnInit {
       this.fileUploader.nativeElement.value = null;
     }
   }
-  
+
   // 유효성검사
   buildForm(): void{
     this.deployForm = this.formBuilder.group({
@@ -148,6 +143,12 @@ export class DeployWriteFormComponent implements OnInit {
       return false;
     } else if(this.deployForm.controls.centerScript.errors != null){
       alert("스크립트를 입력해주세요");
+      return false;
+    }
+
+    if(portalScript.value != '' || centerScript.value != '' || tbwappScript.value != '' || this.files.length != 0){
+    } else {
+      alert("스크립트 혹은 jar파일을 입력해주세요");
       return false;
     }
 
@@ -206,7 +207,7 @@ export class DeployWriteFormComponent implements OnInit {
     }
 
     // 2-2. 파일 추가
-    if(this.files.length !=0){
+    if(this.files.length != 0){
         this.uploadService.upload(this.files)
         .subscribe(data=>{
             if(data.success){

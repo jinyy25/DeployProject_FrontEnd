@@ -1,14 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
 import { fadeInUp400ms } from '../../@vex/animations/fade-in-up.animation';
 import { DeployService} from '../services/deploy.service';
 import { stagger40ms } from '../../@vex/animations/stagger.animation';
 import { Deploy } from '../models/deploy.model';
-import {PageEvent} from '@angular/material/paginator';
 import { User } from '../models/user.model';
 import { JwtService } from '../services/jwt.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import { FormControl } from '@angular/forms';
 import { ScriptView } from '../models/scriptView.model';
@@ -18,8 +15,6 @@ import { DatePipe } from '@angular/common';
 import { MY_FORMATS } from '../schedule/insert-schedule/insert-schedule.component';
 import { ExcelService } from '../services/excel-file.service';
 import { File } from '../models/file.model';
-
-
 
 @Component({
   selector: 'vex-deploy-list',
@@ -37,19 +32,14 @@ import { File } from '../models/file.model';
 
 
 export class DeployListComponent implements OnInit{
-
   loginUser : User;
   check:string;
-
   deploys:Deploy[];
-
 
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 10;//한 페이지 당 보여줄 데이터의 수
   itemsPerPages = [10,15,20];
   totalItems: any;
-
-  
 
   searchGroup :FormGroup;
   layoutCtrl = new FormControl('boxed');
@@ -86,14 +76,12 @@ export class DeployListComponent implements OnInit{
     if(this.check !=null){ 
       this.loginUser = this.jwtService.decodeToUser(this.check);
     }
-
     
     //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
       searchCategory:[''],
       keyword:[''],
     })
-
 
     //리스트 불러오기
     this.deployService.selectDeploys()
