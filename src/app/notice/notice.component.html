@@ -52,8 +52,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let notice of notices | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }" routerLink="{{notice.boardNo}}"  >
-						<td>{{notice.boardNo}}</td>
+				<tr *ngFor="let notice of notices | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }"  (click)="link(notice.boardNo)" >
+						<td #boardNo>{{notice.boardNo}}</td>
 						<td>{{notice.title}}</td>
 						<td>{{notice.writer}}</td>
 						<td>{{notice.team}}</td>
@@ -70,7 +70,7 @@
 		</div>
 			<div id="item">
 				Items per Page:
-				<select (change)="handlePageSizeChange($event)">
+				<select (change)="handlePageSizeChange($event)" [(ngModel)]=itemsPerPage>
 					<option *ngFor="let itemsPerPage of itemsPerPages" >
 					{{ itemsPerPage }}
 					</option>

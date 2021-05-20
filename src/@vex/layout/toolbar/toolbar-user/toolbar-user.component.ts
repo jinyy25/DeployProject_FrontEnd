@@ -29,12 +29,6 @@ export class ToolbarUserComponent implements OnInit {
        
       this.loginUser = this.jwtService.decodeToUser(this.check);
       
-    }else{
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-
-      if(this.check !=null){
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
     }
   }
 

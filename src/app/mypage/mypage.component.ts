@@ -9,6 +9,7 @@ import { TeamService } from '../services/team.service';
 import { UserService } from '../services/user.service';
 import { JwtService } from '../services/jwt.service';
 import { Position } from '../models/position.model';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'vex-mypage',
@@ -38,7 +39,8 @@ export class MypageComponent implements OnInit {
               private cd: ChangeDetectorRef,
               private userService : UserService,
               private teamService : TeamService,
-              private jwtService : JwtService
+              private jwtService : JwtService,
+              private loginService : LoginService
               ) { }
 
   ngOnInit(): void {
@@ -95,12 +97,24 @@ export class MypageComponent implements OnInit {
     this.userService.updateUser(this.user)
       .subscribe(res=>{
         if(res.data){
-            localStorage.removeItem("AUTH_TOKEN");
-            sessionStorage.removeItem("AUTH_TOKEN");
-            this.router.navigate(['/login']);
+          this.loginService.logout(this.user.id)
+          .subscribe(res=>{
+            if(res.success){
+              localStorage.removeItem("AUTH_TOKEN");
+              this.router.navigate(['/login']);
+            }else{
+              
+            }
+            
+          })
+            
           }
       })
     
+  }
+
+  cancel(){
+    this.router.navigate(['/']);
   }
 
 }

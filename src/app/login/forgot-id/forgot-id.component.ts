@@ -51,11 +51,6 @@ export class ForgotIdComponent implements OnInit {
       }else{
         this.form.controls.email.setErrors({checkError:true});
       }
-
-      
-
-     
-      // this.router.navigate(['/login']);
     })
   }
 
