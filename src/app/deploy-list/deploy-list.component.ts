@@ -76,6 +76,12 @@ export class DeployListComponent implements OnInit{
     if(this.check !=null){ 
       this.loginUser = this.jwtService.decodeToUser(this.check);
     }
+
+    localStorage.removeItem("NOTICE_PAGE");
+    localStorage.removeItem("NOTICE_ITEM_PAGE");
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
+    localStorage.removeItem("NOTICE_TEAM");
     
     //검색 유효성검사
     this.searchGroup = this.formBuilder.group({
