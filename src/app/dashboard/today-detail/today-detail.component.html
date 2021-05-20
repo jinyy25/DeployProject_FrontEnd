@@ -26,6 +26,13 @@
     <button mat-raised-button color="primary" mat-dialog-close>취소</button>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="primary">스케쥴로 이동</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/schedule', data.user.id, data.complete]"
+      mat-dialog-close
+    >
+      스케쥴로 이동
+    </button>
   </div>
 </div>
