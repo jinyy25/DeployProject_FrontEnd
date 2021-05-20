@@ -99,8 +99,8 @@ export class DeployWriteFormComponent implements OnInit {
   // 유효성검사
   buildForm(): void{
     this.deployForm = this.formBuilder.group({
-      deployTitle:['',[Validators.required]],
-      deployContent:['',[Validators.required]],
+      deployTitle:['',[Validators.required,Validators.pattern(/^\S*$/)]],
+      deployContent:['',[Validators.required,Validators.pattern(/^\S*$/)]],
       portalScript:['',[Validators.pattern(/^src/)]],
       tbwappScript:['',[Validators.pattern(/^src/)]],
       centerScript:['',[Validators.pattern(/^src/)]]

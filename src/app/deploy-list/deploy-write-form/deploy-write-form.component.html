@@ -14,6 +14,7 @@
                 <mat-label>제목</mat-label>
                 <input #deployTitle formControlName="deployTitle" maxlength="33" matInput>
                 <mat-error *ngIf="deployForm.get('deployTitle').hasError('required')">제목을 입력해 주세요</mat-error>
+                <mat-error *ngIf="deployForm.get('deployTitle').hasError('pattern')">공백을 채워주세요</mat-error>
             </mat-form-field>    
             <mat-form-field class="block" appearance="standard">
                 <mat-label>내용</mat-label>
@@ -21,6 +22,7 @@
                 #deployContent formControlName="deployContent" 
                 maxlength="166" matInput></textarea>
                 <mat-error *ngIf="deployForm.get('deployContent').hasError('required')">내용을 입력해 주세요</mat-error>
+                <mat-error *ngIf="deployForm.get('deployContent').hasError('pattern')">공백을 채워주세요</mat-error>
             </mat-form-field>
             <mat-form-field class="block" appearance="standard">
                 <mat-label>portal</mat-label>
