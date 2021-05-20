@@ -79,35 +79,28 @@ export class DeployWriteFormComponent implements OnInit {
 
     text=text.substr(1);
 
-    //files는 기존에 선택된 파일을 저장하는 변수
-    for(let i =0 ; i<this.files.length;i++){
-      this.temporary=this.files[i];
-      for(let j=0; j<this.temporary.length;j++){
-        if(this.temporary[j].name!=text){
+    //취소한 파일 이외 파일 추가
+    for(let i = 0; i < this.files.length; i++){
+      this.temporary = this.files[i];
+      for(let j = 0; j < this.temporary.length; j++){
+        if(this.temporary[j].name != text){
           this.fileNames.push(this.temporary[j]);
         }
       }
-
     }
     
     //파일선택시 초기화
     this.files=[];
     this.files.push(this.fileNames);
-    this.fileNames=[];
-    
+    this.fileNames=[];   
     
     //파일이 없을때 닫음
-    if(this.files[0].length==0){
-      this.display="none";
-      this.fileUploader.nativeElement.value=null;
+    if(this.files[0].length == 0){
+      this.display = "none";
+      this.fileUploader.nativeElement.value = null;
     }
   }
-
-  //파일명초기화
-  reset(){
-    this.fileUploader.nativeElement.value=null;
-  }
-
+  
   // 유효성검사
   buildForm(): void{
     this.deployForm = this.formBuilder.group({
@@ -134,8 +127,7 @@ export class DeployWriteFormComponent implements OnInit {
 
   // 2. send버튼 누를시
   send(deployForm,deployTitle,deployContent,
-        portalScript,tbwappScript,centerScript
-        ){
+        portalScript,tbwappScript,centerScript){
     //에러표시      
     this.deployForm.markAllAsTouched();
 
@@ -159,7 +151,7 @@ export class DeployWriteFormComponent implements OnInit {
       return false;
     }
 
-    //로그인 유저정보 추출
+    //로그인 유저정보
     this.check = localStorage.getItem("AUTH_TOKEN"); 
       if(this.check !=null){ 
         this.loginUser=this.jwtService.decodeToUser(this.check);

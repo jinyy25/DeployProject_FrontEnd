@@ -44,7 +44,7 @@
             <div id = "fileWrap">
                 <div>
                     <input #fileUploader type="file" multiple id="file" (change)="selectFiles($event)" style="display: none;" accept=".jar">
-                    <label id="fileLabel" for="file" (click)="reset()">파일 선택</label>
+                    <label id="fileLabel" for="file">파일 선택</label>
                 </div>
                 <div *ngIf="display=='block'" id="fileBox">
                     <ul *ngFor = "let fileList of files">
