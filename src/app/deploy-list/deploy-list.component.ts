@@ -11,15 +11,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import { FormControl } from '@angular/forms';
-import { UserExcelService } from '../common/excel-download/userExcel.service';
 import { ScriptView } from '../models/scriptView.model';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { MY_FORMATS } from '../schedule/insert-schedule/insert-schedule.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Schedule } from '../models/schedule.model';
-import { Inject } from '@angular/core';
 import { ExcelService } from '../services/excel-file.service';
 import { File } from '../models/file.model';
 
@@ -50,9 +46,10 @@ export class DeployListComponent implements OnInit{
 
   p: number;//현재 페이지 정보 담기 위함
   itemsPerPage = 10;//한 페이지 당 보여줄 데이터의 수
+  itemsPerPages = [10,15,20];
   totalItems: any;
+
   
-  itemsPerPages=[10,15,20];
 
   searchGroup :FormGroup;
   layoutCtrl = new FormControl('boxed');
@@ -66,9 +63,7 @@ export class DeployListComponent implements OnInit{
   all="all";
 
   file:File = new File();
-
   changeValue = new String;
-
   zipName: string;
   
   //엑셀관련
@@ -82,9 +77,7 @@ export class DeployListComponent implements OnInit{
     private jwtService:JwtService,
     private formBuilder:FormBuilder,
     private excelService : ExcelService,
-    private userService : UserExcelService,
     private pipe: DatePipe,
-
   ){}
 
 
@@ -101,7 +94,6 @@ export class DeployListComponent implements OnInit{
       keyword:[''],
     })
 
-    this.changeValue='';
 
     //리스트 불러오기
     this.deployService.selectDeploys()
@@ -136,7 +128,7 @@ export class DeployListComponent implements OnInit{
   //3. 엑셀다운로드
   exportToExcel(listTitle:string,deployNo:number):void {  
 
-      this.deployService.selectDeployDetail(deployNo)
+      this.deployService. selectScriptDetail(deployNo)
       .subscribe(
           response => {
             this.scriptViews = response.data
@@ -149,7 +141,6 @@ export class DeployListComponent implements OnInit{
               data: this.dataForExcel,
               headers: this.dataHeaders
             }
-
             this.excelService.exportExcel(reportData);
           },
       )  
@@ -164,8 +155,8 @@ export class DeployListComponent implements OnInit{
 
   //5. 한 페이지에 보여줄 아이템 수 변경시 작동할 메서드
   handlePageSizeChange(event): void {
-      this.itemsPerPage = event.target.value;
-      this.p = 1;
+    this.itemsPerPage = event.target.value;
+    this.p = 1;
   }
 
 

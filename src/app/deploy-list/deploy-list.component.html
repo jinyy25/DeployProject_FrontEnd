@@ -36,7 +36,7 @@
                         class="search-field"  
                         appearance="standard"
                         *ngIf="category == 'deployDate'">
-                        <input matInput [matDatepicker]="fromDatePicker" formControlName="keyword"/>
+                        <input matInput [matDatepicker]="fromDatePicker" formControlName="keyword" readonly/>
                         <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #fromDatePicker></mat-datepicker>
                     </mat-form-field>
@@ -88,7 +88,7 @@
             {{ itemsPerPage }}
             </option>
         </select>
-    </div> 
+      </div>
     </vex-page-layout-content>
 
 </vex-page-layout>

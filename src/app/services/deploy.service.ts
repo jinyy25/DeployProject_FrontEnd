@@ -28,12 +28,12 @@ export class DeployService {
   }
 
   //3. select scripts
-  public selectDeployDetail(deployNo){
+  public selectScriptDetail(deployNo){
       return this.httpClient.get<any>(this.deployURL+"/"+deployNo);
   }
 
   //4. select deploy
-  public selectDeployContent(deployNo){
+  public selectDeployDetail(deployNo){
     return this.httpClient.get<any>(this.deployURL+"/deployContent/"+deployNo);
   }
 
@@ -43,7 +43,7 @@ export class DeployService {
   }
 
 
-  //7. select File info
+  //6. select File info
   public selectFileInfo(deployNo){
     return this.httpClient.get<any>(this.deployURL + "/search/" + deployNo);
   }

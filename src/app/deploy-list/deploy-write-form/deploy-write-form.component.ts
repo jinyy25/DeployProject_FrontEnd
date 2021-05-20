@@ -30,8 +30,6 @@ export class DeployWriteFormComponent implements OnInit {
   layoutCtrl = new FormControl('boxed');
   fileList:DeployFile = new DeployFile();
 
-  // selectedFiles? : FileList;
-
   fileConfirm = [];
 
   files = [];
@@ -54,6 +52,7 @@ export class DeployWriteFormComponent implements OnInit {
     private route:ActivatedRoute,
 
     ) { 
+      //상단 시간표시
       this.buildForm();
       setInterval(() =>{
         const currentDate = new Date();
@@ -77,7 +76,7 @@ export class DeployWriteFormComponent implements OnInit {
 
   //파일 닫기 누를시
   close(text:string): void{
-   
+
     text=text.substr(1);
 
     //files는 기존에 선택된 파일을 저장하는 변수
@@ -89,8 +88,9 @@ export class DeployWriteFormComponent implements OnInit {
         }
       }
 
-    }//for end
+    }
     
+    //파일선택시 초기화
     this.files=[];
     this.files.push(this.fileNames);
     this.fileNames=[];
@@ -134,7 +134,7 @@ export class DeployWriteFormComponent implements OnInit {
 
   // 2. send버튼 누를시
   send(deployForm,deployTitle,deployContent,
-        portalScript,tbwappScript,centerScript,files
+        portalScript,tbwappScript,centerScript
         ){
     //에러표시      
     this.deployForm.markAllAsTouched();
@@ -147,12 +147,16 @@ export class DeployWriteFormComponent implements OnInit {
     } else if(this.deployForm.controls.deployContent.errors != null){
       deployContent.focus();
       alert("내용을 입력해주세요");
+      return false;
     } else if(this.deployForm.controls.portalScript.errors != null){
       alert("스크립트를 입력해주세요");
+      return false;
     } else if(this.deployForm.controls.tbwappScript.errors != null){
       alert("스크립트를 입력해주세요");
+      return false;
     } else if(this.deployForm.controls.centerScript.errors != null){
       alert("스크립트를 입력해주세요");
+      return false;
     }
 
     //로그인 유저정보 추출

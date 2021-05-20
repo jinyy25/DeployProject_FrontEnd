@@ -67,7 +67,7 @@ export class DeployDetailComponent implements OnInit {
   this.deployNo=this.route.snapshot.params['deployNo'];
 
   //script정보
-  this.deployService.selectDeployDetail(this.deployNo)
+  this.deployService. selectScriptDetail(this.deployNo)
     .subscribe(
         response => {
           this.scriptViews = response.data;  
@@ -75,7 +75,7 @@ export class DeployDetailComponent implements OnInit {
     )
   
   //deploy정보
-  this.deployService.selectDeployContent(this.deployNo)
+  this.deployService.selectDeployDetail(this.deployNo)
       .subscribe(
         response => {
           this.deploy = response.data.deploy;
