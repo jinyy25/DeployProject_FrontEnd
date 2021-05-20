@@ -46,7 +46,10 @@ const routes: VexRoutes = [
         path : 'schedule',
         loadChildren:() => import('./schedule/schedule.module').then(m => m.ScheduleModule)
       },
-   
+      {
+        path : 'schedule/:id/:complete',
+        loadChildren:() => import('./schedule/schedule.module').then(m => m.ScheduleModule)
+      },
       {
         path : 'code-management',
         children:[

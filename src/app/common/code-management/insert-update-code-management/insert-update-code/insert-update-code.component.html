@@ -20,7 +20,7 @@
             (keyup)="checkCodeId(codeId.value)"
         />
         <mat-error *ngIf="form.get('codeId').hasError('required')">코드 아이디를 입력해 주세요.</mat-error>
-        <mat-error *ngIf="form.get('codeId').hasError('pattern')">코드 아이디를 입력해 주세요.</mat-error>
+        <mat-error *ngIf="form.get('codeId').hasError('pattern')">공백을 입력할 수 없습니다.</mat-error>
         <mat-error *ngIf="form.get('codeId').hasError('checkError')">중복된 코드 아이디입니다.</mat-error>
         </mat-form-field>
         <br/>
@@ -32,8 +32,8 @@
             #codeName
             required
         />
-        <mat-error *ngIf="form.get('codeName').hasError('pattern')">코드 이름를 입력해 주세요.</mat-error>
         <mat-error *ngIf="form.get('codeName').hasError('required')">코드 이름을 입력해 주세요.</mat-error>
+        <mat-error *ngIf="form.get('codeName').hasError('pattern')">공백을 입력할 수 없습니다.</mat-error>
         </mat-form-field>
         <br/>
         <mat-form-field appearance="standard">
@@ -44,7 +44,7 @@
             #parentCodeId
         />
         <mat-error *ngIf="form.get('parentCodeId').hasError('required')">최상위 코드 아이디를 입력해 주세요.</mat-error>
-        <mat-error *ngIf="form.get('parentCodeId').hasError('pattern')">코드 이름를 입력해 주세요.</mat-error>
+        <mat-error *ngIf="form.get('parentCodeId').hasError('pattern')">공백을 입력할 수 없습니다.</mat-error>
         </mat-form-field>
         <br/>
         <mat-form-field appearance="standard">

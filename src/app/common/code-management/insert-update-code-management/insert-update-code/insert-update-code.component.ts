@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
   templateUrl: './insert-update-code.component.html',
   styleUrls: ['./insert-update-code.component.scss']
 })
+
 export class InsertUpdateCodeComponent implements OnInit {
   form : FormGroup;
   //submitted = false;
@@ -24,6 +25,7 @@ export class InsertUpdateCodeComponent implements OnInit {
 
   //subscribe에서 넘어온 data 받기 용
   dataRegister: any={}
+
 
   constructor(
       private dialogRef : MatDialogRef<InsertUpdateCodeComponent>,
@@ -43,9 +45,9 @@ export class InsertUpdateCodeComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       isParentCode: [''],
-      codeId: ['', [Validators.required, Validators.pattern("[/^\s+|\s+$/g]")]],
-      codeName: ['', [Validators.required,Validators.pattern("[/^\s+|\s+$/g]")]],
-      parentCodeId: ['',[Validators.required, Validators.pattern("[/^\s+|\s+$/g]")]],
+      codeId: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
+      codeName: ['', [Validators.required,Validators.pattern(/^\S*$/)]],
+      parentCodeId: ['',[Validators.required, Validators.pattern(/^\S*$/)]],
       dsplOrder: ['', [Validators.required,Validators.pattern("^[0-9]*$")]],
       isInUse:  ['']
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
@@ -78,17 +80,23 @@ export class InsertUpdateCodeComponent implements OnInit {
           );//이 정보를 업데이트 dialog에 붙여줌!
     }
   }
-  //코드아이디 중복체크
- public checkCodeId(codeId){
-  this.codeMgmtService.checkCodeId(codeId)
-   .subscribe(data =>{
-     console.log(data.success);
-     if(data.success==true){
-       this.form.controls.codeId.setErrors({checkError:true});
-     }
 
-   });
-  }
+  //코드아이디 중복체크
+  checkCodeId(codeId) {
+
+    this.codeMgmtService.checkCodeId(codeId)
+        .subscribe(data =>{
+          this.dataRegister = data;
+
+         if(this.dataRegister.success==true) {
+        this.form.controls.codeId.setErrors({checkError:true});
+
+         }//if end
+    });//subscribe end 
+  }//checkCodeId end
+
+  
+
   onSubmit(){
             this.form.markAllAsTouched();//에러 한번에 다 뜨게
            

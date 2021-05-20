@@ -9,7 +9,6 @@ import { ScheduleService } from 'src/app/services/schedule.service';
   styleUrls: ['./today-detail.component.scss']
 })
 export class TodayDetailComponent implements OnInit {
-  schedule;
   scheduleList : Schedule[];//클릭한 사람의 오늘의 일정 리스트
 
   constructor(
@@ -18,10 +17,11 @@ export class TodayDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.schedule = new Schedule();
-    this.schedule.writer = this.data.user.id;
-    this.schedule.complete = this.data.complete;
-    this.service.selectTodayList(this.schedule).subscribe(res => {
+    const schedule = new Schedule();
+    schedule.writer = this.data.user.id;
+    schedule.complete = this.data.complete;
+    
+    this.service.selectTodayList(schedule).subscribe(res => {
       this.scheduleList = res.data;
     });
   }

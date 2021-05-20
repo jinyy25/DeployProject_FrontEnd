@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FullCalendarComponent, CalendarOptions } from '@fullcalendar/angular';
 import { EventApi, EventInput } from '@fullcalendar/core';
@@ -17,6 +17,8 @@ import { UserService } from '../services/user.service';
 import icChevronLeft from '@iconify/icons-ic/twotone-chevron-left';
 import icChevronRight from '@iconify/icons-ic/twotone-chevron-right';
 import { dropdownAnimation } from 'src/@vex/animations/dropdown.animation';
+import { ActivatedRoute } from '@angular/router';
+import { Schedule } from '../models/schedule.model';
 
 @Component({
   selector: 'app-schedule',
@@ -40,7 +42,7 @@ export class ScheduleComponent implements AfterViewInit {
   icChevronRight = icChevronRight;
 
   toggle = false;
-  
+
   ngOnInit() {
     this.check = localStorage.getItem("AUTH_TOKEN");
 
@@ -55,9 +57,18 @@ export class ScheduleComponent implements AfterViewInit {
     this.userService.selectUserList().subscribe(res => {
       this.userList = res.data;
     });
+
+    this.route.paramMap.subscribe(params => {//dashboard에서 이동
+      this.id = params.get('id');
+      this.complete = params.get('complete');
+    });
   }
 
   events : EventInput[] = [];
+  dashEvents : EventInput[] = [];
+
+  id;
+  complete;
 
   constructor(
     private dialog : MatDialog,
@@ -65,7 +76,8 @@ export class ScheduleComponent implements AfterViewInit {
     private pipe: DatePipe,
     private jwtService : JwtService,
     private teamService : TeamService,
-    private userService : UserService
+    private userService : UserService,
+    private route : ActivatedRoute
   ) {}
 
   calendarOptions : CalendarOptions = {
@@ -100,48 +112,97 @@ export class ScheduleComponent implements AfterViewInit {
   ngAfterViewInit(){
     //let calendarApi = this.calendar.getApi();
 
-    this.service.selectScheduleList().subscribe(res => {
-      res.data.forEach(element => {
-
-        let endDate = element.endDate;
-
-        if(element.startDate.length == 10 && element.endDate.length == 10){
-          const end = new Date(element.endDate);
-          end.setDate(end.getDate() + 1);
-          endDate = this.pipe.transform(end, 'yyyy-MM-dd');
-        }
-
-        const edit = element.complete != 'Y' && element.writer == this.loginUser.id;//완료되지 않은 일정, 내가 작성한 일정만 이동 가능 = true
-        let color;
-
-        for (let i = 0; i < this.teamList.length; i++) {
-          if(element.team == this.teamList[i].codeName){
-            color = this.colorArray[i];
+    if(this.id == null && this.complete == null){
+      this.service.selectScheduleList().subscribe(res => {
+        res.data.forEach(element => {
+  
+          let endDate = element.endDate;
+  
+          if(element.startDate.length == 10 && element.endDate.length == 10){
+            const end = new Date(element.endDate);
+            end.setDate(end.getDate() + 1);
+            endDate = this.pipe.transform(end, 'yyyy-MM-dd');
           }
-        }
-
-        if(element.writer == this.loginUser.id){
-          color = 'default';
-        }
-        if(element.complete == 'Y'){//완료된 일정은 회색
-          color = 'grey';
-        }
-
-        this.events.push({
-          id : String(element.scheduleNo),
-          title : element.scheduleTitle,
-          start : element.startDate,
-          end : endDate,
-          schedule : element,
-          startEditable : edit,
-          durationEditable : edit,
-          color : color
+  
+          const edit = element.complete != 'Y' && element.writer == this.loginUser.id;//완료되지 않은 일정, 내가 작성한 일정만 이동 가능 = true
+          let color;
+  
+          for (let i = 0; i < this.teamList.length; i++) {
+            if(element.team == this.teamList[i].codeName){
+              color = this.colorArray[i];
+            }
+          }
+  
+          if(element.writer == this.loginUser.id){
+            color = 'default';
+          }
+          if(element.complete == 'Y'){//완료된 일정은 회색
+            color = 'grey';
+          }
+  
+          this.events.push({
+            id : String(element.scheduleNo),
+            title : element.scheduleTitle,
+            start : element.startDate,
+            end : endDate,
+            schedule : element,
+            startEditable : edit,
+            durationEditable : edit,
+            color : color
+          });
         });
+        this.calendarOptions.events = this.events;
       });
-      this.calendarOptions.events = this.events;
-    });
+    }
 
     setTimeout(() => this.viewDate = this.calendar.getApi().currentData.viewTitle);//ChangeDetectorRef 써도 됨
+
+    if(this.id != null && this.complete != null){
+      const schedule = new Schedule();
+      schedule.writer = this.id;
+      schedule.complete = this.complete;
+
+      this.service.selectTodayList(schedule).subscribe(res => {
+        res.data.forEach(element => {
+  
+          let endDate = element.endDate;
+  
+          if(element.startDate.length == 10 && element.endDate.length == 10){
+            const end = new Date(element.endDate);
+            end.setDate(end.getDate() + 1);
+            endDate = this.pipe.transform(end, 'yyyy-MM-dd');
+          }
+  
+          const edit = element.complete != 'Y' && element.writer == this.loginUser.id;//완료되지 않은 일정, 내가 작성한 일정만 이동 가능 = true
+          let color;
+  
+          for (let i = 0; i < this.teamList.length; i++) {
+            if(element.team == this.teamList[i].codeName){
+              color = this.colorArray[i];
+            }
+          }
+  
+          if(element.writer == this.loginUser.id){
+            color = 'default';
+          }
+          if(element.complete == 'Y'){//완료된 일정은 회색
+            color = 'grey';
+          }
+  
+          this.dashEvents.push({
+            id : String(element.scheduleNo),
+            title : element.scheduleTitle,
+            start : element.startDate,
+            end : endDate,
+            schedule : element,
+            startEditable : edit,
+            durationEditable : edit,
+            color : color
+          });
+        });
+        this.calendarOptions.events = this.dashEvents;
+      });
+    }
   }
 
   //이벤트 클릭시 수정, 삭제
@@ -295,7 +356,7 @@ export class ScheduleComponent implements AfterViewInit {
     this.toggle = !this.toggle;
   }
 
-  showOne(){//자기꺼 보여주기, 개인별 검색
+  showOne(){//개인별 검색
     if(this.toggle){//팀별 안 보이게
       this.toggle = !this.toggle;
     }
@@ -312,7 +373,7 @@ export class ScheduleComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe( result => {//id 전달
       if(result){
-        if(result.length == 1){
+        if(result.length == 1){//자기꺼, 검색하는 사람이 한명일때
           const oneEvent = this.events.filter((event) => event.schedule.writer == result);
           this.calendarOptions.events = oneEvent; 
         }else{
