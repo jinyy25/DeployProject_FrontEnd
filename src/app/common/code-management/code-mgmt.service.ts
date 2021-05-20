@@ -22,10 +22,10 @@ export class CodeMgmtService {
   public getChildCodeInfos(parentCodeId) {
     return this.http.get<CodeMgmt[]>(this.userUrl+"/childInfo/"+parentCodeId);
   }
-  public insertCode(codemgmt : CodeMgmt){
+  public insertCode(codemgmt : CodeMgmt) {
     return this.http.post(this.userUrl, codemgmt);
   }
-  public updateCode(codemgmt: CodeMgmt){
+  public updateCode(codemgmt: CodeMgmt) {
     return this.http.patch<any>(this.userUrl, codemgmt);
   }
   public deleteCode(codeId: string) {
@@ -42,5 +42,8 @@ export class CodeMgmtService {
   }
   public checkCodeId(codeId:string) {
     return this.http.get<any>(this.userUrl+"/checkCodeId/"+codeId);
+  }
+  public searchCode(type, keyword) {
+    return this.http.get<any>(this.userUrl+"/search?type="+type+"&word="+keyword);
   }
 }

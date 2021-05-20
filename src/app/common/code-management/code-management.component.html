@@ -14,11 +14,31 @@
 						     class="-mt-6">
         <div class="card overflow-auto -mt-16">
     	<div class="bg-app-bar px-6 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+            <div id="searchBox" [formGroup]="codeSearchForm" (keyup.enter)="searchCode()">
+            <mat-form-field class="select-field" appearance="standard">
+                <mat-label>분류</mat-label>
+                <mat-select required formControlName="type">
+                    <mat-option value="codeId">코드아이디</mat-option>
+                    <mat-option value="codeName">코드이름</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="search-field" appearance="standard" >
+                <mat-label>검색어를 입력해 주세요.</mat-label>
+                <input formControlName="keyword" matInput>
+            </mat-form-field>
+            <button mat-raised-button
+            class="search_btn"
+            color="primary"
+            (keyup.enter)="searchCode()"
+            (click)="searchCode()">
+            검색
+            </button>
             <button mat-raised-button
             color="primary" 
             (click)="openInsertCodeDialog()">
             코드등록
             </button>
+            </div>
 		</div>
 	    </div>    
     <table id="boardTable" class="table table-striped">
@@ -54,7 +74,7 @@
         </tr>
         <tr [hidden]="!hideme[i]" >
             <td align="center"> </td>
-                <td colspan="15">
+            <td colspan="15">
                 <table>
                     <thead>
                         <tr>

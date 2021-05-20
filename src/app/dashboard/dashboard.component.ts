@@ -11,6 +11,7 @@ import { ScheduleService } from '../services/schedule.service';
 import { TeamService } from '../services/team.service';
 import { TodayDetailComponent } from './today-detail/today-detail.component';
 
+
 @Component({
   selector: 'vex-dashboard',
   templateUrl: './dashboard.component.html',
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
   notices:Notice[];
   teamControl;
   dataSource;
-
+  
   
   constructor(
     private jwtService : JwtService,
@@ -66,7 +67,7 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem("NOTICE_ITEM_PAGE");
     localStorage.removeItem("NOTICE_TYPE");
     localStorage.removeItem("NOTICE_WORD");
-    localStorage.removeItem("NOTICE_TEAM");
+    
   }
 
   changeTeam(){//선택한 팀 유저리스트
