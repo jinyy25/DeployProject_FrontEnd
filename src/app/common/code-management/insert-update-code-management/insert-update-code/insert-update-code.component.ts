@@ -85,14 +85,14 @@ export class InsertUpdateCodeComponent implements OnInit {
   checkCodeId(codeId) {
 
     this.codeMgmtService.checkCodeId(codeId)
-    .subscribe(data =>{
-      this.dataRegister = data;
-      console.log(this.dataRegister.success);
-     if(this.dataRegister.success==true){
-       this.form.controls.codeId.setErrors({checkError:true});
+        .subscribe(data =>{
+          this.dataRegister = data;
 
-     }//if end
-   });//subscribe end 
+         if(this.dataRegister.success==true) {
+        this.form.controls.codeId.setErrors({checkError:true});
+
+         }//if end
+    });//subscribe end 
   }//checkCodeId end
 
   
