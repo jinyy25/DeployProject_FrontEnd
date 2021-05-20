@@ -55,6 +55,7 @@ export class CodeManagementComponent implements OnInit {
           this.dataRegister = data;
           this.codeMgmts = this.dataRegister.data;
     });
+
     //로그인 유저정보 얻어오기
     this.check = localStorage.getItem("AUTH_TOKEN");
 
@@ -62,14 +63,14 @@ export class CodeManagementComponent implements OnInit {
        
       this.loginUser = this.jwtService.decodeToUser(this.check);
       
-    } else {
-
-      this.check= sessionStorage.getItem("AUTH_TOKEN");
-
-      if(this.check != null) {
-        this.loginUser = this.jwtService.decodeToUser(this.check);
-      }
     }
+
+    localStorage.removeItem("NOTICE_PAGE");
+    localStorage.removeItem("NOTICE_ITEM_PAGE");
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
+    localStorage.removeItem("NOTICE_TEAM");
+
     //검색폼
     this.codeSearchForm=this.formBuilder.group({
       type:['',Validators.required],
