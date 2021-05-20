@@ -1,3 +1,6 @@
+<vex-secondary-toolbar current="Dashboard">
+  <vex-breadcrumbs [crumbs]="['Dashboards']" class="flex-auto"></vex-breadcrumbs>
+</vex-secondary-toolbar>
 <div class="schedule">
   <h4>오늘의 일정</h4>
   <mat-form-field appearance="standard">
@@ -56,62 +59,68 @@
     </table>
   </div>
 </div>
+
 <div id="notice">
-  <h3>공지사항</h3>
-  <mat-table id="noticeTable" [dataSource]="dataSource">
-    <ng-container matColumnDef="title">
-      <mat-header-cell class="notice_title" *matHeaderCellDef
-        >제목</mat-header-cell
-      >
-      <mat-cell
-        class="notice_title"
-        routerLink="/notice/{{ notice.boardNo }}"
-        *matCellDef="let notice"
-        >{{ notice.title }}</mat-cell
-      >
-    </ng-container>
+  <div class="card  w-full" fxLayout="column">
+    <div class="border-b py-4 px-6" fxLayout="row" fxLayoutAlign="start center">
+      <h2 class="m-0 title" fxFlex="auto">공지사항</h2>
+    </div>
+  
+    <table id="noticeTable" class="w-full" [dataSource]="dataSource" mat-table matSort>
+      <ng-container matColumnDef="title">
+        <mat-header-cell class="notice_title" *matHeaderCellDef
+          >제목</mat-header-cell
+        >
+        <mat-cell
+          class="notice_title"
+          routerLink="/notice/{{ notice.boardNo }}"
+          *matCellDef="let notice"
+          >{{ notice.title }}</mat-cell
+        >
+      </ng-container>
 
-    <ng-container matColumnDef="writer">
-      <mat-header-cell class="notice_writer" *matHeaderCellDef
-        >작성자</mat-header-cell
-      >
-      <mat-cell
-        class="notice_writer"
-        routerLink="/notice/{{ notice.boardNo }}"
-        *matCellDef="let notice"
-        >{{ notice.writer }}</mat-cell
-      >
-    </ng-container>
+      <ng-container matColumnDef="writer">
+        <mat-header-cell class="notice_writer" *matHeaderCellDef
+          >작성자</mat-header-cell
+        >
+        <mat-cell
+          class="notice_writer"
+          routerLink="/notice/{{ notice.boardNo }}"
+          *matCellDef="let notice"
+          >{{ notice.writer }}</mat-cell
+        >
+      </ng-container>
 
-    <ng-container matColumnDef="team">
-      <mat-header-cell class="notice_team" *matHeaderCellDef
-        >팀</mat-header-cell
-      >
-      <mat-cell
-        class="notice_team"
-        routerLink="/notice/{{ notice.boardNo }}"
-        *matCellDef="let notice"
-        >{{ notice.team }}</mat-cell
-      >
-    </ng-container>
+      <ng-container matColumnDef="team">
+        <mat-header-cell class="notice_team" *matHeaderCellDef
+          >팀</mat-header-cell
+        >
+        <mat-cell
+          class="notice_team"
+          routerLink="/notice/{{ notice.boardNo }}"
+          *matCellDef="let notice"
+          >{{ notice.team }}</mat-cell
+        >
+      </ng-container>
 
-    <ng-container matColumnDef="regdate">
-      <mat-header-cell class="notice_regdate" *matHeaderCellDef
-        >등록일</mat-header-cell
-      >
-      <mat-cell
-        class="notice_regdate"
-        routerLink="/notice/{{ notice.boardNo }}"
-        *matCellDef="let notice"
-        >{{ notice.regdate }}</mat-cell
-      >
-    </ng-container>
+      <ng-container matColumnDef="regdate">
+        <mat-header-cell class="notice_regdate" *matHeaderCellDef
+          >등록일</mat-header-cell
+        >
+        <mat-cell
+          class="notice_regdate"
+          routerLink="/notice/{{ notice.boardNo }}"
+          *matCellDef="let notice"
+          >{{ notice.regdate }}</mat-cell
+        >
+      </ng-container>
 
-    <mat-header-row
-      class="list_header"
-      *matHeaderRowDef="['title', 'writer', 'team','regdate']"
-    ></mat-header-row>
-    <mat-row *matRowDef="let notice; columns: ['title', 'writer', 'team','regdate']">
-    </mat-row>
-  </mat-table>
+      <mat-header-row
+        class="list_header"
+        *matHeaderRowDef="['title', 'writer', 'team','regdate']"
+      ></mat-header-row>
+      <mat-row *matRowDef="let notice; columns: ['title', 'writer', 'team','regdate']">
+      </mat-row>
+    </table>
+  </div>
 </div>

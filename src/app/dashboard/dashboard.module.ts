@@ -10,6 +10,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TodayDetailComponent } from './today-detail/today-detail.component';
 import { MatButtonModule } from '@angular/material/button';
+import { WidgetTableModule } from 'src/@vex/components/widgets/widget-table/widget-table.module';
+import { SecondaryToolbarModule } from 'src/@vex/components/secondary-toolbar/secondary-toolbar.module';
+import { BreadcrumbsModule } from 'src/@vex/components/breadcrumbs/breadcrumbs.module';
 
 
 
@@ -25,7 +28,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatTableModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    SecondaryToolbarModule,
+    BreadcrumbsModule
+    
   ],
   entryComponents: [
     TodayDetailComponent
