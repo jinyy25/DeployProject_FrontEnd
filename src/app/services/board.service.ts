@@ -30,8 +30,8 @@ export class BoardService {
   updateNotice(fileList:BoardFile,boardNo){
     return this.http.patch<any>(this.userUrl+"/"+boardNo,fileList);
   }
-  searchNotice(type,word){
-    return this.http.get<any>(this.userUrl+"/search?type="+type+"&word="+word);
+  searchNotice(team,type,word){
+    return this.http.get<any>(this.userUrl+"/search?team="+team+"&type="+type+"&word="+word);
   }
   selectTeamNotice(team){
     return this.http.get<any>(this.userUrl+"/team?codeName="+team);

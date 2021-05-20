@@ -29,7 +29,7 @@
 				</mat-form-field>
 				<mat-form-field class="search-field" appearance="standard" >
 					<mat-label>검색어를 입력해 주세요.</mat-label>
-					<input formControlName="word" matInput>	
+					<input formControlName="word" matInput  #word>	
 				</mat-form-field> 
 				
 				<button color="primary" mat-raised-button (click)="search(form)" class="search_btn" (keyup.enter)="search(form)">검색</button>
@@ -52,7 +52,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let notice of notices | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }"  (click)="link(notice.boardNo)" >
+				<tr *ngFor="let notice of notices | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }"  (click)="link(notice.boardNo,form)" >
 						<td #boardNo>{{notice.boardNo}}</td>
 						<td>{{notice.title}}</td>
 						<td>{{notice.writer}}</td>
