@@ -44,6 +44,13 @@ export class MypageComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    localStorage.removeItem("NOTICE_PAGE");
+    localStorage.removeItem("NOTICE_ITEM_PAGE");
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
+    localStorage.removeItem("NOTICE_TEAM");
+
+
   //로그인 유저 정보
   this.check = localStorage.getItem("AUTH_TOKEN");
 

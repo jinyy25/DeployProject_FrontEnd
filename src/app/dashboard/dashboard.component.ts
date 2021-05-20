@@ -67,6 +67,7 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem("NOTICE_ITEM_PAGE");
     localStorage.removeItem("NOTICE_TYPE");
     localStorage.removeItem("NOTICE_WORD");
+    localStorage.removeItem("NOTICE_TEAM");
     
   }
 
