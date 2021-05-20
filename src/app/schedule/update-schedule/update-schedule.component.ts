@@ -53,7 +53,7 @@ export class UpdateScheduleComponent implements OnInit {
         endDate : [{value : this.pipe.transform(endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
         endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33)]],
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33), Validators.pattern(/^\S*$/)]],
         scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
         updateReason : ['', [Validators.maxLength(166)]]
       });
@@ -67,7 +67,7 @@ export class UpdateScheduleComponent implements OnInit {
         endDate : [{value : this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
         endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33)]],
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33), Validators.pattern(/^\S*$/)]],
         scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
         updateReason : ['', [Validators.maxLength(166)]]
       });

@@ -12,8 +12,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 export class InsertUpdateCodeComponent implements OnInit {
   form : FormGroup;
-  //submitted = false;
-  //loading = false;
   // form 요소에 편하게 접근하기 위한 getter
   get f() { return this.form.controls; }
 
@@ -45,8 +43,8 @@ export class InsertUpdateCodeComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       isParentCode: [''],
-      codeId: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
-      codeName: ['', [Validators.required,Validators.pattern(/^\S*$/)]],
+      codeId: ['', [Validators.required, Validators.pattern(/^\S*$/)]],//공백 허용하지 않음
+      codeName: ['', [Validators.required,Validators.pattern(/^(?=.*\S).+$/)]],//문자간 공백은 허용함
       parentCodeId: ['',[Validators.required, Validators.pattern(/^\S*$/)]],
       dsplOrder: ['', [Validators.required,Validators.pattern("^[0-9]*$")]],
       isInUse:  ['']

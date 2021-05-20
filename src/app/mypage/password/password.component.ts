@@ -34,6 +34,11 @@ export class PasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    localStorage.removeItem("NOTICE_PAGE");
+    localStorage.removeItem("NOTICE_ITEM_PAGE");
+    localStorage.removeItem("NOTICE_TYPE");
+    localStorage.removeItem("NOTICE_WORD");
+    localStorage.removeItem("NOTICE_TEAM");
     
     this.form = this.fb.group({
       password: ['', Validators.required],
