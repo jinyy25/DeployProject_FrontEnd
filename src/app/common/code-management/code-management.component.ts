@@ -6,10 +6,9 @@ import { logging } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 import { CodeMgmt } from './codemgmt.model';
-import { ChildCodeMgmt } from './child.codemgmt.model';
 import { CodeMgmtService } from './code-mgmt.service';
 import { InsertUpdateCodeComponent } from './insert-update-code-management/insert-update-code/insert-update-code.component';
 
@@ -29,14 +28,15 @@ export class CodeManagementComponent implements OnInit {
   check : string;
 
   codeMgmts: CodeMgmt[];
-  //childCodeMgmts: ChildCodeMgmt[];
   childCodeMgmtInformations: any = [];  
   parentCodeId: string;
   Index: any;
   hideme = [];
 
   //subscribe에서 넘어온 data 받기 용
-  dataRegister:any={}
+  dataRegister: any={}
+
+  codeSearchForm: FormGroup;
 
 
   layoutCtrl = new FormControl('boxed');
@@ -45,6 +45,7 @@ export class CodeManagementComponent implements OnInit {
 
   constructor(private router: Router,
               private codeMgmtService: CodeMgmtService,
+              private formBuilder: FormBuilder,
               private dialog: MatDialog,
               private jwtService : JwtService) { }
 
@@ -54,7 +55,7 @@ export class CodeManagementComponent implements OnInit {
           this.dataRegister = data;
           this.codeMgmts = this.dataRegister.data;
     });
-
+    //로그인 유저정보 얻어오기
     this.check = localStorage.getItem("AUTH_TOKEN");
 
     if(this.check != null) {
@@ -69,7 +70,25 @@ export class CodeManagementComponent implements OnInit {
         this.loginUser = this.jwtService.decodeToUser(this.check);
       }
     }
+    //검색폼
+    this.codeSearchForm=this.formBuilder.group({
+      type:['',Validators.required],
+      keyword:['',Validators.required]
+    })
   }//ngOnInit() end
+
+  //검색
+  searchCode() {
+    if(this.codeSearchForm.controls.type.errors !=null) {
+      return false;
+    } else if(this.codeSearchForm.controls.keyword.errors !=null) {
+      return false;
+    }
+    this.codeMgmtService.searchCode(this.codeSearchForm.controls.type.value,this.codeSearchForm.controls.keyword.value)
+    .subscribe(data => {
+      
+    })
+  }
 
   toggleChildCodeList(i,parentCodeId) {
     
@@ -84,7 +103,7 @@ export class CodeManagementComponent implements OnInit {
     this.Index = i;
   }//toggleChildCodeList end 
 
-  openInsertCodeDialog() : void {//코드 등록 모달창 띄움
+  openInsertCodeDialog() : void {//코드 등록 팝업창 띄움
 
     const dialogConfig = new MatDialogConfig();
 
