@@ -1,2 +1,2 @@
 # DeployProject_FrontEnd
-Angular, Node.js
+Angular, Node.js, TypeScript
