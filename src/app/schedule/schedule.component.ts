@@ -294,18 +294,26 @@ export class ScheduleComponent implements AfterViewInit {
             }
           });
   
-        }else if(result){//수정
+        }else if(result){//수정 const data = {type : 'complete', schedule : this.schedule};
   
-          if(!result.allDay){//시간 있으면 날짜, 시간 합쳐줌
-            result.startDate = result.startDate+" "+result.startTime;
-            result.endDate = result.endDate+" "+result.endTime;
+          if(!result.schedule.allDay){//시간 있으면 날짜, 시간 합쳐줌
+            result.schedule.startDate = result.schedule.startDate+" "+result.schedule.startTime;
+            result.schedule.endDate = result.schedule.endDate+" "+result.schedule.endTime;
           }
           
-          this.service.updateSchedule(result).subscribe(res => {
+          this.service.updateSchedule(result.schedule).subscribe(res => {
             if(res.data){
-              alert("일정을 수정하였습니다");
+              if(result.type == 'update'){
+                alert("일정을 수정하였습니다");
+              }else if(result.type == 'complete'){
+                alert("일정을 완료하였습니다");
+              }
             }else{
-              alert("수정에 실패하였습니다")
+              if(result.type == 'update'){
+                alert("수정에 실패하였습니다");
+              }else if(result.type == 'complete'){
+                alert("완료에 실패하였습니다");
+              }
             }
             this.router.routeReuseStrategy.shouldReuseRoute = () => false;
             this.router.onSameUrlNavigation = 'reload';

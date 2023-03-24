@@ -1,8 +1,8 @@
 <vex-secondary-toolbar *ngIf="boardNo == null" current="공지사항 등록">
-  <vex-breadcrumbs [crumbs]="['Notice','Notice-write']"></vex-breadcrumbs>
+  <vex-breadcrumbs [crumbs]="['Notice','Notice-Write']"></vex-breadcrumbs>
 </vex-secondary-toolbar>
 <vex-secondary-toolbar *ngIf="boardNo != null" current="공지사항 수정">
-  <vex-breadcrumbs [crumbs]="['Notice','Notice-update']"></vex-breadcrumbs>
+  <vex-breadcrumbs [crumbs]="['Notice','Notice-Update']"></vex-breadcrumbs>
 </vex-secondary-toolbar>
 <div id="noticeWrap">
 	<div id="formGroup" [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">

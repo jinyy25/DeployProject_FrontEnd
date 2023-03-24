@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class CodeMgmtService {
 
-  private userUrl = '/code';
+  private userUrl = '/api/code';
 
   constructor(private http:HttpClient) { }
 
@@ -43,7 +43,10 @@ export class CodeMgmtService {
   public checkCodeId(codeId:string) {
     return this.http.get<any>(this.userUrl+"/checkCodeId/"+codeId);
   }
+  public checkParentCodeId(parentCodeId:string) {
+    return this.http.get<any>(this.userUrl+"/checkParentCodeId/"+parentCodeId);
+  }
   public searchCode(type, keyword) {
-    return this.http.get<any>(this.userUrl+"/search?type="+type+"&word="+keyword);
+    return this.http.get<any>(this.userUrl+"/search?type="+type+"&keyword="+keyword);
   }
 }

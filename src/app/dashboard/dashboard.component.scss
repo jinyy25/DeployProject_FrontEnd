@@ -15,14 +15,15 @@
   width: 400px;
   text-align: center;
   border: 1px solid #dee2e6;
-  border-top-left-radius:.25rem;
-  border-top-right-radius: .25rem;
-  height: 300px;
+  height: 380px;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 24px 0 0 24px;
   float: left;
   background-color: white;
+  --tw-shadow: var(--elevation-z8);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .schedule table {
@@ -31,9 +32,11 @@
 
 .schedule h4 {
   background: linear-gradient(to top, #ffe400 50%, transparent 50%);
-  width: 100px;
+  width: 110px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 20px;
+  font: 500 18px/26px var(--font);
+  letter-spacing: -0.014em;
 }
 
 #notice {
@@ -42,6 +45,7 @@
   margin-top: 24px;
   margin-left: 60px;
   user-select: none;
+  height: 380px;
 }
 
 #notice .notice_title {
@@ -71,4 +75,8 @@
 .count:hover {
   color: #5c77ff;
   text-decoration: underline;
+}
+
+.card {
+  border-radius: 0;
 }

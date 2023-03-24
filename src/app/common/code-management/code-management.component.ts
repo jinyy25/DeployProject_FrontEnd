@@ -38,6 +38,8 @@ export class CodeManagementComponent implements OnInit {
 
   codeSearchForm: FormGroup;
 
+  searchType: string;
+
 
   layoutCtrl = new FormControl('boxed');
   searchCtrl = new FormControl();
@@ -70,15 +72,16 @@ export class CodeManagementComponent implements OnInit {
     localStorage.removeItem("NOTICE_TYPE");
     localStorage.removeItem("NOTICE_WORD");
     localStorage.removeItem("NOTICE_TEAM");
-
+    
+    this.searchType="codeId";
     //검색폼
     this.codeSearchForm=this.formBuilder.group({
-      type:['',Validators.required],
+      type:[this.searchType, Validators.required],
       keyword:['',Validators.required]
     })
   }//ngOnInit() end
 
-  //검색
+  //코드검색
   searchCode() {
     if(this.codeSearchForm.controls.type.errors !=null) {
       return false;
@@ -87,7 +90,7 @@ export class CodeManagementComponent implements OnInit {
     }
     this.codeMgmtService.searchCode(this.codeSearchForm.controls.type.value,this.codeSearchForm.controls.keyword.value)
     .subscribe(data => {
-      
+        console.log(data);
     })
   }
 
@@ -148,6 +151,7 @@ export class CodeManagementComponent implements OnInit {
     dialogRef.afterClosed().subscribe( result => {//onClose 메소드에서 리턴한 codeMgmt 객체
       result.modifier = this.loginUser.id;
       result.codeId = codeId;
+      //여기에 parentCodeId 심어주면 될 것
       this.codeMgmtService.updateCode(result).subscribe(data=> {
         this.dataRegister = data;//바로 data.success하면 에러 뜸.
         if(this.dataRegister.success == true){

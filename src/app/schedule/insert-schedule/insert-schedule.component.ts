@@ -52,7 +52,7 @@ export class InsertScheduleComponent implements OnInit{
         endDate : [this.pipe.transform(endDate, 'yyyy-MM-dd'), [Validators.required]],
         endTime : [{value:'', disabled:this.data.allDay}],
         allDay : [this.data.allDay],
-        scheduleTitle : ['', [Validators.required, Validators.maxLength(33), Validators.pattern(/^\S*$/)]],
+        scheduleTitle : ['', [Validators.required, Validators.maxLength(33), Validators.pattern(/^(?=.*\S).+$/)]],
         scheduleContent : ['', [Validators.maxLength(166)]]
       });
 
@@ -64,7 +64,7 @@ export class InsertScheduleComponent implements OnInit{
         endDate : [this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), [Validators.required]],
         endTime : [this.pipe.transform(this.data.endDate, 'HH:mm')],
         allDay : [this.data.allDay],
-        scheduleTitle : ['', [Validators.required, Validators.maxLength(33), Validators.pattern(/^\S*$/)]],
+        scheduleTitle : ['', [Validators.required, Validators.maxLength(33), Validators.pattern(/^(?=.*\S).+$/)]],
         scheduleContent : ['', [Validators.maxLength(166)]]
       });
       
@@ -81,7 +81,7 @@ export class InsertScheduleComponent implements OnInit{
     }else if(endDate.value == ''){
       endDate.focus();
       return false;
-    }else if(scheduleTitle.value == ''){
+    }else if(this.form.controls.scheduleTitle.errors != null){
       scheduleTitle.focus();
       return false;
     }

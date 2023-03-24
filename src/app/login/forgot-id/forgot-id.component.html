@@ -27,11 +27,16 @@
 		  </ul>
       </div>
 
-      <button *ngIf="display!='block'" color="primary" mat-raised-button type="button" (click)="findId(form)" >
-        확인
-	  </button>
+      <div class="buttonWrap">
+        <button *ngIf="display!='block'" color="primary" mat-raised-button type="button"  (click)="cancel()" >
+          취소
+        </button>
+        <button *ngIf="display!='block'" color="primary" mat-raised-button type="button" (click)="findId(form)" >
+          확인
+        </button>
+      </div>
 	 
-    <div id="buttonWrap">
+    <div class="buttonWrap">
       <button *ngIf="display=='block'" color="primary" mat-raised-button routerLink="/forgot-password">비밀번호 찾기</button>
 		  <button *ngIf="display=='block'" color="primary" mat-raised-button routerLink="/login">로그인</button>
     </div>

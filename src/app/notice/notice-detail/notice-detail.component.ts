@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { JwtService } from 'src/app/services/jwt.service';
 import { User } from 'src/app/models/user.model';
 import { FormControl } from '@angular/forms';
+import { HttpUrlEncodingCodec } from '@angular/common/http';
 
 @Component({
   selector: 'vex-notice-detail',
@@ -27,7 +28,9 @@ export class NoticeDetailComponent implements OnInit {
   check:string;
   loginUser:User;  
   display:string;
-  
+  codec = new HttpUrlEncodingCodec;
+  url="http://localhost:8080/file/files/";
+
   constructor(
     private boardService:BoardService,
     private route:ActivatedRoute,
@@ -55,6 +58,11 @@ export class NoticeDetailComponent implements OnInit {
       }
     })
     
+  }
+
+  //대괄호 중괄호 등 포함되어 있을 때 에러뜨는 것 막기 위해 인코딩 메서드 작성함
+  ngEncode(param: string) {
+    return this.codec.encodeValue(param);
   }
 
   //목록

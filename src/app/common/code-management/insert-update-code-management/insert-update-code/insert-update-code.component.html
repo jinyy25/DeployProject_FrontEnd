@@ -41,10 +41,12 @@
         <input
             matInput
             formControlName="parentCodeId"
+            (keyup)="checkParentCodeId(parentCodeId.value)"
             #parentCodeId
         />
         <mat-error *ngIf="form.get('parentCodeId').hasError('required')">최상위 코드 아이디를 입력해 주세요.</mat-error>
         <mat-error *ngIf="form.get('parentCodeId').hasError('pattern')">공백을 입력할 수 없습니다.</mat-error>
+        <mat-error *ngIf="form.get('parentCodeId').hasError('noParentCodeError')">존재하지 않는 최상위코드 입니다.</mat-error>
         </mat-form-field>
         <br/>
         <mat-form-field appearance="standard">
@@ -61,7 +63,6 @@
         <mat-error *ngIf="f.dsplOrder.hasError('checkError')">
             동일 순서를 입력할 수 없습니다.
         </mat-error>
-
         </mat-form-field>
         <br/>
         <mat-checkbox

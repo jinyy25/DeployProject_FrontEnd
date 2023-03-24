@@ -150,13 +150,7 @@ export class NoticeWriteFormComponent implements OnInit {
     this.check = localStorage.getItem("AUTH_TOKEN"); 
       if(this.check !=null){ 
         this.loginUser=this.jwtService.decodeToUser(this.check);
-      }else{
-        this.check= sessionStorage.getItem("AUTH_TOKEN");
-
-        if(this.check !=null){
-          this.loginUser = this.jwtService.decodeToUser(this.check);
-        }//if end
-      }//if~else end
+      }
 
 
       this.fileList.writer=this.loginUser.id;

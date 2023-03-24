@@ -14,8 +14,8 @@ export class DeployService {
     private httpClient:HttpClient
   ) { }
 
-  private deployURL='/deploy';
-  private fileURL='/file';
+  private deployURL='/api/deploy';
+  private fileURL='/api/file';
 
   //1. select all deploys
   public selectDeploys(){

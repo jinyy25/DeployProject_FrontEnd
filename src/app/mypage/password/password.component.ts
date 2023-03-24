@@ -112,5 +112,8 @@ export class PasswordComponent implements OnInit {
     })
   }
 
+  cancel(){
+    this.router.navigate(['/']);
+  }
 
 }

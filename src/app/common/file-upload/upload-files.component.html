@@ -45,7 +45,7 @@
       *ngFor="let file of fileInfos | async"
     >
       <li class="list-group-item">
-        <a href="{{ file.url }}">{{ file.name }}</a>
+        <a href="{{ ngEncode(file.url) }}">{{ file.name }}</a>
       </li>
     </ul>
   </div>

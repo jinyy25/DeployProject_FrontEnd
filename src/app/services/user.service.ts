@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  private userUrl = "/user";
+  private userUrl = "/api/user";
 
   public insertUser(user){
     return this.http.post<any>(this.userUrl,user);

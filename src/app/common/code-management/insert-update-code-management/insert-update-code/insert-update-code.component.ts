@@ -36,20 +36,24 @@ export class InsertUpdateCodeComponent implements OnInit {
   ngOnInit(): void {
     //dialog 열었을 때 codeId 정보 있었냐 없었냐에 따라서 등록인지 수정인지 구분
     if(this.codeId!=null) {
-      this.isInsertMode =false;
+      this.isInsertMode = false;
+      
     } else {
       this.isInsertMode =true;
+      this.isParentCode = true;//등록일 때 최상위 코드 체크박스 체크되어있게 할 것
     }
 
     this.form = this.formBuilder.group({
-      isParentCode: [''],
+      isParentCode: ['isParentCode'],//최상위 코드 체크 default 설정을 위해 작성
       codeId: ['', [Validators.required, Validators.pattern(/^\S*$/)]],//공백 허용하지 않음
       codeName: ['', [Validators.required,Validators.pattern(/^(?=.*\S).+$/)]],//문자간 공백은 허용함
       parentCodeId: ['',[Validators.required, Validators.pattern(/^\S*$/)]],
       dsplOrder: ['', [Validators.required,Validators.pattern("^[0-9]*$")]],
       isInUse:  ['']
     });//url 주소에 따라 폼이 다르게 작성되어야 하므로 ngOnInit() method 안에 있어야 함
-
+    if(this.isInsertMode) {
+      this.form.get('parentCodeId').disable();
+    }
     if (!this.isInsertMode) {//update용 dialog인 경우에는
       this.codeMgmtService.selectOneCodeByCodeId(this.codeId)//codeId를 통해 codeMgmt 정보 불러옴
           .subscribe(data => 
@@ -64,13 +68,14 @@ export class InsertUpdateCodeComponent implements OnInit {
           }//if~else end 
 
             //부모코드이면 isParentCode true로
+            //부모 코드 아이디도  diable 되어있어야 함
             if(this.dataRegister.data.parentCodeId==null) {
             this.form.get('isParentCode').setValue(true);
-            
-            //다이얼로그에서 parentCodeId disable 되어있어야 함
             this.form.get('parentCodeId').disable();
-          } else {
+            
+          } else {//자식코드 수정이면 최상위 코드는 체크 안되어 있어야 함
             this.form.get('isParentCode').setValue(false);
+
           }//if~else end
             this.form.get('codeId').disable();//코드 아이디 수정 못하게 막기
           }
@@ -92,6 +97,19 @@ export class InsertUpdateCodeComponent implements OnInit {
          }//if end
     });//subscribe end 
   }//checkCodeId end
+  
+  checkParentCodeId(parentCodeId) {//최상위 코드 존재하지 않는 것 입력하면 에러메시지 뜨도록 함
+    
+    this.codeMgmtService.checkParentCodeId(parentCodeId)
+        .subscribe(data =>{
+          this.dataRegister = data;
+         if(this.dataRegister.success==false) {
+          this.form.controls.parentCodeId.setErrors({noParentCodeError:true});
+
+         }//if end
+    });//subscribe end 
+
+  }//checkParentCodeId
 
   
 
@@ -118,7 +136,12 @@ export class InsertUpdateCodeComponent implements OnInit {
             if(this.form.value.isParentCode==true){//부모 코드이면 parentCodeID null값 주기
               this.codeMgmt.parentCodeId = null;
             } else {
-              this.codeMgmt.parentCodeId = this.form.value.parentCodeId;
+              if(this.isInsertMode==true){
+                this.codeMgmt.parentCodeId = this.form.value.parentCodeId;
+              } else {
+                this.codeMgmt.parentCodeId = this.data.parentCodeId;
+              }
+              
             }
               this.codeMgmt.codeId = this.form.value.codeId;
               this.codeMgmt.codeName = this.form.value.codeName;

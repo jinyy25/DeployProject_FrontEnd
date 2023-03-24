@@ -21,7 +21,8 @@ export class ForgotIdComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +53,10 @@ export class ForgotIdComponent implements OnInit {
         this.form.controls.email.setErrors({checkError:true});
       }
     })
+  }
+
+  cancel(){
+    this.router.navigate(['/login']);
   }
 
 }

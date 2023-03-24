@@ -8,7 +8,7 @@ import { Notice } from '../models/notice.model';
 })
 export class BoardService {
 
-  private userUrl = '/board';
+  private userUrl = '/api/board';
   
   constructor(private http: HttpClient) { }
 

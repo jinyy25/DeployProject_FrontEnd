@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
 
   todayDetail(user, complete){
     this.dialog.open(TodayDetailComponent, {
-      width: '600px',
+      width: '500px',
       data: {user : user, complete : complete}
     });
   }

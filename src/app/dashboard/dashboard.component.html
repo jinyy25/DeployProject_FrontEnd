@@ -1,5 +1,8 @@
 <vex-secondary-toolbar current="Dashboard">
-  <vex-breadcrumbs [crumbs]="['Dashboards']" class="flex-auto"></vex-breadcrumbs>
+  <vex-breadcrumbs
+    [crumbs]="['Dashboards']"
+    class="flex-auto"
+  ></vex-breadcrumbs>
 </vex-secondary-toolbar>
 <div class="schedule">
   <h4>오늘의 일정</h4>
@@ -61,12 +64,18 @@
 </div>
 
 <div id="notice">
-  <div class="card  w-full" fxLayout="column">
+  <div class="card w-full" fxLayout="column">
     <div class="border-b py-4 px-6" fxLayout="row" fxLayoutAlign="start center">
       <h2 class="m-0 title" fxFlex="auto">공지사항</h2>
     </div>
-  
-    <table id="noticeTable" class="w-full" [dataSource]="dataSource" mat-table matSort>
+
+    <table
+      id="noticeTable"
+      class="w-full"
+      [dataSource]="dataSource"
+      mat-table
+      matSort
+    >
       <ng-container matColumnDef="title">
         <mat-header-cell class="notice_title" *matHeaderCellDef
           >제목</mat-header-cell
@@ -117,9 +126,11 @@
 
       <mat-header-row
         class="list_header"
-        *matHeaderRowDef="['title', 'writer', 'team','regdate']"
+        *matHeaderRowDef="['title', 'writer', 'team', 'regdate']"
       ></mat-header-row>
-      <mat-row *matRowDef="let notice; columns: ['title', 'writer', 'team','regdate']">
+      <mat-row
+        *matRowDef="let notice; columns: ['title', 'writer', 'team', 'regdate']"
+      >
       </mat-row>
     </table>
   </div>

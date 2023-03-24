@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEventType, HttpResponse, HttpUrlEncodingCodec} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadFilesService } from './upload-files.service';
 //upload-files.component 파일 업로드, 프로그레스바, 파일 리스트 디스플레이
@@ -12,6 +12,8 @@ import { UploadFilesService } from './upload-files.service';
 export class UploadFilesComponent implements OnInit {
 
   selectedFiles?: FileList;
+
+  codec = new HttpUrlEncodingCodec;
  
   progressInfos: any[] = [];//각각 파일의 업로드 프로그레스 보여주기 위함. 각각의 아이템 value와 file 필드 갖고있음
  
@@ -23,7 +25,11 @@ export class UploadFilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fileInfos = this.uploadService.getFiles();
-    console.log(this.fileInfos);
+  }
+
+  //대괄호 중괄호 등 포함되어 있을 때 다운로드 시 에러뜨는 것 막기 위해 인코딩 메서드 작성함
+  ngEncode(param: string) {
+    return this.codec.encodeValue(param);
   }
 
   selectFiles(event): void {//업로드 하기위해 선택한 파일 얻어옴

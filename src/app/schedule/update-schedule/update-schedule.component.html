@@ -103,7 +103,12 @@
         maxlength="33"
         [readonly]="data.disable"
       />
-      <mat-error>제목을 입력해주세요</mat-error>
+      <mat-error *ngIf="form.controls.scheduleTitle.hasError('required')">
+        제목을 입력해주세요
+      </mat-error>
+      <mat-error *ngIf="form.controls.scheduleTitle.hasError('pattern')">
+        공백을 입력할 수 없습니다
+      </mat-error>
     </mat-form-field>
     <br />
 

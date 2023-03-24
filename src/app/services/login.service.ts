@@ -11,7 +11,7 @@ export class LoginService {
   
   constructor(private http:HttpClient) { }
 
-  private userUrl = '/user';
+  private userUrl = '/api/user';
 
   public login(user){
     return this.http.post<any>(this.userUrl+"/session",user);

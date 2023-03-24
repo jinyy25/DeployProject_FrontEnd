@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class ScheduleService{
 
-  private url = '/schedule';
+  private url = '/api/schedule';
 
   constructor(private http : HttpClient) { }
 

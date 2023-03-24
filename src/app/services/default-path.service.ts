@@ -9,8 +9,8 @@ import { DefaultPath } from '../models/default-path.model';
 })
 export class DefaultPathService {
 
-  private defaultPathUrl = '/defaultPath';
-  private defaultPathListUrl ='/defaultPath/list'
+  private defaultPathUrl = '/api/defaultPath';
+  private defaultPathListUrl ='/api/defaultPath/list'
 
   constructor(private http : HttpClient) { }
 

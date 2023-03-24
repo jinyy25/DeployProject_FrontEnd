@@ -42,11 +42,14 @@ export class NoticeComponent implements OnInit {
 
   ngOnInit(): void {
     
+    //목록가기위해서 전에있던 페이지,게시물 개수,검색을 한 내용 등 불러옴
     this.page = localStorage.getItem("NOTICE_PAGE");
     this.itemPage = localStorage.getItem("NOTICE_ITEM_PAGE");
     this.noticeTeam = localStorage.getItem("NOTICE_TEAM");
     this.noticeType = localStorage.getItem("NOTICE_TYPE");
     this.noticeWord = localStorage.getItem("NOTICE_WORD");
+
+    //저장된 페이지
     if(this.page!=null){
       this.p=parseInt(this.page);
       localStorage.removeItem("NOTICE_PAGE");
@@ -54,11 +57,13 @@ export class NoticeComponent implements OnInit {
       this.p=1;
     }
 
+    //저장된 아이템(게시글) 개수
     if(this.itemPage!=null){
       this.itemsPerPage=parseInt(this.itemPage);
       localStorage.removeItem("NOTICE_ITEM_PAGE");
     }
 
+    //검색을 한 경우
     if(this.noticeWord!=null){
 
       if(this.noticeTeam!=null){
@@ -74,17 +79,20 @@ export class NoticeComponent implements OnInit {
     })
       
     }else{
+      //검색을 하지 않은 경우
       this.noticeType="title";
-      if(this.noticeTeam!=null){
+
+      //팀을 선택한 경우
+      if(this.noticeTeam!=null&&this.noticeTeam!="전체"){
         this.teamName=this.noticeTeam;
         this.boardService.selectTeamNotice(this.teamName)
         .subscribe(res =>{
           this.notices=res.data.noticeList;
           this.teams=res.data.teamList;
-          localStorage.removeItem("NOTICE_TEAM");
         })
         
       }else{
+        //팀을 선택하지 않은 경우
         this.boardService.selectNotice()
         .subscribe(res =>{
           this.teams=res.data.teamList;
@@ -100,7 +108,7 @@ export class NoticeComponent implements OnInit {
 
     this.form=this.fb.group({
       type:[this.noticeType,Validators.required],
-      word:[this.noticeWord,Validators.required]
+      word:[this.noticeWord,Validators.pattern(/^\S/)]
     })
   }
 
@@ -113,6 +121,11 @@ export class NoticeComponent implements OnInit {
     if(this.form.controls.type.errors !=null){
       return false;
     }else if(this.form.controls.word.errors !=null){
+      alert("검색어를 입력해 주세요.");
+      return false;
+    }
+    if(this.form.controls.word.value==null){
+      alert("검색어를 입력해 주세요.");
       return false;
     }
     this.boardService.searchNotice(this.teamName,this.form.controls.type.value,this.form.controls.word.value)
@@ -133,7 +146,7 @@ export class NoticeComponent implements OnInit {
       this.teams=res.data.teamList;
       this.notices=res.data.noticeList;
       this.form.controls.type.setValue(this.noticeType);
-      this.form.controls.word.setValue("");
+      this.form.controls.word.setValue(null);
       this.p=1;
     })
   }
@@ -149,7 +162,7 @@ export class NoticeComponent implements OnInit {
         this.notices=res.data.noticeList;
         this.noticeType="title";
         this.form.controls.type.setValue(this.noticeType);
-        this.form.controls.word.setValue("");
+        this.form.controls.word.setValue(null);
         this.p=1;
       })
   }
@@ -164,9 +177,7 @@ export class NoticeComponent implements OnInit {
     localStorage.setItem("NOTICE_PAGE",""+this.p);
     localStorage.setItem("NOTICE_ITEM_PAGE",""+this.itemsPerPage);
     this.router.navigate(["/notice/"+boardNo]);
-    console.log(this.form.controls.word.value);
     if(this.form.controls.word.value!=null){
-      console.log("ca");
       localStorage.setItem("NOTICE_TYPE",form.controls.type.value);
       localStorage.setItem("NOTICE_WORD",form.controls.word.value);
     }

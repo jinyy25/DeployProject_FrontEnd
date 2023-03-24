@@ -53,7 +53,7 @@ export class UpdateScheduleComponent implements OnInit {
         endDate : [{value : this.pipe.transform(endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
         endTime : [{value : '', disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33), Validators.pattern(/^\S*$/)]],
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33), Validators.pattern(/^(?=.*\S).+$/)]],
         scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
         updateReason : ['', [Validators.maxLength(166)]]
       });
@@ -67,7 +67,7 @@ export class UpdateScheduleComponent implements OnInit {
         endDate : [{value : this.pipe.transform(this.data.endDate, 'yyyy-MM-dd'), disabled : this.data.complete == 'Y'}, [Validators.required]],
         endTime : [{value : this.pipe.transform(this.data.endDate, 'HH:mm'), disabled : this.data.allDay || this.data.complete == 'Y'}],
         allDay : [{value : this.data.allDay,  disabled : this.data.complete == 'Y' || this.data.disable}],
-        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33), Validators.pattern(/^\S*$/)]],
+        scheduleTitle : [{value : this.data.scheduleTitle, disabled : this.data.complete == 'Y'}, [Validators.required, Validators.maxLength(33), Validators.pattern(/^(?=.*\S).+$/)]],
         scheduleContent : [{value : this.data.scheduleContent, disabled : this.data.complete == 'Y'}, [Validators.maxLength(166)]],
         updateReason : ['', [Validators.maxLength(166)]]
       });
@@ -92,7 +92,7 @@ export class UpdateScheduleComponent implements OnInit {
     }else if(endDate.value == ''){
       endDate.focus();
       return false;
-    }else if(scheduleTitle.value == ''){
+    }else if(this.form.controls.scheduleTitle.errors != null){
       scheduleTitle.focus();
       return false;
     }
@@ -121,7 +121,9 @@ export class UpdateScheduleComponent implements OnInit {
         this.schedule.startDate = this.pipe.transform(this.form.value.startDate, 'yyyy-MM-dd');
         this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
         this.schedule.updateDate = this.pipe.transform(new Date(), 'yyyy-MM-dd');
-        this.dialogRef.close(this.schedule);
+        
+        const data = {type : 'update', schedule : this.schedule};
+        this.dialogRef.close(data);
       }
 
     }else if(type == 'complete'){//완료 버튼
@@ -132,7 +134,9 @@ export class UpdateScheduleComponent implements OnInit {
         this.schedule.endDate = this.pipe.transform(this.form.value.endDate, 'yyyy-MM-dd');
         this.schedule.complete = 'Y';
         this.schedule.completeDate = this.pipe.transform(new Date(), 'yyyy-MM-dd HH:mm');
-        this.dialogRef.close(this.schedule);
+
+        const data = {type : 'complete', schedule : this.schedule};
+        this.dialogRef.close(data);
       }
 
     }
