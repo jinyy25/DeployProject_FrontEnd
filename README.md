@@ -5,7 +5,7 @@
 - 기능 : 스크립트 or 파일 업로드시 해당경로의 파일을 압축하여 배포, 스케쥴러, 게시판, 로그인 기능
 
 - 사용된 기술 
-  : Angular, SPA, TypeScript
+  : Angular, TypeScript
 
 - 인원: 5명
 
